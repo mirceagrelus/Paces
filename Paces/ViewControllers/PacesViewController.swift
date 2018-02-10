@@ -7,13 +7,25 @@
 //
 
 import UIKit
+import PacesKit
 
 class PacesViewController: UIViewController {
+
+    let gradientView: GradientView = GradientView()
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        self.view.backgroundColor = UIColor.orange
+        setup()
+    }
+
+    func setup() {
+        gradientView.translatesAutoresizingMaskIntoConstraints = false
+        gradientView.insertGradient(topToBottom: true, colorArray: [UIColor.orange, UIColor.red])
+
+        view.addSubview(gradientView)
+
+        AutoLayoutUtils.constrainView(gradientView, equalToView: view)
     }
 
 }

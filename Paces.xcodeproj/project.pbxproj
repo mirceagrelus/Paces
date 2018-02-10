@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		08CAB6B1202F2C5800C7FF41 /* GradientView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08CAB6B0202F2C5800C7FF41 /* GradientView.swift */; };
+		08CAB6B3202F2F1E00C7FF41 /* AutoLayoutUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08CAB6B2202F2F1D00C7FF41 /* AutoLayoutUtils.swift */; };
+		08CAB6B5202F376300C7FF41 /* PaceControlView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08CAB6B4202F376300C7FF41 /* PaceControlView.swift */; };
 		08E64B29202DD3B900A59F41 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08E64B28202DD3B900A59F41 /* AppDelegate.swift */; };
 		08E64B2B202DD3B900A59F41 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08E64B2A202DD3B900A59F41 /* ViewController.swift */; };
 		08E64B2E202DD3B900A59F41 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 08E64B2C202DD3B900A59F41 /* Main.storyboard */; };
@@ -79,6 +82,9 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		08CAB6B0202F2C5800C7FF41 /* GradientView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GradientView.swift; sourceTree = "<group>"; };
+		08CAB6B2202F2F1D00C7FF41 /* AutoLayoutUtils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AutoLayoutUtils.swift; sourceTree = "<group>"; };
+		08CAB6B4202F376300C7FF41 /* PaceControlView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaceControlView.swift; sourceTree = "<group>"; };
 		08E64B25202DD3B900A59F41 /* Paces.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Paces.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		08E64B28202DD3B900A59F41 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		08E64B2A202DD3B900A59F41 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -150,6 +156,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		08CAB6B6202F377100C7FF41 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				08CAB6B0202F2C5800C7FF41 /* GradientView.swift */,
+				08CAB6B4202F376300C7FF41 /* PaceControlView.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
 		08E64B1C202DD3B900A59F41 = {
 			isa = PBXGroup;
 			children = (
@@ -204,10 +219,12 @@
 			children = (
 				08E64B6A202DD82F00A59F41 /* PacesKit.h */,
 				08E64B6B202DD82F00A59F41 /* Info.plist */,
+				08CAB6B2202F2F1D00C7FF41 /* AutoLayoutUtils.swift */,
 				08E64B86202DD86E00A59F41 /* Environment.swift */,
 				08E64B88202DD9CC00A59F41 /* KeyValueStoreType.swift */,
 				08E64B8A202DE06400A59F41 /* AppEnvironment.swift */,
 				08E64B98202F224A00A59F41 /* Navigation.swift */,
+				08CAB6B6202F377100C7FF41 /* Views */,
 			);
 			path = PacesKit;
 			sourceTree = "<group>";
@@ -572,7 +589,10 @@
 			files = (
 				08E64B87202DD86E00A59F41 /* Environment.swift in Sources */,
 				08E64B89202DD9CC00A59F41 /* KeyValueStoreType.swift in Sources */,
+				08CAB6B1202F2C5800C7FF41 /* GradientView.swift in Sources */,
+				08CAB6B5202F376300C7FF41 /* PaceControlView.swift in Sources */,
 				08E64B8B202DE06400A59F41 /* AppEnvironment.swift in Sources */,
+				08CAB6B3202F2F1E00C7FF41 /* AutoLayoutUtils.swift in Sources */,
 				08E64B99202F224B00A59F41 /* Navigation.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
