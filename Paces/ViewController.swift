@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import PacesKit
 
 class ViewController: UIViewController {
 

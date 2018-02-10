@@ -7,15 +7,29 @@
 //
 
 import UIKit
+import PacesKit
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
-
+    fileprivate var viewModel: AppDelegateViewModelType = AppDelegateViewModel()
+    var appFlowController: AppFlowController!
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
-        // Override point for customization after application launch.
+
+        // Setup the environment, from storage
+        AppEnvironment.replaceCurrentEnvironment(
+            AppEnvironment.fromStorage(userDefaults: UserDefaults.standard)
+        )
+
+        appFlowController = AppFlowController()
+        window = UIWindow(frame: UIScreen.main.bounds)
+        window?.rootViewController = appFlowController
+        window?.makeKeyAndVisible()
+
+        appFlowController.start()
+
         return true
     }
 
