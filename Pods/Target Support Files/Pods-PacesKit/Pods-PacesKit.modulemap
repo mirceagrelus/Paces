@@ -1,0 +1,6 @@
+framework module Pods_PacesKit {
+  umbrella header "Pods-PacesKit-umbrella.h"
+
+  export *
+  module * { export * }
+}
