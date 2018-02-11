@@ -15,7 +15,6 @@ protocol MainFlowControllerDelegate: class {
 class MainFlowController: UIViewController {
 
     weak var delegate: MainFlowControllerDelegate?
-    //let navigationController: UINavigationController = UINavigationController()
     let mainNavigationController: UINavigationController =  {
         let navigationController = UINavigationController()
         navigationController.setNavigationBarHidden(true, animated: false)
@@ -27,7 +26,6 @@ class MainFlowController: UIViewController {
 
         self.view.backgroundColor = UIColor.green
 
-        // Do any additional setup after loading the view.
     }
 
     func start() {

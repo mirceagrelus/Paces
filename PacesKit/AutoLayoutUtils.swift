@@ -36,4 +36,11 @@ public class AutoLayoutUtils {
         view.trailingAnchor.constraint(equalTo: secondView.trailingAnchor, constant:-inset).isActive = true
         view.bottomAnchor.constraint(equalTo: secondView.bottomAnchor, constant:-inset).isActive = true
     }
+
+    public class func constrainView(_ view: UIView, equalToGuide guide: UILayoutGuide, inset: CGFloat = 0){
+        view.topAnchor.constraint(equalTo: guide.topAnchor, constant:inset).isActive = true
+        view.leadingAnchor.constraint(equalTo: guide.leadingAnchor, constant:inset).isActive = true
+        view.trailingAnchor.constraint(equalTo: guide.trailingAnchor, constant:-inset).isActive = true
+        view.bottomAnchor.constraint(equalTo: guide.bottomAnchor, constant:-inset).isActive = true
+    }
 }

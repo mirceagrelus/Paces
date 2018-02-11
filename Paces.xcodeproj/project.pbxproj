@@ -10,6 +10,11 @@
 		08CAB6B1202F2C5800C7FF41 /* GradientView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08CAB6B0202F2C5800C7FF41 /* GradientView.swift */; };
 		08CAB6B3202F2F1E00C7FF41 /* AutoLayoutUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08CAB6B2202F2F1D00C7FF41 /* AutoLayoutUtils.swift */; };
 		08CAB6B5202F376300C7FF41 /* PaceControlView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08CAB6B4202F376300C7FF41 /* PaceControlView.swift */; };
+		08CAB6C6202F3A4D00C7FF41 /* PaceControlView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 08CAB6C5202F3A4D00C7FF41 /* PaceControlView.xib */; };
+		08CAB6C8202F4CB300C7FF41 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08CAB6C7202F4CB300C7FF41 /* Extensions.swift */; };
+		08CAB6CD202F929900C7FF41 /* PaceControlViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08CAB6CC202F929900C7FF41 /* PaceControlViewModel.swift */; };
+		08CAB6CF202F92BC00C7FF41 /* Pace.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08CAB6CE202F92BC00C7FF41 /* Pace.swift */; };
+		08CAB6D42030668300C7FF41 /* PaceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08CAB6D32030668300C7FF41 /* PaceTests.swift */; };
 		08E64B29202DD3B900A59F41 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08E64B28202DD3B900A59F41 /* AppDelegate.swift */; };
 		08E64B2B202DD3B900A59F41 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08E64B2A202DD3B900A59F41 /* ViewController.swift */; };
 		08E64B2E202DD3B900A59F41 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 08E64B2C202DD3B900A59F41 /* Main.storyboard */; };
@@ -85,6 +90,11 @@
 		08CAB6B0202F2C5800C7FF41 /* GradientView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GradientView.swift; sourceTree = "<group>"; };
 		08CAB6B2202F2F1D00C7FF41 /* AutoLayoutUtils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AutoLayoutUtils.swift; sourceTree = "<group>"; };
 		08CAB6B4202F376300C7FF41 /* PaceControlView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaceControlView.swift; sourceTree = "<group>"; };
+		08CAB6C5202F3A4D00C7FF41 /* PaceControlView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PaceControlView.xib; sourceTree = "<group>"; };
+		08CAB6C7202F4CB300C7FF41 /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
+		08CAB6CC202F929900C7FF41 /* PaceControlViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaceControlViewModel.swift; sourceTree = "<group>"; };
+		08CAB6CE202F92BC00C7FF41 /* Pace.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Pace.swift; sourceTree = "<group>"; };
+		08CAB6D32030668300C7FF41 /* PaceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaceTests.swift; sourceTree = "<group>"; };
 		08E64B25202DD3B900A59F41 /* Paces.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Paces.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		08E64B28202DD3B900A59F41 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		08E64B2A202DD3B900A59F41 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -161,8 +171,25 @@
 			children = (
 				08CAB6B0202F2C5800C7FF41 /* GradientView.swift */,
 				08CAB6B4202F376300C7FF41 /* PaceControlView.swift */,
+				08CAB6C5202F3A4D00C7FF41 /* PaceControlView.xib */,
 			);
 			path = Views;
+			sourceTree = "<group>";
+		};
+		08CAB6CB202F926700C7FF41 /* ViewModels */ = {
+			isa = PBXGroup;
+			children = (
+				08CAB6CC202F929900C7FF41 /* PaceControlViewModel.swift */,
+			);
+			path = ViewModels;
+			sourceTree = "<group>";
+		};
+		08CAB6D0202F92C200C7FF41 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				08CAB6CE202F92BC00C7FF41 /* Pace.swift */,
+			);
+			path = Model;
 			sourceTree = "<group>";
 		};
 		08E64B1C202DD3B900A59F41 = {
@@ -224,7 +251,10 @@
 				08E64B88202DD9CC00A59F41 /* KeyValueStoreType.swift */,
 				08E64B8A202DE06400A59F41 /* AppEnvironment.swift */,
 				08E64B98202F224A00A59F41 /* Navigation.swift */,
+				08CAB6C7202F4CB300C7FF41 /* Extensions.swift */,
+				08CAB6D0202F92C200C7FF41 /* Model */,
 				08CAB6B6202F377100C7FF41 /* Views */,
+				08CAB6CB202F926700C7FF41 /* ViewModels */,
 			);
 			path = PacesKit;
 			sourceTree = "<group>";
@@ -235,6 +265,7 @@
 				08E64B77202DD82F00A59F41 /* PacesKitTests.swift */,
 				08E64B79202DD82F00A59F41 /* Info.plist */,
 				08E64B8C202DEDC500A59F41 /* AppEnvironmentTests.swift */,
+				08CAB6D32030668300C7FF41 /* PaceTests.swift */,
 			);
 			path = PacesKitTests;
 			sourceTree = "<group>";
@@ -454,6 +485,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				08CAB6C6202F3A4D00C7FF41 /* PaceControlView.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -588,8 +620,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				08E64B87202DD86E00A59F41 /* Environment.swift in Sources */,
+				08CAB6CD202F929900C7FF41 /* PaceControlViewModel.swift in Sources */,
 				08E64B89202DD9CC00A59F41 /* KeyValueStoreType.swift in Sources */,
 				08CAB6B1202F2C5800C7FF41 /* GradientView.swift in Sources */,
+				08CAB6CF202F92BC00C7FF41 /* Pace.swift in Sources */,
+				08CAB6C8202F4CB300C7FF41 /* Extensions.swift in Sources */,
 				08CAB6B5202F376300C7FF41 /* PaceControlView.swift in Sources */,
 				08E64B8B202DE06400A59F41 /* AppEnvironment.swift in Sources */,
 				08CAB6B3202F2F1E00C7FF41 /* AutoLayoutUtils.swift in Sources */,
@@ -603,6 +638,7 @@
 			files = (
 				08E64B78202DD82F00A59F41 /* PacesKitTests.swift in Sources */,
 				08E64B8D202DEDC500A59F41 /* AppEnvironmentTests.swift in Sources */,
+				08CAB6D42030668300C7FF41 /* PaceTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import PacesKit
 
 public protocol PacesViewModelInputs {
 
@@ -24,6 +25,10 @@ public protocol PacesViewModelType {
 public class PacesViewModel: PacesViewModelType {
     public var inputs: PacesViewModelInputs { return self }
     public var outputs: PacesViewModelOutputs { return self }
+
+    init() {
+
+    }
 }
 
 extension PacesViewModel: PacesViewModelInputs, PacesViewModelOutputs { }
