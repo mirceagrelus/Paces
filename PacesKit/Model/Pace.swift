@@ -29,6 +29,15 @@ public struct Pace {
         return "\(value.rounded(toPlaces: 1))"
     }
 
+    public var displayUnit: String {
+        switch unit {
+        case .minPerKm: return "min/km"
+        case .minPerMile: return "min/mile"
+        case .kmPerHour: return "km/h"
+        case .milePerHour: return "mile/h"
+        }
+    }
+
     public init(value: Double, unit: PaceUnit) {
         self.value = value
         self.unit = unit

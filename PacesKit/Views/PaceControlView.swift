@@ -10,6 +10,9 @@ import UIKit
 
 public class PaceControlView: UIView {
 
+    @IBOutlet weak var valueLabel: UILabel!
+    @IBOutlet weak var unitLabel: UILabel!
+
     public override func awakeFromNib() {
         print("awakeFromNib")
     }
