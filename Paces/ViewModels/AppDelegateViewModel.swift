@@ -7,9 +7,12 @@
 //
 
 import Foundation
+import RxSwift
+import RxCocoa
+import PacesKit
 
 public protocol AppDelegateViewModelInputs {
-
+    //var applicationDidEnterBackgroundSubject: PublishSubject<Void> { get }
 }
 
 public protocol AppDelegateViewModelOutputs {
@@ -22,8 +25,14 @@ public protocol AppDelegateViewModelType {
 }
 
 public class AppDelegateViewModel: AppDelegateViewModelType {
+
+    init() {
+    }
+
     public var inputs: AppDelegateViewModelInputs { return self }
     public var outputs: AppDelegateViewModelOutputs { return self }
+
+    //public var applicationDidEnterBackgroundSubject: PublishSubject<Void> = PublishSubject()
 }
 
 extension AppDelegateViewModel: AppDelegateViewModelInputs, AppDelegateViewModelOutputs { }

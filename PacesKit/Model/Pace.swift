@@ -13,7 +13,7 @@ public struct Pace {
     public let unit: PaceUnit
 
     public var isPacingUnit: Bool {
-        return unit == .minPerKm || unit == .minPerMile
+        return unit.isPacingUnit
     }
 
     public var displayValue: String {
@@ -30,17 +30,18 @@ public struct Pace {
     }
 
     public var displayUnit: String {
-        switch unit {
-        case .minPerKm: return "min/km"
-        case .minPerMile: return "min/mile"
-        case .kmPerHour: return "km/h"
-        case .milePerHour: return "mile/h"
-        }
+        return unit.description
     }
 
     public init(value: Double, unit: PaceUnit) {
         self.value = value
         self.unit = unit
+    }
+
+    public init(stringValue: String, unit: PaceUnit) {
+        self.value = 0
+        self.unit = unit
+        self.updateValue(stringValue)
     }
 
     public static func minPerKm(seconds: Int) -> Pace {
@@ -85,11 +86,54 @@ public struct Pace {
 
 }
 
-public enum PaceUnit {
+extension Pace: Equatable {
+    public static func == (lhs: Pace, rhs: Pace) -> Bool {
+        return lhs.unit == rhs.unit && lhs.value == rhs.value
+    }
+}
+
+public enum PaceUnit: String, Codable {
     case minPerKm
     case minPerMile
     case kmPerHour
     case milePerHour
+
+    public var isPacingUnit: Bool {
+        return self == .minPerKm || self == .minPerMile
+    }
+
+    public var description: String {
+        switch self {
+        case .minPerKm:    return "min/km"
+        case .minPerMile:  return "min/mile"
+        case .kmPerHour:   return "km/h"
+        case .milePerHour: return "mile/h"
+        }
+    }
+
+    public var inputSource: [[CustomStringConvertible]] {
+        switch self {
+        case .minPerKm:    return PaceUnit.paceInputs
+        case .minPerMile:  return PaceUnit.paceInputs
+        case .kmPerHour:   return PaceUnit.speedInputs
+        case .milePerHour: return PaceUnit.speedInputs
+        }
+    }
+
+    public static let paceInputs: [[CustomStringConvertible]] = [Array(0...59), [":"], Array(0...59)]
+    public static let speedInputs: [[CustomStringConvertible]] = [Array(0...100), ["."],  Array(0...9)]
+//    public static let speedInputs: [[CustomStringConvertible]] = [Array(0...100), Array(0...9).map { ".\($0)" } ]
+
+    public static func fromDescription(_ description: String) -> PaceUnit? {
+        switch description {
+        case PaceUnit.minPerKm.description:    return .minPerKm
+        case PaceUnit.minPerMile.description:  return .minPerMile
+        case PaceUnit.kmPerHour.description:   return .kmPerHour
+        case PaceUnit.milePerHour.description: return .milePerHour
+        default:
+            return nil
+        }
+    }
 
     public func toUnitSpeed() -> UnitSpeed {
         switch self {

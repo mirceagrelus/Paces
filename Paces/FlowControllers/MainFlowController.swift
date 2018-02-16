@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import RxSwift
 
 protocol MainFlowControllerDelegate: class {
     func mainFlowControllerDidFinish(_ flowController: MainFlowController)
@@ -28,11 +29,32 @@ class MainFlowController: UIViewController {
 
     }
 
+    override func viewDidAppear(_ animated: Bool) {
+        print("resources: \(RxSwift.Resources.total)")
+    }
+
     func start() {
+        print("resources: \(RxSwift.Resources.total)")
+
         let pacesViewController = PacesViewController()
+        pacesViewController.delegate = self
 
         mainNavigationController.viewControllers = [pacesViewController]
         add(childController: mainNavigationController)
     }
+
+}
+
+extension MainFlowController: PacesViewControllerDelegate {
+    func pacesViewControllerShowSettings(_ pacesViewController: PacesViewController) {
+        // TODO: remove this. Just checked for memory leaks
+        mainNavigationController.viewControllers = []
+        DispatchQueue.main.asyncAfter(deadline: .now() + 5) {
+            self.start()
+        }
+
+        print("resources: \(RxSwift.Resources.total)")
+    }
+
 
 }

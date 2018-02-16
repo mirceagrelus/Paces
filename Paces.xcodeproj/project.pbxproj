@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0860EC8D2031ED6800358F2A /* PickerViewAdapter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0860EC8C2031ED6800358F2A /* PickerViewAdapter.swift */; };
 		08CAB6B1202F2C5800C7FF41 /* GradientView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08CAB6B0202F2C5800C7FF41 /* GradientView.swift */; };
 		08CAB6B3202F2F1E00C7FF41 /* AutoLayoutUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08CAB6B2202F2F1D00C7FF41 /* AutoLayoutUtils.swift */; };
 		08CAB6B5202F376300C7FF41 /* PaceControlView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08CAB6B4202F376300C7FF41 /* PaceControlView.swift */; };
@@ -90,6 +91,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		0860EC8C2031ED6800358F2A /* PickerViewAdapter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PickerViewAdapter.swift; sourceTree = "<group>"; };
 		08CAB6B0202F2C5800C7FF41 /* GradientView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GradientView.swift; sourceTree = "<group>"; };
 		08CAB6B2202F2F1D00C7FF41 /* AutoLayoutUtils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AutoLayoutUtils.swift; sourceTree = "<group>"; };
 		08CAB6B4202F376300C7FF41 /* PaceControlView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaceControlView.swift; sourceTree = "<group>"; };
@@ -259,14 +261,15 @@
 				08E64B6A202DD82F00A59F41 /* PacesKit.h */,
 				08E64B6B202DD82F00A59F41 /* Info.plist */,
 				08CAB6B2202F2F1D00C7FF41 /* AutoLayoutUtils.swift */,
-				08E64B86202DD86E00A59F41 /* Environment.swift */,
 				08E64B88202DD9CC00A59F41 /* KeyValueStoreType.swift */,
 				08E64B8A202DE06400A59F41 /* AppEnvironment.swift */,
+				08E64B86202DD86E00A59F41 /* Environment.swift */,
 				08E64B98202F224A00A59F41 /* Navigation.swift */,
 				08CAB6C7202F4CB300C7FF41 /* Extensions.swift */,
 				08CAB6D0202F92C200C7FF41 /* Model */,
 				08CAB6B6202F377100C7FF41 /* Views */,
 				08CAB6CB202F926700C7FF41 /* ViewModels */,
+				0860EC8C2031ED6800358F2A /* PickerViewAdapter.swift */,
 			);
 			path = PacesKit;
 			sourceTree = "<group>";
@@ -728,6 +731,7 @@
 				08E64B8B202DE06400A59F41 /* AppEnvironment.swift in Sources */,
 				08CAB6B3202F2F1E00C7FF41 /* AutoLayoutUtils.swift in Sources */,
 				08E64B99202F224B00A59F41 /* Navigation.swift in Sources */,
+				0860EC8D2031ED6800358F2A /* PickerViewAdapter.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

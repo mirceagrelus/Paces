@@ -26,3 +26,10 @@ public extension Double {
         return (self * divisor).rounded() / divisor
     }
 }
+
+
+public extension Int {
+    public func isEven() -> Bool {
+        return self % 2 == 0
+    }
+}
