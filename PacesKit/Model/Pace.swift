@@ -120,7 +120,7 @@ public enum PaceUnit: String, Codable {
         }
     }
 
-    public static let paceInputs: [[CustomStringConvertible]] = [Array(0...59), [":"], Array(0...59)]
+    public static let paceInputs: [[CustomStringConvertible]] = [Array(0...59), [":"], Array(0...59).map { String(format: "%02d", arguments:[$0]) }]
     public static let speedInputs: [[CustomStringConvertible]] = [Array(0...100), ["."],  Array(0...9)]
 //    public static let speedInputs: [[CustomStringConvertible]] = [Array(0...100), Array(0...9).map { ".\($0)" } ]
 

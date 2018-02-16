@@ -29,7 +29,7 @@ class PacesViewController: UIViewController {
     var paceControls: [PaceControlView] = []
     let bag = DisposeBag()
 
-    let paceControlHeight: CGFloat = 120
+    let paceControlHeight: CGFloat = 100
     let pickerViewHeight: CGFloat = 200
     let paceControlSpacing: CGFloat = 5
 

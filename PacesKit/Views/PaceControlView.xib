@@ -18,7 +18,7 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <stackView opaque="NO" contentMode="scaleToFill" distribution="equalSpacing" alignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="mxN-SM-h83">
-                    <rect key="frame" x="0.0" y="0.0" width="399" height="164"/>
+                    <rect key="frame" x="20" y="0.0" width="359" height="164"/>
                     <subviews>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="From" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7fw-zr-pxY">
                             <rect key="frame" x="0.0" y="72" width="39.5" height="20.5"/>
@@ -27,7 +27,7 @@
                             <nil key="highlightedColor"/>
                         </label>
                         <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="equalSpacing" alignment="bottom" translatesAutoresizingMaskIntoConstraints="NO" id="s4O-kN-abw">
-                            <rect key="frame" x="330" y="52" width="69" height="60"/>
+                            <rect key="frame" x="290" y="52" width="69" height="60"/>
                             <subviews>
                                 <stackView opaque="NO" contentMode="scaleToFill" alignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="XgN-Et-ib8">
                                     <rect key="frame" x="0.0" y="0.0" width="69" height="39.5"/>
@@ -53,8 +53,8 @@
             </subviews>
             <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>
-                <constraint firstAttribute="trailing" secondItem="mxN-SM-h83" secondAttribute="trailing" id="5mj-t6-aNk"/>
-                <constraint firstItem="mxN-SM-h83" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="n1T-oS-Wgl"/>
+                <constraint firstAttribute="trailingMargin" secondItem="mxN-SM-h83" secondAttribute="trailing" id="5mj-t6-aNk"/>
+                <constraint firstItem="mxN-SM-h83" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leadingMargin" id="n1T-oS-Wgl"/>
                 <constraint firstAttribute="bottomMargin" secondItem="mxN-SM-h83" secondAttribute="bottom" id="oFc-zv-hNP"/>
                 <constraint firstItem="mxN-SM-h83" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="topMargin" id="ubF-K2-5Pw"/>
             </constraints>
