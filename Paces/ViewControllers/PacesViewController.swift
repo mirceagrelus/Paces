@@ -155,6 +155,11 @@ class PacesViewController: UIViewController {
             .bind(to: viewModel.inputs.switchUserInputPace)
             .disposed(by: control.bag)
 
+        viewModel.inputs.switchUserInputPace
+            .withLatestFrom(control.viewModel.inputs.toUnit, resultSelector: { $0.unit == $1 })
+            .bind(to: control.viewModel.inputs.isSource)
+            .disposed(by: control.bag)
+
         return control
     }
 

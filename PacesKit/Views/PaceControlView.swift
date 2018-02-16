@@ -14,7 +14,11 @@ public class PaceControlView: UIView {
 
     @IBOutlet weak var valueLabel: UILabel!
     @IBOutlet weak var unitLabel: UILabel!
+    @IBOutlet weak var sourceLabel: UILabel!
 
+    public static let sourceFromString = "From"
+    public static let sourceToString = "To"
+    
     public let viewModel: PaceControlViewModelType = PaceControlViewModel()
     public let bag = DisposeBag()
 
@@ -48,6 +52,14 @@ public class PaceControlView: UIView {
         viewModel.outputs.pace
             .map { $0.displayValue }
             .bind(to: valueLabel.rx.text)
+            .disposed(by: bag)
+
+        viewModel.inputs.isSource
+            .observeOn(MainScheduler.instance)
+            .subscribe(onNext: { [weak self] isSource in
+                self?.sourceLabel.text = isSource ? PaceControlView.sourceFromString : PaceControlView.sourceToString
+                self?.backgroundColor = isSource ? UIColor.white : UIColor.white.withAlphaComponent(0.5)
+            })
             .disposed(by: bag)
 
     }

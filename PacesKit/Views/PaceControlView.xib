@@ -61,6 +61,7 @@
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <viewLayoutGuide key="safeArea" id="vUN-kp-3ea"/>
             <connections>
+                <outlet property="sourceLabel" destination="7fw-zr-pxY" id="4kf-up-YZh"/>
                 <outlet property="unitLabel" destination="FqJ-jm-hFD" id="N7N-pN-nY3"/>
                 <outlet property="valueLabel" destination="V5s-TA-xdz" id="S7m-5z-5ei"/>
             </connections>

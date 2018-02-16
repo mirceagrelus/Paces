@@ -15,10 +15,13 @@ public protocol PaceControlViewModelInputs {
     var fromPace: PublishRelay<Pace> { get }
 
     // the unit paces are displayed in, by the control
-    var toUnit: PublishRelay<PaceUnit> { get }
+    var toUnit: BehaviorRelay<PaceUnit> { get }
 
     // control tapped event
     var tapped: PublishRelay<Void> { get }
+
+    // is the control considered the source of user input
+    var isSource: PublishRelay<Bool> { get }
 }
 
 public protocol PaceControlViewModelOutputs {
@@ -55,8 +58,9 @@ public class PaceControlViewModel: PaceControlViewModelType {
     public var outputs: PaceControlViewModelOutputs { return self }
 
     public var fromPace: PublishRelay<Pace> =  PublishRelay()
-    public var toUnit: PublishRelay<PaceUnit> =  PublishRelay()
+    public var toUnit: BehaviorRelay<PaceUnit> =  BehaviorRelay(value: PaceUnit.minPerMile)
     public var tapped: PublishRelay<Void> = PublishRelay()
+    public var isSource: PublishRelay<Bool> = PublishRelay()
 
     fileprivate let paceSubject: PublishRelay<Pace> =  PublishRelay()
     public var pace: Observable<Pace> {
