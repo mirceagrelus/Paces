@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0805B25820388BE800916CD4 /* UITableView+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0805B25720388BE800916CD4 /* UITableView+Extensions.swift */; };
+		0805B25A20389DED00916CD4 /* Observable+Operators.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0805B25920389DED00916CD4 /* Observable+Operators.swift */; };
 		0860EC8D2031ED6800358F2A /* PickerViewAdapter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0860EC8C2031ED6800358F2A /* PickerViewAdapter.swift */; };
 		08CAB6B1202F2C5800C7FF41 /* GradientView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08CAB6B0202F2C5800C7FF41 /* GradientView.swift */; };
 		08CAB6B3202F2F1E00C7FF41 /* AutoLayoutUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08CAB6B2202F2F1D00C7FF41 /* AutoLayoutUtils.swift */; };
@@ -91,6 +93,8 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		0805B25720388BE800916CD4 /* UITableView+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITableView+Extensions.swift"; sourceTree = "<group>"; };
+		0805B25920389DED00916CD4 /* Observable+Operators.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Observable+Operators.swift"; sourceTree = "<group>"; };
 		0860EC8C2031ED6800358F2A /* PickerViewAdapter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PickerViewAdapter.swift; sourceTree = "<group>"; };
 		08CAB6B0202F2C5800C7FF41 /* GradientView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GradientView.swift; sourceTree = "<group>"; };
 		08CAB6B2202F2F1D00C7FF41 /* AutoLayoutUtils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AutoLayoutUtils.swift; sourceTree = "<group>"; };
@@ -180,6 +184,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		0805B25B2039614D00916CD4 /* Rx Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				0805B25920389DED00916CD4 /* Observable+Operators.swift */,
+				0805B25720388BE800916CD4 /* UITableView+Extensions.swift */,
+			);
+			path = "Rx Extensions";
+			sourceTree = "<group>";
+		};
 		08CAB6B6202F377100C7FF41 /* Views */ = {
 			isa = PBXGroup;
 			children = (
@@ -258,6 +271,7 @@
 		08E64B69202DD82F00A59F41 /* PacesKit */ = {
 			isa = PBXGroup;
 			children = (
+				0805B25B2039614D00916CD4 /* Rx Extensions */,
 				08E64B6A202DD82F00A59F41 /* PacesKit.h */,
 				08E64B6B202DD82F00A59F41 /* Info.plist */,
 				08CAB6B2202F2F1D00C7FF41 /* AutoLayoutUtils.swift */,
@@ -724,9 +738,11 @@
 				08E64B87202DD86E00A59F41 /* Environment.swift in Sources */,
 				08CAB6CD202F929900C7FF41 /* PaceControlViewModel.swift in Sources */,
 				08E64B89202DD9CC00A59F41 /* KeyValueStoreType.swift in Sources */,
+				0805B25820388BE800916CD4 /* UITableView+Extensions.swift in Sources */,
 				08CAB6B1202F2C5800C7FF41 /* GradientView.swift in Sources */,
 				08CAB6CF202F92BC00C7FF41 /* Pace.swift in Sources */,
 				08CAB6C8202F4CB300C7FF41 /* Extensions.swift in Sources */,
+				0805B25A20389DED00916CD4 /* Observable+Operators.swift in Sources */,
 				08CAB6B5202F376300C7FF41 /* PaceControlView.swift in Sources */,
 				08E64B8B202DE06400A59F41 /* AppEnvironment.swift in Sources */,
 				08CAB6B3202F2F1E00C7FF41 /* AutoLayoutUtils.swift in Sources */,
