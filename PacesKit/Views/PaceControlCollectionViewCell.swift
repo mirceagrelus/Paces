@@ -8,23 +8,19 @@
 
 import UIKit
 
-public class PaceControlCollectionViewCell: UICollectionViewCell {
+public class PaceControlCollectionViewCell: ConversionControlCollectionViewCell {
 
-    public static let PaceCellIdentifier = "PaceControlCell"
+    public static let identifier = "PaceControlCell"
     public var paceControl: PaceControlView = PaceControlView.fromNib()
-    public var controlContentTrailingConstraint: NSLayoutConstraint = NSLayoutConstraint()
-
-    let backgroundContentView: UIView = UIView()
-    let actionsContentView: UIView = UIView()
 
     public override init(frame: CGRect) {
         super.init(frame: frame)
-        setup()
+        setupControl()
     }
 
     public required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
-        setup()
+        setupControl()
     }
 
     public override func prepareForReuse() {
@@ -33,39 +29,18 @@ public class PaceControlCollectionViewCell: UICollectionViewCell {
         // just replace with a new PaceControl.
         paceControl.removeFromSuperview()
         paceControl = PaceControlView.fromNib()
-        setupPaceControl()
+        setupControl()
     }
 
     public func configureFor(unit: PaceUnit) {
         paceControl.configureUnit(unit)
     }
 
-
-    func setup() {
-        //contentView.translatesAutoresizingMaskIntoConstraints = false
-        //contentView.backgroundColor = UIColor.blue
-
-        backgroundContentView.translatesAutoresizingMaskIntoConstraints = false
-        //backgroundContentView.backgroundColor = .yellow
-        contentView.addSubview(backgroundContentView)
-
-        AutoLayoutUtils.constrainView(backgroundContentView, equalToView: contentView)
-
-        //now setup the pace control
-        setupPaceControl()
-    }
-
-    func setupPaceControl() {
+    func setupControl() {
         paceControl.translatesAutoresizingMaskIntoConstraints = false
-        backgroundContentView.addSubview(paceControl)
+        controlContentView.addSubview(paceControl)
 
-        NSLayoutConstraint.activate([
-            paceControl.topAnchor.constraint(equalTo: backgroundContentView.topAnchor),
-            paceControl.widthAnchor.constraint(equalTo: backgroundContentView.widthAnchor),
-            paceControl.heightAnchor.constraint(equalTo: backgroundContentView.heightAnchor)
-            ])
-        controlContentTrailingConstraint = paceControl.trailingAnchor.constraint(equalTo: backgroundContentView.trailingAnchor)
-        controlContentTrailingConstraint.isActive = true
+        AutoLayoutUtils.constrainView(paceControl, equalToView: controlContentView)
 
     }
     

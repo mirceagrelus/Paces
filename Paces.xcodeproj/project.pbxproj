@@ -9,6 +9,10 @@
 /* Begin PBXBuildFile section */
 		0805B25820388BE800916CD4 /* UITableView+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0805B25720388BE800916CD4 /* UITableView+Extensions.swift */; };
 		0805B25A20389DED00916CD4 /* Observable+Operators.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0805B25920389DED00916CD4 /* Observable+Operators.swift */; };
+		083C321B203C6EE4005AD1F5 /* DistanceControlView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 083C321A203C6EE4005AD1F5 /* DistanceControlView.swift */; };
+		083C321D203C6F1D005AD1F5 /* DistanceControlView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 083C321C203C6F1D005AD1F5 /* DistanceControlView.xib */; };
+		083C321F203C7A94005AD1F5 /* ConversionControlCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 083C321E203C7A94005AD1F5 /* ConversionControlCollectionViewCell.swift */; };
+		083C3221203C7C7D005AD1F5 /* DistanceControlCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 083C3220203C7C7D005AD1F5 /* DistanceControlCollectionViewCell.swift */; };
 		0860EC8D2031ED6800358F2A /* PickerViewAdapter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0860EC8C2031ED6800358F2A /* PickerViewAdapter.swift */; };
 		087EFAD620398FA5005B7385 /* PaceControlCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 087EFAD520398FA5005B7385 /* PaceControlCollectionViewCell.swift */; };
 		087EFAD82039D19D005B7385 /* ConversionControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 087EFAD72039D19D005B7385 /* ConversionControl.swift */; };
@@ -98,6 +102,10 @@
 /* Begin PBXFileReference section */
 		0805B25720388BE800916CD4 /* UITableView+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITableView+Extensions.swift"; sourceTree = "<group>"; };
 		0805B25920389DED00916CD4 /* Observable+Operators.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Observable+Operators.swift"; sourceTree = "<group>"; };
+		083C321A203C6EE4005AD1F5 /* DistanceControlView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DistanceControlView.swift; sourceTree = "<group>"; };
+		083C321C203C6F1D005AD1F5 /* DistanceControlView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = DistanceControlView.xib; sourceTree = "<group>"; };
+		083C321E203C7A94005AD1F5 /* ConversionControlCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConversionControlCollectionViewCell.swift; sourceTree = "<group>"; };
+		083C3220203C7C7D005AD1F5 /* DistanceControlCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DistanceControlCollectionViewCell.swift; sourceTree = "<group>"; };
 		0860EC8C2031ED6800358F2A /* PickerViewAdapter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PickerViewAdapter.swift; sourceTree = "<group>"; };
 		087EFAD520398FA5005B7385 /* PaceControlCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaceControlCollectionViewCell.swift; sourceTree = "<group>"; };
 		087EFAD72039D19D005B7385 /* ConversionControl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConversionControl.swift; sourceTree = "<group>"; };
@@ -206,6 +214,10 @@
 				08CAB6B4202F376300C7FF41 /* PaceControlView.swift */,
 				08CAB6C5202F3A4D00C7FF41 /* PaceControlView.xib */,
 				087EFAD520398FA5005B7385 /* PaceControlCollectionViewCell.swift */,
+				083C321A203C6EE4005AD1F5 /* DistanceControlView.swift */,
+				083C321C203C6F1D005AD1F5 /* DistanceControlView.xib */,
+				083C321E203C7A94005AD1F5 /* ConversionControlCollectionViewCell.swift */,
+				083C3220203C7C7D005AD1F5 /* DistanceControlCollectionViewCell.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -535,6 +547,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				083C321D203C6F1D005AD1F5 /* DistanceControlView.xib in Resources */,
 				08CAB6C6202F3A4D00C7FF41 /* PaceControlView.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -746,6 +759,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				08E64B87202DD86E00A59F41 /* Environment.swift in Sources */,
+				083C3221203C7C7D005AD1F5 /* DistanceControlCollectionViewCell.swift in Sources */,
 				087EFAD82039D19D005B7385 /* ConversionControl.swift in Sources */,
 				087EFAD620398FA5005B7385 /* PaceControlCollectionViewCell.swift in Sources */,
 				08CAB6CD202F929900C7FF41 /* PaceControlViewModel.swift in Sources */,
@@ -756,6 +770,8 @@
 				08CAB6C8202F4CB300C7FF41 /* Extensions.swift in Sources */,
 				0805B25A20389DED00916CD4 /* Observable+Operators.swift in Sources */,
 				08CAB6B5202F376300C7FF41 /* PaceControlView.swift in Sources */,
+				083C321F203C7A94005AD1F5 /* ConversionControlCollectionViewCell.swift in Sources */,
+				083C321B203C6EE4005AD1F5 /* DistanceControlView.swift in Sources */,
 				08E64B8B202DE06400A59F41 /* AppEnvironment.swift in Sources */,
 				08CAB6B3202F2F1E00C7FF41 /* AutoLayoutUtils.swift in Sources */,
 				08E64B99202F224B00A59F41 /* Navigation.swift in Sources */,

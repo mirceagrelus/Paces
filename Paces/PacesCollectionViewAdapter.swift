@@ -56,15 +56,24 @@ extension PacesCollectionViewAdapter: UICollectionViewDataSource {
 
     public func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let controlModel = paceControls.value[indexPath.item]
-        //TODO: create cell based on controlModel.unitType
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: PaceControlCollectionViewCell.PaceCellIdentifier, for: indexPath)
 
-        if let paceCell = cell as? PaceControlCollectionViewCell,
-            case .paceUnit(let paceUnit) = controlModel.unitType {
-            //paceCell.configureFor(unit: controlModel.unitType.)
-            paceCell.configureFor(unit: paceUnit)
+        var cell: UICollectionViewCell
 
-            self.bindControl(paceCell.paceControl)
+        switch controlModel.unitType {
+        case .paceUnit(let paceUnit):
+            cell = collectionView.dequeueReusableCell(withReuseIdentifier: PaceControlCollectionViewCell.identifier, for: indexPath)
+            if let paceCell = cell as? PaceControlCollectionViewCell {
+                paceCell.configureFor(unit: paceUnit)
+                self.bindControl(paceCell.paceControl)
+            }
+            break
+        case .raceDistance(_):
+            cell = collectionView.dequeueReusableCell(withReuseIdentifier: DistanceControlCollectionViewCell.identifier, for: indexPath)
+            if let distanceCell = cell as? DistanceControlCollectionViewCell {
+                //distanceCell.configureFor(distance: distance)
+                //self.bindControl
+            }
+            break
         }
 
         return cell
@@ -164,7 +173,7 @@ extension PacesCollectionViewAdapter: UIGestureRecognizerDelegate {
             print("began")
             guard let collectionView = recognizer.view as? UICollectionView,
                 let indexpath = collectionView.indexPathForItem(at: point),
-                let cell = collectionView.cellForItem(at: indexpath) as? PaceControlCollectionViewCell
+                let cell = collectionView.cellForItem(at: indexpath) as? ConversionControlCollectionViewCell
                 else { return }
 
             activePannedCell = cell
@@ -172,7 +181,7 @@ extension PacesCollectionViewAdapter: UIGestureRecognizerDelegate {
         case .changed:
             guard let collectionView = recognizer.view as? UICollectionView,
                 let indexpath = collectionView.indexPathForItem(at: point),
-                let cell = collectionView.cellForItem(at: indexpath) as? PaceControlCollectionViewCell
+                let cell = collectionView.cellForItem(at: indexpath) as? ConversionControlCollectionViewCell
                 else { return }
 
             guard activePannedCell == cell else { return }
@@ -185,14 +194,14 @@ extension PacesCollectionViewAdapter: UIGestureRecognizerDelegate {
             print("changed: \(currentPoint)")
         case .cancelled: fallthrough
         case .failed:
-            if let paceCell = activePannedCell as? PaceControlCollectionViewCell {
-                paceCell.controlContentTrailingConstraint.constant = 0
+            if let controlCell = activePannedCell as? ConversionControlCollectionViewCell {
+                controlCell.controlContentTrailingConstraint.constant = 0
             }
             activePannedCell = nil
         case .ended:
             print("ended")
-            if let paceCell = activePannedCell as? PaceControlCollectionViewCell {
-                paceCell.controlContentTrailingConstraint.constant = 0
+            if let controlCell = activePannedCell as? ConversionControlCollectionViewCell {
+                controlCell.controlContentTrailingConstraint.constant = 0
             }
             activePannedCell = nil
         default:

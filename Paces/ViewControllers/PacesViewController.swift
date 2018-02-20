@@ -226,8 +226,8 @@ extension PacesViewController {
         collectionView.dropDelegate = collectionViewAdapter
         collectionView.dragInteractionEnabled = true
         collectionView.alwaysBounceVertical = true
-        //collectionView.register(DistanceControlCollectionViewCell.self, forCellWithReuseIdentifier: DistanceControlCollectionViewCell.DistanceCellIdentifier)
-        collectionView.register(PaceControlCollectionViewCell.self, forCellWithReuseIdentifier: PaceControlCollectionViewCell.PaceCellIdentifier)
+        collectionView.register(DistanceControlCollectionViewCell.self, forCellWithReuseIdentifier: DistanceControlCollectionViewCell.identifier)
+        collectionView.register(PaceControlCollectionViewCell.self, forCellWithReuseIdentifier: PaceControlCollectionViewCell.identifier)
         collectionView.allowsSelection = false
     }
 
