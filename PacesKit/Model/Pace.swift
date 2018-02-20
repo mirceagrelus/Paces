@@ -16,6 +16,10 @@ public struct Pace {
         return unit.isPacingUnit
     }
 
+    public var isSpeedUnit: Bool {
+        return unit.isSpeedUnit
+    }
+
     public var displayValue: String {
         if isPacingUnit {
             let totalSeconds = Int((value * 60).rounded())
@@ -100,6 +104,10 @@ public enum PaceUnit: String, Codable {
 
     public var isPacingUnit: Bool {
         return self == .minPerKm || self == .minPerMile
+    }
+
+    public var isSpeedUnit: Bool {
+        return self == .kmPerHour || self == .milePerHour
     }
 
     public var description: String {

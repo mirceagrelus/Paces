@@ -19,17 +19,15 @@ class PacesViewController: UIViewController {
 
     weak var delegate:PacesViewControllerDelegate?
     let viewModel: PacesViewModelType = PacesViewModel()
-
-    let gradientView: GradientView = GradientView()
-    let pickerView: UIPickerView = UIPickerView()
-    let paceContentView: UIView = UIView()
-    let contentStack = UIStackView()
-    let coontentStackFillView = UIView()
-    let paceControlStack: UIStackView = UIStackView()
-    var paceControls: [PaceControlView] = []
     let bag = DisposeBag()
 
-    let paceControlHeight: CGFloat = 100
+    let gradientView = GradientView()
+    let pickerView = UIPickerView()
+    let paceContentView = UIView()
+    lazy var collectionView: UICollectionView = { UICollectionView(frame: CGRect.zero, collectionViewLayout: self.tableLayout()) }()
+    lazy var collectionViewAdapter: PacesCollectionViewAdapter =  { createCollectionViewAdapter() }()
+
+    static let paceControlHeight: CGFloat = 80 //70
     let pickerViewHeight: CGFloat = 200
     let paceControlSpacing: CGFloat = 5
 
@@ -42,12 +40,12 @@ class PacesViewController: UIViewController {
         super.init(nibName: nil, bundle: nil)
     }
 
-    deinit {
-        print("PacesViewController_deinit: \(RxSwift.Resources.total)")
+    required init?(coder aDecoder: NSCoder) {
+        super.init(coder: aDecoder)
     }
 
-    required init?(coder aDecoder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
+    deinit {
+        print("PacesViewController_deinit: \(RxSwift.Resources.total)")
     }
 
     override func viewDidLoad() {
@@ -59,7 +57,8 @@ class PacesViewController: UIViewController {
         viewModel.inputs.viewDidLoad.onNext(())
 
         //test_removeControl()
-        test_dismissController()
+//        test_dismissController()
+        test_test()
     }
 
     override func viewWillAppear(_ animated: Bool) {
@@ -79,6 +78,7 @@ class PacesViewController: UIViewController {
         viewModel.inputs.switchUserInputPace
             .map { $0.unit.inputSource }
             .debug("switchPickerDatasource")
+            .observeOnMain()
             .bind(to: pickerView.rx.items(adapter: PickerViewViewAdapter(unit: viewModel.inputs.paceUnit.value)))
             .disposed(by: bag)
 
@@ -86,6 +86,7 @@ class PacesViewController: UIViewController {
         viewModel.inputs.switchUserInputPace
             .map { $0.displayValue }
             .debug("selectPickerValue")
+            .observeOnMain()
             .subscribe(onNext: { [weak self] displayValue in
                 self?.updatePickerValue(stringRepresentation: displayValue)
             })
@@ -101,66 +102,15 @@ class PacesViewController: UIViewController {
             .bind(to: viewModel.inputs.paceValue)
             .disposed(by: bag)
 
-        // recreate the PaceControlViews that were used last time the app was opened
-        let archivedControls = viewModel.outputs.archivedUnits
-            .flatMap { Observable.from($0) }
-            .map { PaceControlView.createWithPaceUnit($0) }
-            .map { self.bindControlModel(control: $0) }
-            .toArray()
-            .debug("archivedControls")
-            .share(replay: 1, scope: .whileConnected)
-
-        // add controls to UI
-        archivedControls
-            //.map { $0.map { $0.0 } }
-            .subscribe(onNext: { controls in
-                self.paceControls = controls
-                self.addPaceControlViews(controls)
-            })
-            .disposed(by: bag)
-
-        // restore last input pace
-        archivedControls
-            .ignoreElements()
-            .andThen(
-                Observable.combineLatest(viewModel.inputs.paceValue, viewModel.inputs.paceUnit, resultSelector: { ($0, $1) })
-            )
-            .debug("afterLoad")
+        // load initial controls
+        viewModel.outputs.paceControls
             .take(1)
-            .observeOn(MainScheduler.instance)
-            .subscribe(onNext: { tupple in
-                let (paceValue, _) = tupple
-                self.updatePickerValue(stringRepresentation: paceValue)
-                self.changePaceValue(stringRepresentation: self.viewModel.inputs.paceValue.value)
+            .subscribe(onNext: { [weak self] controls in
+                self?.collectionViewAdapter.loadControls(controls)
+                self?.collectionView.reloadData()
             })
             .disposed(by: bag)
 
-
-//        self.rx.methodInvoked(#selector(viewDidLoad))
-//            .subscribe { event in
-//                print("methodInvoked - viewDidLoad: \(event)")
-//        }
-//        .disposed(by: bag)
-
-    }
-
-    func bindControlModel(control: PaceControlView) -> PaceControlView {
-        self.viewModel.outputs.pace
-            .debug("control-pace")
-            .bind(to: control.viewModel.inputs.fromPace)
-            .disposed(by: control.bag)
-
-        control.viewModel.outputs.switchUserInputPace
-            .debug("control-switchInputPace")
-            .bind(to: viewModel.inputs.switchUserInputPace)
-            .disposed(by: control.bag)
-
-        viewModel.inputs.switchUserInputPace
-            .withLatestFrom(control.viewModel.inputs.toUnit, resultSelector: { $0.unit == $1 })
-            .bind(to: control.viewModel.inputs.isSource)
-            .disposed(by: control.bag)
-
-        return control
     }
 
     func changeUnit(_ unit: PaceUnit) {
@@ -169,13 +119,6 @@ class PacesViewController: UIViewController {
 
     func changePaceValue(stringRepresentation: String) {
         viewModel.inputs.paceValue.accept(stringRepresentation)
-    }
-
-    func addPaceControlViews(_ views: [PaceControlView]) {
-        views.forEach { (control) in
-            control.heightAnchor.constraint(equalToConstant: paceControlHeight).isActive = true
-            paceControlStack.addArrangedSubview(control)
-        }
     }
 
     func updatePickerValue(stringRepresentation paceValue: String) {
@@ -201,49 +144,47 @@ class PacesViewController: UIViewController {
 }
 
 extension PacesViewController {
-    func test_printResources() {
-        print("resources: \(RxSwift.Resources.total)")
+    func createCollectionViewAdapter() -> PacesCollectionViewAdapter {
+        return PacesCollectionViewAdapter(collectionView) { [weak self] control in
+            guard let weakSelf = self else { return }
+
+            weakSelf.viewModel.outputs.pace
+                .debug("control-pace")
+                .bind(to: control.viewModel.inputs.fromPace)
+                .disposed(by: control.bag)
+
+            control.viewModel.outputs.switchUserInputPace
+                .debug("control-switchInputPace")
+                .bind(to: weakSelf.viewModel.inputs.switchUserInputPace)
+                .disposed(by: control.bag)
+
+            weakSelf.viewModel.inputs.switchUserInputPace
+                .withLatestFrom(control.viewModel.inputs.toUnit, resultSelector: { $0.unit == $1 })
+                .bind(to: control.viewModel.inputs.isSource)
+                .disposed(by: control.bag)
+
+            // trigger initial value
+            control.viewModel.inputs.fromPace.accept(weakSelf.viewModel.outputs.lastPace)
+        }
     }
 
-    func test_dismissController() {
-        let tapGesture = UITapGestureRecognizer()
-        tapGesture.numberOfTapsRequired = 2
-        tapGesture.numberOfTouchesRequired = 2
-        self.view.addGestureRecognizer(tapGesture)
+    func tableLayout(width: CGFloat = 300) -> UICollectionViewFlowLayout {
+        let layout = UICollectionViewFlowLayout()
+        //PaceControlCollectionViewCell.width = width
+        //let width = PaceControlCollectionViewCell.width
+        let width = self.view.bounds.size.width
+        layout.itemSize = CGSize(width: width, height: PacesViewController.paceControlHeight)
+        layout.minimumLineSpacing = 2.0
 
-        tapGesture.rx.event
-            .debug("tapGesture")
-            .subscribe { [weak self] event in
-                self?.test_printResources()
-                self?.delegate?.pacesViewControllerShowSettings(self!)
-                self?.test_printResources()
-            }
-            .disposed(by: bag)
+        return layout
     }
 
-    func test_removeControl() {
-        let tapGesture = UITapGestureRecognizer()
-        tapGesture.numberOfTapsRequired = 2
-        tapGesture.numberOfTouchesRequired = 2
-        self.view.addGestureRecognizer(tapGesture)
-
-        tapGesture.rx.event
-            .subscribe { [unowned self] event in
-                print(event)
-                self.test_printResources()
-
-                let control = self.paceControlStack.arrangedSubviews[1] as! PaceControlView
-                control.removeFromSuperview()
-                self.paceControls = self.paceControls.filter { $0 != control }
-
-                self.test_printResources()
-            }
-            .disposed(by: bag)
-    }
 }
 
 extension PacesViewController {
     func setup() {
+        setupCollectionView()
+
         gradientView.translatesAutoresizingMaskIntoConstraints = false
         gradientView.insertGradient(topToBottom: true, colorArray: [UIColor.orange, UIColor.red])
         view.addSubview(gradientView)
@@ -255,20 +196,8 @@ extension PacesViewController {
         paceContentView.translatesAutoresizingMaskIntoConstraints = false
         gradientView.addSubview(paceContentView)
 
-        contentStack.translatesAutoresizingMaskIntoConstraints = false
-        contentStack.axis = .vertical
-        paceContentView.addSubview(contentStack)
-
-        paceControlStack.translatesAutoresizingMaskIntoConstraints = false
-        paceControlStack.axis = .vertical
-        paceControlStack.distribution = .equalSpacing
-        paceControlStack.spacing = paceControlSpacing
-        contentStack.addArrangedSubview(paceControlStack)
-
-        coontentStackFillView.translatesAutoresizingMaskIntoConstraints = false
-        //coontentStackFillView.backgroundColor = UIColor.purple
-        contentStack.addArrangedSubview(coontentStackFillView)
-
+        collectionView.translatesAutoresizingMaskIntoConstraints = false
+        paceContentView.addSubview(collectionView)
 
         AutoLayoutUtils.constrainView(gradientView, equalToView: view)
 
@@ -286,7 +215,61 @@ extension PacesViewController {
             ])
 
 
-        AutoLayoutUtils.constrainView(contentStack, equalToView: paceContentView)
+        AutoLayoutUtils.constrainView(collectionView, equalToView: paceContentView)
+    }
+
+    func setupCollectionView() {
+        collectionView.backgroundColor = .clear
+        collectionView.dataSource = collectionViewAdapter
+        collectionView.delegate = collectionViewAdapter
+        collectionView.dragDelegate = collectionViewAdapter
+        collectionView.dropDelegate = collectionViewAdapter
+        collectionView.dragInteractionEnabled = true
+        collectionView.alwaysBounceVertical = true
+        //collectionView.register(DistanceControlCollectionViewCell.self, forCellWithReuseIdentifier: DistanceControlCollectionViewCell.DistanceCellIdentifier)
+        collectionView.register(PaceControlCollectionViewCell.self, forCellWithReuseIdentifier: PaceControlCollectionViewCell.PaceCellIdentifier)
+        collectionView.allowsSelection = false
     }
 
 }
+
+
+extension PacesViewController {
+    func test_printResources() {
+        print("resources: \(RxSwift.Resources.total)")
+    }
+
+    func test_test() {
+        let tapGesture = UITapGestureRecognizer()
+        tapGesture.numberOfTapsRequired = 2
+        tapGesture.numberOfTouchesRequired = 2
+        self.view.addGestureRecognizer(tapGesture)
+
+        tapGesture.rx.event
+            .debug("tapGesture")
+            .subscribe { [weak self] event in
+
+                print("resources: \(RxSwift.Resources.total)")
+
+            }
+            .disposed(by: bag)
+
+    }
+
+    func test_dismissController() {
+        let tapGesture = UITapGestureRecognizer()
+        tapGesture.numberOfTapsRequired = 2
+        tapGesture.numberOfTouchesRequired = 2
+        self.view.addGestureRecognizer(tapGesture)
+
+        tapGesture.rx.event
+            .debug("tapGesture")
+            .subscribe { [weak self] event in
+                self?.test_printResources()
+                self?.delegate?.pacesViewControllerShowSettings(self!)
+                self?.test_printResources()
+            }
+            .disposed(by: bag)
+    }
+}
+

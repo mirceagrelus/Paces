@@ -29,8 +29,11 @@ public protocol PacesViewModelOutputs {
     // calculated pace
     var pace: Observable<Pace> { get }
 
-    // emits the units that were archived on first load, and then terminates
-    var archivedUnits: Observable<[PaceUnit]> { get set }
+    // configured controls
+    var paceControls: Observable<[ConversionControl]> { get }
+
+    // the value of the last calculated pace
+    var lastPace: Pace { get }
 }
 
 public protocol PacesViewModelType {
@@ -40,24 +43,27 @@ public protocol PacesViewModelType {
 
 public class PacesViewModel: PacesViewModelType {
 
+    public var lastPace: Pace {
+        return _pace.value
+    }
+
     init() {
         paceValue = BehaviorRelay(value: AppEnvironment.current.inputPaceValue)
         paceUnit = BehaviorRelay(value: AppEnvironment.current.inputPaceUnit)
         switchUserInputPace = BehaviorRelay(value: Pace(stringValue: paceValue.value, unit: paceUnit.value))
-
-        archivedUnits = viewDidLoad
-            .take(1)
-            .map { _ in
-                //TODO: read data from AppEnvironment
-                return [ PaceUnit.minPerMile, PaceUnit.minPerKm, PaceUnit.kmPerHour ]
-            }
-            .share(replay: 1, scope: .whileConnected)
+        _pace = BehaviorRelay(value: switchUserInputPace.value)
+        //TODO: read paces config from AppEnvironment
+        let envControls = [ConversionControl(sortOrder: 0, unitType: .paceUnit(.minPerMile)),
+                           ConversionControl(sortOrder: 1, unitType: .paceUnit(.minPerKm)),
+                           ConversionControl(sortOrder: 2, unitType: .paceUnit(.kmPerHour)),
+                           ConversionControl(sortOrder: 3, unitType: .paceUnit(.milePerHour))]
+        _paceControls = BehaviorRelay(value: envControls)
 
         // calculate new pace when user input pace value changes
         paceValue
             .withLatestFrom(paceUnit, resultSelector: { Pace(stringValue: $0, unit: $1) })
             .debug("pace")
-            .bind(to: paceSubject)
+            .bind(to: _pace)
             .disposed(by: bag)
 
         // switch to the new input unit
@@ -83,7 +89,6 @@ public class PacesViewModel: PacesViewModelType {
             .disposed(by: bag)
     }
 
-
     public var inputs: PacesViewModelInputs { return self }
     public var outputs: PacesViewModelOutputs { return self }
 
@@ -92,14 +97,20 @@ public class PacesViewModel: PacesViewModelType {
     public var viewDidLoad: PublishSubject<()> = PublishSubject()
     public var switchUserInputPace: BehaviorRelay<Pace>
 
-    fileprivate let paceSubject: PublishRelay<Pace> =  PublishRelay()
+    fileprivate let _pace: BehaviorRelay<Pace>
     public var pace: Observable<Pace> {
-        return paceSubject.asObservable()
+        return _pace.asObservable()
     }
 
-    public var archivedUnits: Observable<[PaceUnit]>
+    fileprivate let _paceControls: BehaviorRelay<[ConversionControl]>
+    public var paceControls: Observable<[ConversionControl]> {
+        return _paceControls.asObservable()
+    }
 
     private let bag = DisposeBag()
 }
 
 extension PacesViewModel: PacesViewModelInputs, PacesViewModelOutputs { }
+
+
+

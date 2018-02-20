@@ -10,6 +10,9 @@
 		0805B25820388BE800916CD4 /* UITableView+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0805B25720388BE800916CD4 /* UITableView+Extensions.swift */; };
 		0805B25A20389DED00916CD4 /* Observable+Operators.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0805B25920389DED00916CD4 /* Observable+Operators.swift */; };
 		0860EC8D2031ED6800358F2A /* PickerViewAdapter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0860EC8C2031ED6800358F2A /* PickerViewAdapter.swift */; };
+		087EFAD620398FA5005B7385 /* PaceControlCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 087EFAD520398FA5005B7385 /* PaceControlCollectionViewCell.swift */; };
+		087EFAD82039D19D005B7385 /* ConversionControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 087EFAD72039D19D005B7385 /* ConversionControl.swift */; };
+		087EFAE9203B10B3005B7385 /* PacesCollectionViewAdapter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 087EFAE7203B0666005B7385 /* PacesCollectionViewAdapter.swift */; };
 		08CAB6B1202F2C5800C7FF41 /* GradientView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08CAB6B0202F2C5800C7FF41 /* GradientView.swift */; };
 		08CAB6B3202F2F1E00C7FF41 /* AutoLayoutUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08CAB6B2202F2F1D00C7FF41 /* AutoLayoutUtils.swift */; };
 		08CAB6B5202F376300C7FF41 /* PaceControlView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08CAB6B4202F376300C7FF41 /* PaceControlView.swift */; };
@@ -96,6 +99,9 @@
 		0805B25720388BE800916CD4 /* UITableView+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITableView+Extensions.swift"; sourceTree = "<group>"; };
 		0805B25920389DED00916CD4 /* Observable+Operators.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Observable+Operators.swift"; sourceTree = "<group>"; };
 		0860EC8C2031ED6800358F2A /* PickerViewAdapter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PickerViewAdapter.swift; sourceTree = "<group>"; };
+		087EFAD520398FA5005B7385 /* PaceControlCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaceControlCollectionViewCell.swift; sourceTree = "<group>"; };
+		087EFAD72039D19D005B7385 /* ConversionControl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConversionControl.swift; sourceTree = "<group>"; };
+		087EFAE7203B0666005B7385 /* PacesCollectionViewAdapter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PacesCollectionViewAdapter.swift; sourceTree = "<group>"; };
 		08CAB6B0202F2C5800C7FF41 /* GradientView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GradientView.swift; sourceTree = "<group>"; };
 		08CAB6B2202F2F1D00C7FF41 /* AutoLayoutUtils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AutoLayoutUtils.swift; sourceTree = "<group>"; };
 		08CAB6B4202F376300C7FF41 /* PaceControlView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaceControlView.swift; sourceTree = "<group>"; };
@@ -199,6 +205,7 @@
 				08CAB6B0202F2C5800C7FF41 /* GradientView.swift */,
 				08CAB6B4202F376300C7FF41 /* PaceControlView.swift */,
 				08CAB6C5202F3A4D00C7FF41 /* PaceControlView.xib */,
+				087EFAD520398FA5005B7385 /* PaceControlCollectionViewCell.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -215,6 +222,7 @@
 			isa = PBXGroup;
 			children = (
 				08CAB6CE202F92BC00C7FF41 /* Pace.swift */,
+				087EFAD72039D19D005B7385 /* ConversionControl.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -250,6 +258,7 @@
 				08E64B8E202DFF7F00A59F41 /* FlowControllers */,
 				08E64B9A202F239300A59F41 /* ViewControllers */,
 				08E64B91202EFA2000A59F41 /* ViewModels */,
+				087EFAE7203B0666005B7385 /* PacesCollectionViewAdapter.swift */,
 				08E64B2A202DD3B900A59F41 /* ViewController.swift */,
 				08E64B2C202DD3B900A59F41 /* Main.storyboard */,
 				08E64B2F202DD3B900A59F41 /* Assets.xcassets */,
@@ -717,6 +726,7 @@
 				08E64B9C202F266900A59F41 /* PacesViewController.swift in Sources */,
 				08E64B93202EFA4100A59F41 /* AppDelegateViewModel.swift in Sources */,
 				08E64B2B202DD3B900A59F41 /* ViewController.swift in Sources */,
+				087EFAE9203B10B3005B7385 /* PacesCollectionViewAdapter.swift in Sources */,
 				08E64B29202DD3B900A59F41 /* AppDelegate.swift in Sources */,
 				08E64B95202F115200A59F41 /* AppFlowViewModel.swift in Sources */,
 				08E64B9E202F297600A59F41 /* PacesViewModel.swift in Sources */,
@@ -736,6 +746,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				08E64B87202DD86E00A59F41 /* Environment.swift in Sources */,
+				087EFAD82039D19D005B7385 /* ConversionControl.swift in Sources */,
+				087EFAD620398FA5005B7385 /* PaceControlCollectionViewCell.swift in Sources */,
 				08CAB6CD202F929900C7FF41 /* PaceControlViewModel.swift in Sources */,
 				08E64B89202DD9CC00A59F41 /* KeyValueStoreType.swift in Sources */,
 				0805B25820388BE800916CD4 /* UITableView+Extensions.swift in Sources */,
