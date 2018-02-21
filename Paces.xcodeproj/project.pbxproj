@@ -13,6 +13,11 @@
 		083C321D203C6F1D005AD1F5 /* DistanceControlView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 083C321C203C6F1D005AD1F5 /* DistanceControlView.xib */; };
 		083C321F203C7A94005AD1F5 /* ConversionControlCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 083C321E203C7A94005AD1F5 /* ConversionControlCollectionViewCell.swift */; };
 		083C3221203C7C7D005AD1F5 /* DistanceControlCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 083C3220203C7C7D005AD1F5 /* DistanceControlCollectionViewCell.swift */; };
+		083C3223203D5501005AD1F5 /* Theme.swift in Sources */ = {isa = PBXBuildFile; fileRef = 083C3222203D5501005AD1F5 /* Theme.swift */; };
+		083C3225203D689C005AD1F5 /* ThemeLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 083C3224203D689C005AD1F5 /* ThemeLabel.swift */; };
+		083C3227203D7DD6005AD1F5 /* ConversionControlLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 083C3226203D7DD6005AD1F5 /* ConversionControlLabel.swift */; };
+		083C3229203D88F9005AD1F5 /* ThemeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 083C3228203D88F9005AD1F5 /* ThemeView.swift */; };
+		083C322D203DC5D3005AD1F5 /* ThemeGradientView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 083C322C203DC5D3005AD1F5 /* ThemeGradientView.swift */; };
 		0860EC8D2031ED6800358F2A /* PickerViewAdapter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0860EC8C2031ED6800358F2A /* PickerViewAdapter.swift */; };
 		087EFAD620398FA5005B7385 /* PaceControlCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 087EFAD520398FA5005B7385 /* PaceControlCollectionViewCell.swift */; };
 		087EFAD82039D19D005B7385 /* ConversionControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 087EFAD72039D19D005B7385 /* ConversionControl.swift */; };
@@ -106,6 +111,11 @@
 		083C321C203C6F1D005AD1F5 /* DistanceControlView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = DistanceControlView.xib; sourceTree = "<group>"; };
 		083C321E203C7A94005AD1F5 /* ConversionControlCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConversionControlCollectionViewCell.swift; sourceTree = "<group>"; };
 		083C3220203C7C7D005AD1F5 /* DistanceControlCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DistanceControlCollectionViewCell.swift; sourceTree = "<group>"; };
+		083C3222203D5501005AD1F5 /* Theme.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Theme.swift; sourceTree = "<group>"; };
+		083C3224203D689C005AD1F5 /* ThemeLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThemeLabel.swift; sourceTree = "<group>"; };
+		083C3226203D7DD6005AD1F5 /* ConversionControlLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConversionControlLabel.swift; sourceTree = "<group>"; };
+		083C3228203D88F9005AD1F5 /* ThemeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThemeView.swift; sourceTree = "<group>"; };
+		083C322C203DC5D3005AD1F5 /* ThemeGradientView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThemeGradientView.swift; sourceTree = "<group>"; };
 		0860EC8C2031ED6800358F2A /* PickerViewAdapter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PickerViewAdapter.swift; sourceTree = "<group>"; };
 		087EFAD520398FA5005B7385 /* PaceControlCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaceControlCollectionViewCell.swift; sourceTree = "<group>"; };
 		087EFAD72039D19D005B7385 /* ConversionControl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConversionControl.swift; sourceTree = "<group>"; };
@@ -210,6 +220,9 @@
 		08CAB6B6202F377100C7FF41 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				083C3224203D689C005AD1F5 /* ThemeLabel.swift */,
+				083C3228203D88F9005AD1F5 /* ThemeView.swift */,
+				083C322C203DC5D3005AD1F5 /* ThemeGradientView.swift */,
 				08CAB6B0202F2C5800C7FF41 /* GradientView.swift */,
 				08CAB6B4202F376300C7FF41 /* PaceControlView.swift */,
 				08CAB6C5202F3A4D00C7FF41 /* PaceControlView.xib */,
@@ -218,6 +231,7 @@
 				083C321C203C6F1D005AD1F5 /* DistanceControlView.xib */,
 				083C321E203C7A94005AD1F5 /* ConversionControlCollectionViewCell.swift */,
 				083C3220203C7C7D005AD1F5 /* DistanceControlCollectionViewCell.swift */,
+				083C3226203D7DD6005AD1F5 /* ConversionControlLabel.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -292,15 +306,16 @@
 		08E64B69202DD82F00A59F41 /* PacesKit */ = {
 			isa = PBXGroup;
 			children = (
-				0805B25B2039614D00916CD4 /* Rx Extensions */,
 				08E64B6A202DD82F00A59F41 /* PacesKit.h */,
 				08E64B6B202DD82F00A59F41 /* Info.plist */,
-				08CAB6B2202F2F1D00C7FF41 /* AutoLayoutUtils.swift */,
-				08E64B88202DD9CC00A59F41 /* KeyValueStoreType.swift */,
+				083C3222203D5501005AD1F5 /* Theme.swift */,
 				08E64B8A202DE06400A59F41 /* AppEnvironment.swift */,
 				08E64B86202DD86E00A59F41 /* Environment.swift */,
+				08CAB6B2202F2F1D00C7FF41 /* AutoLayoutUtils.swift */,
+				08E64B88202DD9CC00A59F41 /* KeyValueStoreType.swift */,
 				08E64B98202F224A00A59F41 /* Navigation.swift */,
 				08CAB6C7202F4CB300C7FF41 /* Extensions.swift */,
+				0805B25B2039614D00916CD4 /* Rx Extensions */,
 				08CAB6D0202F92C200C7FF41 /* Model */,
 				08CAB6B6202F377100C7FF41 /* Views */,
 				08CAB6CB202F926700C7FF41 /* ViewModels */,
@@ -764,13 +779,18 @@
 				087EFAD620398FA5005B7385 /* PaceControlCollectionViewCell.swift in Sources */,
 				08CAB6CD202F929900C7FF41 /* PaceControlViewModel.swift in Sources */,
 				08E64B89202DD9CC00A59F41 /* KeyValueStoreType.swift in Sources */,
+				083C322D203DC5D3005AD1F5 /* ThemeGradientView.swift in Sources */,
 				0805B25820388BE800916CD4 /* UITableView+Extensions.swift in Sources */,
 				08CAB6B1202F2C5800C7FF41 /* GradientView.swift in Sources */,
 				08CAB6CF202F92BC00C7FF41 /* Pace.swift in Sources */,
 				08CAB6C8202F4CB300C7FF41 /* Extensions.swift in Sources */,
+				083C3225203D689C005AD1F5 /* ThemeLabel.swift in Sources */,
 				0805B25A20389DED00916CD4 /* Observable+Operators.swift in Sources */,
+				083C3229203D88F9005AD1F5 /* ThemeView.swift in Sources */,
+				083C3227203D7DD6005AD1F5 /* ConversionControlLabel.swift in Sources */,
 				08CAB6B5202F376300C7FF41 /* PaceControlView.swift in Sources */,
 				083C321F203C7A94005AD1F5 /* ConversionControlCollectionViewCell.swift in Sources */,
+				083C3223203D5501005AD1F5 /* Theme.swift in Sources */,
 				083C321B203C6EE4005AD1F5 /* DistanceControlView.swift in Sources */,
 				08E64B8B202DE06400A59F41 /* AppEnvironment.swift in Sources */,
 				08CAB6B3202F2F1E00C7FF41 /* AutoLayoutUtils.swift in Sources */,

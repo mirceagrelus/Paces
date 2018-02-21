@@ -13,6 +13,7 @@ import Foundation
 public struct AppEnvironment {
     internal static let environmentStorageKey = "com.Paces.AppEnvironment.current"
 
+    internal static let key_themeType = "themeType"
     internal static let key_isPremiumUser = "isPremiumUser"
     internal static let key_inputPaceValue = "inputPaceValue"
     internal static let key_inputPaceUnit = "inputPaceUnit"
@@ -38,14 +39,16 @@ public struct AppEnvironment {
     }
 
     // Replaces the current environment onto the stack with an environment that changes only a subset of current global dependencies.
-    public static func replaceCurrentEnvironment(isPremiumUser: Bool = current.isPremiumUser,
+    public static func replaceCurrentEnvironment(theme: Theme = current.theme,
+                                                 isPremiumUser: Bool = current.isPremiumUser,
                                                  inputPaceValue: String = current.inputPaceValue,
                                                  inputPaceUnit: PaceUnit = current.inputPaceUnit,
                                                  ubiquitousStore: KeyValueStoreType = current.ubiquitousStore,
                                                  userDefaults: KeyValueStoreType = current.userDefaults) {
 
         replaceCurrentEnvironment(
-            Environment(isPremiumUser: isPremiumUser,
+            Environment(theme: theme,
+                        isPremiumUser: isPremiumUser,
                         inputPaceValue: inputPaceValue,
                         inputPaceUnit: inputPaceUnit,
                         ubiquitousStore: ubiquitousStore,
@@ -57,14 +60,18 @@ public struct AppEnvironment {
     public static func fromStorage(userDefaults: KeyValueStoreType) -> Environment {
         let data = userDefaults.dictionary(forKey: environmentStorageKey) ?? [:]
 
-        let isPremiumUser = data["isPremiumUser"] as? Bool
+        let themeId = data[key_themeType] as? Int ?? 0
+        let theme = ThemeType(rawValue: themeId)?.theme()
+
+        let isPremiumUser = data[key_isPremiumUser] as? Bool
 
         let inputPaceUnitDescription = data[key_inputPaceUnit] as? String ?? ""
         let inputPaceUnit = PaceUnit.fromDescription(inputPaceUnitDescription)
 
         let inputPaceValue = data[key_inputPaceValue] as? String
 
-        return Environment(isPremiumUser: isPremiumUser ?? current.isPremiumUser,
+        return Environment(theme: theme ?? current.theme,
+                           isPremiumUser: isPremiumUser ?? current.isPremiumUser,
                            inputPaceValue: inputPaceValue ?? current.inputPaceValue,
                            inputPaceUnit: inputPaceUnit ?? current.inputPaceUnit)
     }
@@ -75,7 +82,9 @@ public struct AppEnvironment {
 
         var data: [String: Any] = [:]
 
-        data["isPremiumUser"] = env.isPremiumUser
+        data[key_themeType] = env.theme.themeType.rawValue
+
+        data[key_isPremiumUser] = env.isPremiumUser
         data[key_inputPaceUnit] = env.inputPaceUnit.description
         data[key_inputPaceValue] = env.inputPaceValue
 

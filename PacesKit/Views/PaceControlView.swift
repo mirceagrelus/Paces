@@ -10,11 +10,11 @@ import UIKit
 import RxSwift
 import RxCocoa
 
-public class PaceControlView: UIView {
+public class PaceControlView: ThemeView {
 
-    @IBOutlet weak var valueLabel: UILabel!
-    @IBOutlet weak var unitLabel: UILabel!
-    @IBOutlet weak var sourceLabel: UILabel!
+    @IBOutlet weak var valueLabel: ConversionControlLabel!
+    @IBOutlet weak var unitLabel: ConversionControlLabel!
+    @IBOutlet weak var sourceLabel: ConversionControlLabel!
 
     public static let sourceFromString = "From"
     public static let sourceToString = "To"
@@ -57,13 +57,16 @@ public class PaceControlView: UIView {
         viewModel.inputs.isSource
             .observeOn(MainScheduler.instance)
             .subscribe(onNext: { [weak self] isSource in
+                let theme = AppEnvironment.current.theme
                 self?.sourceLabel.text = isSource ? PaceControlView.sourceFromString : PaceControlView.sourceToString
-                self?.backgroundColor = isSource ? UIColor.white : UIColor.white.withAlphaComponent(0.5)
+                self?.applyBackgroundColor = isSource ? { theme.controlCellBackgroundColorSelected } : { theme.controlCellBackgroundColor }
+                self?.sourceLabel.isSelected = isSource
+                self?.valueLabel.isSelected = isSource
+                self?.unitLabel.isSelected = isSource
             })
             .disposed(by: bag)
 
     }
-
 
 }
 

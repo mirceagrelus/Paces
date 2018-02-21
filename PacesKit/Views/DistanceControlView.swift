@@ -8,7 +8,7 @@
 
 import UIKit
 
-public class DistanceControlView: UIView {
+public class DistanceControlView: ThemeView {
 
 
 

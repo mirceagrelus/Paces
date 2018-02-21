@@ -21,13 +21,13 @@ class PacesViewController: UIViewController {
     let viewModel: PacesViewModelType = PacesViewModel()
     let bag = DisposeBag()
 
-    let gradientView = GradientView()
     let pickerView = UIPickerView()
     let paceContentView = UIView()
+    let gradientView = ThemeGradientView(applyGradientColors: AppEnvironment.current.theme.backgroundColorGradient)
     lazy var collectionView: UICollectionView = { UICollectionView(frame: CGRect.zero, collectionViewLayout: self.tableLayout()) }()
     lazy var collectionViewAdapter: PacesCollectionViewAdapter =  { createCollectionViewAdapter() }()
 
-    static let paceControlHeight: CGFloat = 80 //70
+    let paceControlHeight: CGFloat = 80 //70
     let pickerViewHeight: CGFloat = 200
     let paceControlSpacing: CGFloat = 5
 
@@ -173,7 +173,7 @@ extension PacesViewController {
         //PaceControlCollectionViewCell.width = width
         //let width = PaceControlCollectionViewCell.width
         let width = self.view.bounds.size.width
-        layout.itemSize = CGSize(width: width, height: PacesViewController.paceControlHeight)
+        layout.itemSize = CGSize(width: width, height: self.paceControlHeight)
         layout.minimumLineSpacing = 2.0
 
         return layout
@@ -186,7 +186,6 @@ extension PacesViewController {
         setupCollectionView()
 
         gradientView.translatesAutoresizingMaskIntoConstraints = false
-        gradientView.insertGradient(topToBottom: true, colorArray: [UIColor.orange, UIColor.red])
         view.addSubview(gradientView)
 
         pickerView.translatesAutoresizingMaskIntoConstraints = false

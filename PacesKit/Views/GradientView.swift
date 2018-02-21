@@ -13,8 +13,10 @@ import Foundation
  */
 public class GradientView: UIView {
     private var gradientLayer : CAGradientLayer = CAGradientLayer()
+    var topToBottom: Bool = true
 
-    public init() {
+    public init(topToBottom: Bool = true) {
+        self.topToBottom = topToBottom
         super.init(frame: .zero)
     }
 
@@ -22,7 +24,7 @@ public class GradientView: UIView {
         super.init(coder: aDecoder)
     }
 
-    public func insertGradient(topToBottom: Bool, colorArray: [UIColor]) {
+    public func insertGradient(colorArray: [UIColor]) {
         if let sublayers = layer.sublayers {
             let _ = sublayers.filter { $0 is CAGradientLayer }.map { $0.removeFromSuperlayer() }
         }

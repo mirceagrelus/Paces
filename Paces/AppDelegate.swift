@@ -8,6 +8,7 @@
 
 import UIKit
 import PacesKit
+import RxSwift
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -30,7 +31,26 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
         appFlowController.start()
 
+        //test_themeDidChange()
+
         return true
+    }
+
+    func test_themeDidChange() {
+        let _ = Observable<Int>.interval(5.0, scheduler: MainScheduler.instance)
+            .map { _ -> ThemeType in
+                switch AppEnvironment.current.theme.themeType {
+                case ThemeType.orangeRed: return ThemeType.purpleBlue
+                case ThemeType.purpleBlue: return ThemeType.orangeRed
+                }
+            }
+            .subscribe(onNext: { themeType in
+                print("theme: \(themeType)")
+                let theme = themeType.theme()
+                AppEnvironment.replaceCurrentEnvironment(theme: theme)
+                notifyThemeDidChange()
+            })
+
     }
 
     func applicationWillResignActive(_ application: UIApplication) {

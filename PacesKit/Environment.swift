@@ -10,6 +10,9 @@ import Foundation
 
 public struct Environment {
 
+    // theme of the app
+    public let theme: Theme
+
     // Identifies whether the current user has purchased the Premium IAP
     public let isPremiumUser: Bool
 
@@ -26,12 +29,14 @@ public struct Environment {
     public let ubiquitousStore: KeyValueStoreType
 
     public init(
+        theme: Theme = ThemeType.orangeRed.theme(),
         isPremiumUser: Bool = false,
         inputPaceValue: String = "8:00",
         inputPaceUnit: PaceUnit = .minPerMile,
         ubiquitousStore: KeyValueStoreType = NSUbiquitousKeyValueStore.default,
         userDefaults: KeyValueStoreType = UserDefaults.standard){
 
+        self.theme = theme
         self.isPremiumUser = isPremiumUser
         self.inputPaceValue = inputPaceValue
         self.inputPaceUnit = inputPaceUnit
