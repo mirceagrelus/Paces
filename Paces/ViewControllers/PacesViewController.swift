@@ -111,6 +111,14 @@ class PacesViewController: UIViewController {
             })
             .disposed(by: bag)
 
+        viewModel.outputs.showInput
+            .observeOnMain()
+            .subscribe(onNext: { [weak self] showInput in
+                print("showInput: \(showInput)")
+                self?.pickerView.isHidden = !showInput
+            })
+            .disposed(by: bag)
+
     }
 
     func changeUnit(_ unit: PaceUnit) {
@@ -191,6 +199,7 @@ extension PacesViewController {
         view.addSubview(gradientView)
 
         pickerView.translatesAutoresizingMaskIntoConstraints = false
+        pickerView.backgroundColor = UIColor.white.withAlphaComponent(0.5)
         pickerView.showsSelectionIndicator = false
         gradientView.addSubview(pickerView)
 

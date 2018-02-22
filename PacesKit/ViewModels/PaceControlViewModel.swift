@@ -20,7 +20,7 @@ public protocol PaceControlViewModelInputs {
     // control tapped event
     var tapped: PublishRelay<Void> { get }
 
-    // is the control considered the source of user input
+    // the control is considered the source of user input if it has the same unit as another control providing input
     var isSource: PublishRelay<Bool> { get }
 }
 
@@ -30,6 +30,9 @@ public protocol PaceControlViewModelOutputs {
 
     // unit to swithc input source to
     var switchUserInputPace: Observable<Pace> { get }
+
+    // control is selected in the UI
+    var isSelected: Observable<Bool> { get }
 }
 
 public protocol PaceControlViewModelType {
@@ -47,6 +50,12 @@ public class PaceControlViewModel: PaceControlViewModelType {
             }
             .bind(to: paceSubject)
             .disposed(by: bag)
+
+        isSelected = isSource
+            .scan(false) { previous, isSource -> Bool in
+                isSource ? !previous : isSource
+            }
+            .distinctUntilChanged()
 
         tapped
             .withLatestFrom(pace)
@@ -71,6 +80,7 @@ public class PaceControlViewModel: PaceControlViewModelType {
     public var switchUserInputPace: Observable<Pace> {
         return switchUserInputPaceRelay.asObservable()
     }
+    public var isSelected: Observable<Bool>
 
     private let bag = DisposeBag()
 }

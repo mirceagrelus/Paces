@@ -34,6 +34,9 @@ public protocol PacesViewModelOutputs {
 
     // the value of the last calculated pace
     var lastPace: Pace { get }
+
+    // show user input UI
+    var showInput: Observable<Bool> { get }
 }
 
 public protocol PacesViewModelType {
@@ -78,6 +81,18 @@ public class PacesViewModel: PacesViewModelType {
             .bind(to: paceValue)
             .disposed(by: bag)
 
+        showInput = switchUserInputPace
+            .scan([]) { lastSlice, val -> [Pace] in
+                let slice = (lastSlice + [val]).suffix(2)
+                return Array(slice)
+            }
+            .filter { $0.count == 2 }
+            .scan(true) { isShown, paces -> Bool in
+                let sameTapped = paces[0].unit == paces[1].unit
+                return isShown ? !sameTapped : true
+            }
+            .startWith(true)
+
         // store paceValue in Environment
         paceValue
             .subscribe(onNext: { AppEnvironment.replaceCurrentEnvironment(inputPaceValue: $0) })
@@ -106,6 +121,7 @@ public class PacesViewModel: PacesViewModelType {
     public var paceControls: Observable<[ConversionControl]> {
         return _paceControls.asObservable()
     }
+    public var showInput: Observable<Bool>
 
     private let bag = DisposeBag()
 }

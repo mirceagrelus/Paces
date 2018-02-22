@@ -54,7 +54,7 @@ public class PaceControlView: ThemeView {
             .bind(to: valueLabel.rx.text)
             .disposed(by: bag)
 
-        viewModel.inputs.isSource
+        viewModel.outputs.isSelected
             .observeOn(MainScheduler.instance)
             .subscribe(onNext: { [weak self] isSource in
                 let theme = AppEnvironment.current.theme
