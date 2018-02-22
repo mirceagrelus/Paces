@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="13771" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13772"/>
+        <capability name="Alignment constraints with different attributes" minToolsVersion="5.1"/>
+        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <collectionReusableView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="AddControlView" id="U6b-Vx-4bR" customClass="AddControlView" customModule="PacesKit" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="326" height="77"/>
+            <autoresizingMask key="autoresizingMask"/>
+            <subviews>
+                <imageView hidden="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="check-circle" translatesAutoresizingMaskIntoConstraints="NO" id="dPq-sG-yiy">
+                    <rect key="frame" x="134.5" y="10" width="57" height="57"/>
+                    <constraints>
+                        <constraint firstAttribute="width" secondItem="dPq-sG-yiy" secondAttribute="height" id="Tec-v3-uw6"/>
+                    </constraints>
+                </imageView>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="+" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="J55-hG-MP9">
+                    <rect key="frame" x="153" y="19" width="20.5" height="39.5"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="33"/>
+                    <nil key="textColor"/>
+                    <nil key="highlightedColor"/>
+                </label>
+            </subviews>
+            <constraints>
+                <constraint firstItem="dPq-sG-yiy" firstAttribute="centerY" secondItem="U6b-Vx-4bR" secondAttribute="centerY" id="4E5-bb-oA9"/>
+                <constraint firstItem="dPq-sG-yiy" firstAttribute="centerX" secondItem="U6b-Vx-4bR" secondAttribute="centerX" id="A1I-KS-cgX"/>
+                <constraint firstItem="dPq-sG-yiy" firstAttribute="height" secondItem="U6b-Vx-4bR" secondAttribute="height" constant="-20" id="B9S-Rt-jUl"/>
+                <constraint firstItem="J55-hG-MP9" firstAttribute="centerX" secondItem="U6b-Vx-4bR" secondAttribute="centerXWithinMargins" id="M8H-vE-TlH"/>
+                <constraint firstItem="J55-hG-MP9" firstAttribute="centerY" secondItem="U6b-Vx-4bR" secondAttribute="centerYWithinMargins" id="S6L-Wa-AvK"/>
+            </constraints>
+            <viewLayoutGuide key="safeArea" id="VXr-Tz-HHm"/>
+            <connections>
+                <outlet property="addImageView" destination="dPq-sG-yiy" id="uba-7D-VcO"/>
+                <outlet property="addLabel" destination="J55-hG-MP9" id="4dg-Kf-LzF"/>
+            </connections>
+            <point key="canvasLocation" x="37" y="67.5"/>
+        </collectionReusableView>
+    </objects>
+    <resources>
+        <image name="check-circle" width="18" height="19"/>
+    </resources>
+</document>

@@ -79,6 +79,19 @@ extension PacesCollectionViewAdapter: UICollectionViewDataSource {
         return cell
     }
 
+    public func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
+        let reusableView: UICollectionReusableView
+
+        switch kind {
+        case UICollectionElementKindSectionFooter: reusableView = collectionView.dequeueReusableSupplementaryView(ofKind: kind,
+                                                                                      withReuseIdentifier: AddControlView.identifier,
+                                                                                      for: indexPath)
+        default: reusableView = UICollectionReusableView(frame: .zero)
+        }
+
+        return reusableView
+    }
+
 }
 
 extension PacesCollectionViewAdapter: UICollectionViewDelegate {

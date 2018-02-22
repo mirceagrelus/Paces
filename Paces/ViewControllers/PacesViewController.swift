@@ -174,6 +174,7 @@ extension PacesViewController {
         //let width = PaceControlCollectionViewCell.width
         let width = self.view.bounds.size.width
         layout.itemSize = CGSize(width: width, height: self.paceControlHeight)
+        layout.footerReferenceSize = CGSize(width: width, height: self.paceControlHeight)
         layout.minimumLineSpacing = 2.0
 
         return layout
@@ -238,6 +239,8 @@ extension PacesViewController {
         collectionView.alwaysBounceVertical = true
         collectionView.register(DistanceControlCollectionViewCell.self, forCellWithReuseIdentifier: DistanceControlCollectionViewCell.identifier)
         collectionView.register(PaceControlCollectionViewCell.self, forCellWithReuseIdentifier: PaceControlCollectionViewCell.identifier)
+        let nib = UINib(nibName: String(describing: AddControlView.self), bundle: Bundle(for: AddControlView.self))
+        collectionView.register(nib, forSupplementaryViewOfKind: UICollectionElementKindSectionFooter, withReuseIdentifier: AddControlView.identifier)
         collectionView.allowsSelection = false
     }
 
