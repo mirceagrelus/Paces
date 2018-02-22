@@ -33,6 +33,8 @@ public protocol Theme: class {
     var textColor: UIColor { get }
     var backgroundColorGradient: [UIColor] { get }
 
+    var navBarItemsTintColor: UIColor { get }
+
     var controlCellTextColor: UIColor { get }
     var controlCellTextColorSelected: UIColor { get }
     var controlCellBackgroundColor: UIColor { get }
@@ -46,6 +48,8 @@ public class ThemeOrangeRed: Theme {
     public var textColor: UIColor = .white
     public var backgroundColorGradient: [UIColor] = [UIColor.orange, UIColor.red]
 
+    public var navBarItemsTintColor: UIColor = .black
+
     public var controlCellTextColor: UIColor = UIColor.white
     public var controlCellTextColorSelected: UIColor = UIColor.black
     public var controlCellBackgroundColor: UIColor = UIColor.black.withAlphaComponent(0.1)
@@ -58,6 +62,8 @@ public class ThemePurpleBlue: Theme {
 
     public var textColor: UIColor = .white
     public var backgroundColorGradient: [UIColor] = [UIColor.purple, UIColor.blue]
+
+    public var navBarItemsTintColor: UIColor = .black
 
     public var controlCellTextColor: UIColor = .white
     public var controlCellTextColorSelected: UIColor = UIColor.black

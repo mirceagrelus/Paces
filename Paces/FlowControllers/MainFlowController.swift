@@ -8,6 +8,7 @@
 
 import UIKit
 import RxSwift
+import PacesKit
 
 protocol MainFlowControllerDelegate: class {
     func mainFlowControllerDidFinish(_ flowController: MainFlowController)
@@ -17,8 +18,11 @@ class MainFlowController: UIViewController {
 
     weak var delegate: MainFlowControllerDelegate?
     let mainNavigationController: UINavigationController =  {
+        let theme = AppEnvironment.current.theme
         let navigationController = UINavigationController()
         navigationController.setNavigationBarHidden(true, animated: false)
+        navigationController.navigationBar.tintColor = theme.navBarItemsTintColor
+        navigationController.navigationBar.isTranslucent = true
         return navigationController
     }()
 

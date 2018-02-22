@@ -183,6 +183,7 @@ extension PacesViewController {
 
 extension PacesViewController {
     func setup() {
+        setupNavigationBar()
         setupCollectionView()
 
         gradientView.translatesAutoresizingMaskIntoConstraints = false
@@ -217,6 +218,16 @@ extension PacesViewController {
         AutoLayoutUtils.constrainView(collectionView, equalToView: paceContentView)
     }
 
+    func setupNavigationBar() {
+        self.navigationController?.setNavigationBarHidden(false, animated: false)
+        self.navigationItem.title = "Paces"
+        let item = UIBarButtonItem(image: UIImage(named: "shortcut-icon-bars"), style: .plain, target: nil, action: nil)
+        //let item = UIBarButtonItem(image: UIImage(named: "settings-icon"), style: .plain, target: nil, action: nil)
+        self.navigationItem.rightBarButtonItem = item
+
+        self.toolbarItems = [item]
+    }
+
     func setupCollectionView() {
         collectionView.backgroundColor = .clear
         collectionView.dataSource = collectionViewAdapter
@@ -246,7 +257,7 @@ extension PacesViewController {
 
         tapGesture.rx.event
             .debug("tapGesture")
-            .subscribe { [weak self] event in
+            .subscribe { event in
 
                 print("resources: \(RxSwift.Resources.total)")
 
