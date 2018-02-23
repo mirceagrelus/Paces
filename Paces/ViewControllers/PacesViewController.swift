@@ -22,14 +22,20 @@ class PacesViewController: UIViewController {
     let bag = DisposeBag()
 
     let pickerView = UIPickerView()
+    let paceInputView = PaceInputView()
     let paceContentView = UIView()
     let gradientView = ThemeGradientView(applyGradientColors: AppEnvironment.current.theme.backgroundColorGradient)
     lazy var collectionView: UICollectionView = { UICollectionView(frame: CGRect.zero, collectionViewLayout: self.tableLayout()) }()
     lazy var collectionViewAdapter: PacesCollectionViewAdapter =  { createCollectionViewAdapter() }()
+    lazy var inputSourceAnimator = UIViewPropertyAnimator(duration: inputAnimationDuration, dampingRatio: 0.8, animations: nil)
+    var pickerBottomConstraint: NSLayoutConstraint = NSLayoutConstraint()
+    var paceContentBottomAnchor: NSLayoutConstraint = NSLayoutConstraint()
 
     let paceControlHeight: CGFloat = 80 //70
     let pickerViewHeight: CGFloat = 200
     let paceControlSpacing: CGFloat = 5
+    let inputAnimationDuration = 0.3
+    let bounceAdjustment: CGFloat = 50
 
     fileprivate let _viewWillDisappear = PublishSubject<Void>()
     var viewWillDisappear: Observable<Void> {
@@ -114,8 +120,7 @@ class PacesViewController: UIViewController {
         viewModel.outputs.showInput
             .observeOnMain()
             .subscribe(onNext: { [weak self] showInput in
-                print("showInput: \(showInput)")
-                self?.pickerView.isHidden = !showInput
+                self?.togglePaceInput(showInput)
             })
             .disposed(by: bag)
 
@@ -148,7 +153,16 @@ class PacesViewController: UIViewController {
         self.pickerView.selectRow(second, inComponent: 2, animated: true)
     }
 
-
+    func togglePaceInput(_ showInput: Bool) {
+        inputSourceAnimator.addAnimations { [weak self] in
+            guard let strongSelf = self else { return }
+            let const = showInput ? 0 : strongSelf.paceInputView.bounds.size.height + strongSelf.bounceAdjustment
+            self?.pickerBottomConstraint.constant = const
+            self?.paceContentBottomAnchor.constant = showInput ? -strongSelf.pickerView.bounds.size.height : 0
+            self?.view.layoutIfNeeded()
+        }
+        inputSourceAnimator.startAnimation()
+    }
 }
 
 extension PacesViewController {
@@ -198,10 +212,12 @@ extension PacesViewController {
         gradientView.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(gradientView)
 
+        paceInputView.translatesAutoresizingMaskIntoConstraints = false
+        view.addSubview(paceInputView)
+
         pickerView.translatesAutoresizingMaskIntoConstraints = false
-        pickerView.backgroundColor = UIColor.white.withAlphaComponent(0.5)
         pickerView.showsSelectionIndicator = false
-        gradientView.addSubview(pickerView)
+        paceInputView.addSubview(pickerView)
 
         paceContentView.translatesAutoresizingMaskIntoConstraints = false
         gradientView.addSubview(paceContentView)
@@ -212,18 +228,27 @@ extension PacesViewController {
         AutoLayoutUtils.constrainView(gradientView, equalToView: view)
 
         NSLayoutConstraint.activate([
-            pickerView.leadingAnchor.constraint(equalTo: gradientView.leadingAnchor),
-            pickerView.trailingAnchor.constraint(equalTo: gradientView.trailingAnchor),
-            pickerView.bottomAnchor.constraint(equalTo: gradientView.safeAreaLayoutGuide.bottomAnchor)
+            paceInputView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            paceInputView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
             ])
+
+        NSLayoutConstraint.activate([
+            pickerView.leadingAnchor.constraint(equalTo: paceInputView.leadingAnchor),
+            pickerView.trailingAnchor.constraint(equalTo: paceInputView.trailingAnchor),
+            pickerView.topAnchor.constraint(equalTo: paceInputView.topAnchor),
+            pickerView.bottomAnchor.constraint(equalTo: paceInputView.safeAreaLayoutGuide.bottomAnchor, constant: -bounceAdjustment),
+            pickerView.heightAnchor.constraint(equalToConstant: pickerViewHeight)
+            ])
+        pickerBottomConstraint = pickerView.bottomAnchor.constraint(equalTo: gradientView.safeAreaLayoutGuide.bottomAnchor)
+        pickerBottomConstraint.isActive = true
 
         NSLayoutConstraint.activate([
             paceContentView.leadingAnchor.constraint(equalTo: gradientView.safeAreaLayoutGuide.leadingAnchor),
             paceContentView.trailingAnchor.constraint(equalTo: gradientView.safeAreaLayoutGuide.trailingAnchor),
-            paceContentView.topAnchor.constraint(equalTo: gradientView.safeAreaLayoutGuide.topAnchor),
-            paceContentView.bottomAnchor.constraint(equalTo: pickerView.topAnchor)
+            paceContentView.topAnchor.constraint(equalTo: gradientView.safeAreaLayoutGuide.topAnchor)
             ])
-
+        paceContentBottomAnchor = paceContentView.bottomAnchor.constraint(equalTo: gradientView.safeAreaLayoutGuide.bottomAnchor)
+        paceContentBottomAnchor.isActive = true
 
         AutoLayoutUtils.constrainView(collectionView, equalToView: paceContentView)
     }

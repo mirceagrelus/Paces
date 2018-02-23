@@ -50,10 +50,10 @@ public final class PickerViewViewAdapter : NSObject, UIPickerViewDataSource, UIP
         //let contentView = UIView()
         //contentView.directionalLayoutMargins = NSDirectionalEdgeInsets(top: 0, leading: 20, bottom: 0, trailing: 20)
         //contentView.backgroundColor = UIColor.cyan
-        let label = UILabel()
+        let label = ThemeLabel(applyTextColor: AppEnvironment.current.theme.inputViewTextColor)
         //label.translatesAutoresizingMaskIntoConstraints = false
         label.text = items[component][row].description
-        label.textColor = UIColor.white
+        //label.textColor = UIColor.white
         //label.backgroundColor = UIColor.green
         //label.font = UIFont.preferredFont(forTextStyle: .title1)
         label.font = UIFont.systemFont(ofSize: 33)

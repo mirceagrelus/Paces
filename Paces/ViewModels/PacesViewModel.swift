@@ -59,7 +59,8 @@ public class PacesViewModel: PacesViewModelType {
         let envControls = [ConversionControl(sortOrder: 0, unitType: .paceUnit(.minPerMile)),
                            ConversionControl(sortOrder: 1, unitType: .paceUnit(.minPerKm)),
                            ConversionControl(sortOrder: 2, unitType: .paceUnit(.kmPerHour)),
-                           ConversionControl(sortOrder: 3, unitType: .raceDistance(26))]
+                           ConversionControl(sortOrder: 3, unitType: .paceUnit(.milePerHour)),
+                           ConversionControl(sortOrder: 4, unitType: .raceDistance(26))]
         _paceControls = BehaviorRelay(value: envControls)
 
         // calculate new pace when user input pace value changes
