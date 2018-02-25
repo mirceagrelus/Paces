@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		0805B25820388BE800916CD4 /* UITableView+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0805B25720388BE800916CD4 /* UITableView+Extensions.swift */; };
 		0805B25A20389DED00916CD4 /* Observable+Operators.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0805B25920389DED00916CD4 /* Observable+Operators.swift */; };
+		08138DCF2043041C000BFC37 /* PickUnitView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08138DCE2043041C000BFC37 /* PickUnitView.swift */; };
 		083C321B203C6EE4005AD1F5 /* DistanceControlView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 083C321A203C6EE4005AD1F5 /* DistanceControlView.swift */; };
 		083C321D203C6F1D005AD1F5 /* DistanceControlView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 083C321C203C6F1D005AD1F5 /* DistanceControlView.xib */; };
 		083C321F203C7A94005AD1F5 /* ConversionControlCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 083C321E203C7A94005AD1F5 /* ConversionControlCollectionViewCell.swift */; };
@@ -113,6 +114,7 @@
 /* Begin PBXFileReference section */
 		0805B25720388BE800916CD4 /* UITableView+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITableView+Extensions.swift"; sourceTree = "<group>"; };
 		0805B25920389DED00916CD4 /* Observable+Operators.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Observable+Operators.swift"; sourceTree = "<group>"; };
+		08138DCE2043041C000BFC37 /* PickUnitView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PickUnitView.swift; sourceTree = "<group>"; };
 		083C321A203C6EE4005AD1F5 /* DistanceControlView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DistanceControlView.swift; sourceTree = "<group>"; };
 		083C321C203C6F1D005AD1F5 /* DistanceControlView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = DistanceControlView.xib; sourceTree = "<group>"; };
 		083C321E203C7A94005AD1F5 /* ConversionControlCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConversionControlCollectionViewCell.swift; sourceTree = "<group>"; };
@@ -247,6 +249,7 @@
 				083C323C203ED37C005AD1F5 /* AddControlView.swift */,
 				083C323D203ED37C005AD1F5 /* AddControlView.xib */,
 				08C694FC203F248D005A96CA /* PaceInputView.swift */,
+				08138DCE2043041C000BFC37 /* PickUnitView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -819,6 +822,7 @@
 				08E64B99202F224B00A59F41 /* Navigation.swift in Sources */,
 				08C694FF20404B25005A96CA /* Race.swift in Sources */,
 				08C694FD203F248D005A96CA /* PaceInputView.swift in Sources */,
+				08138DCF2043041C000BFC37 /* PickUnitView.swift in Sources */,
 				0860EC8D2031ED6800358F2A /* PickerViewAdapter.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

@@ -58,6 +58,8 @@ public class PaceControlView: ThemeView {
                 self?.sourceLabel.isSelected = isSelected
                 self?.valueLabel.isSelected = isSelected
                 self?.unitLabel.isSelected = isSelected
+
+                self?.sourceLabel.alpha = isSelected ? 1.0 : 0.0
             })
             .disposed(by: bag)
 
