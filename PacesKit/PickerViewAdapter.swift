@@ -34,7 +34,8 @@ public final class PickerViewViewAdapter : NSObject, UIPickerViewDataSource, UIP
     public func pickerView(_ pickerView: UIPickerView, widthForComponent component: Int) -> CGFloat {
         if items.count == 3 {
             if component == 1 { return staticUnitWidth }
-            return (pickerView.bounds.size.width - staticUnitWidth) / 2.0
+            return 100
+            //return (pickerView.bounds.size.width - staticUnitWidth) / 2.0
         }
         else if items.count == 5 {
             if component == 1 || component == 3 { return staticUnitWidth}
@@ -51,8 +52,7 @@ public final class PickerViewViewAdapter : NSObject, UIPickerViewDataSource, UIP
         let label = ThemeLabel(applyTextColor: AppEnvironment.current.theme.inputViewTextColor)
         //label.translatesAutoresizingMaskIntoConstraints = false
         label.text = items[component][row].description
-        //label.textColor = UIColor.white
-        //label.backgroundColor = UIColor.green
+//        label.backgroundColor = UIColor.green
         //label.font = UIFont.preferredFont(forTextStyle: .title1)
         label.font = UIFont.systemFont(ofSize: 33)
         //label.textAlignment = component == 0 ? .right : component == 1 ? .center : .left
