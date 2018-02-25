@@ -16,7 +16,7 @@ public struct AppEnvironment {
     internal static let key_themeType = "themeType"
     internal static let key_isPremiumUser = "isPremiumUser"
     internal static let key_inputPaceValue = "inputPaceValue"
-    internal static let key_inputPaceUnit = "inputPaceUnit"
+    internal static let key_inputPaceType = "inputPaceType"
 
     // A global stack of environments.
     fileprivate static var stack: [Environment] = [Environment()]
@@ -41,16 +41,16 @@ public struct AppEnvironment {
     // Replaces the current environment onto the stack with an environment that changes only a subset of current global dependencies.
     public static func replaceCurrentEnvironment(theme: Theme = current.theme,
                                                  isPremiumUser: Bool = current.isPremiumUser,
-                                                 inputPaceValue: String = current.inputPaceValue,
-                                                 inputPaceUnit: PaceUnit = current.inputPaceUnit,
+                                                 inputValue: String = current.inputValue,
+                                                 inputPaceType: PaceType = current.inputPaceType,
                                                  ubiquitousStore: KeyValueStoreType = current.ubiquitousStore,
                                                  userDefaults: KeyValueStoreType = current.userDefaults) {
 
         replaceCurrentEnvironment(
             Environment(theme: theme,
                         isPremiumUser: isPremiumUser,
-                        inputPaceValue: inputPaceValue,
-                        inputPaceUnit: inputPaceUnit,
+                        inputValue: inputValue,
+                        inputPaceType: inputPaceType,
                         ubiquitousStore: ubiquitousStore,
                         userDefaults: userDefaults)
         )
@@ -65,15 +65,25 @@ public struct AppEnvironment {
 
         let isPremiumUser = data[key_isPremiumUser] as? Bool
 
-        let inputPaceUnitDescription = data[key_inputPaceUnit] as? String ?? ""
-        let inputPaceUnit = PaceUnit.fromDescription(inputPaceUnitDescription)
+        let inputValue = data[key_inputPaceValue] as? String
 
-        let inputPaceValue = data[key_inputPaceValue] as? String
+        var inputPaceType: PaceType? = nil
+        do {
+            if let jsonString = data[key_inputPaceType] as? String,
+                let jsonData = jsonString.data(using: .utf8) {
+                
+                inputPaceType = try JSONDecoder().decode(PaceType.self, from: jsonData)
+            }
+        }
+        catch {
+            print(error.localizedDescription)
+        }
+
 
         return Environment(theme: theme ?? current.theme,
                            isPremiumUser: isPremiumUser ?? current.isPremiumUser,
-                           inputPaceValue: inputPaceValue ?? current.inputPaceValue,
-                           inputPaceUnit: inputPaceUnit ?? current.inputPaceUnit)
+                           inputValue: inputValue ?? current.inputValue,
+                           inputPaceType: inputPaceType ?? current.inputPaceType)
     }
 
     // Saves some key data for the current environment
@@ -85,8 +95,20 @@ public struct AppEnvironment {
         data[key_themeType] = env.theme.themeType.rawValue
 
         data[key_isPremiumUser] = env.isPremiumUser
-        data[key_inputPaceUnit] = env.inputPaceUnit.description
-        data[key_inputPaceValue] = env.inputPaceValue
+        data[key_inputPaceValue] = env.inputValue
+
+        do {
+            let encoder = JSONEncoder()
+            let jsonData = try encoder.encode(env.inputPaceType)
+            let jsonString = String(decoding: jsonData, as: UTF8.self)
+
+            data[key_inputPaceType] = jsonString
+        }
+        catch {
+            print(error.localizedDescription)
+        }
+
+
 
         userDefaults.set(data, forKey: environmentStorageKey)
 

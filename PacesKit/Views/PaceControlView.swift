@@ -32,15 +32,10 @@ public class PaceControlView: ThemeView {
             .map { _ in () }
             .bind(to: viewModel.inputs.tapped)
             .disposed(by: bag)
-
     }
 
     public func configureUnit(_ unit: PaceUnit) {
         viewModel.inputs.toUnit.accept(unit)
-    }
-
-    public func processPace(_ pace: Pace) {
-        viewModel.inputs.fromPace.accept(pace)
     }
 
     func bindViewModel() {
@@ -56,13 +51,13 @@ public class PaceControlView: ThemeView {
 
         viewModel.outputs.isSelected
             .observeOn(MainScheduler.instance)
-            .subscribe(onNext: { [weak self] isSource in
+            .subscribe(onNext: { [weak self] isSelected in
                 let theme = AppEnvironment.current.theme
-                self?.sourceLabel.text = isSource ? PaceControlView.sourceFromString : PaceControlView.sourceToString
-                self?.applyBackgroundColor = isSource ? { theme.controlCellBackgroundColorSelected } : { theme.controlCellBackgroundColor }
-                self?.sourceLabel.isSelected = isSource
-                self?.valueLabel.isSelected = isSource
-                self?.unitLabel.isSelected = isSource
+                self?.sourceLabel.text = isSelected ? PaceControlView.sourceFromString : PaceControlView.sourceToString
+                self?.applyBackgroundColor = isSelected ? { theme.controlCellBackgroundColorSelected } : { theme.controlCellBackgroundColor }
+                self?.sourceLabel.isSelected = isSelected
+                self?.valueLabel.isSelected = isSelected
+                self?.unitLabel.isSelected = isSelected
             })
             .disposed(by: bag)
 

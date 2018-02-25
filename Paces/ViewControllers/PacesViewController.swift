@@ -80,16 +80,15 @@ class PacesViewController: UIViewController {
 
     func bindViewModel() {
 
-        // setup the pickerView data source according to the  PaceUnit
-        viewModel.inputs.switchUserInputPace
-            .map { $0.unit.inputSource }
+        // update the pickerView data source
+        viewModel.outputs.inputDataSource
             .debug("switchPickerDatasource")
             .observeOnMain()
-            .bind(to: pickerView.rx.items(adapter: PickerViewViewAdapter(unit: viewModel.inputs.paceUnit.value)))
+            .bind(to: pickerView.rx.items(adapter: PickerViewViewAdapter()))
             .disposed(by: bag)
 
         // update selection in picker when switching pace
-        viewModel.inputs.switchUserInputPace
+        viewModel.inputs.inputPaceType
             .map { $0.displayValue }
             .debug("selectPickerValue")
             .observeOnMain()
@@ -98,17 +97,17 @@ class PacesViewController: UIViewController {
             })
             .disposed(by: bag)
 
-        // convert selected picker pace to a Pace value
+        // convert selected picker values to an input string representation
         pickerView.rx.modelSelected(CustomStringConvertible.self)
-            .withLatestFrom(viewModel.inputs.paceUnit) { pickermodel, paceUnit -> String in
+            .withLatestFrom(viewModel.inputs.inputPaceType) { pickermodel, paceType -> String in
                 return pickermodel.reduce("", { "\($0)\($1)" })
             }
             .debug("pickerSelected")
             .filter { !$0.isEmpty }
-            .bind(to: viewModel.inputs.paceValue)
+            .bind(to: viewModel.inputs.inputValue)
             .disposed(by: bag)
 
-        // load initial controls
+        // load preexisting controls
         viewModel.outputs.paceControls
             .take(1)
             .subscribe(onNext: { [weak self] controls in
@@ -117,6 +116,7 @@ class PacesViewController: UIViewController {
             })
             .disposed(by: bag)
 
+        // show or hide user input pane
         viewModel.outputs.showInput
             .observeOnMain()
             .subscribe(onNext: { [weak self] showInput in
@@ -124,14 +124,14 @@ class PacesViewController: UIViewController {
             })
             .disposed(by: bag)
 
-    }
-
-    func changeUnit(_ unit: PaceUnit) {
-        viewModel.inputs.paceUnit.accept(unit)
-    }
-
-    func changePaceValue(stringRepresentation: String) {
-        viewModel.inputs.paceValue.accept(stringRepresentation)
+        // trigger initial value selection on first load
+        viewModel.inputs.viewDidLoad
+            .debug("viewDidLoad")
+            .take(1)
+            .withLatestFrom(viewModel.inputs.inputPaceType)
+            .map { $0.displayValue }
+            .bind(to: viewModel.inputs.inputValue)
+            .disposed(by: bag)
     }
 
     func updatePickerValue(stringRepresentation paceValue: String) {
@@ -167,27 +167,52 @@ class PacesViewController: UIViewController {
 
 extension PacesViewController {
     func createCollectionViewAdapter() -> PacesCollectionViewAdapter {
-        return PacesCollectionViewAdapter(collectionView) { [weak self] control in
+        let bindPaceControl: (PaceControlView) -> () = { [weak self] control in
             guard let weakSelf = self else { return }
 
-            weakSelf.viewModel.outputs.pace
+            weakSelf.viewModel.outputs.paceType
                 .debug("control-pace")
-                .bind(to: control.viewModel.inputs.fromPace)
+                .bind(to: control.viewModel.inputs.fromPaceType)
                 .disposed(by: control.bag)
 
-            control.viewModel.outputs.switchUserInputPace
+            control.viewModel.outputs.switchUserInputPaceType
                 .debug("control-switchInputPace")
-                .bind(to: weakSelf.viewModel.inputs.switchUserInputPace)
+                .bind(to: weakSelf.viewModel.inputs.switchUserInputPaceType)
                 .disposed(by: control.bag)
 
-            weakSelf.viewModel.inputs.switchUserInputPace
-                .withLatestFrom(control.viewModel.inputs.toUnit, resultSelector: { $0.unit == $1 })
+            weakSelf.viewModel.inputs.switchUserInputPaceType
+                .withLatestFrom(control.viewModel.inputs.toUnit)  { switchPaceType, controlUnit in
+                    if case .pace(let pace) = switchPaceType { return pace.unit == controlUnit }
+                    return false
+                }
                 .bind(to: control.viewModel.inputs.isSource)
                 .disposed(by: control.bag)
-
-            // trigger initial value
-            control.viewModel.inputs.fromPace.accept(weakSelf.viewModel.outputs.lastPace)
         }
+
+        let bindDistanceControl: (DistanceControlView) -> () = { [weak self] control in
+            guard let strongSelf = self else { return }
+
+            strongSelf.viewModel.outputs.paceType
+                .debug("race-paceType")
+                .bind(to: control.viewModel.inputs.fromPaceType)
+                .disposed(by: control.bag)
+
+            control.viewModel.outputs.switchUserInputPaceType
+                .debug("control-switchInputPace")
+                .bind(to: strongSelf.viewModel.inputs.switchUserInputPaceType)
+                .disposed(by: control.bag)
+
+            strongSelf.viewModel.inputs.switchUserInputPaceType
+                .withLatestFrom(control.viewModel.inputs.toRaceDistance)  { switchPaceType, raceDistance in
+                    if case .race(let race) = switchPaceType { return race.raceDistance == raceDistance }
+                    return false
+                }
+                .bind(to: control.viewModel.inputs.isSource)
+                .disposed(by: control.bag)
+        }
+
+
+        return PacesCollectionViewAdapter(collectionView, bindPaceControl: bindPaceControl , bindDistanceControl: bindDistanceControl)
     }
 
     func tableLayout(width: CGFloat = 300) -> UICollectionViewFlowLayout {

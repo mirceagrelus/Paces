@@ -16,11 +16,11 @@ public struct Environment {
     // Identifies whether the current user has purchased the Premium IAP
     public let isPremiumUser: Bool
 
-    // last pace value used
-    public let inputPaceValue: String
+    // last input value used
+    public let inputValue: String
 
-    // the last pace unit that was used for input data
-    public let inputPaceUnit: PaceUnit
+    // the last pace type that was used for input data
+    public let inputPaceType: PaceType
 
     /// A local key-value store. Default is `UserDefaults.standard`
     public let userDefaults: KeyValueStoreType
@@ -31,15 +31,15 @@ public struct Environment {
     public init(
         theme: Theme = ThemeType.orangeRed.theme(),
         isPremiumUser: Bool = false,
-        inputPaceValue: String = "8:00",
-        inputPaceUnit: PaceUnit = .minPerMile,
+        inputValue: String = "8:00",
+        inputPaceType: PaceType = .pace(Pace.minPerMile(seconds: 8*60)), 
         ubiquitousStore: KeyValueStoreType = NSUbiquitousKeyValueStore.default,
         userDefaults: KeyValueStoreType = UserDefaults.standard){
 
         self.theme = theme
         self.isPremiumUser = isPremiumUser
-        self.inputPaceValue = inputPaceValue
-        self.inputPaceUnit = inputPaceUnit
+        self.inputValue = inputValue
+        self.inputPaceType = inputPaceType
         self.ubiquitousStore = ubiquitousStore
         self.userDefaults = userDefaults
     }

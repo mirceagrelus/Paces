@@ -20,38 +20,38 @@
                 <stackView opaque="NO" contentMode="scaleToFill" distribution="equalSpacing" alignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="68V-JF-kAE">
                     <rect key="frame" x="16" y="0.0" width="311" height="80"/>
                     <subviews>
-                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="01:32:00" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Apr-bY-J6s">
-                            <rect key="frame" x="0.0" y="20.5" width="132.5" height="39.5"/>
-                            <fontDescription key="fontDescription" type="system" pointSize="33"/>
-                            <nil key="textColor"/>
-                            <nil key="highlightedColor"/>
-                        </label>
                         <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="equalSpacing" alignment="bottom" translatesAutoresizingMaskIntoConstraints="NO" id="KTy-Ye-8Cv">
-                            <rect key="frame" x="148.5" y="9.5" width="162.5" height="61.5"/>
+                            <rect key="frame" x="0.0" y="10" width="311" height="60"/>
                             <subviews>
-                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text=" " textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="iAo-L6-a76">
-                                    <rect key="frame" x="158" y="0.0" width="4.5" height="20.5"/>
-                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="01:32:00" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Apr-bY-J6s" customClass="ConversionControlLabel" customModule="PacesKit" customModuleProvider="target">
+                                    <rect key="frame" x="178.5" y="0.0" width="132.5" height="39.5"/>
+                                    <fontDescription key="fontDescription" type="system" pointSize="33"/>
                                     <nil key="textColor"/>
                                     <nil key="highlightedColor"/>
                                 </label>
                                 <stackView opaque="NO" contentMode="scaleToFill" alignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="ZPW-xQ-lfq">
-                                    <rect key="frame" x="133.5" y="20.5" width="29" height="20.5"/>
+                                    <rect key="frame" x="129" y="39.5" width="182" height="20.5"/>
                                     <subviews>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="13.1" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jNC-n8-clw">
-                                            <rect key="frame" x="0.0" y="0.0" width="29" height="20.5"/>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Half marathon" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="YMF-ZG-9Rk" customClass="ConversionControlLabel" customModule="PacesKit" customModuleProvider="target">
+                                            <rect key="frame" x="0.0" y="0.0" width="114" height="20.5"/>
+                                            <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="17"/>
+                                            <nil key="textColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text=" - " textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ZdF-t7-E2Z" customClass="ConversionControlLabel" customModule="PacesKit" customModuleProvider="target">
+                                            <rect key="frame" x="114" y="0.0" width="16.5" height="20.5"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                            <nil key="textColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="13.1 mi" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jNC-n8-clw" customClass="ConversionControlLabel" customModule="PacesKit" customModuleProvider="target">
+                                            <rect key="frame" x="130.5" y="0.0" width="51.5" height="20.5"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                             <nil key="textColor"/>
                                             <nil key="highlightedColor"/>
                                         </label>
                                     </subviews>
                                 </stackView>
-                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Half marathon | miles" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="YMF-ZG-9Rk">
-                                    <rect key="frame" x="0.0" y="41" width="162.5" height="20.5"/>
-                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                    <nil key="textColor"/>
-                                    <nil key="highlightedColor"/>
-                                </label>
                             </subviews>
                         </stackView>
                     </subviews>
@@ -67,6 +67,12 @@
             </constraints>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <viewLayoutGuide key="safeArea" id="gZ0-Fx-wnn"/>
+            <connections>
+                <outlet property="raceDistanceLabel" destination="jNC-n8-clw" id="r1g-yR-tSc"/>
+                <outlet property="raceTypeLabel" destination="YMF-ZG-9Rk" id="lvo-Nd-3Ph"/>
+                <outlet property="separatorLabel" destination="ZdF-t7-E2Z" id="ZF3-GO-S2P"/>
+                <outlet property="valueLabel" destination="Apr-bY-J6s" id="VOs-f3-zlQ"/>
+            </connections>
             <point key="canvasLocation" x="-204.5" y="-491.5"/>
         </view>
     </objects>

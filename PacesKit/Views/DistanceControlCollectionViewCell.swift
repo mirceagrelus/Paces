@@ -32,6 +32,10 @@ public class DistanceControlCollectionViewCell: ConversionControlCollectionViewC
         setupControl()
     }
 
+    public func configureFor(raceDistance: RaceDistance) {
+        distanceControl.configureDistance(raceDistance)
+    }
+
     func setupControl() {
         distanceControl.translatesAutoresizingMaskIntoConstraints = false
         controlContentView.addSubview(distanceControl)

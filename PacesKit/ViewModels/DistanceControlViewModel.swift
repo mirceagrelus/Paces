@@ -1,8 +1,8 @@
 //
-//  PaceControlViewModel.swift
+//  DistanceControlViewModel.swift
 //  Paces
 //
-//  Created by Mircea Grelus on 2018-02-10.
+//  Created by Mircea Grelus on 2018-02-23.
 //  Copyright © 2018 CodexBit Software. All rights reserved.
 //
 
@@ -10,12 +10,12 @@ import Foundation
 import RxSwift
 import RxCocoa
 
-public protocol PaceControlViewModelInputs {
+public protocol DistanceControlViewModelInputs {
     // source input pace to convert from
     var fromPaceType: PublishRelay<PaceType> { get }
 
-    // the pace unit displayed by the control
-    var toUnit: BehaviorRelay<PaceUnit> { get }
+    // the race distance displayed by the control
+    var toRaceDistance: BehaviorRelay<RaceDistance> { get }
 
     // control tapped event
     var tapped: PublishRelay<Void> { get }
@@ -24,9 +24,9 @@ public protocol PaceControlViewModelInputs {
     var isSource: PublishRelay<Bool> { get }
 }
 
-public protocol PaceControlViewModelOutputs {
-    // the calculated pace
-    var pace: Observable<Pace> { get }
+public protocol DistanceControlViewModelOutputs {
+    // the calculated race
+    var race: Observable<Race> { get }
 
     // paceType to switch input to
     var switchUserInputPaceType: Observable<PaceType> { get }
@@ -35,19 +35,19 @@ public protocol PaceControlViewModelOutputs {
     var isSelected: Observable<Bool> { get }
 }
 
-public protocol PaceControlViewModelType {
-    var inputs: PaceControlViewModelInputs { get }
-    var outputs: PaceControlViewModelOutputs { get }
+public protocol DistanceControlViewModelType {
+    var inputs: DistanceControlViewModelInputs { get }
+    var outputs: DistanceControlViewModelOutputs { get }
 }
 
-public class PaceControlViewModel: PaceControlViewModelType {
+public class DistanceControlViewModel: DistanceControlViewModelType {
 
     init() {
         Observable
-            .combineLatest(fromPaceType, toUnit) { (paceType, toUnit) -> Pace in
-                return paceType.converted(to: toUnit)
+            .combineLatest(fromPaceType, toRaceDistance) { (paceType, raceDistance) -> Race in
+                return paceType.converted(to: raceDistance)
             }
-            .bind(to: _pace)
+            .bind(to: _race)
             .disposed(by: bag)
 
         isSelected = isSource
@@ -57,23 +57,23 @@ public class PaceControlViewModel: PaceControlViewModelType {
             .distinctUntilChanged()
 
         tapped
-            .withLatestFrom(pace)
-            .map { .pace($0) }
+            .withLatestFrom(race)
+            .map { .race($0) }
             .bind(to: _switchUserInputPaceType)
             .disposed(by: bag)
     }
 
-    public var inputs: PaceControlViewModelInputs { return self }
-    public var outputs: PaceControlViewModelOutputs { return self }
+    public var inputs: DistanceControlViewModelInputs { return self }
+    public var outputs: DistanceControlViewModelOutputs { return self }
 
     public var fromPaceType: PublishRelay<PaceType> =  PublishRelay()
-    public var toUnit: BehaviorRelay<PaceUnit> =  BehaviorRelay(value: PaceUnit.minPerMile)
+    public var toRaceDistance: BehaviorRelay<RaceDistance> =  BehaviorRelay(value: RaceDistance(raceType: .halfMarathon, distanceUnit: .mile))
     public var tapped: PublishRelay<Void> = PublishRelay()
     public var isSource: PublishRelay<Bool> = PublishRelay()
 
-    fileprivate let _pace: PublishRelay<Pace> =  PublishRelay()
-    public var pace: Observable<Pace> {
-        return _pace.asObservable()
+    fileprivate let _race: PublishRelay<Race> =  PublishRelay()
+    public var race: Observable<Race> {
+        return _race.asObservable()
     }
 
     fileprivate let _switchUserInputPaceType: PublishRelay<PaceType> =  PublishRelay()
@@ -85,4 +85,4 @@ public class PaceControlViewModel: PaceControlViewModelType {
     private let bag = DisposeBag()
 }
 
-extension PaceControlViewModel: PaceControlViewModelInputs, PaceControlViewModelOutputs { }
+extension DistanceControlViewModel: DistanceControlViewModelInputs, DistanceControlViewModelOutputs { }

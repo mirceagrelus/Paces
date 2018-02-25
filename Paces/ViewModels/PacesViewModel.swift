@@ -12,31 +12,31 @@ import RxSwift
 import RxCocoa
 
 public protocol PacesViewModelInputs {
-    // the string representation of the pace value
-    var paceValue: BehaviorRelay<String> { get }
+    // the string representation of the input pace value
+    var inputValue: BehaviorRelay<String> { get }
 
-    // the unit paces should be displayed in.
-    var paceUnit: BehaviorRelay<PaceUnit> { get }
+    // the paceType configured for the input
+    var inputPaceType: BehaviorRelay<PaceType> { get }
 
     // viewDidLoad event
     var viewDidLoad: PublishSubject<()> { get }
 
-    // the pace that the input UI has to provide input for
-    var switchUserInputPace: BehaviorRelay<Pace> { get }
+    // event for switching input to a new paceType
+    var switchUserInputPaceType: BehaviorRelay<PaceType> { get }
 }
 
 public protocol PacesViewModelOutputs {
-    // calculated pace
-    var pace: Observable<Pace> { get }
+    // the calculated pacing element from user input
+    var paceType: Observable<PaceType> { get }
 
     // configured controls
     var paceControls: Observable<[ConversionControl]> { get }
 
-    // the value of the last calculated pace
-    var lastPace: Pace { get }
-
-    // show user input UI
+    // show user input pane UI
     var showInput: Observable<Bool> { get }
+
+    // data source of input for the picker view
+    var inputDataSource: Observable<[[CustomStringConvertible]]> { get }
 }
 
 public protocol PacesViewModelType {
@@ -46,76 +46,84 @@ public protocol PacesViewModelType {
 
 public class PacesViewModel: PacesViewModelType {
 
-    public var lastPace: Pace {
-        return _pace.value
-    }
-
     init() {
-        paceValue = BehaviorRelay(value: AppEnvironment.current.inputPaceValue)
-        paceUnit = BehaviorRelay(value: AppEnvironment.current.inputPaceUnit)
-        switchUserInputPace = BehaviorRelay(value: Pace(stringValue: paceValue.value, unit: paceUnit.value))
-        _pace = BehaviorRelay(value: switchUserInputPace.value)
+        inputValue = BehaviorRelay(value: AppEnvironment.current.inputValue)
+        inputPaceType = BehaviorRelay(value: AppEnvironment.current.inputPaceType)
+        switchUserInputPaceType = BehaviorRelay(value: inputPaceType.value)
         //TODO: read paces config from AppEnvironment
-        let envControls = [ConversionControl(sortOrder: 0, unitType: .paceUnit(.minPerMile)),
-                           ConversionControl(sortOrder: 1, unitType: .paceUnit(.minPerKm)),
-                           ConversionControl(sortOrder: 2, unitType: .paceUnit(.kmPerHour)),
-                           ConversionControl(sortOrder: 3, unitType: .paceUnit(.milePerHour)),
-                           ConversionControl(sortOrder: 4, unitType: .raceDistance(26))]
+        let envControls = [ConversionControl(sortOrder: 0, paceType: .pace(Pace(stringValue: "", unit: .minPerMile))),
+                           ConversionControl(sortOrder: 1, paceType: .pace(Pace(stringValue: "", unit: .minPerKm))),
+                           ConversionControl(sortOrder: 2, paceType: .pace(Pace(stringValue: "", unit: .kmPerHour))),
+                           ConversionControl(sortOrder: 3, paceType: .pace(Pace(stringValue: "", unit: .milePerHour))),
+                           ConversionControl(sortOrder: 4, paceType: .race(Race(time: 0, raceDistance: RaceDistance(raceType: .halfMarathon, distanceUnit: .km)) ))
+        ]
         _paceControls = BehaviorRelay(value: envControls)
 
-        // calculate new pace when user input pace value changes
-        paceValue
-            .withLatestFrom(paceUnit, resultSelector: { Pace(stringValue: $0, unit: $1) })
-            .debug("pace")
-            .bind(to: _pace)
+        // calculate new pace when user input value changes
+        inputValue
+            .withLatestFrom(inputPaceType) { value, inputPaceType -> PaceType in
+                return inputPaceType.withUpdatedValue(value)
+            }
+            .debug("PaceType")
+            .bind(to: _paceType)
             .disposed(by: bag)
 
-        // switch to the new input unit
-        switchUserInputPace
-            .map { $0.unit }
-            .bind(to: paceUnit)
+        // switch to new input type
+        switchUserInputPaceType
+            .bind(to: inputPaceType)
             .disposed(by: bag)
 
-        // switch to the new input value
-        switchUserInputPace
+        // update datasource for new type of input
+        inputPaceType
+            .map { paceType -> [[CustomStringConvertible]] in
+                switch paceType {
+                case .pace(let pace): return pace.unit.inputSource
+                case .race(let race): return race.inputSource
+                }
+            }
+            .bind(to: _inputDataSource)
+            .disposed(by: bag)
+
+        // update value for new type of input
+        inputPaceType
             .map { $0.displayValue }
-            .bind(to: paceValue)
+            .bind(to: inputValue)
             .disposed(by: bag)
 
-        showInput = switchUserInputPace
-            .scan([]) { lastSlice, val -> [Pace] in
+        showInput = switchUserInputPaceType
+            .scan([]) { lastSlice, val -> [PaceType] in
                 let slice = (lastSlice + [val]).suffix(2)
                 return Array(slice)
             }
             .filter { $0.count == 2 }
-            .scan(true) { isShown, paces -> Bool in
-                let sameTapped = paces[0].unit == paces[1].unit
+            .scan(true) { isShown, paceTypes -> Bool in
+                let sameTapped = PaceType.equalUnits(lhs: paceTypes[0], rhs: paceTypes[1])
                 return isShown ? !sameTapped : true
             }
             .startWith(true)
 
-        // store paceValue in Environment
-        paceValue
-            .subscribe(onNext: { AppEnvironment.replaceCurrentEnvironment(inputPaceValue: $0) })
+        // store inputValue in Environment
+        inputValue
+            .subscribe(onNext: { AppEnvironment.replaceCurrentEnvironment(inputValue: $0) })
             .disposed(by: bag)
 
         // store pace unit in Environment
-        paceUnit
-            .subscribe(onNext: { AppEnvironment.replaceCurrentEnvironment(inputPaceUnit: $0) })
+        paceType
+            .subscribe(onNext: { AppEnvironment.replaceCurrentEnvironment(inputPaceType: $0) })
             .disposed(by: bag)
     }
 
     public var inputs: PacesViewModelInputs { return self }
     public var outputs: PacesViewModelOutputs { return self }
 
-    public var paceValue: BehaviorRelay<String>
-    public var paceUnit: BehaviorRelay<PaceUnit>
+    public var inputValue: BehaviorRelay<String>
+    public var inputPaceType: BehaviorRelay<PaceType>
     public var viewDidLoad: PublishSubject<()> = PublishSubject()
-    public var switchUserInputPace: BehaviorRelay<Pace>
+    public var switchUserInputPaceType: BehaviorRelay<PaceType>
 
-    fileprivate let _pace: BehaviorRelay<Pace>
-    public var pace: Observable<Pace> {
-        return _pace.asObservable()
+    fileprivate let _paceType: PublishRelay<PaceType> = PublishRelay()
+    public var paceType: Observable<PaceType> {
+        return _paceType.asObservable()
     }
 
     fileprivate let _paceControls: BehaviorRelay<[ConversionControl]>
@@ -123,6 +131,11 @@ public class PacesViewModel: PacesViewModelType {
         return _paceControls.asObservable()
     }
     public var showInput: Observable<Bool>
+
+    fileprivate let _inputDataSource: BehaviorRelay<[[CustomStringConvertible]]> = BehaviorRelay(value: [])
+    public var inputDataSource: Observable<[[CustomStringConvertible]]> {
+        return _inputDataSource.asObservable()
+    }
 
     private let bag = DisposeBag()
 }
