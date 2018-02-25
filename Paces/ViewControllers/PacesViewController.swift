@@ -136,21 +136,28 @@ class PacesViewController: UIViewController {
 
     func updatePickerValue(stringRepresentation paceValue: String) {
         print("== \(paceValue)")
-        let min: String
-        let sec: String
+        let first: String
+        let second: String
+        var third: String? = nil
 
         let components = paceValue.contains(":") ? paceValue.components(separatedBy: ":") :
                          paceValue.contains(".") ? paceValue.components(separatedBy: ".") : ["",""]
 
         guard components.count >= 2 else { return }
-        min = components[0]
-        sec = components[1]
+        first = components[0]
+        second = components[1]
+        if components.count >= 3 {
+            third = components[2]
+        }
 
-        let first = Int(min) ?? 0
-        let second = Int(sec) ?? 0
+        let comp1 = Int(first) ?? 0
+        let comp2 = Int(second) ?? 0
 
-        self.pickerView.selectRow(first, inComponent: 0, animated: true)
-        self.pickerView.selectRow(second, inComponent: 2, animated: true)
+        self.pickerView.selectRow(comp1, inComponent: 0, animated: true)
+        self.pickerView.selectRow(comp2, inComponent: 2, animated: true)
+        if let thirdVal = third {
+            self.pickerView.selectRow(Int(thirdVal) ?? 0, inComponent: 4, animated: true)
+        }
     }
 
     func togglePaceInput(_ showInput: Bool) {
