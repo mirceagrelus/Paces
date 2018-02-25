@@ -8,7 +8,7 @@
 
 import Foundation
 
-public struct Pace {
+public struct Pace: Codable {
     public var value: Double
     public let unit: PaceUnit
 
@@ -87,6 +87,26 @@ public struct Pace {
 
         return Pace(value: targetSpeed.value, unit: targetUnit)
     }
+
+    public func converted(to raceDistance: RaceDistance) -> Race {
+        guard value > 0 else {  return Race(time: 0, raceDistance: raceDistance) }
+
+        let metersPerSecond = Measurement(value: value, unit: unit.toUnitSpeed()).converted(to: UnitSpeed.metersPerSecond)
+        let totalSeconds = raceDistance.coefficient / metersPerSecond.value
+
+        return Race(time: totalSeconds, raceDistance: raceDistance)
+    }
+
+//    public func converted(from race: Race) -> Pace {
+//        let raceDistance = race.raceDistance.coefficient
+//        let seconds = race.time
+//
+//        let value = raceDistance / seconds
+//        let raceSpeed = Measurement(value: value, unit: UnitSpeed.metersPerSecond)
+//        let targetSpeed = raceSpeed.converted(to: self.unit.toUnitSpeed())
+//
+//        return Pace(value: targetSpeed.value, unit: self.unit)
+//    }
 
 }
 

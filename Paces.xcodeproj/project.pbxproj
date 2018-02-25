@@ -26,6 +26,7 @@
 		087EFAD82039D19D005B7385 /* ConversionControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 087EFAD72039D19D005B7385 /* ConversionControl.swift */; };
 		087EFAE9203B10B3005B7385 /* PacesCollectionViewAdapter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 087EFAE7203B0666005B7385 /* PacesCollectionViewAdapter.swift */; };
 		08C694FD203F248D005A96CA /* PaceInputView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08C694FC203F248D005A96CA /* PaceInputView.swift */; };
+		08C694FF20404B25005A96CA /* Race.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08C694FE20404B25005A96CA /* Race.swift */; };
 		08CAB6B1202F2C5800C7FF41 /* GradientView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08CAB6B0202F2C5800C7FF41 /* GradientView.swift */; };
 		08CAB6B3202F2F1E00C7FF41 /* AutoLayoutUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08CAB6B2202F2F1D00C7FF41 /* AutoLayoutUtils.swift */; };
 		08CAB6B5202F376300C7FF41 /* PaceControlView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08CAB6B4202F376300C7FF41 /* PaceControlView.swift */; };
@@ -128,6 +129,7 @@
 		087EFAD72039D19D005B7385 /* ConversionControl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConversionControl.swift; sourceTree = "<group>"; };
 		087EFAE7203B0666005B7385 /* PacesCollectionViewAdapter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PacesCollectionViewAdapter.swift; sourceTree = "<group>"; };
 		08C694FC203F248D005A96CA /* PaceInputView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaceInputView.swift; sourceTree = "<group>"; };
+		08C694FE20404B25005A96CA /* Race.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Race.swift; sourceTree = "<group>"; };
 		08CAB6B0202F2C5800C7FF41 /* GradientView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GradientView.swift; sourceTree = "<group>"; };
 		08CAB6B2202F2F1D00C7FF41 /* AutoLayoutUtils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AutoLayoutUtils.swift; sourceTree = "<group>"; };
 		08CAB6B4202F376300C7FF41 /* PaceControlView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaceControlView.swift; sourceTree = "<group>"; };
@@ -259,6 +261,7 @@
 			isa = PBXGroup;
 			children = (
 				08CAB6CE202F92BC00C7FF41 /* Pace.swift */,
+				08C694FE20404B25005A96CA /* Race.swift */,
 				087EFAD72039D19D005B7385 /* ConversionControl.swift */,
 			);
 			path = Model;
@@ -810,6 +813,7 @@
 				08E64B8B202DE06400A59F41 /* AppEnvironment.swift in Sources */,
 				08CAB6B3202F2F1E00C7FF41 /* AutoLayoutUtils.swift in Sources */,
 				08E64B99202F224B00A59F41 /* Navigation.swift in Sources */,
+				08C694FF20404B25005A96CA /* Race.swift in Sources */,
 				08C694FD203F248D005A96CA /* PaceInputView.swift in Sources */,
 				0860EC8D2031ED6800358F2A /* PickerViewAdapter.swift in Sources */,
 			);
