@@ -68,6 +68,9 @@ public class PacesViewModel: PacesViewModelType {
             .bind(to: _paceType)
             .disposed(by: bag)
 
+        // share the latest computed pace, so new and reusable cells have an initial value
+        paceType = _paceType.share(replay: 1, scope: .whileConnected)
+
         // switch to new input type
         switchUserInputPaceType
             .bind(to: inputPaceType)
@@ -122,9 +125,7 @@ public class PacesViewModel: PacesViewModelType {
     public var switchUserInputPaceType: BehaviorRelay<PaceType>
 
     fileprivate let _paceType: PublishRelay<PaceType> = PublishRelay()
-    public var paceType: Observable<PaceType> {
-        return _paceType.asObservable()
-    }
+    public var paceType: Observable<PaceType>
 
     fileprivate let _paceControls: BehaviorRelay<[ConversionControl]>
     public var paceControls: Observable<[ConversionControl]> {
