@@ -15,6 +15,7 @@ public class PaceControlView: ThemeView {
     @IBOutlet weak var valueLabel: ConversionControlLabel!
     @IBOutlet weak var unitLabel: ConversionControlLabel!
     @IBOutlet weak var sourceLabel: ConversionControlLabel!
+    @IBOutlet weak var pickUnitImageView: UIImageView!
 
     public static let sourceFromString = "From"
     public static let sourceToString = "To"
@@ -53,13 +54,14 @@ public class PaceControlView: ThemeView {
             .observeOn(MainScheduler.instance)
             .subscribe(onNext: { [weak self] isSelected in
                 let theme = AppEnvironment.current.theme
-                self?.sourceLabel.text = isSelected ? PaceControlView.sourceFromString : PaceControlView.sourceToString
+                //self?.sourceLabel.text = isSelected ? PaceControlView.sourceFromString : PaceControlView.sourceToString
                 self?.applyBackgroundColor = isSelected ? { theme.controlCellBackgroundColorSelected } : { theme.controlCellBackgroundColor }
-                self?.sourceLabel.isSelected = isSelected
+                self?.pickUnitImageView.tintColor = isSelected ?  theme.controlCellTextColorSelected : theme.controlCellTextColor
+                //self?.sourceLabel.isSelected = isSelected
                 self?.valueLabel.isSelected = isSelected
                 self?.unitLabel.isSelected = isSelected
 
-                self?.sourceLabel.alpha = isSelected ? 1.0 : 0.0
+                //self?.sourceLabel.alpha = isSelected ? 1.0 : 0.0
             })
             .disposed(by: bag)
 

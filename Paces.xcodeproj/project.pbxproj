@@ -9,9 +9,11 @@
 /* Begin PBXBuildFile section */
 		0805B25820388BE800916CD4 /* UITableView+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0805B25720388BE800916CD4 /* UITableView+Extensions.swift */; };
 		0805B25A20389DED00916CD4 /* Observable+Operators.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0805B25920389DED00916CD4 /* Observable+Operators.swift */; };
+		08083CDD20430F33007E5A43 /* PaceControlView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 08083CDC20430F33007E5A43 /* PaceControlView.xib */; };
+		08083CDF2043F86F007E5A43 /* DistanceControlView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 08083CDE2043F86F007E5A43 /* DistanceControlView.xib */; };
 		08138DCF2043041C000BFC37 /* PickUnitView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08138DCE2043041C000BFC37 /* PickUnitView.swift */; };
 		083C321B203C6EE4005AD1F5 /* DistanceControlView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 083C321A203C6EE4005AD1F5 /* DistanceControlView.swift */; };
-		083C321D203C6F1D005AD1F5 /* DistanceControlView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 083C321C203C6F1D005AD1F5 /* DistanceControlView.xib */; };
+		083C321D203C6F1D005AD1F5 /* DistanceControlRightAlignedView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 083C321C203C6F1D005AD1F5 /* DistanceControlRightAlignedView.xib */; };
 		083C321F203C7A94005AD1F5 /* ConversionControlCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 083C321E203C7A94005AD1F5 /* ConversionControlCollectionViewCell.swift */; };
 		083C3221203C7C7D005AD1F5 /* DistanceControlCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 083C3220203C7C7D005AD1F5 /* DistanceControlCollectionViewCell.swift */; };
 		083C3223203D5501005AD1F5 /* Theme.swift in Sources */ = {isa = PBXBuildFile; fileRef = 083C3222203D5501005AD1F5 /* Theme.swift */; };
@@ -32,7 +34,7 @@
 		08CAB6B1202F2C5800C7FF41 /* GradientView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08CAB6B0202F2C5800C7FF41 /* GradientView.swift */; };
 		08CAB6B3202F2F1E00C7FF41 /* AutoLayoutUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08CAB6B2202F2F1D00C7FF41 /* AutoLayoutUtils.swift */; };
 		08CAB6B5202F376300C7FF41 /* PaceControlView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08CAB6B4202F376300C7FF41 /* PaceControlView.swift */; };
-		08CAB6C6202F3A4D00C7FF41 /* PaceControlView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 08CAB6C5202F3A4D00C7FF41 /* PaceControlView.xib */; };
+		08CAB6C6202F3A4D00C7FF41 /* PaceControlRightAlignedView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 08CAB6C5202F3A4D00C7FF41 /* PaceControlRightAlignedView.xib */; };
 		08CAB6C8202F4CB300C7FF41 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08CAB6C7202F4CB300C7FF41 /* Extensions.swift */; };
 		08CAB6CD202F929900C7FF41 /* PaceControlViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08CAB6CC202F929900C7FF41 /* PaceControlViewModel.swift */; };
 		08CAB6CF202F92BC00C7FF41 /* Pace.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08CAB6CE202F92BC00C7FF41 /* Pace.swift */; };
@@ -114,9 +116,11 @@
 /* Begin PBXFileReference section */
 		0805B25720388BE800916CD4 /* UITableView+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITableView+Extensions.swift"; sourceTree = "<group>"; };
 		0805B25920389DED00916CD4 /* Observable+Operators.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Observable+Operators.swift"; sourceTree = "<group>"; };
+		08083CDC20430F33007E5A43 /* PaceControlView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PaceControlView.xib; sourceTree = "<group>"; };
+		08083CDE2043F86F007E5A43 /* DistanceControlView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = DistanceControlView.xib; sourceTree = "<group>"; };
 		08138DCE2043041C000BFC37 /* PickUnitView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PickUnitView.swift; sourceTree = "<group>"; };
 		083C321A203C6EE4005AD1F5 /* DistanceControlView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DistanceControlView.swift; sourceTree = "<group>"; };
-		083C321C203C6F1D005AD1F5 /* DistanceControlView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = DistanceControlView.xib; sourceTree = "<group>"; };
+		083C321C203C6F1D005AD1F5 /* DistanceControlRightAlignedView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = DistanceControlRightAlignedView.xib; sourceTree = "<group>"; };
 		083C321E203C7A94005AD1F5 /* ConversionControlCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConversionControlCollectionViewCell.swift; sourceTree = "<group>"; };
 		083C3220203C7C7D005AD1F5 /* DistanceControlCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DistanceControlCollectionViewCell.swift; sourceTree = "<group>"; };
 		083C3222203D5501005AD1F5 /* Theme.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Theme.swift; sourceTree = "<group>"; };
@@ -137,7 +141,7 @@
 		08CAB6B0202F2C5800C7FF41 /* GradientView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GradientView.swift; sourceTree = "<group>"; };
 		08CAB6B2202F2F1D00C7FF41 /* AutoLayoutUtils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AutoLayoutUtils.swift; sourceTree = "<group>"; };
 		08CAB6B4202F376300C7FF41 /* PaceControlView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaceControlView.swift; sourceTree = "<group>"; };
-		08CAB6C5202F3A4D00C7FF41 /* PaceControlView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PaceControlView.xib; sourceTree = "<group>"; };
+		08CAB6C5202F3A4D00C7FF41 /* PaceControlRightAlignedView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PaceControlRightAlignedView.xib; sourceTree = "<group>"; };
 		08CAB6C7202F4CB300C7FF41 /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 		08CAB6CC202F929900C7FF41 /* PaceControlViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaceControlViewModel.swift; sourceTree = "<group>"; };
 		08CAB6CE202F92BC00C7FF41 /* Pace.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Pace.swift; sourceTree = "<group>"; };
@@ -240,10 +244,12 @@
 				083C322C203DC5D3005AD1F5 /* ThemeGradientView.swift */,
 				08CAB6B0202F2C5800C7FF41 /* GradientView.swift */,
 				08CAB6B4202F376300C7FF41 /* PaceControlView.swift */,
-				08CAB6C5202F3A4D00C7FF41 /* PaceControlView.xib */,
+				08083CDC20430F33007E5A43 /* PaceControlView.xib */,
+				08CAB6C5202F3A4D00C7FF41 /* PaceControlRightAlignedView.xib */,
 				087EFAD520398FA5005B7385 /* PaceControlCollectionViewCell.swift */,
 				083C321A203C6EE4005AD1F5 /* DistanceControlView.swift */,
-				083C321C203C6F1D005AD1F5 /* DistanceControlView.xib */,
+				08083CDE2043F86F007E5A43 /* DistanceControlView.xib */,
+				083C321C203C6F1D005AD1F5 /* DistanceControlRightAlignedView.xib */,
 				083C3220203C7C7D005AD1F5 /* DistanceControlCollectionViewCell.swift */,
 				083C321E203C7A94005AD1F5 /* ConversionControlCollectionViewCell.swift */,
 				083C323C203ED37C005AD1F5 /* AddControlView.swift */,
@@ -583,9 +589,11 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				083C321D203C6F1D005AD1F5 /* DistanceControlView.xib in Resources */,
+				083C321D203C6F1D005AD1F5 /* DistanceControlRightAlignedView.xib in Resources */,
 				083C3241203EE0F9005AD1F5 /* KitAssets.xcassets in Resources */,
-				08CAB6C6202F3A4D00C7FF41 /* PaceControlView.xib in Resources */,
+				08083CDD20430F33007E5A43 /* PaceControlView.xib in Resources */,
+				08083CDF2043F86F007E5A43 /* DistanceControlView.xib in Resources */,
+				08CAB6C6202F3A4D00C7FF41 /* PaceControlRightAlignedView.xib in Resources */,
 				083C323F203ED37D005AD1F5 /* AddControlView.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

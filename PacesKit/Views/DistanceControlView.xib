@@ -4,8 +4,8 @@
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
-        <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13772"/>
+        <capability name="Alignment constraints with different attributes" minToolsVersion="5.1"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -13,67 +13,88 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
-        <view contentMode="scaleToFill" id="xTI-lo-phL" customClass="DistanceControlView" customModule="PacesKit" customModuleProvider="target">
-            <rect key="frame" x="0.0" y="0.0" width="343" height="80"/>
+        <view contentMode="scaleToFill" id="Rt8-if-eBN" customClass="DistanceControlView" customModule="PacesKit" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="378" height="82"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <subviews>
-                <stackView opaque="NO" contentMode="scaleToFill" distribution="equalSpacing" alignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="68V-JF-kAE">
-                    <rect key="frame" x="16" y="0.0" width="311" height="80"/>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="6Db-TV-Jl7">
+                    <rect key="frame" x="339" y="0.0" width="23" height="82"/>
                     <subviews>
-                        <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="equalSpacing" alignment="bottom" translatesAutoresizingMaskIntoConstraints="NO" id="KTy-Ye-8Cv">
-                            <rect key="frame" x="0.0" y="10" width="311" height="60"/>
+                        <stackView opaque="NO" contentMode="scaleToFill" alignment="lastBaseline" spacing="6" translatesAutoresizingMaskIntoConstraints="NO" id="4JP-Lh-f91">
+                            <rect key="frame" x="0.0" y="30" width="23" height="23"/>
                             <subviews>
-                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="01:32:00" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Apr-bY-J6s" customClass="ConversionControlLabel" customModule="PacesKit" customModuleProvider="target">
-                                    <rect key="frame" x="178.5" y="0.0" width="132.5" height="39.5"/>
-                                    <fontDescription key="fontDescription" type="system" pointSize="33"/>
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text=" " textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="YYC-7y-etW" customClass="ConversionControlLabel" customModule="PacesKit" customModuleProvider="target">
+                                    <rect key="frame" x="0.0" y="0.0" width="5" height="23"/>
+                                    <fontDescription key="fontDescription" type="system" pointSize="19"/>
                                     <nil key="textColor"/>
                                     <nil key="highlightedColor"/>
                                 </label>
-                                <stackView opaque="NO" contentMode="scaleToFill" alignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="ZPW-xQ-lfq">
-                                    <rect key="frame" x="129" y="39.5" width="182" height="20.5"/>
-                                    <subviews>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Half marathon" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="YMF-ZG-9Rk" customClass="ConversionControlLabel" customModule="PacesKit" customModuleProvider="target">
-                                            <rect key="frame" x="0.0" y="0.0" width="114" height="20.5"/>
-                                            <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="17"/>
-                                            <nil key="textColor"/>
-                                            <nil key="highlightedColor"/>
-                                        </label>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text=" - " textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ZdF-t7-E2Z" customClass="ConversionControlLabel" customModule="PacesKit" customModuleProvider="target">
-                                            <rect key="frame" x="114" y="0.0" width="16.5" height="20.5"/>
-                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                            <nil key="textColor"/>
-                                            <nil key="highlightedColor"/>
-                                        </label>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="13.1 mi" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jNC-n8-clw" customClass="ConversionControlLabel" customModule="PacesKit" customModuleProvider="target">
-                                            <rect key="frame" x="130.5" y="0.0" width="51.5" height="20.5"/>
-                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                            <nil key="textColor"/>
-                                            <nil key="highlightedColor"/>
-                                        </label>
-                                    </subviews>
-                                </stackView>
+                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="arrow-down-large" highlightedImage="arrow-down-large" translatesAutoresizingMaskIntoConstraints="NO" id="FLM-Gj-IBS">
+                                    <rect key="frame" x="11" y="12" width="12" height="6"/>
+                                </imageView>
                             </subviews>
                         </stackView>
                     </subviews>
-                    <viewLayoutGuide key="safeArea" id="3iS-Ah-7gd"/>
+                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <constraints>
+                        <constraint firstItem="4JP-Lh-f91" firstAttribute="centerY" secondItem="6Db-TV-Jl7" secondAttribute="centerY" id="eRD-tc-d8Z"/>
+                        <constraint firstAttribute="trailing" secondItem="4JP-Lh-f91" secondAttribute="trailing" id="ojS-oA-HXN"/>
+                        <constraint firstItem="4JP-Lh-f91" firstAttribute="leading" secondItem="6Db-TV-Jl7" secondAttribute="leading" id="qif-qJ-7tY"/>
+                    </constraints>
+                </view>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="BWC-46-fxa" customClass="ConversionControlLabel" customModule="PacesKit" customModuleProvider="target">
+                    <rect key="frame" x="150.5" y="21.5" width="78" height="39.5"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="33"/>
+                    <nil key="textColor"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="q7m-62-7Wa">
+                    <rect key="frame" x="267.5" y="58.5" width="94.5" height="20.5"/>
+                    <subviews>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8i1-tW-bSW" customClass="ConversionControlLabel" customModule="PacesKit" customModuleProvider="target">
+                            <rect key="frame" x="0.0" y="0.0" width="44.5" height="20.5"/>
+                            <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
+                            <nil key="textColor"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="-" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kaM-bv-Ma6" customClass="ConversionControlLabel" customModule="PacesKit" customModuleProvider="target">
+                            <rect key="frame" x="44.5" y="0.0" width="8" height="20.5"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                            <nil key="textColor"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="VVT-DH-2my" customClass="ConversionControlLabel" customModule="PacesKit" customModuleProvider="target">
+                            <rect key="frame" x="52.5" y="0.0" width="42" height="20.5"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                            <nil key="textColor"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                    </subviews>
                 </stackView>
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
             <constraints>
-                <constraint firstAttribute="trailingMargin" secondItem="68V-JF-kAE" secondAttribute="trailing" id="Z1P-tl-4yd"/>
-                <constraint firstItem="68V-JF-kAE" firstAttribute="top" secondItem="xTI-lo-phL" secondAttribute="topMargin" id="Zix-RT-Yt6"/>
-                <constraint firstAttribute="bottomMargin" secondItem="68V-JF-kAE" secondAttribute="bottom" id="b8e-8s-Yh0"/>
-                <constraint firstItem="68V-JF-kAE" firstAttribute="leading" secondItem="xTI-lo-phL" secondAttribute="leadingMargin" id="mOg-kZ-PED"/>
+                <constraint firstItem="6Db-TV-Jl7" firstAttribute="centerY" secondItem="Rt8-if-eBN" secondAttribute="centerY" id="0zU-cJ-n44"/>
+                <constraint firstItem="BWC-46-fxa" firstAttribute="centerY" secondItem="Rt8-if-eBN" secondAttribute="centerYWithinMargins" id="PWh-cB-OUk"/>
+                <constraint firstItem="BWC-46-fxa" firstAttribute="centerX" secondItem="Rt8-if-eBN" secondAttribute="centerXWithinMargins" id="TZO-6e-JhC"/>
+                <constraint firstItem="6Db-TV-Jl7" firstAttribute="height" secondItem="Rt8-if-eBN" secondAttribute="height" id="Wyv-bV-Sw3"/>
+                <constraint firstItem="6Db-TV-Jl7" firstAttribute="trailing" secondItem="Rt8-if-eBN" secondAttribute="trailingMargin" id="f1A-xI-gZM"/>
+                <constraint firstItem="q7m-62-7Wa" firstAttribute="bottom" secondItem="Rt8-if-eBN" secondAttribute="bottom" constant="-3" id="jSo-6M-p7c"/>
+                <constraint firstAttribute="trailingMargin" secondItem="q7m-62-7Wa" secondAttribute="trailing" id="usV-Bg-JR8"/>
             </constraints>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
-            <viewLayoutGuide key="safeArea" id="gZ0-Fx-wnn"/>
+            <viewLayoutGuide key="safeArea" id="s7r-ip-cgf"/>
             <connections>
-                <outlet property="raceDistanceLabel" destination="jNC-n8-clw" id="r1g-yR-tSc"/>
-                <outlet property="raceTypeLabel" destination="YMF-ZG-9Rk" id="lvo-Nd-3Ph"/>
-                <outlet property="separatorLabel" destination="ZdF-t7-E2Z" id="ZF3-GO-S2P"/>
-                <outlet property="valueLabel" destination="Apr-bY-J6s" id="VOs-f3-zlQ"/>
+                <outlet property="pickUnitImageView" destination="FLM-Gj-IBS" id="htA-RM-Dbj"/>
+                <outlet property="raceDistanceLabel" destination="VVT-DH-2my" id="Oy1-HN-tD4"/>
+                <outlet property="raceTypeLabel" destination="8i1-tW-bSW" id="qGs-4x-4R0"/>
+                <outlet property="separatorLabel" destination="kaM-bv-Ma6" id="MAx-G2-vgU"/>
+                <outlet property="valueLabel" destination="BWC-46-fxa" id="2fE-YU-18Z"/>
             </connections>
-            <point key="canvasLocation" x="-204.5" y="-491.5"/>
+            <point key="canvasLocation" x="-4" y="-139"/>
         </view>
     </objects>
+    <resources>
+        <image name="arrow-down-large" width="12" height="6"/>
+    </resources>
 </document>

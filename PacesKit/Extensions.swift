@@ -14,6 +14,10 @@ extension UIView {
         //return Bundle.main.loadNibNamed(String(describing: T.self), owner: nil, options: nil)![0] as! T
     }
 
+    public class func fromNib<T: UIView>(named name:String) -> T {
+        return Bundle(for: T.self).loadNibNamed(name, owner: nil, options: nil)![0] as! T
+    }
+
     public class func fromMainNib<T: UIView>() -> T {
         return Bundle.main.loadNibNamed(String(describing: T.self), owner: nil, options: nil)![0] as! T
     }

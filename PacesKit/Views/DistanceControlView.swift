@@ -16,6 +16,7 @@ public class DistanceControlView: ThemeView {
     @IBOutlet weak var raceTypeLabel: ConversionControlLabel!
     @IBOutlet weak var raceDistanceLabel: ConversionControlLabel!
     @IBOutlet weak var separatorLabel: ConversionControlLabel!
+    @IBOutlet weak var pickUnitImageView: UIImageView!
     
     public let viewModel: DistanceControlViewModelType = DistanceControlViewModel()
     public let bag = DisposeBag()
@@ -57,6 +58,7 @@ public class DistanceControlView: ThemeView {
             .subscribe(onNext: { [weak self] isSelected in
                 let theme = AppEnvironment.current.theme
                 self?.applyBackgroundColor = isSelected ? { theme.controlCellBackgroundColorSelected } : { theme.controlCellBackgroundColor }
+                self?.pickUnitImageView.tintColor = isSelected ?  theme.controlCellTextColorSelected : theme.controlCellTextColor
                 self?.valueLabel.isSelected = isSelected
                 self?.raceTypeLabel.isSelected = isSelected
                 self?.raceDistanceLabel.isSelected = isSelected
