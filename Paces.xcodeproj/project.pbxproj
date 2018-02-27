@@ -11,6 +11,10 @@
 		0805B25A20389DED00916CD4 /* Observable+Operators.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0805B25920389DED00916CD4 /* Observable+Operators.swift */; };
 		08083CDD20430F33007E5A43 /* PaceControlView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 08083CDC20430F33007E5A43 /* PaceControlView.xib */; };
 		08083CDF2043F86F007E5A43 /* DistanceControlView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 08083CDE2043F86F007E5A43 /* DistanceControlView.xib */; };
+		08083CF320445884007E5A43 /* ConfigurePaceTypeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08083CF220445884007E5A43 /* ConfigurePaceTypeView.swift */; };
+		08083CF520445890007E5A43 /* ConfigurePaceTypeView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 08083CF420445890007E5A43 /* ConfigurePaceTypeView.xib */; };
+		08083CF720445EFE007E5A43 /* PaceTypeButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08083CF620445EFE007E5A43 /* PaceTypeButton.swift */; };
+		08083CF820446C71007E5A43 /* PaceTypeButton.swift in Headers */ = {isa = PBXBuildFile; fileRef = 08083CF620445EFE007E5A43 /* PaceTypeButton.swift */; settings = {ATTRIBUTES = (Public, ); }; };
 		08138DCF2043041C000BFC37 /* PickUnitView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08138DCE2043041C000BFC37 /* PickUnitView.swift */; };
 		083C321B203C6EE4005AD1F5 /* DistanceControlView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 083C321A203C6EE4005AD1F5 /* DistanceControlView.swift */; };
 		083C321D203C6F1D005AD1F5 /* DistanceControlRightAlignedView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 083C321C203C6F1D005AD1F5 /* DistanceControlRightAlignedView.xib */; };
@@ -118,6 +122,9 @@
 		0805B25920389DED00916CD4 /* Observable+Operators.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Observable+Operators.swift"; sourceTree = "<group>"; };
 		08083CDC20430F33007E5A43 /* PaceControlView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PaceControlView.xib; sourceTree = "<group>"; };
 		08083CDE2043F86F007E5A43 /* DistanceControlView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = DistanceControlView.xib; sourceTree = "<group>"; };
+		08083CF220445884007E5A43 /* ConfigurePaceTypeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfigurePaceTypeView.swift; sourceTree = "<group>"; };
+		08083CF420445890007E5A43 /* ConfigurePaceTypeView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ConfigurePaceTypeView.xib; sourceTree = "<group>"; };
+		08083CF620445EFE007E5A43 /* PaceTypeButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaceTypeButton.swift; sourceTree = "<group>"; };
 		08138DCE2043041C000BFC37 /* PickUnitView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PickUnitView.swift; sourceTree = "<group>"; };
 		083C321A203C6EE4005AD1F5 /* DistanceControlView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DistanceControlView.swift; sourceTree = "<group>"; };
 		083C321C203C6F1D005AD1F5 /* DistanceControlRightAlignedView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = DistanceControlRightAlignedView.xib; sourceTree = "<group>"; };
@@ -256,6 +263,9 @@
 				083C323D203ED37C005AD1F5 /* AddControlView.xib */,
 				08C694FC203F248D005A96CA /* PaceInputView.swift */,
 				08138DCE2043041C000BFC37 /* PickUnitView.swift */,
+				08083CF220445884007E5A43 /* ConfigurePaceTypeView.swift */,
+				08083CF420445890007E5A43 /* ConfigurePaceTypeView.xib */,
+				08083CF620445EFE007E5A43 /* PaceTypeButton.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -424,6 +434,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				08E64B7A202DD82F00A59F41 /* PacesKit.h in Headers */,
+				08083CF820446C71007E5A43 /* PaceTypeButton.swift in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -590,6 +601,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				083C321D203C6F1D005AD1F5 /* DistanceControlRightAlignedView.xib in Resources */,
+				08083CF520445890007E5A43 /* ConfigurePaceTypeView.xib in Resources */,
 				083C3241203EE0F9005AD1F5 /* KitAssets.xcassets in Resources */,
 				08083CDD20430F33007E5A43 /* PaceControlView.xib in Resources */,
 				08083CDF2043F86F007E5A43 /* DistanceControlView.xib in Resources */,
@@ -828,6 +840,8 @@
 				08E64B8B202DE06400A59F41 /* AppEnvironment.swift in Sources */,
 				08CAB6B3202F2F1E00C7FF41 /* AutoLayoutUtils.swift in Sources */,
 				08E64B99202F224B00A59F41 /* Navigation.swift in Sources */,
+				08083CF720445EFE007E5A43 /* PaceTypeButton.swift in Sources */,
+				08083CF320445884007E5A43 /* ConfigurePaceTypeView.swift in Sources */,
 				08C694FF20404B25005A96CA /* Race.swift in Sources */,
 				08C694FD203F248D005A96CA /* PaceInputView.swift in Sources */,
 				08138DCF2043041C000BFC37 /* PickUnitView.swift in Sources */,
