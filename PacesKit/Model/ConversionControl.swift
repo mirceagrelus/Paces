@@ -40,6 +40,14 @@ public enum PaceType: Codable {
         case race
     }
 
+    public func converted(to paceType: PaceType) -> PaceType {
+        switch paceType {
+        case .pace(let pace): return .pace(self.converted(to: pace.unit))
+        case .race(let race): return .race(self.converted(to: race.raceDistance))
+
+        }
+    }
+
     public func converted(to paceUnit: PaceUnit) -> Pace {
         switch self {
         case .pace(let pace): return pace.converted(to: paceUnit)

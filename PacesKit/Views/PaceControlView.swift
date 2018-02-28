@@ -20,37 +20,27 @@ public class PaceControlView: ThemeView {
     public static let sourceFromString = "From"
     public static let sourceToString = "To"
     
-    public let viewModel: PaceControlViewModelType = PaceControlViewModel()
+    public var viewModel: PaceControlViewModelType = PaceControlViewModel() { didSet { self.bindViewModel() }}
     public let bag = DisposeBag()
 
     public override func awakeFromNib() {
         self.bindViewModel()
-
-        let tapGesture = UITapGestureRecognizer()
-        self.addGestureRecognizer(tapGesture)
-
-        tapGesture.rx.event
-            .map { _ in () }
-            .bind(to: viewModel.inputs.tapped)
-            .disposed(by: bag)
-    }
-
-    public func configureUnit(_ unit: PaceUnit) {
-        viewModel.inputs.toUnit.accept(unit)
     }
 
     func bindViewModel() {
-        viewModel.outputs.pace
+        viewModel.inputs.pace
             .map { $0.unit.description }
             .bind(to: unitLabel.rx.text)
             .disposed(by: bag)
 
-        viewModel.outputs.pace
+        viewModel.inputs.pace
             .map { $0.displayValue }
             .bind(to: valueLabel.rx.text)
             .disposed(by: bag)
 
-        viewModel.outputs.isSelected
+        //viewModel.outputs.isSelected
+        viewModel.inputs.isSelected
+            .debug("isSelected")
             .observeOn(MainScheduler.instance)
             .subscribe(onNext: { [weak self] isSelected in
                 let theme = AppEnvironment.current.theme
@@ -65,16 +55,25 @@ public class PaceControlView: ThemeView {
             })
             .disposed(by: bag)
 
+        let tapGesture = UITapGestureRecognizer()
+        self.addGestureRecognizer(tapGesture)
+        tapGesture.rx.event
+            .map { _ in () }
+            .bind(to: viewModel.inputs.tapped)
+            .disposed(by: bag)
+
+        let configureTap = UITapGestureRecognizer()
+        unitLabel.addGestureRecognizer(configureTap)
+        unitLabel.isUserInteractionEnabled = true
+        configureTap.rx.event
+            .map { _ in () }
+            .bind(to: viewModel.inputs.configureTapped)
+            .disposed(by: bag)
+
     }
 
 }
 
-extension PaceControlView {
-    public class func createWithPaceUnit(_ unit: PaceUnit) -> PaceControlView {
-        let paceControl: PaceControlView = PaceControlView.fromNib()
-        paceControl.configureUnit(unit)
-        return paceControl
-    }
-}
+
 
 

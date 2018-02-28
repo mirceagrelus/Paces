@@ -42,6 +42,8 @@ public protocol PacesViewModelOutputs {
 public protocol PacesViewModelType {
     var inputs: PacesViewModelInputs { get }
     var outputs: PacesViewModelOutputs { get }
+
+    func bindControlModel() -> (PaceTypeControlViewModelType) -> ()
 }
 
 public class PacesViewModel: PacesViewModelType {
@@ -114,6 +116,31 @@ public class PacesViewModel: PacesViewModelType {
         paceType
             .subscribe(onNext: { AppEnvironment.replaceCurrentEnvironment(inputPaceType: $0) })
             .disposed(by: bag)
+    }
+
+    // closure used for binding the control model to the input model
+    public func bindControlModel() -> (PaceTypeControlViewModelType) -> () {
+        return { [weak self] controlModel in
+            guard let strongSelf = self else { return }
+
+            strongSelf.outputs.paceType
+                .debug("control-pace")
+                .bind(to: controlModel.inputs.fromPaceType)
+                .disposed(by: controlModel.bag)
+
+            controlModel.outputs.switchUserInputPaceType
+                .debug("control-switchInputPace")
+                .bind(to: strongSelf.inputs.switchUserInputPaceType)
+                .disposed(by: controlModel.bag)
+
+            strongSelf.inputs.switchUserInputPaceType
+                .debug("control-switchUserInputPaceType")
+                .withLatestFrom(controlModel.inputs.toPaceType)  { switchPaceType, toPaceType in
+                    return PaceType.equalUnits(lhs: switchPaceType, rhs: toPaceType)
+                }
+                .bind(to: controlModel.inputs.isSource)
+                .disposed(by: controlModel.bag)
+        }
     }
 
     public var inputs: PacesViewModelInputs { return self }

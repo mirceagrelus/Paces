@@ -18,42 +18,30 @@ public class DistanceControlView: ThemeView {
     @IBOutlet weak var separatorLabel: ConversionControlLabel!
     @IBOutlet weak var pickUnitImageView: UIImageView!
     
-    public let viewModel: DistanceControlViewModelType = DistanceControlViewModel()
+    public var viewModel: DistanceControlViewModelType = DistanceControlViewModel() { didSet { self.bindViewModel() }}
     public let bag = DisposeBag()
 
     public override func awakeFromNib() {
         self.bindViewModel()
-
-        let tapGesture = UITapGestureRecognizer()
-        self.addGestureRecognizer(tapGesture)
-
-        tapGesture.rx.event
-            .map { _ in () }
-            .bind(to: viewModel.inputs.tapped)
-            .disposed(by: bag)
-    }
-
-    public func configureDistance(_ raceDistance: RaceDistance) {
-        viewModel.inputs.toRaceDistance.accept(raceDistance)
     }
 
     func bindViewModel() {
-        viewModel.outputs.race
+        viewModel.inputs.race
             .map { $0.raceDistance.nameDescription }
             .bind(to: raceTypeLabel.rx.text)
             .disposed(by: bag)
 
-        viewModel.outputs.race
+        viewModel.inputs.race
             .map { $0.raceDistance.distanceDescription }
             .bind(to: raceDistanceLabel.rx.text)
             .disposed(by: bag)
 
-        viewModel.outputs.race
+        viewModel.inputs.race
             .map { $0.displayValue }
             .bind(to: valueLabel.rx.text)
             .disposed(by: bag)
 
-        viewModel.outputs.isSelected
+        viewModel.inputs.isSelected
             .observeOn(MainScheduler.instance)
             .subscribe(onNext: { [weak self] isSelected in
                 let theme = AppEnvironment.current.theme
@@ -65,13 +53,16 @@ public class DistanceControlView: ThemeView {
                 self?.separatorLabel.isSelected = isSelected
             })
             .disposed(by: bag)
+
+        let tapGesture = UITapGestureRecognizer()
+        self.addGestureRecognizer(tapGesture)
+
+        tapGesture.rx.event
+            .map { _ in () }
+            .bind(to: viewModel.inputs.tapped)
+            .disposed(by: bag)
     }
 
 }
 
-extension DistanceControlView {
-    public static func createWithDistanceUnit() -> DistanceControlView {
-        let distanceControl: DistanceControlView = DistanceControlView.fromNib()
-        return distanceControl
-    }
-}
+

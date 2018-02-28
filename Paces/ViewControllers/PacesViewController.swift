@@ -79,7 +79,6 @@ class PacesViewController: UIViewController {
     }
 
     func bindViewModel() {
-
         // update the pickerView data source
         viewModel.outputs.inputDataSource
             .debug("switchPickerDatasource")
@@ -174,58 +173,11 @@ class PacesViewController: UIViewController {
 
 extension PacesViewController {
     func createCollectionViewAdapter() -> PacesCollectionViewAdapter {
-        let bindPaceControl: (PaceControlView) -> () = { [weak self] control in
-            guard let weakSelf = self else { return }
-
-            weakSelf.viewModel.outputs.paceType
-                .debug("control-pace")
-                .bind(to: control.viewModel.inputs.fromPaceType)
-                .disposed(by: control.bag)
-
-            control.viewModel.outputs.switchUserInputPaceType
-                .debug("control-switchInputPace")
-                .bind(to: weakSelf.viewModel.inputs.switchUserInputPaceType)
-                .disposed(by: control.bag)
-
-            weakSelf.viewModel.inputs.switchUserInputPaceType
-                .withLatestFrom(control.viewModel.inputs.toUnit)  { switchPaceType, controlUnit in
-                    if case .pace(let pace) = switchPaceType { return pace.unit == controlUnit }
-                    return false
-                }
-                .bind(to: control.viewModel.inputs.isSource)
-                .disposed(by: control.bag)
-        }
-
-        let bindDistanceControl: (DistanceControlView) -> () = { [weak self] control in
-            guard let strongSelf = self else { return }
-
-            strongSelf.viewModel.outputs.paceType
-                .debug("race-paceType")
-                .bind(to: control.viewModel.inputs.fromPaceType)
-                .disposed(by: control.bag)
-
-            control.viewModel.outputs.switchUserInputPaceType
-                .debug("control-switchInputPace")
-                .bind(to: strongSelf.viewModel.inputs.switchUserInputPaceType)
-                .disposed(by: control.bag)
-
-            strongSelf.viewModel.inputs.switchUserInputPaceType
-                .withLatestFrom(control.viewModel.inputs.toRaceDistance)  { switchPaceType, raceDistance in
-                    if case .race(let race) = switchPaceType { return race.raceDistance == raceDistance }
-                    return false
-                }
-                .bind(to: control.viewModel.inputs.isSource)
-                .disposed(by: control.bag)
-        }
-
-
-        return PacesCollectionViewAdapter(collectionView, bindPaceControl: bindPaceControl , bindDistanceControl: bindDistanceControl)
+        return PacesCollectionViewAdapter(collectionView, bindControl: viewModel.bindControlModel())
     }
 
     func tableLayout(width: CGFloat = 300) -> UICollectionViewFlowLayout {
         let layout = UICollectionViewFlowLayout()
-        //PaceControlCollectionViewCell.width = width
-        //let width = PaceControlCollectionViewCell.width
         let width = self.view.bounds.size.width
         layout.itemSize = CGSize(width: width, height: self.paceControlHeight)
         layout.footerReferenceSize = CGSize(width: width, height: self.paceControlHeight)
@@ -303,8 +255,7 @@ extension PacesViewController {
         collectionView.dropDelegate = collectionViewAdapter
         collectionView.dragInteractionEnabled = true
         collectionView.alwaysBounceVertical = true
-        collectionView.register(DistanceControlCollectionViewCell.self, forCellWithReuseIdentifier: DistanceControlCollectionViewCell.identifier)
-        collectionView.register(PaceControlCollectionViewCell.self, forCellWithReuseIdentifier: PaceControlCollectionViewCell.identifier)
+        collectionView.register(PaceTypeControlCollectionViewCell.self, forCellWithReuseIdentifier: PaceTypeControlCollectionViewCell.identifier)
         let nib = UINib(nibName: String(describing: AddControlView.self), bundle: Bundle(for: AddControlView.self))
         collectionView.register(nib, forSupplementaryViewOfKind: UICollectionElementKindSectionFooter, withReuseIdentifier: AddControlView.identifier)
         collectionView.allowsSelection = false

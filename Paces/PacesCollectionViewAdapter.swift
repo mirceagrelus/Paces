@@ -19,11 +19,8 @@ public class PacesCollectionViewAdapter: NSObject {
     // weak reference to the collection being managed
     fileprivate weak var collectionView: UICollectionView?
 
-    // partially applied closure that binds the control to the input model
-    fileprivate var bindPaceControl: (_ control: PaceControlView) -> ()
-
-    // partially applied closure that binds the control to the input model
-    fileprivate var bindDistanceControl: (_ control: DistanceControlView) -> ()
+    // partially applied closure that binds the control model to the input model
+    fileprivate var bindControl: (_ control: PaceTypeControlViewModelType) -> ()
 
     // pan gesture used for panning control cells
     fileprivate var cellPanGesture: UIPanGestureRecognizer?
@@ -34,12 +31,9 @@ public class PacesCollectionViewAdapter: NSObject {
     // actively panned cell
     fileprivate var activePannedCell: UICollectionViewCell? = nil
 
-    init(_ collectionView: UICollectionView,
-         bindPaceControl: @escaping (PaceControlView) -> (),
-         bindDistanceControl: @escaping (DistanceControlView) -> ()) {
+    init(_ collectionView: UICollectionView, bindControl: @escaping (PaceTypeControlViewModelType) -> () ) {
         self.collectionView = collectionView
-        self.bindPaceControl = bindPaceControl
-        self.bindDistanceControl = bindDistanceControl
+        self.bindControl = bindControl
         super.init()
         // configure the cell pan gesture
         let panGesture = UIPanGestureRecognizer(target: self, action: #selector(self.handleCellPan(_:)))
@@ -65,21 +59,10 @@ extension PacesCollectionViewAdapter: UICollectionViewDataSource {
 
         var cell: UICollectionViewCell
 
-        switch controlModel.paceType {
-        case .pace(let pace):
-            cell = collectionView.dequeueReusableCell(withReuseIdentifier: PaceControlCollectionViewCell.identifier, for: indexPath)
-            if let paceCell = cell as? PaceControlCollectionViewCell {
-                paceCell.configureFor(unit: pace.unit)
-                self.bindPaceControl(paceCell.paceControl)
-            }
-            break
-        case .race(let race):
-            cell = collectionView.dequeueReusableCell(withReuseIdentifier: DistanceControlCollectionViewCell.identifier, for: indexPath)
-            if let distanceCell = cell as? DistanceControlCollectionViewCell {
-                distanceCell.configureFor(raceDistance: race.raceDistance)
-                self.bindDistanceControl(distanceCell.distanceControl)
-            }
-            break
+        cell = collectionView.dequeueReusableCell(withReuseIdentifier: PaceTypeControlCollectionViewCell.identifier, for: indexPath)
+        if let paceTypeCell = cell as? PaceTypeControlCollectionViewCell {
+            paceTypeCell.configureFor(paceType: controlModel.paceType)
+            self.bindControl(paceTypeCell.paceTypeControlView.viewModel)
         }
 
         return cell
