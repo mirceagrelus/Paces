@@ -78,7 +78,8 @@ public struct Race: Codable {
     }
 
     public func converted(to raceDistance: RaceDistance) -> Race {
-        if self.raceDistance.coefficient == raceDistance.coefficient { return self }
+        if self.raceDistance.coefficient == raceDistance.coefficient &&
+            self.raceDistance.distanceUnit == raceDistance.distanceUnit { return self }
 
         let currentMetersPerSecond = self.raceDistance.coefficient / self.time
         let newRaceSeconds = raceDistance.coefficient / currentMetersPerSecond

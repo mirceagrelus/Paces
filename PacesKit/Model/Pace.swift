@@ -152,6 +152,15 @@ public enum PaceUnit: String, Codable {
     public static let speedInputs: [[CustomStringConvertible]] = [Array(0...100), ["."],  Array(0...9)]
 //    public static let speedInputs: [[CustomStringConvertible]] = [Array(0...100), Array(0...9).map { ".\($0)" } ]
 
+    public var distanceUnit: DistanceUnit {
+        switch self {
+        case .minPerKm: return .km
+        case .kmPerHour: return .km
+        case .minPerMile: return .mile
+        case .milePerHour: return .mile
+        }
+    }
+
     public static func fromDescription(_ description: String) -> PaceUnit? {
         switch description {
         case PaceUnit.minPerKm.description:    return .minPerKm

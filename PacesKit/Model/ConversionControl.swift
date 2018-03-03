@@ -34,6 +34,13 @@ public enum PaceType: Codable {
         }
     }
 
+    public var distanceUnit: DistanceUnit {
+        switch self {
+        case .pace(let pace): return pace.unit.distanceUnit
+        case .race(let race): return race.raceDistance.distanceUnit
+        }
+    }
+
     // for Codable conformance
     private enum CodingKeys: CodingKey {
         case pace

@@ -70,25 +70,67 @@ public class ConfigurePaceTypeView: UIView {
         selectInital()
 
         paceMinKm.rx.tap
-            .map { _ in PaceType.pace(Pace(value: 0, unit: .minPerKm)) }
-            .bind(to: viewModel.inputs.selectedPace)
+            .map { _ in .minPerKm }
+            .bind(to: viewModel.inputs.selectedPaceUnit)
             .disposed(by: bag)
 
         paceMinMi.rx.tap
-            .map { _ in PaceType.pace(Pace(value: 0, unit: .minPerMile)) }
-            .bind(to: viewModel.inputs.selectedPace)
+            .map { _ in .minPerMile }
+            .bind(to: viewModel.inputs.selectedPaceUnit)
             .disposed(by: bag)
 
         paceKph.rx.tap
-            .map { _ in PaceType.pace(Pace(value: 0, unit: .kmPerHour)) }
-            .bind(to: viewModel.inputs.selectedPace)
+            .map { _ in .kmPerHour }
+            .bind(to: viewModel.inputs.selectedPaceUnit)
             .disposed(by: bag)
 
         paceMph.rx.tap
-            .map { _ in PaceType.pace(Pace(value: 0, unit: .milePerHour)) }
-            .bind(to: viewModel.inputs.selectedPace)
+            .map { _ in .milePerHour }
+            .bind(to: viewModel.inputs.selectedPaceUnit)
             .disposed(by: bag)
 
+        raceMarathon.rx.tap
+            .map { _ in RaceType.marathon }
+            .bind(to: viewModel.inputs.selectedRaceType)
+            .disposed(by: bag)
+
+        raceHalfMarathon.rx.tap
+            .map { _ in RaceType.halfMarathon }
+            .bind(to: viewModel.inputs.selectedRaceType)
+            .disposed(by: bag)
+
+        race10K.rx.tap
+            .map { _ in RaceType.km10 }
+            .bind(to: viewModel.inputs.selectedRaceType)
+            .disposed(by: bag)
+
+        race5K.rx.tap
+            .map { _ in RaceType.km5 }
+            .bind(to: viewModel.inputs.selectedRaceType)
+            .disposed(by: bag)
+
+        raceCustom.rx.tap
+            .map { _ in RaceType.custom(0) }
+            .bind(to: viewModel.inputs.selectedRaceType)
+            .disposed(by: bag)
+
+        raceDistanceKm.rx.tap
+            .map { _ in DistanceUnit.km }
+            .do(onNext: { [weak self] _ in
+                self?.raceDistanceMile.isSelected = false
+                self?.raceDistanceKm.isSelected = true
+            })
+            .bind(to: viewModel.inputs.selectedRaceDistanceUnit)
+            .disposed(by: bag)
+
+        raceDistanceMile.rx.tap
+            .map { _ in DistanceUnit.mile }
+            .do(onNext: { [weak self] _ in
+                self?.raceDistanceMile.isSelected = true
+                self?.raceDistanceKm.isSelected = false
+            })
+            .bind(to: viewModel.inputs.selectedRaceDistanceUnit)
+            .disposed(by: bag)
     }
 
     func selectInital() {
@@ -114,5 +156,6 @@ public class ConfigurePaceTypeView: UIView {
             }
         }
     }
+
 
 }
