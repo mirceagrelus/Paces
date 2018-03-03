@@ -213,9 +213,9 @@ class PacesViewController: UIViewController {
         configurePaceTypeView.viewModel.outputs.paceTypeUpdated
             .take(1)
             .observeOnMain()
-            .subscribe(onNext: { [weak self] (indexPath, paceType) in
+            .subscribe(onNext: { [weak self] (index, paceType) in
                 dimView.tapped.onNext(())
-                self?.collectionViewAdapter.updatePaceType(paceType, at: indexPath)
+                self?.collectionViewAdapter.updatePaceType(paceType, at: index)
             })
             .disposed(by: configurePaceTypeView.bag)
 

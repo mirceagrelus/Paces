@@ -11,8 +11,11 @@ import RxSwift
 import RxCocoa
 
 public protocol ConfigurePaceTypeViewModelInputs {
+    // control paceType
     var paceType: PaceType { get }
-    var indexPath: IndexPath { get }
+
+    // index of the control in the datasource
+    var index: Int { get }
 
     //the selected PaceUnit to swith to
     var selectedPaceUnit: PublishRelay<PaceUnit> { get }
@@ -26,7 +29,7 @@ public protocol ConfigurePaceTypeViewModelInputs {
 
 public protocol ConfigurePaceTypeViewModelOutputs {
 
-    var paceTypeUpdated: Observable<(IndexPath, PaceType)> { get set }
+    var paceTypeUpdated: Observable<(Int, PaceType)> { get set }
 }
 
 public protocol ConfigurePaceTypeViewModelType {
@@ -36,9 +39,9 @@ public protocol ConfigurePaceTypeViewModelType {
 
 public class ConfigurePaceTypeViewModel: ConfigurePaceTypeViewModelType {
 
-    public init(paceType: PaceType, indexPath: IndexPath) {
+    public init(paceType: PaceType, index: Int) {
         self.paceType = paceType
-        self.indexPath = indexPath
+        self.index = index
 
         // consider a default distanceUnit for Races, even for Paces (based on their distance unit)
         self.selectedRaceDistanceUnit = BehaviorRelay(value: paceType.distanceUnit)
@@ -74,19 +77,19 @@ public class ConfigurePaceTypeViewModel: ConfigurePaceTypeViewModelType {
             selectedPace,
             selectedRace
             )
-            .map { selectedPace in (indexPath, selectedPace) }
+            .map { selectedPace in (index, selectedPace) }
     }
 
     public var inputs: ConfigurePaceTypeViewModelInputs { return self }
     public var outputs: ConfigurePaceTypeViewModelOutputs { return self }
 
     public let paceType: PaceType
-    public let indexPath: IndexPath
+    public let index: Int
     public var selectedPaceUnit: PublishRelay<PaceUnit> = PublishRelay()
     public var selectedRaceType: PublishRelay<RaceType> = PublishRelay()
     public var selectedRaceDistanceUnit: BehaviorRelay<DistanceUnit>
 
-    public var paceTypeUpdated: Observable<(IndexPath, PaceType)>// {
+    public var paceTypeUpdated: Observable<(Int, PaceType)>
 }
 
 extension ConfigurePaceTypeViewModel: ConfigurePaceTypeViewModelInputs, ConfigurePaceTypeViewModelOutputs { }

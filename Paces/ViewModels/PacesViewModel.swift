@@ -25,7 +25,7 @@ public protocol PacesViewModelInputs {
     var switchUserInputPaceType: BehaviorRelay<PaceType> { get }
 
     // pace type that is to be configured
-    var configurePaceType: PublishRelay<(IndexPath, PaceType)> { get }
+    var configurePaceType: PublishRelay<(Int, PaceType)> { get }
 }
 
 public protocol PacesViewModelOutputs {
@@ -114,8 +114,8 @@ public class PacesViewModel: PacesViewModelType {
             .startWith(true)
 
         goToConfigurePace = configurePaceType
-            .map { (indexPath, paceType) -> ConfigurePaceTypeViewModel in
-                 return ConfigurePaceTypeViewModel(paceType: paceType, indexPath: indexPath)
+            .map { (index, paceType) -> ConfigurePaceTypeViewModel in
+                 return ConfigurePaceTypeViewModel(paceType: paceType, index: index)
         }
 
         // store inputValue in Environment
@@ -162,7 +162,7 @@ public class PacesViewModel: PacesViewModelType {
     public var inputPaceType: BehaviorRelay<PaceType>
     public var viewDidLoad: PublishSubject<()> = PublishSubject()
     public var switchUserInputPaceType: BehaviorRelay<PaceType>
-    public var configurePaceType: PublishRelay<(IndexPath, PaceType)> = PublishRelay()
+    public var configurePaceType: PublishRelay<(Int, PaceType)> = PublishRelay()
 
     fileprivate let _paceType: PublishRelay<PaceType> = PublishRelay()
     public var paceType: Observable<PaceType>

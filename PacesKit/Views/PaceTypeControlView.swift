@@ -38,13 +38,13 @@ public class PaceTypeControlView: UIView {
             .disposed(by: bag)
     }
 
-    public func configureFor(_ paceType: PaceType) {
-        switch paceType {
+    public func configureFor(_ control: ConversionControl) {
+        switch control.paceType {
         case .pace(_): self.addPaceControlView()
         case .race(_): self.addDistanceControlView()
         }
 
-        self.viewModel.inputs.toPaceType.accept(paceType)
+        self.viewModel.inputs.control.accept(control)
     }
 
     func addPaceControlView() {

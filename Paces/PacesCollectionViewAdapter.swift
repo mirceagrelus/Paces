@@ -48,8 +48,9 @@ public class PacesCollectionViewAdapter: NSObject {
     }
 
     // update paceType for control at index
-    func updatePaceType(_ paceType: PaceType, at indexPath: IndexPath) {
+    func updatePaceType(_ paceType: PaceType, at index: Int) {
         guard let collectionView = collectionView else { return }
+        let indexPath = IndexPath(row: index, section: 0)
 
         collectionView.performBatchUpdates({
             var items = paceControls.value
@@ -78,10 +79,10 @@ extension PacesCollectionViewAdapter: UICollectionViewDataSource {
 
         cell = collectionView.dequeueReusableCell(withReuseIdentifier: PaceTypeControlCollectionViewCell.identifier, for: indexPath)
         if let paceTypeCell = cell as? PaceTypeControlCollectionViewCell {
-            paceTypeCell.configureFor(paceType: controlModel.paceType)
+            paceTypeCell.configureFor(control: controlModel)
             self.bindControl(paceTypeCell.paceTypeControlView.viewModel)
-            paceTypeCell.paceTypeControlView.viewModel.cellIndexPath = { [weak self] in
-                return self?.collectionView?.indexPath(for:paceTypeCell)
+            paceTypeCell.paceTypeControlView.viewModel.controlIndex = { [weak self] control in
+                return self?.paceControls.value.index(of: control)
             }
             print("bind item: \(indexPath.item)")
         }

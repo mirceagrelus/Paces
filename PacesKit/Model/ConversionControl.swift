@@ -23,6 +23,12 @@ public struct ConversionControl: Codable {
     }
 }
 
+extension ConversionControl: Equatable {
+    public static func == (lhs: ConversionControl, rhs: ConversionControl) -> Bool {
+        return lhs.sortOrder == rhs.sortOrder && lhs.paceType == rhs.paceType
+    }
+}
+
 public enum PaceType: Codable {
     case pace(Pace)
     case race(Race)

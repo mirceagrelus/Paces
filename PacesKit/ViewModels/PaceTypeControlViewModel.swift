@@ -11,6 +11,9 @@ import RxSwift
 import RxCocoa
 
 public protocol PaceTypeControlViewModelInputs: class {
+    // the datasource control
+    var control: PublishRelay<ConversionControl> { get }
+
     // source input pace to convert from
     var fromPaceType: PublishRelay<PaceType> { get }
 
@@ -25,9 +28,6 @@ public protocol PaceTypeControlViewModelInputs: class {
 
     // the control is considered the source of user input if it has the same unit as another control providing input
     var isSource: PublishRelay<Bool> { get }
-
-    // datasource index of current control
-    var cellIndex: BehaviorRelay<IndexPath?> { get }
 }
 
 public protocol PaceTypeControlViewModelOutputs: class {
@@ -38,7 +38,7 @@ public protocol PaceTypeControlViewModelOutputs: class {
     var switchUserInputPaceType: Observable<PaceType> { get }
 
     // configure paceType for IndexPath element
-    var configurePaceType: Observable<(IndexPath, PaceType)> { get }
+    var configurePaceType: Observable<(Int, PaceType)> { get }
 
     // control is selected in the UI
     var isSelected: Observable<Bool> { get }
@@ -52,7 +52,7 @@ public protocol PaceTypeControlViewModelType: class {
     func configuredDistanceViewModel() -> DistanceControlViewModelType
 
     // determines the index of control in the datasource
-    var cellIndexPath: (() -> IndexPath?)? { get set }
+    var controlIndex: ((ConversionControl) -> Int?)? { get set }
 
     var bag: DisposeBag { get }
 }
@@ -60,6 +60,9 @@ public protocol PaceTypeControlViewModelType: class {
 public class PaceTypeControlViewModel: PaceTypeControlViewModelType {
 
     init() {
+
+        control.map { $0.paceType}.bind(to: toPaceType).disposed(by: bag)
+
         Observable
             .combineLatest(fromPaceType, toPaceType) { (from, to) -> PaceType in
                 return from.converted(to: to)
@@ -87,8 +90,9 @@ public class PaceTypeControlViewModel: PaceTypeControlViewModelType {
             .disposed(by: bag)
 
         configureTapped
-            .map { [weak self] _ -> IndexPath? in
-                return self?.cellIndexPath?()
+            .withLatestFrom(control)
+            .map {  [weak self] control -> Int? in
+                return self?.controlIndex?(control)
             }
             .ignoreNil()
             .withLatestFrom(paceType) { ($0, $1)}
@@ -128,12 +132,12 @@ public class PaceTypeControlViewModel: PaceTypeControlViewModelType {
     public var inputs: PaceTypeControlViewModelInputs { return self }
     public var outputs: PaceTypeControlViewModelOutputs { return self }
 
+    public var control: PublishRelay<ConversionControl> = PublishRelay()
     public var fromPaceType: PublishRelay<PaceType> =  PublishRelay()
     public var toPaceType: BehaviorRelay<PaceType> =  BehaviorRelay(value: PaceType.pace(Pace(value: 0, unit: .minPerMile)))
     public var tapped: PublishRelay<Void> = PublishRelay()
     public var configureTapped: PublishRelay<Void> = PublishRelay()
     public var isSource: PublishRelay<Bool> = PublishRelay()
-    public var cellIndex: BehaviorRelay<IndexPath?> = BehaviorRelay(value: nil)
 
     fileprivate let _paceType: PublishRelay<PaceType> =  PublishRelay()
     public var paceType: Observable<PaceType> {
@@ -144,15 +148,14 @@ public class PaceTypeControlViewModel: PaceTypeControlViewModelType {
         return _switchUserInputPaceType.asObservable()
     }
 
-    fileprivate let _configurePaceType: PublishRelay<(IndexPath, PaceType)> = PublishRelay()
-    public var configurePaceType: Observable<(IndexPath, PaceType)> {
+    fileprivate let _configurePaceType: PublishRelay<(Int, PaceType)> = PublishRelay()
+    public var configurePaceType: Observable<(Int, PaceType)> {
         return _configurePaceType.asObservable()
     }
 
     public var isSelected: Observable<Bool>
 
-    public weak var collectionCell: PaceTypeControlCollectionViewCell?
-    public var cellIndexPath: (() -> IndexPath?)?
+    public var controlIndex: ((ConversionControl) -> Int?)?
 
     public let bag = DisposeBag()
 }

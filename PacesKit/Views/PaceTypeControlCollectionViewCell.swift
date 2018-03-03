@@ -32,8 +32,8 @@ public class PaceTypeControlCollectionViewCell: ConversionControlCollectionViewC
         setupControl()
     }
 
-    public func configureFor(paceType: PaceType) {
-        paceTypeControlView.configureFor(paceType)
+    public func configureFor(control: ConversionControl) {
+        paceTypeControlView.configureFor(control)
     }
 
     func setupControl() {
