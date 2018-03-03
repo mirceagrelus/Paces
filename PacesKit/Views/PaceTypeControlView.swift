@@ -33,7 +33,6 @@ public class PaceTypeControlView: UIView {
         self.addGestureRecognizer(tapGesture)
 
         tapGesture.rx.event
-            .debug("tap=paceType")
             .map { _ in () }
             .bind(to: viewModel.inputs.tapped)
             .disposed(by: bag)

@@ -78,7 +78,6 @@ class PacesViewController: UIViewController {
     func bindViewModel() {
         // update the pickerView data source
         viewModel.outputs.inputDataSource
-            .debug("switchPickerDatasource")
             .observeOnMain()
             .bind(to: pickerView.rx.items(adapter: PickerViewViewAdapter()))
             .disposed(by: bag)
@@ -98,7 +97,6 @@ class PacesViewController: UIViewController {
             .withLatestFrom(viewModel.inputs.inputPaceType) { pickermodel, paceType -> String in
                 return pickermodel.reduce("", { "\($0)\($1)" })
             }
-            .debug("pickerSelected")
             .filter { !$0.isEmpty }
             .bind(to: viewModel.inputs.inputValue)
             .disposed(by: bag)
@@ -122,7 +120,6 @@ class PacesViewController: UIViewController {
 
         // trigger initial value selection on first load
         viewModel.inputs.viewDidLoad
-            .debug("viewDidLoad")
             .take(1)
             .withLatestFrom(viewModel.inputs.inputPaceType)
             .map { $0.displayValue }
@@ -130,7 +127,6 @@ class PacesViewController: UIViewController {
             .disposed(by: bag)
 
         viewModel.outputs.goToConfigurePace
-            .debug("goToConfigurePace")
             .subscribe(onNext: { [weak self ] configureModel in
                 self?.showConfigurePace(model: configureModel)
             })
@@ -207,7 +203,6 @@ class PacesViewController: UIViewController {
 
         dimView.tapped
             .take(1)
-            .debug("dimViewTapped")
             .observeOnMain()
             .subscribe(onNext: { _ in
                 _ = onDismiss()
@@ -217,7 +212,6 @@ class PacesViewController: UIViewController {
 
         configurePaceTypeView.viewModel.outputs.paceTypeUpdated
             .take(1)
-            .debug("paceTypeUpdated")
             .observeOnMain()
             .subscribe(onNext: { [weak self] (indexPath, paceType) in
                 dimView.tapped.onNext(())

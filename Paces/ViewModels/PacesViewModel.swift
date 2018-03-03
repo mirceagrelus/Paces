@@ -135,17 +135,14 @@ public class PacesViewModel: PacesViewModelType {
             guard let strongSelf = self else { return }
 
             strongSelf.outputs.paceType
-                .debug("control-pace")
                 .bind(to: controlModel.inputs.fromPaceType)
                 .disposed(by: controlModel.bag)
 
             controlModel.outputs.switchUserInputPaceType
-                .debug("control-switchInputPace")
                 .bind(to: strongSelf.inputs.switchUserInputPaceType)
                 .disposed(by: controlModel.bag)
 
             strongSelf.inputs.switchUserInputPaceType
-                .debug("control-switchUserInputPaceType")
                 .withLatestFrom(controlModel.inputs.toPaceType)  { switchPaceType, toPaceType in
                     return PaceType.equalUnits(lhs: switchPaceType, rhs: toPaceType)
                 }
@@ -153,7 +150,6 @@ public class PacesViewModel: PacesViewModelType {
                 .disposed(by: controlModel.bag)
 
             controlModel.outputs.configurePaceType
-                .debug("control-configure")
                 .bind(to: strongSelf.inputs.configurePaceType)
                 .disposed(by: controlModel.bag)
         }
