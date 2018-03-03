@@ -64,7 +64,6 @@
 		08E64B8D202DEDC500A59F41 /* AppEnvironmentTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08E64B8C202DEDC500A59F41 /* AppEnvironmentTests.swift */; };
 		08E64B90202DFFB500A59F41 /* AppFlowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08E64B8F202DFFB500A59F41 /* AppFlowController.swift */; };
 		08E64B93202EFA4100A59F41 /* AppDelegateViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08E64B92202EFA4100A59F41 /* AppDelegateViewModel.swift */; };
-		08E64B95202F115200A59F41 /* AppFlowViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08E64B94202F115200A59F41 /* AppFlowViewModel.swift */; };
 		08E64B97202F1A9F00A59F41 /* MainFlowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08E64B96202F1A9F00A59F41 /* MainFlowController.swift */; };
 		08E64B99202F224B00A59F41 /* Navigation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08E64B98202F224A00A59F41 /* Navigation.swift */; };
 		08E64B9C202F266900A59F41 /* PacesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08E64B9B202F266900A59F41 /* PacesViewController.swift */; };
@@ -183,7 +182,6 @@
 		08E64B8C202DEDC500A59F41 /* AppEnvironmentTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppEnvironmentTests.swift; sourceTree = "<group>"; };
 		08E64B8F202DFFB500A59F41 /* AppFlowController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppFlowController.swift; sourceTree = "<group>"; };
 		08E64B92202EFA4100A59F41 /* AppDelegateViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegateViewModel.swift; sourceTree = "<group>"; };
-		08E64B94202F115200A59F41 /* AppFlowViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppFlowViewModel.swift; sourceTree = "<group>"; };
 		08E64B96202F1A9F00A59F41 /* MainFlowController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainFlowController.swift; sourceTree = "<group>"; };
 		08E64B98202F224A00A59F41 /* Navigation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Navigation.swift; sourceTree = "<group>"; };
 		08E64B9B202F266900A59F41 /* PacesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PacesViewController.swift; sourceTree = "<group>"; };
@@ -397,7 +395,6 @@
 			isa = PBXGroup;
 			children = (
 				08E64B92202EFA4100A59F41 /* AppDelegateViewModel.swift */,
-				08E64B94202F115200A59F41 /* AppFlowViewModel.swift */,
 				08E64B9D202F297600A59F41 /* PacesViewModel.swift */,
 			);
 			path = ViewModels;
@@ -812,7 +809,6 @@
 				08E64B2B202DD3B900A59F41 /* ViewController.swift in Sources */,
 				087EFAE9203B10B3005B7385 /* PacesCollectionViewAdapter.swift in Sources */,
 				08E64B29202DD3B900A59F41 /* AppDelegate.swift in Sources */,
-				08E64B95202F115200A59F41 /* AppFlowViewModel.swift in Sources */,
 				08E64B9E202F297600A59F41 /* PacesViewModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
