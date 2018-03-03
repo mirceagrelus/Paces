@@ -31,6 +31,7 @@
 		083C323F203ED37D005AD1F5 /* AddControlView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 083C323D203ED37C005AD1F5 /* AddControlView.xib */; };
 		083C3241203EE0F9005AD1F5 /* KitAssets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 083C3240203EE0F9005AD1F5 /* KitAssets.xcassets */; };
 		0860EC8D2031ED6800358F2A /* PickerViewAdapter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0860EC8C2031ED6800358F2A /* PickerViewAdapter.swift */; };
+		08738C362046F7DE009B9652 /* EmptyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08738C352046F7DE009B9652 /* EmptyViewController.swift */; };
 		08738C382047FF16009B9652 /* ConfigurePaceTypeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08738C372047FF15009B9652 /* ConfigurePaceTypeViewModel.swift */; };
 		0877626020498B8A00FFDFC1 /* DimView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0877625F20498B8A00FFDFC1 /* DimView.swift */; };
 		087EFAD82039D19D005B7385 /* ConversionControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 087EFAD72039D19D005B7385 /* ConversionControl.swift */; };
@@ -63,7 +64,6 @@
 		08E64B8D202DEDC500A59F41 /* AppEnvironmentTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08E64B8C202DEDC500A59F41 /* AppEnvironmentTests.swift */; };
 		08E64B90202DFFB500A59F41 /* AppFlowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08E64B8F202DFFB500A59F41 /* AppFlowController.swift */; };
 		08E64B93202EFA4100A59F41 /* AppDelegateViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08E64B92202EFA4100A59F41 /* AppDelegateViewModel.swift */; };
-		08E64B95202F115200A59F41 /* AppFlowViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08E64B94202F115200A59F41 /* AppFlowViewModel.swift */; };
 		08E64B97202F1A9F00A59F41 /* MainFlowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08E64B96202F1A9F00A59F41 /* MainFlowController.swift */; };
 		08E64B99202F224B00A59F41 /* Navigation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08E64B98202F224A00A59F41 /* Navigation.swift */; };
 		08E64B9C202F266900A59F41 /* PacesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08E64B9B202F266900A59F41 /* PacesViewController.swift */; };
@@ -144,6 +144,7 @@
 		083C323D203ED37C005AD1F5 /* AddControlView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AddControlView.xib; sourceTree = "<group>"; };
 		083C3240203EE0F9005AD1F5 /* KitAssets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = KitAssets.xcassets; sourceTree = "<group>"; };
 		0860EC8C2031ED6800358F2A /* PickerViewAdapter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PickerViewAdapter.swift; sourceTree = "<group>"; };
+		08738C352046F7DE009B9652 /* EmptyViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmptyViewController.swift; sourceTree = "<group>"; };
 		08738C372047FF15009B9652 /* ConfigurePaceTypeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfigurePaceTypeViewModel.swift; sourceTree = "<group>"; };
 		0877625F20498B8A00FFDFC1 /* DimView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DimView.swift; sourceTree = "<group>"; };
 		087EFAD72039D19D005B7385 /* ConversionControl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConversionControl.swift; sourceTree = "<group>"; };
@@ -181,7 +182,6 @@
 		08E64B8C202DEDC500A59F41 /* AppEnvironmentTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppEnvironmentTests.swift; sourceTree = "<group>"; };
 		08E64B8F202DFFB500A59F41 /* AppFlowController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppFlowController.swift; sourceTree = "<group>"; };
 		08E64B92202EFA4100A59F41 /* AppDelegateViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegateViewModel.swift; sourceTree = "<group>"; };
-		08E64B94202F115200A59F41 /* AppFlowViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppFlowViewModel.swift; sourceTree = "<group>"; };
 		08E64B96202F1A9F00A59F41 /* MainFlowController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainFlowController.swift; sourceTree = "<group>"; };
 		08E64B98202F224A00A59F41 /* Navigation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Navigation.swift; sourceTree = "<group>"; };
 		08E64B9B202F266900A59F41 /* PacesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PacesViewController.swift; sourceTree = "<group>"; };
@@ -395,7 +395,6 @@
 			isa = PBXGroup;
 			children = (
 				08E64B92202EFA4100A59F41 /* AppDelegateViewModel.swift */,
-				08E64B94202F115200A59F41 /* AppFlowViewModel.swift */,
 				08E64B9D202F297600A59F41 /* PacesViewModel.swift */,
 			);
 			path = ViewModels;
@@ -404,6 +403,7 @@
 		08E64B9A202F239300A59F41 /* ViewControllers */ = {
 			isa = PBXGroup;
 			children = (
+				08738C352046F7DE009B9652 /* EmptyViewController.swift */,
 				08E64B9B202F266900A59F41 /* PacesViewController.swift */,
 			);
 			path = ViewControllers;
@@ -804,11 +804,11 @@
 				08E64B97202F1A9F00A59F41 /* MainFlowController.swift in Sources */,
 				08E64B90202DFFB500A59F41 /* AppFlowController.swift in Sources */,
 				08E64B9C202F266900A59F41 /* PacesViewController.swift in Sources */,
+				08738C362046F7DE009B9652 /* EmptyViewController.swift in Sources */,
 				08E64B93202EFA4100A59F41 /* AppDelegateViewModel.swift in Sources */,
 				08E64B2B202DD3B900A59F41 /* ViewController.swift in Sources */,
 				087EFAE9203B10B3005B7385 /* PacesCollectionViewAdapter.swift in Sources */,
 				08E64B29202DD3B900A59F41 /* AppDelegate.swift in Sources */,
-				08E64B95202F115200A59F41 /* AppFlowViewModel.swift in Sources */,
 				08E64B9E202F297600A59F41 /* PacesViewModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

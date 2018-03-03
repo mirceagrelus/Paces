@@ -12,46 +12,40 @@ import RxCocoa
 
 class AppFlowController: UIViewController {
 
-    let viewModel: AppFlowViewModelType = AppFlowViewModel()
     let bag = DisposeBag()
+    var currentFlow: UIViewController? = nil
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
         self.view.backgroundColor = UIColor.yellow
     }
 
     func start() {
-        bindViewModel()
-
-        viewModel.inputs.start.accept(())
+        // show main flow directly
+        goToMainFlow()
     }
 
-    func bindViewModel() {
-        viewModel.outputs.gotoMainController
-            .subscribe(onNext: { [weak self] in
-                self?.startMain()
-            })
-            .disposed(by: bag)
+    public func goToWhatsNew() {
+        let controller = EmptyViewController()
+//        controller.flowDelegate = self
 
-        viewModel.outputs.gotoIntroController
-            .subscribe(onNext: { [weak self] in
-                self?.startIntro()
-            })
-            .disposed(by: bag)
+        // present What's new over existing UI
+        currentFlow?.present(controller, animated: true, completion: nil)
+
+        DispatchQueue.main.asyncAfter(deadline: .now() + 5) { //[weak self]
+            controller.dismiss(animated: true, completion: nil)
+        }
     }
 
-    func startIntro() {
-//        let introFlowController = IntroFlowController()
-//        introFlowController.delegate = self
-//        add(childController: introFlowController)
-//        introFlowController.start()
-    }
-
-    func startMain() {
+    public func goToMainFlow() {
         let mainFlowController = MainFlowController()
-        mainFlowController.delegate = self
+        mainFlowController.flowDelegate = self
+
+        if let existing = currentFlow {
+            remove(childController: existing)
+        }
         add(childController: mainFlowController)
+        currentFlow = mainFlowController
         mainFlowController.start()
     }
 

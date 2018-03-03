@@ -57,13 +57,10 @@ class PacesViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setup()
-
         bindViewModel()
 
         viewModel.inputs.viewDidLoad.onNext(())
 
-        //test_removeControl()
-//        test_dismissController()
         test_test()
     }
 
@@ -307,6 +304,7 @@ extension PacesViewController {
         paceContentBottomAnchor.isActive = true
 
         AutoLayoutUtils.constrainView(collectionView, equalToView: paceContentView)
+
     }
 
     func setupNavigationBar() {
@@ -315,6 +313,13 @@ extension PacesViewController {
         let item = UIBarButtonItem(image: UIImage(named: "shortcut-icon-bars"), style: .plain, target: nil, action: nil)
         //let item = UIBarButtonItem(image: UIImage(named: "settings-icon"), style: .plain, target: nil, action: nil)
         self.navigationItem.rightBarButtonItem = item
+
+        item.rx.tap
+            .subscribe(onNext: { [weak self] _ in
+                guard let _self = self else { return }
+                self?.delegate?.pacesViewControllerShowSettings(_self)
+            })
+            .disposed(by: bag)
 
         self.toolbarItems = [item]
     }
@@ -358,20 +363,5 @@ extension PacesViewController {
 
     }
 
-    func test_dismissController() {
-        let tapGesture = UITapGestureRecognizer()
-        tapGesture.numberOfTapsRequired = 2
-        tapGesture.numberOfTouchesRequired = 2
-        self.view.addGestureRecognizer(tapGesture)
-
-        tapGesture.rx.event
-            .debug("tapGesture")
-            .subscribe { [weak self] event in
-                self?.test_printResources()
-                self?.delegate?.pacesViewControllerShowSettings(self!)
-                self?.test_printResources()
-            }
-            .disposed(by: bag)
-    }
 }
 

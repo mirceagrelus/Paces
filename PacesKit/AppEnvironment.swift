@@ -17,6 +17,7 @@ public struct AppEnvironment {
     internal static let key_isPremiumUser = "isPremiumUser"
     internal static let key_inputPaceValue = "inputPaceValue"
     internal static let key_inputPaceType = "inputPaceType"
+    internal static let key_lastVersionWhatsNewShown = "lastVersionWhatsNewShown"
 
     // A global stack of environments.
     fileprivate static var stack: [Environment] = [Environment()]
@@ -43,6 +44,7 @@ public struct AppEnvironment {
                                                  isPremiumUser: Bool = current.isPremiumUser,
                                                  inputValue: String = current.inputValue,
                                                  inputPaceType: PaceType = current.inputPaceType,
+                                                 lastVersionWhatsNewShown: Double = current.lastVersionWhatsNewShown,
                                                  ubiquitousStore: KeyValueStoreType = current.ubiquitousStore,
                                                  userDefaults: KeyValueStoreType = current.userDefaults) {
 
@@ -51,6 +53,7 @@ public struct AppEnvironment {
                         isPremiumUser: isPremiumUser,
                         inputValue: inputValue,
                         inputPaceType: inputPaceType,
+                        lastVersionWhatsNewShown: lastVersionWhatsNewShown,
                         ubiquitousStore: ubiquitousStore,
                         userDefaults: userDefaults)
         )
@@ -79,11 +82,14 @@ public struct AppEnvironment {
             print(error.localizedDescription)
         }
 
+        let lastVersionWhatsNewShown = data[key_lastVersionWhatsNewShown] as? Double
+
 
         return Environment(theme: theme ?? current.theme,
                            isPremiumUser: isPremiumUser ?? current.isPremiumUser,
                            inputValue: inputValue ?? current.inputValue,
-                           inputPaceType: inputPaceType ?? current.inputPaceType)
+                           inputPaceType: inputPaceType ?? current.inputPaceType,
+                           lastVersionWhatsNewShown: lastVersionWhatsNewShown ?? current.lastVersionWhatsNewShown)
     }
 
     // Saves some key data for the current environment
@@ -108,7 +114,7 @@ public struct AppEnvironment {
             print(error.localizedDescription)
         }
 
-
+        data[key_lastVersionWhatsNewShown] = env.lastVersionWhatsNewShown
 
         userDefaults.set(data, forKey: environmentStorageKey)
 
