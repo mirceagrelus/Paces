@@ -51,7 +51,6 @@ public class DistanceControlViewModel: DistanceControlViewModelType {
     public var tapped: PublishRelay<Void> = PublishRelay()
     public var configureTapped: PublishRelay<Void> = PublishRelay()
 
-
     public let bag = DisposeBag()
 }
 

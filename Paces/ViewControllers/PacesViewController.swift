@@ -131,6 +131,14 @@ class PacesViewController: UIViewController {
             .map { $0.displayValue }
             .bind(to: viewModel.inputs.inputValue)
             .disposed(by: bag)
+
+        viewModel.outputs.goToConfigurePace
+            .debug("goToConfigurePace")
+            .subscribe(onNext: { [weak self ] configureModel in
+                self?.showConfigurePace(model: configureModel)
+            })
+            .disposed(by: bag)
+
     }
 
     func updatePickerValue(stringRepresentation paceValue: String) {
@@ -169,6 +177,70 @@ class PacesViewController: UIViewController {
         }
         inputSourceAnimator.startAnimation()
     }
+
+    func showConfigurePace(model: ConfigurePaceTypeViewModel) {
+        print("resources: \(RxSwift.Resources.total)")
+
+        let dimView = DimView()
+        dimView.translatesAutoresizingMaskIntoConstraints = false
+        view.addSubview(dimView)
+
+        let configurePaceTypeView = ConfigurePaceTypeView.configuredWith(model)
+        configurePaceTypeView.translatesAutoresizingMaskIntoConstraints = false
+        view.addSubview(configurePaceTypeView)
+
+        configurePaceTypeView.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
+        let hideConstraint = configurePaceTypeView.topAnchor.constraint(equalTo: view.bottomAnchor)
+        hideConstraint.isActive = true
+        let showConstraint = configurePaceTypeView.centerYAnchor.constraint(equalTo: view.centerYAnchor)
+        showConstraint.isActive = false
+
+        AutoLayoutUtils.constrainView(dimView, equalToView: view)
+
+        let onDismiss = {
+            UIViewPropertyAnimator.runningPropertyAnimator(withDuration: 0.2, delay: 0, options: UIViewAnimationOptions.curveEaseIn, animations: {
+                showConstraint.isActive = false
+                hideConstraint.isActive = true
+
+                self.view.layoutIfNeeded()
+            }, completion: { _ in
+                configurePaceTypeView.removeFromSuperview()
+            })
+        }
+
+        dimView.tapped
+            .take(1)
+            .debug("dimViewTapped")
+            .observeOnMain()
+            .subscribe(onNext: { _ in
+                _ = onDismiss()
+                dimView.hide(andRemove: true)
+            })
+            .disposed(by: dimView.bag)
+
+        configurePaceTypeView.viewModel.outputs.paceTypeUpdated
+            .take(1)
+            .debug("paceTypeUpdated")
+            .observeOnMain()
+            .subscribe(onNext: { [weak self] (indexPath, paceType) in
+                dimView.tapped.onNext(())
+                self?.collectionViewAdapter.updatePaceType(paceType, at: indexPath)
+            })
+            .disposed(by: configurePaceTypeView.bag)
+
+        view.layoutIfNeeded()
+        let timingParams = UISpringTimingParameters(dampingRatio: 0.7, initialVelocity: CGVector(dx: 0, dy: 0.7))
+        let animator = UIViewPropertyAnimator(duration: 0.3, timingParameters: timingParams)
+        animator.addAnimations {
+            hideConstraint.isActive = false
+            showConstraint.isActive = true
+            dimView.show()
+
+            self.view.layoutIfNeeded()
+        }
+        animator.startAnimation()
+    }
+
 }
 
 extension PacesViewController {

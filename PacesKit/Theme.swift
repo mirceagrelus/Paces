@@ -32,6 +32,7 @@ public protocol Theme: class {
 
     var textColor: UIColor { get }
     var backgroundColorGradient: [UIColor] { get }
+    var backgroundColor: UIColor { get }
 
     var navBarItemsTintColor: UIColor { get }
 
@@ -50,6 +51,7 @@ public class ThemeOrangeRed: Theme {
 
     public var textColor: UIColor = .white
     public var backgroundColorGradient: [UIColor] = [UIColor.orange, UIColor.red]
+    public var backgroundColor: UIColor = UIColor(red: 255.0/255.0, green: 64.0/255.0, blue: 0/255.0, alpha: 1)
 
     public var navBarItemsTintColor: UIColor = .black
 
@@ -68,6 +70,7 @@ public class ThemePurpleBlue: Theme {
 
     public var textColor: UIColor = .white
     public var backgroundColorGradient: [UIColor] = [UIColor.purple, UIColor.blue]
+    public var backgroundColor: UIColor = UIColor.purple
 
     public var navBarItemsTintColor: UIColor = .black
 

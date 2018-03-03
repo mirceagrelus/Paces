@@ -11,6 +11,13 @@ import UIKit
 @IBDesignable
 public class PaceTypeButton: UIButton {
 
+    var applyTextColor: () -> UIColor
+    var applySelectedTextColor: () -> UIColor
+    var applyBackgroundColor: () -> UIColor
+    var applySelectedBackgroundColor: () -> UIColor
+
+    let edgeInset: CGFloat = 10
+
     @IBInspectable var cornerRadius: CGFloat = 0 {
         didSet {
             layer.cornerRadius = cornerRadius
@@ -28,13 +35,25 @@ public class PaceTypeButton: UIButton {
         }
     }
 
-    public required init?(coder aDecoder: NSCoder) {
-        super.init(coder: aDecoder)
+    public init(applyTextColor: @escaping @autoclosure () -> UIColor = AppEnvironment.current.theme.controlCellTextColor,
+                applySelectedTextColor: @escaping @autoclosure () -> UIColor = AppEnvironment.current.theme.controlCellTextColorSelected,
+                applyBackgroundColor: @escaping @autoclosure () -> UIColor = AppEnvironment.current.theme.controlCellBackgroundColor,
+                applySelectedBackgroundColor: @escaping @autoclosure () -> UIColor = AppEnvironment.current.theme.controlCellBackgroundColorSelected) {
+        self.applyTextColor = applyTextColor
+        self.applySelectedTextColor = applySelectedTextColor
+        self.applyBackgroundColor = applyBackgroundColor
+        self.applySelectedBackgroundColor = applySelectedBackgroundColor
+        super.init(frame: .zero)
+        self.applyStyle()
     }
 
-    public override init(frame: CGRect) {
-        super.init(frame: frame)
-        //view = PaceTypeButton.fromNib()
+    public required init?(coder aDecoder: NSCoder) {
+        self.applyTextColor = { AppEnvironment.current.theme.controlCellTextColor }
+        self.applySelectedTextColor = { AppEnvironment.current.theme.controlCellTextColorSelected }
+        self.applyBackgroundColor = { AppEnvironment.current.theme.controlCellBackgroundColor }
+        self.applySelectedBackgroundColor = { AppEnvironment.current.theme.controlCellBackgroundColorSelected }
+        super.init(coder: aDecoder)
+        self.applyStyle()
     }
 
     public override func prepareForInterfaceBuilder() {
@@ -42,10 +61,42 @@ public class PaceTypeButton: UIButton {
     }
 
     public override func awakeFromNib() {
-        self.setBackgroundColor(UIColor.green, for: UIControlState.normal)
-        self.setBackgroundColor(UIColor.red, for: UIControlState.selected)
+        super.awakeFromNib()
+        contentEdgeInsets = UIEdgeInsets(top: edgeInset, left: edgeInset, bottom: edgeInset, right: edgeInset)
     }
 
+    func applyStyle() {
+        setTitleColor(applyTextColor(), for: .normal)
+        setTitleColor(applySelectedTextColor(), for: .selected)
+        setTitleColor(applySelectedTextColor(), for: .highlighted)
+
+        setBackgroundColor(applyBackgroundColor(), for: .normal)
+        setBackgroundColor(applySelectedBackgroundColor(), for: .selected)
+        setBackgroundColor(applySelectedBackgroundColor(), for: .highlighted)
+    }
+
+    @objc func themeDidChangeNotification(notification: Notification) {
+        DispatchQueue.main.async {
+            self.applyStyle()
+        }
+    }
+
+}
+
+// MARK: - overrides
+extension PaceTypeButton {
+
+    public override func didMoveToWindow() {
+        if self.window != nil {
+            NotificationCenter.default.addObserver(self, selector: #selector(themeDidChangeNotification), name: NSNotification.Name.ThemeDidChange, object: nil)
+        }
+    }
+
+    public override func willMove(toWindow newWindow: UIWindow?) {
+        if window == nil {
+            NotificationCenter.default.removeObserver(self, name: NSNotification.Name.ThemeDidChange, object: nil)
+        }
+    }
 }
 
 extension UIButton {

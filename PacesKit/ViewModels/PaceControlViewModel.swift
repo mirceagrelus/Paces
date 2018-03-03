@@ -20,7 +20,7 @@ public protocol PaceControlViewModelInputs {
     // control tapped event
     var tapped: PublishRelay<Void> { get }
 
-    // control tapped event
+    // configure tapped event
     var configureTapped: PublishRelay<Void> { get }
 }
 
@@ -50,7 +50,6 @@ public class PaceControlViewModel: PaceControlViewModelType {
     public var isSelected: Observable<Bool> = Observable.empty()
     public var tapped: PublishRelay<Void> = PublishRelay()
     public var configureTapped: PublishRelay<Void> = PublishRelay()
-
 
     public let bag = DisposeBag()
 }

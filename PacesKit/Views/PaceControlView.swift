@@ -66,7 +66,7 @@ public class PaceControlView: ThemeView {
         unitLabel.addGestureRecognizer(configureTap)
         unitLabel.isUserInteractionEnabled = true
         configureTap.rx.event
-            .map { _ in () }
+            .map { _ in }
             .bind(to: viewModel.inputs.configureTapped)
             .disposed(by: bag)
 

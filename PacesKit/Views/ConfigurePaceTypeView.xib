@@ -10,83 +10,85 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
-        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="ConfigurePaceTypeView" customModule="PacesKit" customModuleProvider="target"/>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
         <view contentMode="scaleToFill" id="NFZ-cw-cOu" customClass="ConfigurePaceTypeView" customModule="PacesKit" customModuleProvider="target">
-            <rect key="frame" x="0.0" y="0.0" width="388" height="292"/>
+            <rect key="frame" x="0.0" y="0.0" width="387" height="311"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <subviews>
-                <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="equalSpacing" translatesAutoresizingMaskIntoConstraints="NO" id="fMi-Ji-NWb">
-                    <rect key="frame" x="20" y="0.0" width="348" height="292"/>
+                <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="fMi-Ji-NWb">
+                    <rect key="frame" x="20" y="0.0" width="347" height="311"/>
                     <subviews>
-                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Pace" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="D0s-wY-6Eo">
-                            <rect key="frame" x="0.0" y="0.0" width="348" height="23"/>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Pace" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="D0s-wY-6Eo" customClass="ConversionControlLabel" customModule="PacesKit" customModuleProvider="target">
+                            <rect key="frame" x="0.0" y="0.0" width="347" height="23"/>
                             <fontDescription key="fontDescription" type="system" pointSize="19"/>
                             <nil key="textColor"/>
                             <nil key="highlightedColor"/>
                         </label>
                         <stackView opaque="NO" contentMode="scaleToFill" distribution="equalSpacing" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="8Yw-ee-eO6">
-                            <rect key="frame" x="0.0" y="73.5" width="348" height="34"/>
+                            <rect key="frame" x="0.0" y="33" width="347" height="34"/>
                             <subviews>
                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="XM6-1j-sao" customClass="PaceTypeButton" customModule="PacesKit" customModuleProvider="target">
                                     <rect key="frame" x="0.0" y="0.0" width="60" height="34"/>
                                     <state key="normal" title="min/km"/>
-                                    <userDefinedRuntimeAttributes>
-                                        <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
-                                            <real key="value" value="10"/>
-                                        </userDefinedRuntimeAttribute>
-                                        <userDefinedRuntimeAttribute type="number" keyPath="borderWidth">
-                                            <real key="value" value="2"/>
-                                        </userDefinedRuntimeAttribute>
-                                        <userDefinedRuntimeAttribute type="color" keyPath="borderColor">
-                                            <color key="value" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
-                                        </userDefinedRuntimeAttribute>
-                                    </userDefinedRuntimeAttributes>
                                 </button>
-                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0bc-W4-QS5" customClass="PaceTypeButton" customModule="PacesKit" customModuleProvider="target">
-                                    <rect key="frame" x="114.5" y="0.0" width="52" height="34"/>
-                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0bc-W4-QS5" customClass="PaceTypeButton" customModule="PacesKit" customModuleProvider="target">
+                                    <rect key="frame" x="111.5" y="0.0" width="55" height="34"/>
                                     <state key="normal" title="min/mi"/>
                                 </button>
-                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bJZ-p7-hqu" customClass="PaceTypeButton" customModule="PacesKit" customModuleProvider="target">
-                                    <rect key="frame" x="220.5" y="0.0" width="39" height="34"/>
-                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bJZ-p7-hqu" customClass="PaceTypeButton" customModule="PacesKit" customModuleProvider="target">
+                                    <rect key="frame" x="218.5" y="0.0" width="41" height="34"/>
                                     <state key="normal" title="km/h"/>
                                 </button>
-                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="kLh-xx-dls">
-                                    <rect key="frame" x="314" y="0.0" width="34" height="34"/>
-                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="kLh-xx-dls" customClass="PaceTypeButton" customModule="PacesKit" customModuleProvider="target">
+                                    <rect key="frame" x="311" y="0.0" width="36" height="34"/>
                                     <state key="normal" title="mi/h"/>
                                 </button>
                             </subviews>
                         </stackView>
-                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Race" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="MYx-yf-2sf">
-                            <rect key="frame" x="0.0" y="158.5" width="348" height="23"/>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Race" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="MYx-yf-2sf" customClass="ConversionControlLabel" customModule="PacesKit" customModuleProvider="target">
+                            <rect key="frame" x="0.0" y="77" width="347" height="23"/>
                             <fontDescription key="fontDescription" type="system" pointSize="19"/>
                             <nil key="textColor"/>
                             <nil key="highlightedColor"/>
                         </label>
-                        <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="vmr-12-It4">
-                            <rect key="frame" x="0.0" y="232" width="348" height="60"/>
+                        <stackView opaque="NO" contentMode="scaleToFill" alignment="top" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="vmr-12-It4">
+                            <rect key="frame" x="0.0" y="110" width="347" height="201"/>
                             <subviews>
-                                <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="9JL-xd-Q3J">
-                                    <rect key="frame" x="0.0" y="0.0" width="318" height="60"/>
+                                <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="9JL-xd-Q3J">
+                                    <rect key="frame" x="0.0" y="0.0" width="303" height="190"/>
                                     <subviews>
-                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fdJ-s9-qSP">
-                                            <rect key="frame" x="0.0" y="0.0" width="318" height="60"/>
+                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="On9-dt-gV8" customClass="PaceTypeButton" customModule="PacesKit" customModuleProvider="target">
+                                            <rect key="frame" x="0.0" y="0.0" width="303" height="34"/>
+                                            <state key="normal" title="Marathon"/>
+                                        </button>
+                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fdJ-s9-qSP" customClass="PaceTypeButton" customModule="PacesKit" customModuleProvider="target">
+                                            <rect key="frame" x="0.0" y="39" width="303" height="34"/>
                                             <state key="normal" title="Half Marathon"/>
+                                        </button>
+                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="qox-1C-yOC" customClass="PaceTypeButton" customModule="PacesKit" customModuleProvider="target">
+                                            <rect key="frame" x="0.0" y="78" width="303" height="34"/>
+                                            <state key="normal" title="10k"/>
+                                        </button>
+                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="qvt-wE-bGN" customClass="PaceTypeButton" customModule="PacesKit" customModuleProvider="target">
+                                            <rect key="frame" x="0.0" y="117" width="303" height="34"/>
+                                            <state key="normal" title="5k"/>
+                                        </button>
+                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dPf-gj-L8u" customClass="PaceTypeButton" customModule="PacesKit" customModuleProvider="target">
+                                            <rect key="frame" x="0.0" y="156" width="303" height="34"/>
+                                            <state key="normal" title="Custom"/>
                                         </button>
                                     </subviews>
                                 </stackView>
-                                <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="e8x-6Q-IC3">
-                                    <rect key="frame" x="318" y="0.0" width="30" height="60"/>
+                                <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="equalSpacing" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="e8x-6Q-IC3">
+                                    <rect key="frame" x="313" y="0.0" width="34" height="73"/>
                                     <subviews>
-                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="YV6-rf-oef">
-                                            <rect key="frame" x="0.0" y="0.0" width="30" height="30"/>
+                                        <button opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="YV6-rf-oef" customClass="PaceTypeButton" customModule="PacesKit" customModuleProvider="target">
+                                            <rect key="frame" x="0.0" y="0.0" width="34" height="34"/>
                                             <state key="normal" title="km"/>
                                         </button>
-                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="MEd-tA-aBM">
-                                            <rect key="frame" x="0.0" y="30" width="30" height="30"/>
+                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="MEd-tA-aBM" customClass="PaceTypeButton" customModule="PacesKit" customModuleProvider="target">
+                                            <rect key="frame" x="0.0" y="39" width="34" height="34"/>
                                             <state key="normal" title="mile"/>
                                         </button>
                                     </subviews>
@@ -105,7 +107,20 @@
             </constraints>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <viewLayoutGuide key="safeArea" id="MFu-1h-sda"/>
-            <point key="canvasLocation" x="-174" y="-278"/>
+            <connections>
+                <outlet property="paceKph" destination="bJZ-p7-hqu" id="iX8-m3-I8B"/>
+                <outlet property="paceMinKm" destination="XM6-1j-sao" id="eic-ZG-6JA"/>
+                <outlet property="paceMinMi" destination="0bc-W4-QS5" id="SnM-II-ela"/>
+                <outlet property="paceMph" destination="kLh-xx-dls" id="OB3-lb-Nru"/>
+                <outlet property="race10K" destination="qox-1C-yOC" id="lTx-4k-cAK"/>
+                <outlet property="race5K" destination="qvt-wE-bGN" id="fdc-SA-nsL"/>
+                <outlet property="raceCustom" destination="dPf-gj-L8u" id="QOm-1t-aYx"/>
+                <outlet property="raceDistanceKm" destination="YV6-rf-oef" id="8fV-ya-jxw"/>
+                <outlet property="raceDistanceMile" destination="MEd-tA-aBM" id="ktM-eg-a5x"/>
+                <outlet property="raceHalfMarathon" destination="fdJ-s9-qSP" id="ycu-Qr-tbR"/>
+                <outlet property="raceMarathon" destination="On9-dt-gV8" id="YmT-KA-wqt"/>
+            </connections>
+            <point key="canvasLocation" x="-174.5" y="-268.5"/>
         </view>
     </objects>
 </document>

@@ -25,6 +25,9 @@ public protocol PaceTypeControlViewModelInputs: class {
 
     // the control is considered the source of user input if it has the same unit as another control providing input
     var isSource: PublishRelay<Bool> { get }
+
+    // datasource index of current control
+    var cellIndex: BehaviorRelay<IndexPath?> { get }
 }
 
 public protocol PaceTypeControlViewModelOutputs: class {
@@ -33,6 +36,9 @@ public protocol PaceTypeControlViewModelOutputs: class {
 
     // paceType to switch input to
     var switchUserInputPaceType: Observable<PaceType> { get }
+
+    // configure paceType for IndexPath element
+    var configurePaceType: Observable<(IndexPath, PaceType)> { get }
 
     // control is selected in the UI
     var isSelected: Observable<Bool> { get }
@@ -44,6 +50,9 @@ public protocol PaceTypeControlViewModelType: class {
 
     func configuredPaceViewModel() -> PaceControlViewModelType
     func configuredDistanceViewModel() -> DistanceControlViewModelType
+
+    // determines the index of control in the datasource
+    var cellIndexPath: (() -> IndexPath?)? { get set }
 
     var bag: DisposeBag { get }
 }
@@ -69,19 +78,26 @@ public class PaceTypeControlViewModel: PaceTypeControlViewModelType {
             .bind(to: _switchUserInputPaceType)
             .disposed(by: bag)
 
+        // when configuring deselect cell if it is selected
         configureTapped
-            .debug("configureTapped")
-            .subscribe(onNext: { () in
-                print("= show config view")
-            })
+            .withLatestFrom(isSelected)
+            .filter { $0 }
+            .map { _ in }
+            .bind(to: tapped)
+            .disposed(by: bag)
+
+        configureTapped
+            .map { [weak self] _ -> IndexPath? in
+                return self?.cellIndexPath?()
+            }
+            .ignoreNil()
+            .withLatestFrom(paceType) { ($0, $1)}
+            .bind(to: _configurePaceType)
             .disposed(by: bag)
 
     }
 
     public func configuredPaceViewModel() -> PaceControlViewModelType {
-//        let editAction = { }
-        //let controlViewModel = PaceControlViewModel(editAction)
-
         let pace = paceType
             .flatMap { paceType -> Observable<Pace> in
                 if case .pace(let pace) = paceType {
@@ -91,7 +107,7 @@ public class PaceTypeControlViewModel: PaceTypeControlViewModelType {
             }
             .share(replay: 1, scope: .whileConnected)
 
-        let controlViewModel = PaceControlViewModel(pace: pace, isSelected: isSelected, tapped: tapped, configureTapped: configureTapped )
+        let controlViewModel = PaceControlViewModel(pace: pace, isSelected: isSelected, tapped: tapped, configureTapped: configureTapped)
         return controlViewModel
     }
 
@@ -117,7 +133,7 @@ public class PaceTypeControlViewModel: PaceTypeControlViewModelType {
     public var tapped: PublishRelay<Void> = PublishRelay()
     public var configureTapped: PublishRelay<Void> = PublishRelay()
     public var isSource: PublishRelay<Bool> = PublishRelay()
-
+    public var cellIndex: BehaviorRelay<IndexPath?> = BehaviorRelay(value: nil)
 
     fileprivate let _paceType: PublishRelay<PaceType> =  PublishRelay()
     public var paceType: Observable<PaceType> {
@@ -128,8 +144,15 @@ public class PaceTypeControlViewModel: PaceTypeControlViewModelType {
         return _switchUserInputPaceType.asObservable()
     }
 
+    fileprivate let _configurePaceType: PublishRelay<(IndexPath, PaceType)> = PublishRelay()
+    public var configurePaceType: Observable<(IndexPath, PaceType)> {
+        return _configurePaceType.asObservable()
+    }
+
     public var isSelected: Observable<Bool>
 
+    public weak var collectionCell: PaceTypeControlCollectionViewCell?
+    public var cellIndexPath: (() -> IndexPath?)?
 
     public let bag = DisposeBag()
 }

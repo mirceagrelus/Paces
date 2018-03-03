@@ -47,6 +47,23 @@ public class PacesCollectionViewAdapter: NSObject {
         paceControls.accept(controls)
     }
 
+    // update paceType for control at index
+    func updatePaceType(_ paceType: PaceType, at indexPath: IndexPath) {
+        guard let collectionView = collectionView else { return }
+
+        collectionView.performBatchUpdates({
+            var items = paceControls.value
+            if items.count > indexPath.item {
+                var item = items.remove(at: indexPath.item) //items[indexPath.item]
+                item.paceType = item.paceType.converted(to: paceType)
+                items.insert(item, at: indexPath.item)
+                paceControls.accept(items)
+            }
+        })
+
+        collectionView.reloadItems(at: [indexPath])
+    }
+
 }
 
 extension PacesCollectionViewAdapter: UICollectionViewDataSource {
@@ -63,6 +80,10 @@ extension PacesCollectionViewAdapter: UICollectionViewDataSource {
         if let paceTypeCell = cell as? PaceTypeControlCollectionViewCell {
             paceTypeCell.configureFor(paceType: controlModel.paceType)
             self.bindControl(paceTypeCell.paceTypeControlView.viewModel)
+            paceTypeCell.paceTypeControlView.viewModel.cellIndexPath = { [weak self] in
+                return self?.collectionView?.indexPath(for:paceTypeCell)
+            }
+            print("bind item: \(indexPath.item)")
         }
 
         return cell

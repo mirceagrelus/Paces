@@ -23,6 +23,9 @@ public protocol PacesViewModelInputs {
 
     // event for switching input to a new paceType
     var switchUserInputPaceType: BehaviorRelay<PaceType> { get }
+
+    // pace type that is to be configured
+    var configurePaceType: PublishRelay<(IndexPath, PaceType)> { get }
 }
 
 public protocol PacesViewModelOutputs {
@@ -37,6 +40,9 @@ public protocol PacesViewModelOutputs {
 
     // data source of input for the picker view
     var inputDataSource: Observable<[[CustomStringConvertible]]> { get }
+
+    // show configure pace view
+    var goToConfigurePace: Observable<ConfigurePaceTypeViewModel> { get }
 }
 
 public protocol PacesViewModelType {
@@ -107,6 +113,11 @@ public class PacesViewModel: PacesViewModelType {
             }
             .startWith(true)
 
+        goToConfigurePace = configurePaceType
+            .map { (indexPath, paceType) -> ConfigurePaceTypeViewModel in
+                 return ConfigurePaceTypeViewModel(paceType: paceType, indexPath: indexPath)
+        }
+
         // store inputValue in Environment
         inputValue
             .subscribe(onNext: { AppEnvironment.replaceCurrentEnvironment(inputValue: $0) })
@@ -140,6 +151,11 @@ public class PacesViewModel: PacesViewModelType {
                 }
                 .bind(to: controlModel.inputs.isSource)
                 .disposed(by: controlModel.bag)
+
+            controlModel.outputs.configurePaceType
+                .debug("control-configure")
+                .bind(to: strongSelf.inputs.configurePaceType)
+                .disposed(by: controlModel.bag)
         }
     }
 
@@ -150,6 +166,7 @@ public class PacesViewModel: PacesViewModelType {
     public var inputPaceType: BehaviorRelay<PaceType>
     public var viewDidLoad: PublishSubject<()> = PublishSubject()
     public var switchUserInputPaceType: BehaviorRelay<PaceType>
+    public var configurePaceType: PublishRelay<(IndexPath, PaceType)> = PublishRelay()
 
     fileprivate let _paceType: PublishRelay<PaceType> = PublishRelay()
     public var paceType: Observable<PaceType>
@@ -164,6 +181,8 @@ public class PacesViewModel: PacesViewModelType {
     public var inputDataSource: Observable<[[CustomStringConvertible]]> {
         return _inputDataSource.asObservable()
     }
+
+    public var goToConfigurePace: Observable<ConfigurePaceTypeViewModel> = Observable.never()
 
     private let bag = DisposeBag()
 }

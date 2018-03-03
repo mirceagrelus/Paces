@@ -58,8 +58,16 @@ public class DistanceControlView: ThemeView {
         self.addGestureRecognizer(tapGesture)
 
         tapGesture.rx.event
-            .map { _ in () }
+            .map { _ in }
             .bind(to: viewModel.inputs.tapped)
+            .disposed(by: bag)
+
+        let configureTap = UITapGestureRecognizer()
+        raceDistanceLabel.addGestureRecognizer(configureTap)
+        raceDistanceLabel.isUserInteractionEnabled = true
+        configureTap.rx.event
+            .map { _ in }
+            .bind(to: viewModel.inputs.configureTapped)
             .disposed(by: bag)
     }
 
