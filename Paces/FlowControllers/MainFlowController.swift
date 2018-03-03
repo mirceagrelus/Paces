@@ -16,7 +16,7 @@ protocol MainFlowControllerDelegate: class {
 
 class MainFlowController: UIViewController {
 
-    weak var delegate: MainFlowControllerDelegate?
+    weak var flowDelegate: MainFlowControllerDelegate?
     let mainNavigationController: UINavigationController =  {
         let theme = AppEnvironment.current.theme
         let navigationController = UINavigationController()
@@ -28,9 +28,7 @@ class MainFlowController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
         self.view.backgroundColor = UIColor.green
-
     }
 
     override func viewDidAppear(_ animated: Bool) {
@@ -38,8 +36,6 @@ class MainFlowController: UIViewController {
     }
 
     func start() {
-        print("resources: \(RxSwift.Resources.total)")
-
         let pacesViewController = PacesViewController()
         pacesViewController.delegate = self
 
@@ -51,11 +47,11 @@ class MainFlowController: UIViewController {
 
 extension MainFlowController: PacesViewControllerDelegate {
     func pacesViewControllerShowSettings(_ pacesViewController: PacesViewController) {
-        // TODO: remove this. Just checked for memory leaks
-        mainNavigationController.viewControllers = []
-        DispatchQueue.main.asyncAfter(deadline: .now() + 5) {
-            self.start()
-        }
+        let vc = PacesViewController()
+        vc.delegate = self
+
+        self.mainNavigationController.pushViewController(vc, animated: true)
+
 
         print("resources: \(RxSwift.Resources.total)")
     }

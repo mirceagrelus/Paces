@@ -16,6 +16,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     var window: UIWindow?
     fileprivate var viewModel: AppDelegateViewModelType = AppDelegateViewModel()
     var appFlowController: AppFlowController!
+    let bag = DisposeBag()
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
 
@@ -24,16 +25,34 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             AppEnvironment.fromStorage(userDefaults: UserDefaults.standard)
         )
 
+        // A view controller should manage either sequence or UI, but not both.
+        // FlowControllers manage sequences, regular controllers manage UI.
+        // AppFlow is the root coordinator of sequences.
         appFlowController = AppFlowController()
         window = UIWindow(frame: UIScreen.main.bounds)
         window?.rootViewController = appFlowController
         window?.makeKeyAndVisible()
-
         appFlowController.start()
 
-        //test_themeDidChange()
+        // sync iCloud
+        viewModel.outputs.synchronizeUbiquitousStore
+            .observeOnMain()
+            .debug("synchronizeUbiquitousStore")
+            .subscribe(onNext: { _ in
+                _ = AppEnvironment.current.ubiquitousStore.synchronize()
+            })
+            .disposed(by: bag)
 
-        return true
+        viewModel.outputs.gotoWhatNew
+            .delay(1, scheduler: MainScheduler.instance)
+            .debug("WhatsNew")
+            .subscribe(onNext: { [weak self] _ in
+                self?.appFlowController.goToWhatsNew()
+            })
+            .disposed(by: bag)
+
+        viewModel.inputs.applicationDidFinishLaunching(application: application, launchOptions: launchOptions)
+        return viewModel.outputs.applicationDidFinishLaunchingReturnValue
     }
 
     func test_themeDidChange() {
