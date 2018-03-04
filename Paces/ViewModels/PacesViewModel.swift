@@ -21,9 +21,6 @@ public protocol PacesViewModelInputs {
     // viewDidLoad event
     var viewDidLoad: PublishSubject<()> { get }
 
-    // event for switching input to a new paceType
-    var switchUserInputPaceType: BehaviorRelay<PaceType> { get }
-
     // the control that was tapped
     var tappedControl: PublishRelay<ConversionControl> { get }
 
@@ -63,7 +60,6 @@ public class PacesViewModel: PacesViewModelType {
     init() {
         inputValue = BehaviorRelay(value: AppEnvironment.current.inputValue)
         inputPaceType = BehaviorRelay(value: AppEnvironment.current.inputPaceType)
-        switchUserInputPaceType = BehaviorRelay(value: inputPaceType.value)
         //TODO: read paces config from AppEnvironment
         let envControls = [ConversionControl(sortOrder: 0, paceType: .pace(Pace(stringValue: "", unit: .minPerMile))),
                            ConversionControl(sortOrder: 1, paceType: .pace(Pace(stringValue: "", unit: .minPerKm))),
@@ -73,21 +69,16 @@ public class PacesViewModel: PacesViewModelType {
         ]
         _paceControls = BehaviorRelay(value: envControls)
 
-        // calculate new pace when user input value changes
+        // share the latest computed pace
+        paceType = _paceType.share(replay: 1, scope: .whileConnected)
+
+        // calculate new pace for input value
         inputValue
             .withLatestFrom(inputPaceType) { value, inputPaceType -> PaceType in
                 return inputPaceType.withUpdatedValue(value)
             }
             .debug("PaceType")
             .bind(to: _paceType)
-            .disposed(by: bag)
-
-        // share the latest computed pace
-        paceType = _paceType.share(replay: 1, scope: .whileConnected)
-
-        // switch to new input type
-        switchUserInputPaceType
-            .bind(to: inputPaceType)
             .disposed(by: bag)
 
         // update datasource for new type of input
@@ -98,11 +89,13 @@ public class PacesViewModel: PacesViewModelType {
                 case .race(let race): return race.inputSource
                 }
             }
+            .debug("_inputDataSource")
             .bind(to: _inputDataSource)
             .disposed(by: bag)
 
         // update value for new type of input
         inputPaceType
+            .debug("displayValue")
             .map { $0.displayValue }
             .bind(to: inputValue)
             .disposed(by: bag)
@@ -164,7 +157,7 @@ public class PacesViewModel: PacesViewModelType {
                 .disposed(by: controlModel.bag)
 
             controlModel.outputs.switchUserInputPaceType
-                .bind(to: _self.inputs.switchUserInputPaceType)
+                .bind(to: _self.inputs.inputPaceType)
                 .disposed(by: controlModel.bag)
 
             controlModel.outputs.tappedControl
@@ -187,7 +180,6 @@ public class PacesViewModel: PacesViewModelType {
     public var inputValue: BehaviorRelay<String>
     public var inputPaceType: BehaviorRelay<PaceType>
     public var viewDidLoad: PublishSubject<()> = PublishSubject()
-    public var switchUserInputPaceType: BehaviorRelay<PaceType>
     public var tappedControl: PublishRelay<ConversionControl> = PublishRelay()
     public var configurePaceType: PublishRelay<(Int, PaceType)> = PublishRelay()
 

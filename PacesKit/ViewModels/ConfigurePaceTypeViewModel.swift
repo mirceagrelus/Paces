@@ -77,6 +77,7 @@ public class ConfigurePaceTypeViewModel: ConfigurePaceTypeViewModelType {
             selectedPace,
             selectedRace
             )
+            .map { [paceType] in paceType.converted(to: $0) }
             .map { selectedPace in (index, selectedPace) }
     }
 

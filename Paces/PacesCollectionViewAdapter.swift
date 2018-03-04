@@ -31,6 +31,9 @@ public class PacesCollectionViewAdapter: NSObject {
     // actively panned cell
     fileprivate var activePannedCell: UICollectionViewCell? = nil
 
+    // indexpath of the control being reconfigured
+    fileprivate var reconfigureIndexPath: IndexPath? = nil
+
     init(_ collectionView: UICollectionView, bindControl: @escaping (PaceTypeControlViewModelType) -> () ) {
         self.collectionView = collectionView
         self.bindControl = bindControl
@@ -55,14 +58,15 @@ public class PacesCollectionViewAdapter: NSObject {
         collectionView.performBatchUpdates({
             var items = paceControls.value
             if items.count > indexPath.item {
-                var item = items.remove(at: indexPath.item) //items[indexPath.item]
-                item.paceType = item.paceType.converted(to: paceType)
+                var item = items.remove(at: indexPath.item)
+                item.paceType = paceType
                 items.insert(item, at: indexPath.item)
                 paceControls.accept(items)
+
+                reconfigureIndexPath = indexPath
+                collectionView.reloadItems(at: [indexPath])
             }
         })
-
-        collectionView.reloadItems(at: [indexPath])
     }
 
 }
@@ -83,6 +87,12 @@ extension PacesCollectionViewAdapter: UICollectionViewDataSource {
             self.bindControl(paceTypeCell.paceTypeControlView.viewModel)
             paceTypeCell.paceTypeControlView.viewModel.controlIndex = { [weak self] control in
                 return self?.paceControls.value.index(of: control)
+            }
+            // select control if it's being reconfigured
+            if let reconfigureIndex = reconfigureIndexPath,
+                reconfigureIndex == indexPath {
+                reconfigureIndexPath = nil
+                paceTypeCell.paceTypeControlView.viewModel.inputs.tapped.accept(())
             }
             print("bind item: \(indexPath.item)")
         }
