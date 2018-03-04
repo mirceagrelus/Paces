@@ -18,20 +18,19 @@
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <subviews>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="6Db-TV-Jl7">
-                    <rect key="frame" x="339" y="0.0" width="23" height="82"/>
+                    <rect key="frame" x="334" y="0.0" width="44" height="82"/>
                     <subviews>
                         <stackView opaque="NO" contentMode="scaleToFill" alignment="lastBaseline" spacing="6" translatesAutoresizingMaskIntoConstraints="NO" id="4JP-Lh-f91">
-                            <rect key="frame" x="0.0" y="30" width="23" height="23"/>
+                            <rect key="frame" x="0.0" y="19.5" width="44" height="44"/>
                             <subviews>
-                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text=" " textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="YYC-7y-etW" customClass="ConversionControlLabel" customModule="PacesKit" customModuleProvider="target">
-                                    <rect key="frame" x="0.0" y="0.0" width="5" height="23"/>
-                                    <fontDescription key="fontDescription" type="system" pointSize="19"/>
-                                    <nil key="textColor"/>
-                                    <nil key="highlightedColor"/>
-                                </label>
-                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="arrow-down-large" highlightedImage="arrow-down-large" translatesAutoresizingMaskIntoConstraints="NO" id="FLM-Gj-IBS">
-                                    <rect key="frame" x="11" y="12" width="12" height="6"/>
-                                </imageView>
+                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="cai-fY-zxU">
+                                    <rect key="frame" x="0.0" y="0.0" width="44" height="44"/>
+                                    <constraints>
+                                        <constraint firstAttribute="height" constant="44" id="VxQ-Em-t7O"/>
+                                        <constraint firstAttribute="width" constant="44" id="x4j-Zd-aPK"/>
+                                    </constraints>
+                                    <state key="normal" image="arrowDown"/>
+                                </button>
                             </subviews>
                         </stackView>
                     </subviews>
@@ -49,7 +48,7 @@
                     <nil key="highlightedColor"/>
                 </label>
                 <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="q7m-62-7Wa">
-                    <rect key="frame" x="267.5" y="58.5" width="94.5" height="20.5"/>
+                    <rect key="frame" x="142" y="58.5" width="94.5" height="20.5"/>
                     <subviews>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8i1-tW-bSW" customClass="ConversionControlLabel" customModule="PacesKit" customModuleProvider="target">
                             <rect key="frame" x="0.0" y="0.0" width="44.5" height="20.5"/>
@@ -75,17 +74,23 @@
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
             <constraints>
                 <constraint firstItem="6Db-TV-Jl7" firstAttribute="centerY" secondItem="Rt8-if-eBN" secondAttribute="centerY" id="0zU-cJ-n44"/>
+                <constraint firstItem="q7m-62-7Wa" firstAttribute="centerX" secondItem="Rt8-if-eBN" secondAttribute="centerXWithinMargins" id="1gp-kp-Olx"/>
                 <constraint firstItem="BWC-46-fxa" firstAttribute="centerY" secondItem="Rt8-if-eBN" secondAttribute="centerYWithinMargins" id="PWh-cB-OUk"/>
                 <constraint firstItem="BWC-46-fxa" firstAttribute="centerX" secondItem="Rt8-if-eBN" secondAttribute="centerXWithinMargins" id="TZO-6e-JhC"/>
                 <constraint firstItem="6Db-TV-Jl7" firstAttribute="height" secondItem="Rt8-if-eBN" secondAttribute="height" id="Wyv-bV-Sw3"/>
-                <constraint firstItem="6Db-TV-Jl7" firstAttribute="trailing" secondItem="Rt8-if-eBN" secondAttribute="trailingMargin" id="f1A-xI-gZM"/>
+                <constraint firstItem="6Db-TV-Jl7" firstAttribute="trailing" secondItem="Rt8-if-eBN" secondAttribute="trailing" id="f1A-xI-gZM"/>
                 <constraint firstItem="q7m-62-7Wa" firstAttribute="bottom" secondItem="Rt8-if-eBN" secondAttribute="bottom" constant="-3" id="jSo-6M-p7c"/>
                 <constraint firstAttribute="trailingMargin" secondItem="q7m-62-7Wa" secondAttribute="trailing" id="usV-Bg-JR8"/>
             </constraints>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <viewLayoutGuide key="safeArea" id="s7r-ip-cgf"/>
+            <variation key="default">
+                <mask key="constraints">
+                    <exclude reference="usV-Bg-JR8"/>
+                </mask>
+            </variation>
             <connections>
-                <outlet property="pickUnitImageView" destination="FLM-Gj-IBS" id="htA-RM-Dbj"/>
+                <outlet property="editButton" destination="cai-fY-zxU" id="KLy-7e-Ihw"/>
                 <outlet property="raceDistanceLabel" destination="VVT-DH-2my" id="Oy1-HN-tD4"/>
                 <outlet property="raceTypeLabel" destination="8i1-tW-bSW" id="qGs-4x-4R0"/>
                 <outlet property="separatorLabel" destination="kaM-bv-Ma6" id="MAx-G2-vgU"/>
@@ -95,6 +100,6 @@
         </view>
     </objects>
     <resources>
-        <image name="arrow-down-large" width="12" height="6"/>
+        <image name="arrowDown" width="11" height="6"/>
     </resources>
 </document>

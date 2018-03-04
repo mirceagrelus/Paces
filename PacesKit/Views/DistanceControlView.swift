@@ -16,7 +16,7 @@ public class DistanceControlView: ThemeView {
     @IBOutlet weak var raceTypeLabel: ConversionControlLabel!
     @IBOutlet weak var raceDistanceLabel: ConversionControlLabel!
     @IBOutlet weak var separatorLabel: ConversionControlLabel!
-    @IBOutlet weak var pickUnitImageView: UIImageView!
+    @IBOutlet weak var editButton: UIButton!
     
     public var viewModel: DistanceControlViewModelType = DistanceControlViewModel() { didSet { self.bindViewModel() }}
     public let bag = DisposeBag()
@@ -46,7 +46,7 @@ public class DistanceControlView: ThemeView {
             .subscribe(onNext: { [weak self] isSelected in
                 let theme = AppEnvironment.current.theme
                 self?.applyBackgroundColor = isSelected ? { theme.controlCellBackgroundColorSelected } : { theme.controlCellBackgroundColor }
-                self?.pickUnitImageView.tintColor = isSelected ?  theme.controlCellTextColorSelected : theme.controlCellTextColor
+                self?.editButton.tintColor = isSelected ?  theme.controlCellTextColorSelected : theme.controlCellTextColor
                 self?.valueLabel.isSelected = isSelected
                 self?.raceTypeLabel.isSelected = isSelected
                 self?.raceDistanceLabel.isSelected = isSelected
@@ -62,10 +62,7 @@ public class DistanceControlView: ThemeView {
             .bind(to: viewModel.inputs.tapped)
             .disposed(by: bag)
 
-        let configureTap = UITapGestureRecognizer()
-        raceDistanceLabel.addGestureRecognizer(configureTap)
-        raceDistanceLabel.isUserInteractionEnabled = true
-        configureTap.rx.event
+        editButton.rx.tap
             .map { _ in }
             .bind(to: viewModel.inputs.configureTapped)
             .disposed(by: bag)

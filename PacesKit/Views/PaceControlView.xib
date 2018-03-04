@@ -18,14 +18,19 @@
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <subviews>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="w0h-Wz-qsO">
-                    <rect key="frame" x="350" y="0.0" width="12" height="82"/>
+                    <rect key="frame" x="334" y="0.0" width="44" height="82"/>
                     <subviews>
                         <stackView opaque="NO" contentMode="scaleToFill" alignment="lastBaseline" spacing="6" translatesAutoresizingMaskIntoConstraints="NO" id="eox-Va-S4r">
-                            <rect key="frame" x="0.0" y="38.5" width="12" height="6"/>
+                            <rect key="frame" x="0.0" y="19" width="44" height="44"/>
                             <subviews>
-                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="arrow-down-large" highlightedImage="arrow-down-large" translatesAutoresizingMaskIntoConstraints="NO" id="kU1-42-bBH">
-                                    <rect key="frame" x="0.0" y="0.0" width="12" height="6"/>
-                                </imageView>
+                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ith-jF-OZz">
+                                    <rect key="frame" x="0.0" y="0.0" width="44" height="44"/>
+                                    <constraints>
+                                        <constraint firstAttribute="height" constant="44" id="HXc-qv-5Ls"/>
+                                        <constraint firstAttribute="width" constant="44" id="hfH-7q-JKd"/>
+                                    </constraints>
+                                    <state key="normal" image="arrowDown"/>
+                                </button>
                             </subviews>
                         </stackView>
                     </subviews>
@@ -43,7 +48,7 @@
                     <nil key="highlightedColor"/>
                 </label>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jhp-5u-Y7C" customClass="ConversionControlLabel" customModule="PacesKit" customModuleProvider="target">
-                    <rect key="frame" x="320" y="58.5" width="42" height="20.5"/>
+                    <rect key="frame" x="168" y="58.5" width="42" height="20.5"/>
                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                     <nil key="textColor"/>
                     <nil key="highlightedColor"/>
@@ -51,18 +56,24 @@
             </subviews>
             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
             <constraints>
-                <constraint firstItem="w0h-Wz-qsO" firstAttribute="trailing" secondItem="360-Xm-lWY" secondAttribute="trailingMargin" id="4bY-OW-M7w"/>
+                <constraint firstItem="w0h-Wz-qsO" firstAttribute="trailing" secondItem="360-Xm-lWY" secondAttribute="trailing" id="4bY-OW-M7w"/>
                 <constraint firstItem="jhp-5u-Y7C" firstAttribute="bottom" secondItem="360-Xm-lWY" secondAttribute="bottom" constant="-3" id="6rV-i7-fw9"/>
                 <constraint firstItem="w0h-Wz-qsO" firstAttribute="centerY" secondItem="360-Xm-lWY" secondAttribute="centerY" id="CAW-Co-qki"/>
                 <constraint firstItem="mzD-Pu-bnp" firstAttribute="centerX" secondItem="360-Xm-lWY" secondAttribute="centerXWithinMargins" id="a3q-dp-a0b"/>
                 <constraint firstItem="w0h-Wz-qsO" firstAttribute="height" secondItem="360-Xm-lWY" secondAttribute="height" id="ajN-0V-jk9"/>
                 <constraint firstItem="mzD-Pu-bnp" firstAttribute="centerY" secondItem="360-Xm-lWY" secondAttribute="centerYWithinMargins" id="i7f-ep-QYD"/>
                 <constraint firstAttribute="trailingMargin" secondItem="jhp-5u-Y7C" secondAttribute="trailing" id="rXY-dD-JTN"/>
+                <constraint firstItem="jhp-5u-Y7C" firstAttribute="centerX" secondItem="360-Xm-lWY" secondAttribute="centerXWithinMargins" id="riq-Of-Kce"/>
             </constraints>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <viewLayoutGuide key="safeArea" id="qu2-YE-qNR"/>
+            <variation key="default">
+                <mask key="constraints">
+                    <exclude reference="rXY-dD-JTN"/>
+                </mask>
+            </variation>
             <connections>
-                <outlet property="pickUnitImageView" destination="kU1-42-bBH" id="FFi-aY-sxV"/>
+                <outlet property="editButton" destination="Ith-jF-OZz" id="FCT-Qa-c6b"/>
                 <outlet property="unitLabel" destination="jhp-5u-Y7C" id="Cr3-e4-qXT"/>
                 <outlet property="valueLabel" destination="mzD-Pu-bnp" id="pmg-3X-6ks"/>
             </connections>
@@ -70,6 +81,6 @@
         </view>
     </objects>
     <resources>
-        <image name="arrow-down-large" width="12" height="6"/>
+        <image name="arrowDown" width="11" height="6"/>
     </resources>
 </document>
