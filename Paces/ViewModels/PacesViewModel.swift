@@ -24,7 +24,10 @@ public protocol PacesViewModelInputs {
     // event for switching input to a new paceType
     var switchUserInputPaceType: BehaviorRelay<PaceType> { get }
 
-    // pace type that is to be configured
+    // the control that was tapped
+    var tappedControl: PublishRelay<ConversionControl> { get }
+
+    // pace type that needs to be configured
     var configurePaceType: PublishRelay<(Int, PaceType)> { get }
 }
 
@@ -40,6 +43,9 @@ public protocol PacesViewModelOutputs {
 
     // data source of input for the picker view
     var inputDataSource: Observable<[[CustomStringConvertible]]> { get }
+
+    // selection event rebroadcasted to all controls
+    var controlSelection: Observable<ConversionControl> { get }
 
     // show configure pace view
     var goToConfigurePace: Observable<ConfigurePaceTypeViewModel> { get }
@@ -76,7 +82,7 @@ public class PacesViewModel: PacesViewModelType {
             .bind(to: _paceType)
             .disposed(by: bag)
 
-        // share the latest computed pace, so new and reusable cells have an initial value
+        // share the latest computed pace
         paceType = _paceType.share(replay: 1, scope: .whileConnected)
 
         // switch to new input type
@@ -101,14 +107,19 @@ public class PacesViewModel: PacesViewModelType {
             .bind(to: inputValue)
             .disposed(by: bag)
 
-        showInput = switchUserInputPaceType
-            .scan([]) { lastSlice, val -> [PaceType] in
+        // redistribute the tap event to all controls, so they can handle selection
+        tappedControl
+            .bind(to: _controlSelection)
+            .disposed(by: bag)
+
+        showInput = tappedControl
+            .scan([]) { lastSlice, val -> [ConversionControl] in
                 let slice = (lastSlice + [val]).suffix(2)
                 return Array(slice)
             }
             .filter { $0.count == 2 }
-            .scan(true) { isShown, paceTypes -> Bool in
-                let sameTapped = PaceType.equalUnits(lhs: paceTypes[0], rhs: paceTypes[1])
+            .scan(true) { isShown, controls -> Bool in
+                let sameTapped = controls[0] == controls [1]
                 return isShown ? !sameTapped : true
             }
             .startWith(true)
@@ -127,30 +138,47 @@ public class PacesViewModel: PacesViewModelType {
         paceType
             .subscribe(onNext: { AppEnvironment.replaceCurrentEnvironment(inputPaceType: $0) })
             .disposed(by: bag)
+
+        // select initial control on load
+        let initiallySelectedControl = Observable
+            .combineLatest(paceControls, inputPaceType) { (controls, lastPaceType) -> ConversionControl? in
+                controls.first { PaceType.equalUnits(lhs: $0.paceType, rhs: lastPaceType) }
+        }
+
+        viewDidLoad
+            .withLatestFrom(initiallySelectedControl)
+            .take(1)
+            .debug("viewDidLoad = selectedControl")
+            .ignoreNil()
+            //.map { _ in }
+            .bind(to: _controlSelection)
+            .disposed(by: bag)
+
     }
 
     // closure used for binding the control model to the input model
     public func bindControlModel() -> (PaceTypeControlViewModelType) -> () {
         return { [weak self] controlModel in
-            guard let strongSelf = self else { return }
+            guard let _self = self else { return }
 
-            strongSelf.outputs.paceType
+            _self.outputs.paceType
                 .bind(to: controlModel.inputs.fromPaceType)
                 .disposed(by: controlModel.bag)
 
             controlModel.outputs.switchUserInputPaceType
-                .bind(to: strongSelf.inputs.switchUserInputPaceType)
+                .bind(to: _self.inputs.switchUserInputPaceType)
                 .disposed(by: controlModel.bag)
 
-            strongSelf.inputs.switchUserInputPaceType
-                .withLatestFrom(controlModel.inputs.toPaceType)  { switchPaceType, toPaceType in
-                    return PaceType.equalUnits(lhs: switchPaceType, rhs: toPaceType)
-                }
-                .bind(to: controlModel.inputs.isSource)
+            controlModel.outputs.tappedControl
+                .bind(to: _self.inputs.tappedControl)
+                .disposed(by: controlModel.bag)
+
+            _self.outputs.controlSelection
+                .bind(to: controlModel.inputs.controlSelection)
                 .disposed(by: controlModel.bag)
 
             controlModel.outputs.configurePaceType
-                .bind(to: strongSelf.inputs.configurePaceType)
+                .bind(to: _self.inputs.configurePaceType)
                 .disposed(by: controlModel.bag)
         }
     }
@@ -162,6 +190,7 @@ public class PacesViewModel: PacesViewModelType {
     public var inputPaceType: BehaviorRelay<PaceType>
     public var viewDidLoad: PublishSubject<()> = PublishSubject()
     public var switchUserInputPaceType: BehaviorRelay<PaceType>
+    public var tappedControl: PublishRelay<ConversionControl> = PublishRelay()
     public var configurePaceType: PublishRelay<(Int, PaceType)> = PublishRelay()
 
     fileprivate let _paceType: PublishRelay<PaceType> = PublishRelay()
@@ -176,6 +205,10 @@ public class PacesViewModel: PacesViewModelType {
     fileprivate let _inputDataSource: BehaviorRelay<[[CustomStringConvertible]]> = BehaviorRelay(value: [])
     public var inputDataSource: Observable<[[CustomStringConvertible]]> {
         return _inputDataSource.asObservable()
+    }
+    fileprivate let _controlSelection: PublishRelay<ConversionControl> = PublishRelay()
+    public var controlSelection: Observable<ConversionControl> {
+        return _controlSelection.asObservable()
     }
 
     public var goToConfigurePace: Observable<ConfigurePaceTypeViewModel> = Observable.never()
