@@ -77,7 +77,6 @@ public class PaceTypeControlViewModel: PaceTypeControlViewModelType {
             .scan(false) { prev, isSelected -> Bool in
                 !isSelected
             }
-            .debug("Tapped sel")
             .bind(to: _isSelected)
             .disposed(by: bag)
 
@@ -95,7 +94,6 @@ public class PaceTypeControlViewModel: PaceTypeControlViewModelType {
             .withLatestFrom(control) { $0 == $1 }
             .filter { $0 }
             .map { _ in }
-            .debug("sameControl selection")
             .bind(to: tapped)
             .disposed(by: bag)
 

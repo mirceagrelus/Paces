@@ -40,7 +40,6 @@ public class PaceControlView: ThemeView {
 
         //viewModel.outputs.isSelected
         viewModel.inputs.isSelected
-            .debug("isSelected")
             .observeOn(MainScheduler.instance)
             .subscribe(onNext: { [weak self] isSelected in
                 let theme = AppEnvironment.current.theme

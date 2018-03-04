@@ -45,7 +45,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
         viewModel.outputs.gotoWhatNew
             .delay(1, scheduler: MainScheduler.instance)
-            .debug("WhatsNew")
             .subscribe(onNext: { [weak self] _ in
                 self?.appFlowController.goToWhatsNew()
             })

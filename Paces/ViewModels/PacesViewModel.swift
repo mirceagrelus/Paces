@@ -148,9 +148,7 @@ public class PacesViewModel: PacesViewModelType {
         viewDidLoad
             .withLatestFrom(initiallySelectedControl)
             .take(1)
-            .debug("viewDidLoad = selectedControl")
             .ignoreNil()
-            //.map { _ in }
             .bind(to: _controlSelection)
             .disposed(by: bag)
 

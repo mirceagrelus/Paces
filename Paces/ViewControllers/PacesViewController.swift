@@ -85,7 +85,6 @@ class PacesViewController: UIViewController {
         // update selection in picker when switching pace
         viewModel.inputs.inputPaceType
             .map { $0.displayValue }
-            .debug("selectPickerValue")
             .observeOnMain()
             .subscribe(onNext: { [weak self] displayValue in
                 self?.updatePickerValue(stringRepresentation: displayValue)
