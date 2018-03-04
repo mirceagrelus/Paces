@@ -11,9 +11,9 @@ import UIKit
 public class PaceInputView: UIView {
 
     let shadowOpacity: Float = 0.5
-    let shadowRadius: CGFloat = 5
+    let shadowRadius: CGFloat = 10
     let borderWidth: CGFloat = 1.0
-    let borderColor: UIColor = UIColor.black.withAlphaComponent(0.2)
+    let borderColor: UIColor = UIColor.black.withAlphaComponent(0.5)
 
     public override init(frame: CGRect) {
         super.init(frame: .zero)

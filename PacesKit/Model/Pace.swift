@@ -133,9 +133,9 @@ public enum PaceUnit: String, Codable {
     public var description: String {
         switch self {
         case .minPerKm:    return "min/km"
-        case .minPerMile:  return "min/mile"
-        case .kmPerHour:   return "km/h"
-        case .milePerHour: return "mile/h"
+        case .minPerMile:  return "min/mi"
+        case .kmPerHour:   return "kph"
+        case .milePerHour: return "mph"
         }
     }
 

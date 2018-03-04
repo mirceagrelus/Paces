@@ -62,6 +62,19 @@ public class ConfigurePaceTypeView: UIView {
         layer.borderColor = borderColor.cgColor
         layer.borderWidth = borderWidth
 
+        paceMinKm.setTitle(PaceUnit.minPerKm.description, for: .normal)
+        paceMinMi.setTitle(PaceUnit.minPerMile.description, for: .normal)
+        paceKph.setTitle(PaceUnit.kmPerHour.description, for: .normal)
+        paceMph.setTitle(PaceUnit.milePerHour.description, for: .normal)
+
+        raceMarathon.setTitle(RaceType.marathon.name, for: .normal)
+        raceHalfMarathon.setTitle(RaceType.halfMarathon.name, for: .normal)
+        race10K.setTitle(RaceType.km10.name, for: .normal)
+        race5K.setTitle(RaceType.km5.name, for: .normal)
+        raceCustom.setTitle(RaceType.custom(0).name, for: .normal)
+
+        raceDistanceKm.setTitle(DistanceUnit.km.description, for: .normal)
+        raceDistanceMile.setTitle(DistanceUnit.mile.description, for: .normal)
     }
 
     func bindViewModel() {
