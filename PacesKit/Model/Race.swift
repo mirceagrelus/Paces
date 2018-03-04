@@ -71,20 +71,26 @@ public struct Race: Codable {
         let currenSeconds = self.time
         let currentMeters = self.raceDistance.coefficient
 
-        let currentSpeed = Measurement(value: currentMeters / currenSeconds, unit: UnitSpeed.metersPerSecond)
+        var speedValue = currentMeters / currenSeconds
+        if !speedValue.isFinite { speedValue = 0 }
+
+        let currentSpeed = Measurement(value: speedValue, unit: UnitSpeed.metersPerSecond)
         let targetSpeed = currentSpeed.converted(to: paceUnit.toUnitSpeed())
 
         return Pace(value: targetSpeed.value, unit: paceUnit)
     }
 
-    public func converted(to raceDistance: RaceDistance) -> Race {
-        if self.raceDistance.coefficient == raceDistance.coefficient &&
-            self.raceDistance.distanceUnit == raceDistance.distanceUnit { return self }
+    public func converted(to newRaceDistance: RaceDistance) -> Race {
+        if self.raceDistance.coefficient == newRaceDistance.coefficient &&
+            self.raceDistance.distanceUnit == newRaceDistance.distanceUnit { return self }
 
-        let currentMetersPerSecond = self.raceDistance.coefficient / self.time
-        let newRaceSeconds = raceDistance.coefficient / currentMetersPerSecond
+        var currentMetersPerSecond = self.raceDistance.coefficient / self.time
+        if !currentMetersPerSecond.isFinite { currentMetersPerSecond = 0 }
 
-        return Race(time: newRaceSeconds, raceDistance: raceDistance)
+        var newRaceSeconds = newRaceDistance.coefficient / currentMetersPerSecond
+        if !newRaceSeconds.isFinite { newRaceSeconds = 0 }
+
+        return Race(time: newRaceSeconds, raceDistance: newRaceDistance)
     }
 
 //    public func converted(from pace: Pace) -> Race {
