@@ -43,6 +43,7 @@ public class PacesCollectionViewAdapter: NSObject {
         panGesture.delegate = self
         self.collectionView?.addGestureRecognizer(panGesture)
         self.cellPanGesture = panGesture
+        panGesture.isEnabled = false
     }
 
     // supplies data for the datasource
@@ -218,14 +219,18 @@ extension PacesCollectionViewAdapter: UIGestureRecognizerDelegate {
                 let cell = collectionView.cellForItem(at: indexpath) as? ConversionControlCollectionViewCell
                 else { return }
 
-            guard activePannedCell == cell else { return }
+            guard let activeCell = activePannedCell as? ConversionControlCollectionViewCell,
+                activePannedCell == cell else { return }
 
             let currentPoint =  collectionView.convert(point, to: cell)
-            let deltaX = currentPoint.x - cellPanStartPoint.x
+            //let deltaX = currentPoint.x - cellPanStartPoint.x
+            var deltaX = max(currentPoint.x - cellPanStartPoint.x, -activeCell.maxDragDistance)
+            if deltaX > 0 { deltaX = 0 }
+            print("deltax: \(deltaX)")
 
             cell.controlContentTrailingConstraint.constant = deltaX
 
-            print("changed: \(currentPoint)")
+//            print("changed: \(currentPoint)")
         case .cancelled: fallthrough
         case .failed:
             if let controlCell = activePannedCell as? ConversionControlCollectionViewCell {

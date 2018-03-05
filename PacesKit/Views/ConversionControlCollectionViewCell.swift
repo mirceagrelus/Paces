@@ -12,6 +12,7 @@ public class ConversionControlCollectionViewCell: UICollectionViewCell {
 
     var controlContentView: UIView = UIView()
     public var controlContentTrailingConstraint: NSLayoutConstraint = NSLayoutConstraint()
+    public var maxDragDistance: CGFloat = 80
 
     public override init(frame: CGRect) {
         super.init(frame: frame)
