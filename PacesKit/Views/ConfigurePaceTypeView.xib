@@ -28,10 +28,10 @@
                             <rect key="frame" x="0.0" y="0.0" width="422" height="363"/>
                             <subviews>
                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="9Iw-em-Lf9">
-                                    <rect key="frame" x="104" y="10" width="214" height="343"/>
+                                    <rect key="frame" x="104" y="23.5" width="214" height="316"/>
                                     <subviews>
                                         <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="fMi-Ji-NWb">
-                                            <rect key="frame" x="8" y="8" width="198" height="327"/>
+                                            <rect key="frame" x="8" y="8" width="198" height="300"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Pace" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="D0s-wY-6Eo" customClass="ConversionControlLabel" customModule="PacesKit" customModuleProvider="target">
                                                     <rect key="frame" x="0.0" y="0.0" width="198" height="23"/>
@@ -67,10 +67,10 @@
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <stackView opaque="NO" contentMode="scaleToFill" alignment="top" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="vmr-12-It4">
-                                                    <rect key="frame" x="0.0" y="110" width="198" height="217"/>
+                                                    <rect key="frame" x="0.0" y="110" width="198" height="190"/>
                                                     <subviews>
                                                         <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="9JL-xd-Q3J">
-                                                            <rect key="frame" x="0.0" y="0.0" width="154" height="217"/>
+                                                            <rect key="frame" x="0.0" y="0.0" width="154" height="190"/>
                                                             <subviews>
                                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="On9-dt-gV8" customClass="PaceTypeButton" customModule="PacesKit" customModuleProvider="target">
                                                                     <rect key="frame" x="0.0" y="0.0" width="154" height="34"/>
@@ -88,18 +88,10 @@
                                                                     <rect key="frame" x="0.0" y="117" width="154" height="34"/>
                                                                     <state key="normal" title="5k"/>
                                                                 </button>
-                                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dPf-gj-L8u" customClass="PaceTypeButton" customModule="PacesKit" customModuleProvider="target">
+                                                                <view contentMode="scaleToFill" placeholderIntrinsicWidth="154" placeholderIntrinsicHeight="34" translatesAutoresizingMaskIntoConstraints="NO" id="7Rp-0Z-huc" customClass="CustomDistanceInput" customModule="PacesKit" customModuleProvider="target">
                                                                     <rect key="frame" x="0.0" y="156" width="154" height="34"/>
-                                                                    <state key="normal" title="Custom"/>
-                                                                </button>
-                                                                <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Custom distance" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="aU9-iD-Upe">
-                                                                    <rect key="frame" x="0.0" y="195" width="154" height="22"/>
-                                                                    <color key="backgroundColor" red="0.87975888324873097" green="0.27269515381867904" blue="0.17350169660065526" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                                                    <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                                                    <nil key="textColor"/>
-                                                                    <fontDescription key="fontDescription" type="system" pointSize="18"/>
-                                                                    <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" keyboardType="numbersAndPunctuation" returnKeyType="done" smartQuotesType="no"/>
-                                                                </textField>
+                                                                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                                </view>
                                                             </subviews>
                                                         </stackView>
                                                         <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="equalSpacing" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="e8x-6Q-IC3">
@@ -177,8 +169,7 @@
                 <outlet property="paceMph" destination="kLh-xx-dls" id="OB3-lb-Nru"/>
                 <outlet property="race10K" destination="qox-1C-yOC" id="lTx-4k-cAK"/>
                 <outlet property="race5K" destination="qvt-wE-bGN" id="fdc-SA-nsL"/>
-                <outlet property="raceCustom" destination="dPf-gj-L8u" id="QOm-1t-aYx"/>
-                <outlet property="raceCustomDistance" destination="aU9-iD-Upe" id="NYP-SM-WMA"/>
+                <outlet property="raceCustomDistance" destination="7Rp-0Z-huc" id="sLD-gs-Yms"/>
                 <outlet property="raceDistanceKm" destination="YV6-rf-oef" id="8fV-ya-jxw"/>
                 <outlet property="raceDistanceMile" destination="MEd-tA-aBM" id="ktM-eg-a5x"/>
                 <outlet property="raceHalfMarathon" destination="fdJ-s9-qSP" id="ycu-Qr-tbR"/>

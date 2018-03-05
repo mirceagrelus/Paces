@@ -44,7 +44,8 @@ public class PaceTypeButton: UIButton {
         self.applyBackgroundColor = applyBackgroundColor
         self.applySelectedBackgroundColor = applySelectedBackgroundColor
         super.init(frame: .zero)
-        self.applyStyle()
+        commonInit()
+        applyStyle()
     }
 
     public required init?(coder aDecoder: NSCoder) {
@@ -53,15 +54,16 @@ public class PaceTypeButton: UIButton {
         self.applyBackgroundColor = { AppEnvironment.current.theme.controlCellBackgroundColor }
         self.applySelectedBackgroundColor = { AppEnvironment.current.theme.controlCellBackgroundColorSelected }
         super.init(coder: aDecoder)
-        self.applyStyle()
+        commonInit()
+        applyStyle()
     }
 
-    public override func prepareForInterfaceBuilder() {
-        super.prepareForInterfaceBuilder()
+    func commonInit() {
+        setup()
+        applyStyle()
     }
 
-    public override func awakeFromNib() {
-        super.awakeFromNib()
+    func setup() {
         contentEdgeInsets = UIEdgeInsets(top: edgeInset, left: edgeInset, bottom: edgeInset, right: edgeInset)
     }
 
@@ -75,6 +77,10 @@ public class PaceTypeButton: UIButton {
         setBackgroundColor(applySelectedBackgroundColor(), for: .highlighted)
     }
 
+    public override func prepareForInterfaceBuilder() {
+        super.prepareForInterfaceBuilder()
+    }
+
     @objc func themeDidChangeNotification(notification: Notification) {
         DispatchQueue.main.async {
             self.applyStyle()
@@ -85,7 +91,6 @@ public class PaceTypeButton: UIButton {
 
 // MARK: - overrides
 extension PaceTypeButton {
-
     public override func didMoveToWindow() {
         if self.window != nil {
             NotificationCenter.default.addObserver(self, selector: #selector(themeDidChangeNotification), name: NSNotification.Name.ThemeDidChange, object: nil)
@@ -100,7 +105,6 @@ extension PaceTypeButton {
 }
 
 extension UIButton {
-
     func setBackgroundColor(_ color: UIColor, for state: UIControlState) {
         UIGraphicsBeginImageContext(CGSize(width: 1, height: 1))
         if let currentGraphicsContext = UIGraphicsGetCurrentContext() {

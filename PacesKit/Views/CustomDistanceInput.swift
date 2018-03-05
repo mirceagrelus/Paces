@@ -7,6 +7,8 @@
 //
 
 import UIKit
+import RxSwift
+import RxCocoa
 
 public class CustomDistanceInput: UIView {
 
@@ -14,11 +16,18 @@ public class CustomDistanceInput: UIView {
     var applySelectedTextColor: () -> UIColor
     var applyBackgroundColor: () -> UIColor
     var applySelectedBackgroundColor: () -> UIColor
-    var isSelected: Bool = false { didSet { applyStyle() } }
 
-    let nameLabel: UILabel = UILabel()
-    let distanceTextField: UITextField = UITextField()
+    let nameButton: PaceTypeButton = PaceTypeButton()
+    let textInput: UITextField = UITextField()
+    let keyboardToolbar: UIToolbar = UIToolbar()
+    let keyboardDoneButton: UIBarButtonItem = UIBarButtonItem(barButtonSystemItem: .done, target: nil, action: nil)
     let labelFontSize: CGFloat = 18
+    let buttonTitle = "Custom distance"
+    let bag = DisposeBag()
+
+    public var isInputActive: BehaviorRelay<Bool> = BehaviorRelay(value: false)
+    public var distance: PublishRelay<Double> = PublishRelay()
+    public var selectedDistance: PublishRelay<Double> = PublishRelay()
 
     init(applyTextColor: @escaping @autoclosure () -> UIColor = AppEnvironment.current.theme.controlCellTextColor,
          applySelectedTextColor: @escaping @autoclosure () -> UIColor = AppEnvironment.current.theme.controlCellTextColorSelected,
@@ -46,19 +55,86 @@ public class CustomDistanceInput: UIView {
         applyStyle()
     }
 
+    public func updateDistance(_ distance: Double) {
+        //show in same locale
+        let number = NSNumber(value: distance)
+        let formatter = NumberFormatter()
+        formatter.generatesDecimalNumbers = true
+        formatter.numberStyle = NumberFormatter.Style.decimal
+
+        textInput.text = formatter.string(from: number)
+        isInputActive.accept(true)
+    }
+
     func setup() {
-        nameLabel.font = UIFont.systemFont(ofSize: labelFontSize)
-        nameLabel.translatesAutoresizingMaskIntoConstraints = false
-        nameLabel.isUserInteractionEnabled = false
-        addSubview(nameLabel)
+        setupUI()
+        setupActions()
+    }
 
+    func setupUI() {
+        backgroundColor = .clear
 
+        nameButton.translatesAutoresizingMaskIntoConstraints = false
+        nameButton.setTitle(buttonTitle, for: .normal)
+        addSubview(nameButton)
+
+        keyboardToolbar.sizeToFit()
+        let flexBarButton = UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: nil, action: nil)
+        keyboardToolbar.items = [flexBarButton, keyboardDoneButton]
+
+        textInput.translatesAutoresizingMaskIntoConstraints = false
+        textInput.borderStyle = UITextBorderStyle.none
+        textInput.font = UIFont.systemFont(ofSize: labelFontSize)
+        textInput.keyboardType = UIKeyboardType.decimalPad
+        textInput.inputAccessoryView = keyboardToolbar
+        textInput.textAlignment = .center
+        addSubview(textInput)
+
+        AutoLayoutUtils.constrainView(textInput, equalToView: self)
+        AutoLayoutUtils.constrainView(nameButton, equalToView: self)
+    }
+
+    func setupActions() {
+        nameButton.rx.tap
+            .map { _ in true }
+            .bind(to: isInputActive)
+            .disposed(by: bag)
+
+        isInputActive
+            .subscribe(onNext: { [weak self] isActive in
+                guard let _self = self else { return }
+                self?.nameButton.setTitle(isActive ? " " : _self.buttonTitle, for: .normal)
+                self?.textInput.isHidden = !isActive
+                self?.applyStyle()
+                if isActive { self?.textInput.becomeFirstResponder() }
+            })
+            .disposed(by: bag)
+
+        textInput.rx.text.orEmpty
+            .map(toDoubleUsingCurrentLocale)
+            .ignoreNil()
+            .bind(to: distance)
+            .disposed(by: bag)
+
+        keyboardDoneButton.rx.tap
+            .withLatestFrom(textInput.rx.text.orEmpty)
+            .map(toDoubleUsingCurrentLocale)
+            .do(onNext: { [weak self] val in
+                self?.textInput.resignFirstResponder()
+                if val == nil { self?.isInputActive.accept(false) }
+            })
+            .ignoreNil()
+            .bind(to: selectedDistance)
+            .disposed(by: bag)
     }
 
     func applyStyle() {
-        nameLabel.textColor = applyTextColor()
+        textInput.textColor = applySelectedTextColor()
+        textInput.backgroundColor = applySelectedBackgroundColor()
+    }
 
-        self.backgroundColor = isSelected ? applySelectedBackgroundColor() : applyBackgroundColor()
+    public override var intrinsicContentSize: CGSize {
+        return nameButton.intrinsicContentSize
     }
 
     @objc func themeDidChangeNotification(notification: Notification) {
@@ -67,10 +143,19 @@ public class CustomDistanceInput: UIView {
         }
     }
 
+    func toDoubleUsingCurrentLocale(_ input: String) -> Double? {
+        let formatter = NumberFormatter()
+        formatter.locale = NSLocale.current
+
+        if let number = formatter.number(from: input) {
+            return number.doubleValue
+        }
+        return nil
+    }
+
 }
 
 extension CustomDistanceInput {
-
     public override func didMoveToWindow() {
         if self.window != nil {
             NotificationCenter.default.addObserver(self, selector: #selector(themeDidChangeNotification), name: NSNotification.Name.ThemeDidChange, object: nil)

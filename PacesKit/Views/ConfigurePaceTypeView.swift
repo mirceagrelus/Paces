@@ -37,8 +37,7 @@ public class ConfigurePaceTypeView: UIView {
     @IBOutlet weak var raceHalfMarathon: PaceTypeButton!
     @IBOutlet weak var race10K: PaceTypeButton!
     @IBOutlet weak var race5K: PaceTypeButton!
-    @IBOutlet weak var raceCustom: PaceTypeButton!
-    @IBOutlet weak var raceCustomDistance: UITextField!
+    @IBOutlet weak var raceCustomDistance: CustomDistanceInput!
     @IBOutlet weak var raceDistanceKm: PaceTypeButton!
     @IBOutlet weak var raceDistanceMile: PaceTypeButton!
 
@@ -48,7 +47,6 @@ public class ConfigurePaceTypeView: UIView {
     let borderWidth: CGFloat = 1.0
     let borderColor: UIColor = UIColor.black.withAlphaComponent(0.5)
 
-
     deinit {
         print("ConfigurePaceTypeView - deinit")
     }
@@ -57,7 +55,6 @@ public class ConfigurePaceTypeView: UIView {
         super.awakeFromNib()
         setup()
         bindViewModel()
-
     }
 
     // animate the configuration screen in place
@@ -127,8 +124,8 @@ public class ConfigurePaceTypeView: UIView {
             .bind(to: viewModel.inputs.selectedRaceType)
             .disposed(by: bag)
 
-        raceCustom.rx.tap
-            .map { _ in RaceType.custom(0) }
+        raceCustomDistance.selectedDistance
+            .map { distance in RaceType.custom(distance) }
             .bind(to: viewModel.inputs.selectedRaceType)
             .disposed(by: bag)
 
@@ -166,7 +163,7 @@ public class ConfigurePaceTypeView: UIView {
             case .halfMarathon: raceHalfMarathon.isSelected = true
             case .km10: race10K.isSelected = true
             case .km5: race5K.isSelected = true
-            case .custom(_): raceCustom.isSelected = true
+            case .custom(let distance): raceCustomDistance.updateDistance(distance)
             }
             switch race.raceDistance.distanceUnit {
             case .km: raceDistanceKm.isSelected = true
@@ -211,7 +208,6 @@ public class ConfigurePaceTypeView: UIView {
         raceHalfMarathon.setTitle(RaceType.halfMarathon.name, for: .normal)
         race10K.setTitle(RaceType.km10.name, for: .normal)
         race5K.setTitle(RaceType.km5.name, for: .normal)
-        raceCustom.setTitle(RaceType.custom(0).name, for: .normal)
 
         raceDistanceKm.setTitle(DistanceUnit.km.description, for: .normal)
         raceDistanceMile.setTitle(DistanceUnit.mile.description, for: .normal)
@@ -252,7 +248,10 @@ public class ConfigurePaceTypeView: UIView {
             })
             .disposed(by: bag)
 
-        NotificationCenter.default.rx.notification(Notification.Name.UIKeyboardWillHide)
+        Observable.merge(
+            NotificationCenter.default.rx.notification(Notification.Name.UIKeyboardWillHide),
+            NotificationCenter.default.rx.notification(Notification.Name.UIKeyboardDidHide)
+            )
             .subscribe(onNext: { [weak self] notification in
                 self?.scrollView.contentInset = UIEdgeInsets.zero
             })
