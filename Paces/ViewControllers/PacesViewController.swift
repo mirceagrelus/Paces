@@ -61,7 +61,7 @@ class PacesViewController: UIViewController {
 
         viewModel.inputs.viewDidLoad.onNext(())
 
-        test_test()
+        //test_test()
     }
 
     override func viewWillAppear(_ animated: Bool) {
@@ -173,63 +173,36 @@ class PacesViewController: UIViewController {
     func showConfigurePace(model: ConfigurePaceTypeViewModel) {
         print("resources: \(RxSwift.Resources.total)")
 
-        let dimView = DimView()
-        dimView.translatesAutoresizingMaskIntoConstraints = false
-        view.addSubview(dimView)
-
         let configurePaceTypeView = ConfigurePaceTypeView.configuredWith(model)
         configurePaceTypeView.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(configurePaceTypeView)
 
-        configurePaceTypeView.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
-        let hideConstraint = configurePaceTypeView.topAnchor.constraint(equalTo: view.bottomAnchor)
-        hideConstraint.isActive = true
-        let showConstraint = configurePaceTypeView.centerYAnchor.constraint(equalTo: view.centerYAnchor)
-        showConstraint.isActive = false
-
-        AutoLayoutUtils.constrainView(dimView, equalToView: view)
-
-        let onDismiss = {
-            UIViewPropertyAnimator.runningPropertyAnimator(withDuration: 0.2, delay: 0, options: UIViewAnimationOptions.curveEaseIn, animations: {
-                showConstraint.isActive = false
-                hideConstraint.isActive = true
-
-                self.view.layoutIfNeeded()
-            }, completion: { _ in
-                configurePaceTypeView.removeFromSuperview()
-            })
-        }
-
-        dimView.tapped
-            .take(1)
-            .observeOnMain()
-            .subscribe(onNext: { _ in
-                _ = onDismiss()
-                dimView.hide(andRemove: true)
-            })
-            .disposed(by: dimView.bag)
+        NSLayoutConstraint.activate([
+            configurePaceTypeView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
+            configurePaceTypeView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            configurePaceTypeView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            configurePaceTypeView.bottomAnchor.constraint(equalTo: view.bottomAnchor)
+            ])
 
         configurePaceTypeView.viewModel.outputs.paceTypeUpdated
             .take(1)
             .observeOnMain()
             .subscribe(onNext: { [weak self] (index, paceType) in
-                dimView.tapped.onNext(())
                 self?.collectionViewAdapter.updatePaceType(paceType, at: index)
             })
             .disposed(by: configurePaceTypeView.bag)
 
-        view.layoutIfNeeded()
-        let timingParams = UISpringTimingParameters(dampingRatio: 0.7, initialVelocity: CGVector(dx: 0, dy: 0.7))
-        let animator = UIViewPropertyAnimator(duration: 0.3, timingParameters: timingParams)
-        animator.addAnimations {
-            hideConstraint.isActive = false
-            showConstraint.isActive = true
-            dimView.show()
+        configurePaceTypeView.viewModel.outputs.configureFinished
+            .take(1)
+            .observeOnMain()
+            .subscribe(onNext: { _ in
+                configurePaceTypeView.removeFromSuperview()
+            })
+            .disposed(by: configurePaceTypeView.bag)
 
-            self.view.layoutIfNeeded()
-        }
-        animator.startAnimation()
+        configurePaceTypeView.show()
     }
+
 
 }
 

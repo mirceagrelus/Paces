@@ -30,6 +30,7 @@
 		083C323E203ED37D005AD1F5 /* AddControlView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 083C323C203ED37C005AD1F5 /* AddControlView.swift */; };
 		083C323F203ED37D005AD1F5 /* AddControlView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 083C323D203ED37C005AD1F5 /* AddControlView.xib */; };
 		083C3241203EE0F9005AD1F5 /* KitAssets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 083C3240203EE0F9005AD1F5 /* KitAssets.xcassets */; };
+		083D12B1204D348600606005 /* CustomDistanceInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 083D12B0204D348600606005 /* CustomDistanceInput.swift */; };
 		0860EC8D2031ED6800358F2A /* PickerViewAdapter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0860EC8C2031ED6800358F2A /* PickerViewAdapter.swift */; };
 		08738C362046F7DE009B9652 /* EmptyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08738C352046F7DE009B9652 /* EmptyViewController.swift */; };
 		08738C382047FF16009B9652 /* ConfigurePaceTypeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08738C372047FF15009B9652 /* ConfigurePaceTypeViewModel.swift */; };
@@ -143,6 +144,7 @@
 		083C323C203ED37C005AD1F5 /* AddControlView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddControlView.swift; sourceTree = "<group>"; };
 		083C323D203ED37C005AD1F5 /* AddControlView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AddControlView.xib; sourceTree = "<group>"; };
 		083C3240203EE0F9005AD1F5 /* KitAssets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = KitAssets.xcassets; sourceTree = "<group>"; };
+		083D12B0204D348600606005 /* CustomDistanceInput.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomDistanceInput.swift; sourceTree = "<group>"; };
 		0860EC8C2031ED6800358F2A /* PickerViewAdapter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PickerViewAdapter.swift; sourceTree = "<group>"; };
 		08738C352046F7DE009B9652 /* EmptyViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmptyViewController.swift; sourceTree = "<group>"; };
 		08738C372047FF15009B9652 /* ConfigurePaceTypeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfigurePaceTypeViewModel.swift; sourceTree = "<group>"; };
@@ -269,6 +271,7 @@
 				08083CF220445884007E5A43 /* ConfigurePaceTypeView.swift */,
 				08083CF420445890007E5A43 /* ConfigurePaceTypeView.xib */,
 				08083CF620445EFE007E5A43 /* PaceTypeButton.swift */,
+				083D12B0204D348600606005 /* CustomDistanceInput.swift */,
 				08083CFD20458C2B007E5A43 /* PaceTypeControlView.swift */,
 				08083CFF20458EDC007E5A43 /* PaceTypeControlCollectionViewCell.swift */,
 				083C321E203C7A94005AD1F5 /* ConversionControlCollectionViewCell.swift */,
@@ -828,6 +831,7 @@
 				08E64B87202DD86E00A59F41 /* Environment.swift in Sources */,
 				08083CFC20456F32007E5A43 /* PaceTypeControlViewModel.swift in Sources */,
 				087EFAD82039D19D005B7385 /* ConversionControl.swift in Sources */,
+				083D12B1204D348600606005 /* CustomDistanceInput.swift in Sources */,
 				083C323E203ED37D005AD1F5 /* AddControlView.swift in Sources */,
 				08C6950120406177005A96CA /* DistanceControlViewModel.swift in Sources */,
 				08CAB6CD202F929900C7FF41 /* PaceControlViewModel.swift in Sources */,

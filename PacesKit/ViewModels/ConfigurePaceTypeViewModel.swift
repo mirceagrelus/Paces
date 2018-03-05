@@ -29,7 +29,11 @@ public protocol ConfigurePaceTypeViewModelInputs {
 
 public protocol ConfigurePaceTypeViewModelOutputs {
 
+    // Emits with the selected paceType
     var paceTypeUpdated: Observable<(Int, PaceType)> { get set }
+
+    // Configuration has finished
+    var configureFinished: PublishRelay<Void> { get }
 }
 
 public protocol ConfigurePaceTypeViewModelType {
@@ -91,6 +95,7 @@ public class ConfigurePaceTypeViewModel: ConfigurePaceTypeViewModelType {
     public var selectedRaceDistanceUnit: BehaviorRelay<DistanceUnit>
 
     public var paceTypeUpdated: Observable<(Int, PaceType)>
+    public var configureFinished: PublishRelay<Void> = PublishRelay()
 }
 
 extension ConfigurePaceTypeViewModel: ConfigurePaceTypeViewModelInputs, ConfigurePaceTypeViewModelOutputs { }

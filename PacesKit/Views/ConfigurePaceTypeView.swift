@@ -21,6 +21,14 @@ public class ConfigurePaceTypeView: UIView {
     public var viewModel: ConfigurePaceTypeViewModelType! { didSet { self.bindViewModel() }}
     public let bag = DisposeBag()
 
+    @IBOutlet weak var dimView: DimView!
+    @IBOutlet weak var scrollView: UIScrollView!
+    @IBOutlet weak var scrollViewContentView: UIView!
+    @IBOutlet weak var contentView: UIView!
+    @IBOutlet weak var ibConstraint: NSLayoutConstraint!
+    var contentShowConstraint: NSLayoutConstraint = NSLayoutConstraint()
+    var contentHideConstraint: NSLayoutConstraint = NSLayoutConstraint()
+
     @IBOutlet weak var paceMinKm: PaceTypeButton!
     @IBOutlet weak var paceMinMi: PaceTypeButton!
     @IBOutlet weak var paceKph: PaceTypeButton!
@@ -30,6 +38,7 @@ public class ConfigurePaceTypeView: UIView {
     @IBOutlet weak var race10K: PaceTypeButton!
     @IBOutlet weak var race5K: PaceTypeButton!
     @IBOutlet weak var raceCustom: PaceTypeButton!
+    @IBOutlet weak var raceCustomDistance: UITextField!
     @IBOutlet weak var raceDistanceKm: PaceTypeButton!
     @IBOutlet weak var raceDistanceMile: PaceTypeButton!
 
@@ -45,42 +54,38 @@ public class ConfigurePaceTypeView: UIView {
     }
 
     public override func awakeFromNib() {
+        super.awakeFromNib()
         setup()
         bindViewModel()
 
     }
 
-    func setup() {
-        let theme = AppEnvironment.current.theme
-        backgroundColor = theme.backgroundColor
-        layoutMargins = UIEdgeInsets(top: edgeInset, left: edgeInset, bottom: edgeInset, right: edgeInset)
+    // animate the configuration screen in place
+    public func show() {
+        dimView.show()
 
-        layer.shadowColor = UIColor.black.cgColor
-        layer.shadowOpacity = shadowOpacity
-        layer.shadowOffset = CGSize.zero
-        layer.shadowRadius = shadowRadius
-        layer.borderColor = borderColor.cgColor
-        layer.borderWidth = borderWidth
+        layoutIfNeeded()
+        let timingParams = UISpringTimingParameters(dampingRatio: 0.7, initialVelocity: CGVector(dx: 0, dy: 0.7))
+        let animator = UIViewPropertyAnimator(duration: 0.3, timingParameters: timingParams)
+        animator.addAnimations {
+            self.contentHideConstraint.isActive = false
+            self.contentShowConstraint.isActive = true
 
-        paceMinKm.setTitle(PaceUnit.minPerKm.description, for: .normal)
-        paceMinMi.setTitle(PaceUnit.minPerMile.description, for: .normal)
-        paceKph.setTitle(PaceUnit.kmPerHour.description, for: .normal)
-        paceMph.setTitle(PaceUnit.milePerHour.description, for: .normal)
-
-        raceMarathon.setTitle(RaceType.marathon.name, for: .normal)
-        raceHalfMarathon.setTitle(RaceType.halfMarathon.name, for: .normal)
-        race10K.setTitle(RaceType.km10.name, for: .normal)
-        race5K.setTitle(RaceType.km5.name, for: .normal)
-        raceCustom.setTitle(RaceType.custom(0).name, for: .normal)
-
-        raceDistanceKm.setTitle(DistanceUnit.km.description, for: .normal)
-        raceDistanceMile.setTitle(DistanceUnit.mile.description, for: .normal)
+            self.layoutIfNeeded()
+        }
+        animator.startAnimation()
     }
 
     func bindViewModel() {
         guard viewModel != nil else { return }
 
-        selectInital()
+        selectInitalType()
+
+        viewModel.outputs.paceTypeUpdated
+            .subscribe(onNext: { [weak self] _ in
+                self?.dismiss()
+            })
+            .disposed(by: bag)
 
         paceMinKm.rx.tap
             .map { _ in .minPerKm }
@@ -146,7 +151,7 @@ public class ConfigurePaceTypeView: UIView {
             .disposed(by: bag)
     }
 
-    func selectInital() {
+    func selectInitalType() {
         switch viewModel.inputs.paceType {
         case .pace(let pace):
             switch pace.unit {
@@ -170,5 +175,103 @@ public class ConfigurePaceTypeView: UIView {
         }
     }
 
+    func setup() {
+        setupUI()
+        setupGestures()
+        observeKeyboard()
+    }
+
+    func setupUI() {
+        //disable Interface Builder constraint, and use these show/hide cosntraints.
+        ibConstraint.isActive = false
+        contentShowConstraint = self.scrollView.centerYAnchor.constraint(equalTo: centerYAnchor)
+        contentHideConstraint = self.scrollView.topAnchor.constraint(equalTo: bottomAnchor)
+        contentShowConstraint.isActive = false
+        contentHideConstraint.isActive = true
+
+        let theme = AppEnvironment.current.theme
+
+        scrollView.keyboardDismissMode = UIScrollViewKeyboardDismissMode.interactive
+
+        contentView.layer.shadowColor = UIColor.black.cgColor
+        contentView.layer.shadowOpacity = shadowOpacity
+        contentView.layer.shadowOffset = CGSize.zero
+        contentView.layer.shadowRadius = shadowRadius
+        contentView.layer.borderColor = borderColor.cgColor
+        contentView.layer.borderWidth = borderWidth
+        contentView.layoutMargins = UIEdgeInsets(top: edgeInset, left: edgeInset, bottom: edgeInset, right: edgeInset)
+        contentView.backgroundColor = theme.backgroundColor
+
+        paceMinKm.setTitle(PaceUnit.minPerKm.description, for: .normal)
+        paceMinMi.setTitle(PaceUnit.minPerMile.description, for: .normal)
+        paceKph.setTitle(PaceUnit.kmPerHour.description, for: .normal)
+        paceMph.setTitle(PaceUnit.milePerHour.description, for: .normal)
+
+        raceMarathon.setTitle(RaceType.marathon.name, for: .normal)
+        raceHalfMarathon.setTitle(RaceType.halfMarathon.name, for: .normal)
+        race10K.setTitle(RaceType.km10.name, for: .normal)
+        race5K.setTitle(RaceType.km5.name, for: .normal)
+        raceCustom.setTitle(RaceType.custom(0).name, for: .normal)
+
+        raceDistanceKm.setTitle(DistanceUnit.km.description, for: .normal)
+        raceDistanceMile.setTitle(DistanceUnit.mile.description, for: .normal)
+    }
+
+    func setupGestures() {
+        let dismissGesture = UITapGestureRecognizer()
+        scrollViewContentView.addGestureRecognizer(dismissGesture)
+        dismissGesture.rx.event
+            .map { _ in }
+            .subscribe(onNext: { [weak self] _ in
+                self?.dismiss()
+            })
+            .disposed(by: bag)
+
+        //easiest way to stop propagating taps from the contentView to the scrollContentView
+        let ignore = UITapGestureRecognizer()
+        contentView.addGestureRecognizer(ignore)
+    }
+
+    func observeKeyboard() {
+        NotificationCenter.default.rx.notification(Notification.Name.UIKeyboardWillChangeFrame)
+            .subscribe(onNext: { [weak self] notification in
+                guard let _self = self,
+                    let userInfo = notification.userInfo,
+                    let frameEndValue = userInfo[UIKeyboardFrameEndUserInfoKey] as? NSValue else { return }
+
+                let keyboardScreenEndFrame = frameEndValue.cgRectValue
+                let keyboardViewEndFrame = _self.convert(keyboardScreenEndFrame, from: _self.window)
+
+                let actualHeight = keyboardViewEndFrame.height - _self.safeAreaInsets.bottom
+                _self.scrollView.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: actualHeight, right: 0)
+
+                _self.scrollView.scrollIndicatorInsets = _self.scrollView.contentInset
+
+//                let selectedRange = contentView.selectedRange
+//                contentView.scrollRangeToVisible(selectedRange)
+            })
+            .disposed(by: bag)
+
+        NotificationCenter.default.rx.notification(Notification.Name.UIKeyboardWillHide)
+            .subscribe(onNext: { [weak self] notification in
+                self?.scrollView.contentInset = UIEdgeInsets.zero
+            })
+            .disposed(by: bag)
+    }
+
+    func dismiss() {
+        dimView.hide()
+
+        UIViewPropertyAnimator.runningPropertyAnimator(withDuration: 0.2, delay: 0, options: UIViewAnimationOptions.curveEaseIn, animations: {
+            self.contentShowConstraint.isActive = false
+            self.contentHideConstraint.isActive = true
+
+            self.layoutIfNeeded()
+        }, completion: { _ in
+            self.viewModel.outputs.configureFinished.accept(())
+        })
+    }
+
 
 }
+
