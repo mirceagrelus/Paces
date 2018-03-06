@@ -31,6 +31,7 @@
 		083C323F203ED37D005AD1F5 /* AddControlView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 083C323D203ED37C005AD1F5 /* AddControlView.xib */; };
 		083C3241203EE0F9005AD1F5 /* KitAssets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 083C3240203EE0F9005AD1F5 /* KitAssets.xcassets */; };
 		083D12B1204D348600606005 /* CustomDistanceInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 083D12B0204D348600606005 /* CustomDistanceInput.swift */; };
+		084DFEC2204E87C900AFE0B2 /* HelperFunctions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 084DFEC1204E87C900AFE0B2 /* HelperFunctions.swift */; };
 		0860EC8D2031ED6800358F2A /* PickerViewAdapter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0860EC8C2031ED6800358F2A /* PickerViewAdapter.swift */; };
 		08738C362046F7DE009B9652 /* EmptyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08738C352046F7DE009B9652 /* EmptyViewController.swift */; };
 		08738C382047FF16009B9652 /* ConfigurePaceTypeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08738C372047FF15009B9652 /* ConfigurePaceTypeViewModel.swift */; };
@@ -145,6 +146,7 @@
 		083C323D203ED37C005AD1F5 /* AddControlView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AddControlView.xib; sourceTree = "<group>"; };
 		083C3240203EE0F9005AD1F5 /* KitAssets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = KitAssets.xcassets; sourceTree = "<group>"; };
 		083D12B0204D348600606005 /* CustomDistanceInput.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomDistanceInput.swift; sourceTree = "<group>"; };
+		084DFEC1204E87C900AFE0B2 /* HelperFunctions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HelperFunctions.swift; sourceTree = "<group>"; };
 		0860EC8C2031ED6800358F2A /* PickerViewAdapter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PickerViewAdapter.swift; sourceTree = "<group>"; };
 		08738C352046F7DE009B9652 /* EmptyViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmptyViewController.swift; sourceTree = "<group>"; };
 		08738C372047FF15009B9652 /* ConfigurePaceTypeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfigurePaceTypeViewModel.swift; sourceTree = "<group>"; };
@@ -246,6 +248,7 @@
 			children = (
 				0805B25920389DED00916CD4 /* Observable+Operators.swift */,
 				0805B25720388BE800916CD4 /* UITableView+Extensions.swift */,
+				084DFEC1204E87C900AFE0B2 /* HelperFunctions.swift */,
 			);
 			path = "Rx Extensions";
 			sourceTree = "<group>";
@@ -828,6 +831,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				084DFEC2204E87C900AFE0B2 /* HelperFunctions.swift in Sources */,
 				08E64B87202DD86E00A59F41 /* Environment.swift in Sources */,
 				08083CFC20456F32007E5A43 /* PaceTypeControlViewModel.swift in Sources */,
 				087EFAD82039D19D005B7385 /* ConversionControl.swift in Sources */,

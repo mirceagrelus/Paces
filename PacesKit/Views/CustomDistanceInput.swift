@@ -143,16 +143,6 @@ public class CustomDistanceInput: UIView {
         }
     }
 
-    func toDoubleUsingCurrentLocale(_ input: String) -> Double? {
-        let formatter = NumberFormatter()
-        formatter.locale = NSLocale.current
-
-        if let number = formatter.number(from: input) {
-            return number.doubleValue
-        }
-        return nil
-    }
-
 }
 
 extension CustomDistanceInput {
