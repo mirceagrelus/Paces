@@ -10,6 +10,10 @@ import Foundation
 
 // Collection of mapping funtions for Rx work
 
+public func void<T>(_:T) -> Void {
+    return ()
+}
+
 public func toDoubleUsingCurrentLocale(_ input:String) -> Double? {
     let formatter = NumberFormatter()
     formatter.locale = NSLocale.current
