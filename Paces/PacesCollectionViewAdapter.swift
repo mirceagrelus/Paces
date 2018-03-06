@@ -10,6 +10,7 @@ import Foundation
 import PacesKit
 import RxSwift
 import RxCocoa
+import Action
 
 public class PacesCollectionViewAdapter: NSObject {
 
@@ -21,6 +22,9 @@ public class PacesCollectionViewAdapter: NSObject {
 
     // partially applied closure that binds the control model to the input model
     fileprivate var bindControl: (_ control: PaceTypeControlViewModelType) -> ()
+
+    // The action to use for adding controls
+    fileprivate var addPaceTypeAction: CocoaAction?
 
     // pan gesture used for panning control cells
     fileprivate var cellPanGesture: UIPanGestureRecognizer?
@@ -34,9 +38,15 @@ public class PacesCollectionViewAdapter: NSObject {
     // indexpath of the control being reconfigured
     fileprivate var reconfigureIndexPath: IndexPath? = nil
 
-    init(_ collectionView: UICollectionView, bindControl: @escaping (PaceTypeControlViewModelType) -> () ) {
+    // index of the section containing ConversionControls
+    let controlsSection: Int = 0
+
+    init(_ collectionView: UICollectionView,
+         bindControl: @escaping (PaceTypeControlViewModelType) -> (),
+         addPaceAction: CocoaAction? = nil ) {
         self.collectionView = collectionView
         self.bindControl = bindControl
+        self.addPaceTypeAction = addPaceAction
         super.init()
         // configure the cell pan gesture
         let panGesture = UIPanGestureRecognizer(target: self, action: #selector(self.handleCellPan(_:)))
@@ -54,7 +64,7 @@ public class PacesCollectionViewAdapter: NSObject {
     // update paceType for control at index
     func updatePaceType(_ paceType: PaceType, at index: Int) {
         guard let collectionView = collectionView else { return }
-        let indexPath = IndexPath(row: index, section: 0)
+        let indexPath = IndexPath(row: index, section: controlsSection)
 
         collectionView.performBatchUpdates({
             var items = paceControls.value
@@ -67,6 +77,21 @@ public class PacesCollectionViewAdapter: NSObject {
                 reconfigureIndexPath = indexPath
                 collectionView.reloadItems(at: [indexPath])
             }
+        })
+    }
+
+    // add a paceType
+    func addPaceType(_ paceType: PaceType) {
+        guard let collectionView = collectionView else { return }
+
+        collectionView.performBatchUpdates({
+            var items = paceControls.value
+            let position = items.count
+            let item = ConversionControl(sortOrder: position, paceType: paceType)
+            items.append(item)
+            paceControls.accept(items)
+
+            collectionView.insertItems(at: [IndexPath(row: position, section: controlsSection)])
         })
     }
 
@@ -105,9 +130,13 @@ extension PacesCollectionViewAdapter: UICollectionViewDataSource {
         let reusableView: UICollectionReusableView
 
         switch kind {
-        case UICollectionElementKindSectionFooter: reusableView = collectionView.dequeueReusableSupplementaryView(ofKind: kind,
-                                                                                      withReuseIdentifier: AddControlView.identifier,
-                                                                                      for: indexPath)
+        case UICollectionElementKindSectionFooter:
+            reusableView = collectionView.dequeueReusableSupplementaryView(ofKind: kind,
+                                                                           withReuseIdentifier: AddControlView.identifier,
+                                                                           for: indexPath)
+            if let addCell = reusableView as? AddControlView {
+                addCell.addAction = self.addPaceTypeAction
+            }
         default: reusableView = UICollectionReusableView(frame: .zero)
         }
 

@@ -10,6 +10,7 @@ import Foundation
 import PacesKit
 import RxSwift
 import RxCocoa
+import Action
 
 public protocol PacesViewModelInputs {
     // the string representation of the input pace value
@@ -26,6 +27,9 @@ public protocol PacesViewModelInputs {
 
     // pace type that needs to be configured
     var configurePaceType: PublishRelay<(Int, PaceType)> { get }
+
+    // add a new paceType
+    var addPaceType: PublishRelay<Void> { get }
 }
 
 public protocol PacesViewModelOutputs {
@@ -44,14 +48,18 @@ public protocol PacesViewModelOutputs {
     // selection event rebroadcasted to all controls
     var controlSelection: Observable<ConversionControl> { get }
 
-    // show configure pace view
+    // show configure pace UI
     var goToConfigurePace: Observable<ConfigurePaceTypeViewModel> { get }
+
+    // show add pace UI
+    var goToAddPaceType: Observable<ConfigurePaceTypeViewModel> { get }
 }
 
 public protocol PacesViewModelType {
     var inputs: PacesViewModelInputs { get }
     var outputs: PacesViewModelOutputs { get }
 
+    var addPaceAction: CocoaAction { get }
     func bindControlModel() -> (PaceTypeControlViewModelType) -> ()
 }
 
@@ -122,6 +130,9 @@ public class PacesViewModel: PacesViewModelType {
                  return ConfigurePaceTypeViewModel(paceType: paceType, index: index)
         }
 
+        goToAddPaceType = addPaceType
+            .map { _ in ConfigurePaceTypeViewModel(paceType: nil, index: 0) }
+
         // store inputValue in Environment
         inputValue
             .subscribe(onNext: { AppEnvironment.replaceCurrentEnvironment(inputValue: $0) })
@@ -145,6 +156,16 @@ public class PacesViewModel: PacesViewModelType {
             .bind(to: _controlSelection)
             .disposed(by: bag)
 
+    }
+
+    // Action used for triggerign the add of a PaceType control
+    public var addPaceAction: CocoaAction {
+        return CocoaAction { [weak self] _ -> Observable<Void> in
+            if let _self = self {
+                return Observable.just(_self.addPaceType.accept(()))
+            }
+            return Observable.empty()
+        }
     }
 
     // closure used for binding the control model to the input model
@@ -182,6 +203,7 @@ public class PacesViewModel: PacesViewModelType {
     public var viewDidLoad: PublishSubject<()> = PublishSubject()
     public var tappedControl: PublishRelay<ConversionControl> = PublishRelay()
     public var configurePaceType: PublishRelay<(Int, PaceType)> = PublishRelay()
+    public var addPaceType: PublishRelay<Void> = PublishRelay()
 
     fileprivate let _paceType: PublishRelay<PaceType> = PublishRelay()
     public var paceType: Observable<PaceType>
@@ -201,7 +223,8 @@ public class PacesViewModel: PacesViewModelType {
         return _controlSelection.asObservable()
     }
 
-    public var goToConfigurePace: Observable<ConfigurePaceTypeViewModel> = Observable.never()
+    public var goToConfigurePace: Observable<ConfigurePaceTypeViewModel>
+    public var goToAddPaceType: Observable<ConfigurePaceTypeViewModel>
 
     private let bag = DisposeBag()
 }

@@ -149,7 +149,8 @@ public class ConfigurePaceTypeView: UIView {
     }
 
     func selectInitalType() {
-        switch viewModel.inputs.paceType {
+        guard let initialPaceType = viewModel.inputs.paceType else { return }
+        switch initialPaceType {
         case .pace(let pace):
             switch pace.unit {
             case .minPerKm: paceMinKm.isSelected = true

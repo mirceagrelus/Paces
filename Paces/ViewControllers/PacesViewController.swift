@@ -125,7 +125,10 @@ class PacesViewController: UIViewController {
             .bind(to: viewModel.inputs.inputValue)
             .disposed(by: bag)
 
-        viewModel.outputs.goToConfigurePace
+        Observable.merge(
+            viewModel.outputs.goToConfigurePace,
+            viewModel.outputs.goToAddPaceType
+            )
             .subscribe(onNext: { [weak self ] configureModel in
                 self?.showConfigurePace(model: configureModel)
             })
@@ -188,7 +191,14 @@ class PacesViewController: UIViewController {
             .take(1)
             .observeOnMain()
             .subscribe(onNext: { [weak self] (index, paceType) in
-                self?.collectionViewAdapter.updatePaceType(paceType, at: index)
+                if model.paceType == nil {
+                    //adding a pace
+                    self?.collectionViewAdapter.addPaceType(paceType)
+                }
+                else {
+                    // editing a pace
+                    self?.collectionViewAdapter.updatePaceType(paceType, at: index)
+                }
             })
             .disposed(by: configurePaceTypeView.bag)
 
@@ -208,7 +218,9 @@ class PacesViewController: UIViewController {
 
 extension PacesViewController {
     func createCollectionViewAdapter() -> PacesCollectionViewAdapter {
-        return PacesCollectionViewAdapter(collectionView, bindControl: viewModel.bindControlModel())
+        return PacesCollectionViewAdapter(collectionView,
+                                          bindControl: viewModel.bindControlModel(),
+                                          addPaceAction: viewModel.addPaceAction)
     }
 
     func tableLayout(width: CGFloat = 300) -> UICollectionViewFlowLayout {

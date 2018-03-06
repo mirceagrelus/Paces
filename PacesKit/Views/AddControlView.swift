@@ -7,20 +7,23 @@
 //
 
 import UIKit
+import RxSwift
+import RxCocoa
+import Action
 
 public class AddControlView: UICollectionReusableView {
 
     public static let identifier = "AddControlView"
-    @IBOutlet weak var addImageView: UIImageView!
-    @IBOutlet weak var addLabel: UILabel!
-    
+    @IBOutlet weak var addButton: PaceTypeButton!
+
+    public var addAction: CocoaAction? { didSet { addButton.rx.action = addAction }}
+
     public override func awakeFromNib() {
         super.awakeFromNib()
 
-        let theme = AppEnvironment.current.theme
-
-        addImageView.tintColor = theme.controlCellBackgroundColorSelected
-        addLabel.textColor = theme.controlCellTextColor
+        addButton.applyBackgroundColor = { UIColor.clear }
+        addButton.applySelectedBackgroundColor = { UIColor.clear }
+        addButton.applyStyle()
     }
-    
+
 }

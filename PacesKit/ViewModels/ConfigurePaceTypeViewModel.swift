@@ -12,7 +12,7 @@ import RxCocoa
 
 public protocol ConfigurePaceTypeViewModelInputs {
     // control paceType
-    var paceType: PaceType { get }
+    var paceType: PaceType? { get }
 
     // index of the control in the datasource
     var index: Int { get }
@@ -43,16 +43,19 @@ public protocol ConfigurePaceTypeViewModelType {
 
 public class ConfigurePaceTypeViewModel: ConfigurePaceTypeViewModelType {
 
-    public init(paceType: PaceType, index: Int) {
+    public init(paceType: PaceType?, index: Int) {
         self.paceType = paceType
         self.index = index
 
-        // consider a default distanceUnit for Races, even for Paces (based on their distance unit)
-        self.selectedRaceDistanceUnit = BehaviorRelay(value: paceType.distanceUnit)
+        // adding is a configuration with a nil PaceType. Consider a default distanceUnit of Km for Races
+        // When editing use either the Race's or Pace's distance unit as default
+        let raceDistanceUnit = paceType != nil ? paceType!.distanceUnit : DistanceUnit.km
+        self.selectedRaceDistanceUnit = BehaviorRelay(value: raceDistanceUnit)
 
         // if editing a race type
         let initialRaceType: BehaviorRelay<RaceType?> = {
-            if case .race(let race) = paceType {
+            if let existingPace = paceType,
+                case let .race(race) = existingPace{
                 return BehaviorRelay(value: race.raceDistance.raceType)
             }
             return BehaviorRelay(value: nil)
@@ -62,7 +65,7 @@ public class ConfigurePaceTypeViewModel: ConfigurePaceTypeViewModelType {
         let selectedPace = selectedPaceUnit
             .map { unit in  PaceType.pace(Pace(value: 0, unit: unit)) }
 
-        // when switching to a race type automatically use the latest distance unit
+        // when switching to a race type automatically use the latest distance unit if present
         let raceTypePicked = selectedRaceType
             .withLatestFrom(selectedRaceDistanceUnit) { ($0, $1) }
 
@@ -81,14 +84,17 @@ public class ConfigurePaceTypeViewModel: ConfigurePaceTypeViewModelType {
             selectedPace,
             selectedRace
             )
-            .map { [paceType] in paceType.converted(to: $0) }
+            .map { [paceType] in
+                if let initialPace = paceType { return initialPace.converted(to: $0) }
+                return $0
+            }
             .map { selectedPace in (index, selectedPace) }
     }
 
     public var inputs: ConfigurePaceTypeViewModelInputs { return self }
     public var outputs: ConfigurePaceTypeViewModelOutputs { return self }
 
-    public let paceType: PaceType
+    public let paceType: PaceType?
     public let index: Int
     public var selectedPaceUnit: PublishRelay<PaceUnit> = PublishRelay()
     public var selectedRaceType: PublishRelay<RaceType> = PublishRelay()

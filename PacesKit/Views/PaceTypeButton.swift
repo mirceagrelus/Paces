@@ -11,10 +11,10 @@ import UIKit
 //@IBDesignable
 public class PaceTypeButton: UIButton {
 
-    var applyTextColor: () -> UIColor
-    var applySelectedTextColor: () -> UIColor
-    var applyBackgroundColor: () -> UIColor
-    var applySelectedBackgroundColor: () -> UIColor
+    public var applyTextColor: () -> UIColor
+    public var applySelectedTextColor: () -> UIColor
+    public var applyBackgroundColor: () -> UIColor
+    public var applySelectedBackgroundColor: () -> UIColor
 
     let edgeInset: CGFloat = 10
 
@@ -45,7 +45,6 @@ public class PaceTypeButton: UIButton {
         self.applySelectedBackgroundColor = applySelectedBackgroundColor
         super.init(frame: .zero)
         commonInit()
-        applyStyle()
     }
 
     public required init?(coder aDecoder: NSCoder) {
@@ -55,7 +54,6 @@ public class PaceTypeButton: UIButton {
         self.applySelectedBackgroundColor = { AppEnvironment.current.theme.controlCellBackgroundColorSelected }
         super.init(coder: aDecoder)
         commonInit()
-        applyStyle()
     }
 
     func commonInit() {
