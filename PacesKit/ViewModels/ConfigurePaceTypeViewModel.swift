@@ -9,6 +9,7 @@
 import Foundation
 import RxSwift
 import RxCocoa
+import Action
 
 public protocol ConfigurePaceTypeViewModelInputs {
     // control paceType
@@ -25,6 +26,9 @@ public protocol ConfigurePaceTypeViewModelInputs {
 
     // the selected DistanceUnit of the Race to switch to
     var selectedRaceDistanceUnit: BehaviorRelay<DistanceUnit> { get }
+
+    // delete tapped
+    var selectedDelete: PublishRelay<Void> { get }
 }
 
 public protocol ConfigurePaceTypeViewModelOutputs {
@@ -36,9 +40,17 @@ public protocol ConfigurePaceTypeViewModelOutputs {
     var configureFinished: PublishRelay<Void> { get }
 }
 
-public protocol ConfigurePaceTypeViewModelType {
+// mark the protocol as having class semantics, otherwise viewModel didSet handler in ViewController gets called again when mutating the model,
+// even though the model is a class.
+public protocol ConfigurePaceTypeViewModelType: class {
     var inputs: ConfigurePaceTypeViewModelInputs { get }
     var outputs: ConfigurePaceTypeViewModelOutputs { get }
+
+    // action to perform on delete
+    var deleteAction: Action<Int, Void>? { get set }
+
+    // action to perform PaceType update
+    var updateAction: Action<(Int, PaceType), Void>? { get set }
 }
 
 public class ConfigurePaceTypeViewModel: ConfigurePaceTypeViewModelType {
@@ -75,7 +87,6 @@ public class ConfigurePaceTypeViewModel: ConfigurePaceTypeViewModelType {
             .withLatestFrom(initialRaceType) { ($1!, $0) }
             .skip(1)
 
-        //let selectedRace = pickRaceType.amb(pickDistance)
         let selectedRace = Observable.merge(raceTypePicked, distancePicked)
             .map { (raceType, distanceUnit) in PaceType.race(Race(time: 0, raceDistance: RaceDistance(raceType: raceType, distanceUnit: distanceUnit))) }
 
@@ -89,6 +100,31 @@ public class ConfigurePaceTypeViewModel: ConfigurePaceTypeViewModelType {
                 return $0
             }
             .map { selectedPace in (index, selectedPace) }
+            .share(replay: 1, scope: .whileConnected)
+    }
+
+    public var deleteAction: Action<Int, Void>? {
+        didSet {
+            if let action = deleteAction {
+                selectedDelete
+                    .map { [paceType] _ in paceType}
+                    .filter { $0 != nil }
+                    .map { [index] _ in index }
+                    .bind(to: action.inputs)
+                    .disposed(by: bag)
+            }
+        }
+    }
+
+    public var updateAction: Action<(Int, PaceType), Void>? {
+        didSet {
+            if let action = updateAction {
+                paceTypeUpdated
+                    .take(1)
+                    .bind(to: action.inputs)
+                    .disposed(by: bag)
+            }
+        }
     }
 
     public var inputs: ConfigurePaceTypeViewModelInputs { return self }
@@ -99,9 +135,12 @@ public class ConfigurePaceTypeViewModel: ConfigurePaceTypeViewModelType {
     public var selectedPaceUnit: PublishRelay<PaceUnit> = PublishRelay()
     public var selectedRaceType: PublishRelay<RaceType> = PublishRelay()
     public var selectedRaceDistanceUnit: BehaviorRelay<DistanceUnit>
+    public var selectedDelete: PublishRelay<Void> = PublishRelay()
 
     public var paceTypeUpdated: Observable<(Int, PaceType)>
     public var configureFinished: PublishRelay<Void> = PublishRelay()
+
+    public let bag = DisposeBag()
 }
 
 extension ConfigurePaceTypeViewModel: ConfigurePaceTypeViewModelInputs, ConfigurePaceTypeViewModelOutputs { }

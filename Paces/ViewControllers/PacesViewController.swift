@@ -10,6 +10,7 @@ import UIKit
 import PacesKit
 import RxSwift
 import RxCocoa
+import Action
 
 protocol PacesViewControllerDelegate: class {
     func pacesViewControllerShowSettings(_ pacesViewController: PacesViewController)
@@ -176,31 +177,29 @@ class PacesViewController: UIViewController {
     func showConfigurePace(model: ConfigurePaceTypeViewModel) {
         print("resources: \(RxSwift.Resources.total)")
 
+        let adding = model.paceType == nil
+        let updateAction = Action<(Int, PaceType), Void> { [weak self] (index, paceType) in
+            if adding {
+                self?.collectionViewAdapter.addPaceType(paceType)
+            }
+            else {
+                // editing a pace
+                self?.collectionViewAdapter.updatePaceType(paceType, at: index)
+            }
+            return Observable.empty()
+        }
+
+        let deleteAction = Action<Int, Void>(enabledIf: Observable.just(!adding)) { [weak self] (index:Int) -> Observable<Void> in
+            self?.collectionViewAdapter.deletePaceType(at: index)
+            return .empty()
+        }
+
+        model.updateAction = updateAction
+        model.deleteAction = deleteAction
+
         let configurePaceTypeView = ConfigurePaceTypeView.configuredWith(model)
         configurePaceTypeView.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(configurePaceTypeView)
-
-        NSLayoutConstraint.activate([
-            configurePaceTypeView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
-            configurePaceTypeView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
-            configurePaceTypeView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-            configurePaceTypeView.bottomAnchor.constraint(equalTo: view.bottomAnchor)
-            ])
-
-        configurePaceTypeView.viewModel.outputs.paceTypeUpdated
-            .take(1)
-            .observeOnMain()
-            .subscribe(onNext: { [weak self] (index, paceType) in
-                if model.paceType == nil {
-                    //adding a pace
-                    self?.collectionViewAdapter.addPaceType(paceType)
-                }
-                else {
-                    // editing a pace
-                    self?.collectionViewAdapter.updatePaceType(paceType, at: index)
-                }
-            })
-            .disposed(by: configurePaceTypeView.bag)
 
         configurePaceTypeView.viewModel.outputs.configureFinished
             .take(1)
@@ -209,6 +208,13 @@ class PacesViewController: UIViewController {
                 configurePaceTypeView.removeFromSuperview()
             })
             .disposed(by: configurePaceTypeView.bag)
+
+        NSLayoutConstraint.activate([
+            configurePaceTypeView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
+            configurePaceTypeView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            configurePaceTypeView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            configurePaceTypeView.bottomAnchor.constraint(equalTo: view.bottomAnchor)
+            ])
 
         configurePaceTypeView.show()
     }

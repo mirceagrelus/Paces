@@ -95,6 +95,21 @@ public class PacesCollectionViewAdapter: NSObject {
         })
     }
 
+    func deletePaceType(at index: Int) {
+        guard let collectionView = collectionView else { return }
+
+        collectionView.performBatchUpdates({
+            var items = paceControls.value
+            let indexPath = IndexPath(row: index, section: controlsSection)
+            if items.count > indexPath.item {
+                items.remove(at: indexPath.item)
+                paceControls.accept(items)
+
+                collectionView.deleteItems(at: [indexPath])
+            }
+        })
+    }
+
 }
 
 extension PacesCollectionViewAdapter: UICollectionViewDataSource {

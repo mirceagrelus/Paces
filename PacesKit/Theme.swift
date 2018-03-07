@@ -34,6 +34,8 @@ public protocol Theme: class {
     var backgroundColorGradient: [UIColor] { get }
     var backgroundColor: UIColor { get }
 
+    var destructiveActionActiveColor: UIColor { get }
+
     var navBarItemsTintColor: UIColor { get }
 
     var inputViewTextColor: UIColor { get }
@@ -53,6 +55,8 @@ public class ThemeOrangeRed: Theme {
     public var backgroundColorGradient: [UIColor] = [UIColor.orange, UIColor.red]
     public var backgroundColor: UIColor = UIColor(red: 255.0/255.0, green: 64.0/255.0, blue: 0/255.0, alpha: 1)
 
+    public var destructiveActionActiveColor: UIColor = UIColor.black.withAlphaComponent(0.6)
+
     public var navBarItemsTintColor: UIColor = .black
 
     public var inputViewTextColor: UIColor = .black
@@ -71,6 +75,8 @@ public class ThemePurpleBlue: Theme {
     public var textColor: UIColor = .white
     public var backgroundColorGradient: [UIColor] = [UIColor.purple, UIColor.blue]
     public var backgroundColor: UIColor = UIColor.purple
+
+    public var destructiveActionActiveColor: UIColor = UIColor.black.withAlphaComponent(0.6)
 
     public var navBarItemsTintColor: UIColor = .black
 

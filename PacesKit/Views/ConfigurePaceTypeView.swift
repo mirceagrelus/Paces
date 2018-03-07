@@ -18,7 +18,7 @@ public class ConfigurePaceTypeView: UIView {
         return configurePaceTypeView
     }
 
-    public var viewModel: ConfigurePaceTypeViewModelType! { didSet { self.bindViewModel() }}
+    public var viewModel: ConfigurePaceTypeViewModelType! { didSet { bindViewModel() }}
     public let bag = DisposeBag()
 
     @IBOutlet weak var dimView: DimView!
@@ -29,6 +29,7 @@ public class ConfigurePaceTypeView: UIView {
     var contentShowConstraint: NSLayoutConstraint = NSLayoutConstraint()
     var contentHideConstraint: NSLayoutConstraint = NSLayoutConstraint()
 
+    @IBOutlet weak var deleteStackView: UIStackView!
     @IBOutlet weak var paceMinKm: PaceTypeButton!
     @IBOutlet weak var paceMinMi: PaceTypeButton!
     @IBOutlet weak var paceKph: PaceTypeButton!
@@ -40,6 +41,7 @@ public class ConfigurePaceTypeView: UIView {
     @IBOutlet weak var raceCustomDistance: CustomDistanceInput!
     @IBOutlet weak var raceDistanceKm: PaceTypeButton!
     @IBOutlet weak var raceDistanceMile: PaceTypeButton!
+    @IBOutlet weak var deleteButton: PaceTypeButton!
 
     let edgeInset: CGFloat = 20
     let shadowOpacity: Float = 0.5
@@ -54,7 +56,6 @@ public class ConfigurePaceTypeView: UIView {
     public override func awakeFromNib() {
         super.awakeFromNib()
         setup()
-        bindViewModel()
     }
 
     // animate the configuration screen in place
@@ -146,9 +147,19 @@ public class ConfigurePaceTypeView: UIView {
             })
             .bind(to: viewModel.inputs.selectedRaceDistanceUnit)
             .disposed(by: bag)
+
+        deleteButton.rx.tap
+            .map(void)
+            .do(onNext: { [weak self] _ in
+                self?.dismiss()
+            })
+            .bind(to: viewModel.inputs.selectedDelete)
+            .disposed(by: bag)
     }
 
     func selectInitalType() {
+        deleteStackView.isHidden = viewModel.inputs.paceType == nil
+
         guard let initialPaceType = viewModel.inputs.paceType else { return }
         switch initialPaceType {
         case .pace(let pace):
@@ -212,6 +223,9 @@ public class ConfigurePaceTypeView: UIView {
 
         raceDistanceKm.setTitle(DistanceUnit.km.description, for: .normal)
         raceDistanceMile.setTitle(DistanceUnit.mile.description, for: .normal)
+
+        deleteButton.applyBackgroundColor = { theme.destructiveActionActiveColor }
+        deleteButton.applyStyle()
     }
 
     func setupGestures() {

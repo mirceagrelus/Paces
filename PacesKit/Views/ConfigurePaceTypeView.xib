@@ -28,74 +28,74 @@
                             <rect key="frame" x="0.0" y="0.0" width="422" height="363"/>
                             <subviews>
                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="9Iw-em-Lf9">
-                                    <rect key="frame" x="104" y="23.5" width="214" height="316"/>
+                                    <rect key="frame" x="83" y="-4" width="256" height="371"/>
                                     <subviews>
                                         <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="fMi-Ji-NWb">
-                                            <rect key="frame" x="8" y="8" width="198" height="300"/>
+                                            <rect key="frame" x="8" y="8" width="240" height="355"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Pace" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="D0s-wY-6Eo" customClass="ConversionControlLabel" customModule="PacesKit" customModuleProvider="target">
-                                                    <rect key="frame" x="0.0" y="0.0" width="198" height="23"/>
+                                                    <rect key="frame" x="0.0" y="0.0" width="240" height="23"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="19"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <stackView opaque="NO" contentMode="scaleToFill" distribution="equalSpacing" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="8Yw-ee-eO6">
-                                                    <rect key="frame" x="0.0" y="33" width="198" height="34"/>
+                                                    <rect key="frame" x="0.0" y="33" width="240" height="34"/>
                                                     <subviews>
                                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="XM6-1j-sao" customClass="PaceTypeButton" customModule="PacesKit" customModuleProvider="target">
                                                             <rect key="frame" x="0.0" y="0.0" width="60" height="34"/>
                                                             <state key="normal" title="min/km"/>
                                                         </button>
                                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0bc-W4-QS5" customClass="PaceTypeButton" customModule="PacesKit" customModuleProvider="target">
-                                                            <rect key="frame" x="65" y="0.0" width="55" height="34"/>
+                                                            <rect key="frame" x="79" y="0.0" width="55" height="34"/>
                                                             <state key="normal" title="min/mi"/>
                                                         </button>
                                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bJZ-p7-hqu" customClass="PaceTypeButton" customModule="PacesKit" customModuleProvider="target">
-                                                            <rect key="frame" x="125" y="0.0" width="31" height="34"/>
+                                                            <rect key="frame" x="153" y="0.0" width="31" height="34"/>
                                                             <state key="normal" title="kph"/>
                                                         </button>
                                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="kLh-xx-dls" customClass="PaceTypeButton" customModule="PacesKit" customModuleProvider="target">
-                                                            <rect key="frame" x="161" y="0.0" width="37" height="34"/>
+                                                            <rect key="frame" x="203" y="0.0" width="37" height="34"/>
                                                             <state key="normal" title="mph"/>
                                                         </button>
                                                     </subviews>
                                                 </stackView>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Race" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="MYx-yf-2sf" customClass="ConversionControlLabel" customModule="PacesKit" customModuleProvider="target">
-                                                    <rect key="frame" x="0.0" y="77" width="198" height="23"/>
+                                                    <rect key="frame" x="0.0" y="77" width="240" height="23"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="19"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <stackView opaque="NO" contentMode="scaleToFill" alignment="top" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="vmr-12-It4">
-                                                    <rect key="frame" x="0.0" y="110" width="198" height="190"/>
+                                                    <rect key="frame" x="0.0" y="110" width="240" height="190"/>
                                                     <subviews>
                                                         <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="9JL-xd-Q3J">
-                                                            <rect key="frame" x="0.0" y="0.0" width="154" height="190"/>
+                                                            <rect key="frame" x="0.0" y="0.0" width="196" height="190"/>
                                                             <subviews>
                                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="On9-dt-gV8" customClass="PaceTypeButton" customModule="PacesKit" customModuleProvider="target">
-                                                                    <rect key="frame" x="0.0" y="0.0" width="154" height="34"/>
+                                                                    <rect key="frame" x="0.0" y="0.0" width="196" height="34"/>
                                                                     <state key="normal" title="Marathon"/>
                                                                 </button>
                                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fdJ-s9-qSP" customClass="PaceTypeButton" customModule="PacesKit" customModuleProvider="target">
-                                                                    <rect key="frame" x="0.0" y="39" width="154" height="34"/>
+                                                                    <rect key="frame" x="0.0" y="39" width="196" height="34"/>
                                                                     <state key="normal" title="Half Marathon"/>
                                                                 </button>
                                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="qox-1C-yOC" customClass="PaceTypeButton" customModule="PacesKit" customModuleProvider="target">
-                                                                    <rect key="frame" x="0.0" y="78" width="154" height="34"/>
+                                                                    <rect key="frame" x="0.0" y="78" width="196" height="34"/>
                                                                     <state key="normal" title="10k"/>
                                                                 </button>
                                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="qvt-wE-bGN" customClass="PaceTypeButton" customModule="PacesKit" customModuleProvider="target">
-                                                                    <rect key="frame" x="0.0" y="117" width="154" height="34"/>
+                                                                    <rect key="frame" x="0.0" y="117" width="196" height="34"/>
                                                                     <state key="normal" title="5k"/>
                                                                 </button>
                                                                 <view contentMode="scaleToFill" placeholderIntrinsicWidth="154" placeholderIntrinsicHeight="34" translatesAutoresizingMaskIntoConstraints="NO" id="7Rp-0Z-huc" customClass="CustomDistanceInput" customModule="PacesKit" customModuleProvider="target">
-                                                                    <rect key="frame" x="0.0" y="156" width="154" height="34"/>
+                                                                    <rect key="frame" x="0.0" y="156" width="196" height="34"/>
                                                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                 </view>
                                                             </subviews>
                                                         </stackView>
                                                         <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="equalSpacing" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="e8x-6Q-IC3">
-                                                            <rect key="frame" x="164" y="0.0" width="34" height="73"/>
+                                                            <rect key="frame" x="206" y="0.0" width="34" height="73"/>
                                                             <subviews>
                                                                 <button opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="YV6-rf-oef" customClass="PaceTypeButton" customModule="PacesKit" customModuleProvider="target">
                                                                     <rect key="frame" x="0.0" y="0.0" width="34" height="34"/>
@@ -107,6 +107,23 @@
                                                                 </button>
                                                             </subviews>
                                                         </stackView>
+                                                    </subviews>
+                                                </stackView>
+                                                <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="equalSpacing" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="uuw-Jl-arl">
+                                                    <rect key="frame" x="0.0" y="310" width="240" height="45"/>
+                                                    <subviews>
+                                                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="xbl-o3-8a1">
+                                                            <rect key="frame" x="0.0" y="0.0" width="240" height="1"/>
+                                                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                            <constraints>
+                                                                <constraint firstAttribute="height" constant="1" id="uui-si-mbT"/>
+                                                            </constraints>
+                                                        </view>
+                                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0Sp-YO-ZYw" customClass="PaceTypeButton" customModule="PacesKit" customModuleProvider="target">
+                                                            <rect key="frame" x="0.0" y="11" width="240" height="34"/>
+                                                            <fontDescription key="fontDescription" type="system" pointSize="18"/>
+                                                            <state key="normal" title="Delete"/>
+                                                        </button>
                                                     </subviews>
                                                 </stackView>
                                             </subviews>
@@ -161,6 +178,8 @@
             <viewLayoutGuide key="safeArea" id="MFu-1h-sda"/>
             <connections>
                 <outlet property="contentView" destination="9Iw-em-Lf9" id="DNZ-6W-2s0"/>
+                <outlet property="deleteButton" destination="0Sp-YO-ZYw" id="vao-Tc-lYI"/>
+                <outlet property="deleteStackView" destination="uuw-Jl-arl" id="8J8-nN-nGv"/>
                 <outlet property="dimView" destination="aN0-5X-ygm" id="Bad-vY-ak3"/>
                 <outlet property="ibConstraint" destination="myW-Ws-bJG" id="JR0-jL-XaQ"/>
                 <outlet property="paceKph" destination="bJZ-p7-hqu" id="iX8-m3-I8B"/>

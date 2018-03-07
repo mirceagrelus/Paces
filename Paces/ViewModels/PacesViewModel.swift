@@ -133,6 +133,16 @@ public class PacesViewModel: PacesViewModelType {
         goToAddPaceType = addPaceType
             .map { _ in ConfigurePaceTypeViewModel(paceType: nil, index: 0) }
 
+//        addPaceType
+//            .withLatestFrom(showInput)
+//            .filter { $0 }
+//            .withLatestFrom(tappedControl)
+////            .bind(to: _controlSelection)
+//            .subscribe(onNext: { [weak self] in
+//                self?.tappedControl.accept($0)
+//            })
+//            .disposed(by: bag)
+
         // store inputValue in Environment
         inputValue
             .subscribe(onNext: { AppEnvironment.replaceCurrentEnvironment(inputValue: $0) })
@@ -158,12 +168,10 @@ public class PacesViewModel: PacesViewModelType {
 
     }
 
-    // Action used for triggerign the add of a PaceType control
+    // Action used for triggering the add of a PaceType control
     public var addPaceAction: CocoaAction {
         return CocoaAction { [weak self] _ -> Observable<Void> in
-            if let _self = self {
-                return Observable.just(_self.addPaceType.accept(()))
-            }
+            self?.addPaceType.accept(())
             return Observable.empty()
         }
     }
