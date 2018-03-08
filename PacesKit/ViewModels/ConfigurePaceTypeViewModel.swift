@@ -15,8 +15,8 @@ public protocol ConfigurePaceTypeViewModelInputs {
     // control paceType
     var paceType: PaceType? { get }
 
-    // index of the control in the datasource
-    var index: Int { get }
+    // id of the control being configured
+    var controlId: Int { get }
 
     //the selected PaceUnit to swith to
     var selectedPaceUnit: PublishRelay<PaceUnit> { get }
@@ -55,9 +55,9 @@ public protocol ConfigurePaceTypeViewModelType: class {
 
 public class ConfigurePaceTypeViewModel: ConfigurePaceTypeViewModelType {
 
-    public init(paceType: PaceType?, index: Int) {
+    public init(paceType: PaceType?, controlId: Int) {
         self.paceType = paceType
-        self.index = index
+        self.controlId = controlId
 
         // adding is a configuration with a nil PaceType. Consider a default distanceUnit of Km for Races
         // When editing use either the Race's or Pace's distance unit as default
@@ -99,7 +99,7 @@ public class ConfigurePaceTypeViewModel: ConfigurePaceTypeViewModelType {
                 if let initialPace = paceType { return initialPace.converted(to: $0) }
                 return $0
             }
-            .map { selectedPace in (index, selectedPace) }
+            .map { selectedPace in (controlId, selectedPace) }
             .share(replay: 1, scope: .whileConnected)
     }
 
@@ -109,7 +109,7 @@ public class ConfigurePaceTypeViewModel: ConfigurePaceTypeViewModelType {
                 selectedDelete
                     .map { [paceType] _ in paceType}
                     .filter { $0 != nil }
-                    .map { [index] _ in index }
+                    .map { [controlId] _ in controlId }
                     .bind(to: action.inputs)
                     .disposed(by: bag)
             }
@@ -131,7 +131,7 @@ public class ConfigurePaceTypeViewModel: ConfigurePaceTypeViewModelType {
     public var outputs: ConfigurePaceTypeViewModelOutputs { return self }
 
     public let paceType: PaceType?
-    public let index: Int
+    public let controlId: Int
     public var selectedPaceUnit: PublishRelay<PaceUnit> = PublishRelay()
     public var selectedRaceType: PublishRelay<RaceType> = PublishRelay()
     public var selectedRaceDistanceUnit: BehaviorRelay<DistanceUnit>

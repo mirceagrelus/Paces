@@ -48,9 +48,6 @@ public protocol PaceTypeControlViewModelType: class {
     func configuredPaceViewModel() -> PaceControlViewModelType
     func configuredDistanceViewModel() -> DistanceControlViewModelType
 
-    // determines the index of control in the datasource
-    var controlIndex: ((ConversionControl) -> Int?)? { get set }
-
     var bag: DisposeBag { get }
 }
 
@@ -80,15 +77,14 @@ public class PaceTypeControlViewModel: PaceTypeControlViewModelType {
             .disposed(by: bag)
 
         // configure pace type for the control
+        let paceToConfigure = Observable
+            .combineLatest(control, paceType) { ($0.id, $1) }
+
         configureTapped
-            .withLatestFrom(control)
-            .map {  [weak self] control -> Int? in
-                return self?.controlIndex?(control)
-            }
-            .ignoreNil()
-            .withLatestFrom(paceType) { ($0, $1)}
+            .withLatestFrom(paceToConfigure)
             .bind(to: _configurePaceType)
             .disposed(by: bag)
+
     }
 
     public func configuredPaceViewModel() -> PaceControlViewModelType {
@@ -153,8 +149,6 @@ public class PaceTypeControlViewModel: PaceTypeControlViewModelType {
     public var configurePaceType: Observable<(Int, PaceType)> {
         return _configurePaceType.asObservable()
     }
-
-    public var controlIndex: ((ConversionControl) -> Int?)?
 
     public let bag = DisposeBag()
 }

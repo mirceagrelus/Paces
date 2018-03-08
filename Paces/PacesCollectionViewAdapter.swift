@@ -66,8 +66,10 @@ public class PacesCollectionViewAdapter: NSObject {
     }
 
     // update paceType for control at index
-    func updatePaceType(_ paceType: PaceType, at index: Int) {
-        guard let collectionView = collectionView else { return }
+    func updatePaceType(_ paceType: PaceType, controlId: Int) {
+        guard let collectionView = collectionView,
+            let index = indexOfControl(id: controlId) else { return }
+
         let indexPath = IndexPath(row: index, section: controlsSection)
 
         collectionView.performBatchUpdates({
@@ -100,8 +102,9 @@ public class PacesCollectionViewAdapter: NSObject {
         })
     }
 
-    func deletePaceType(at index: Int) {
-        guard let collectionView = collectionView else { return }
+    func deletePaceType(controlId: Int) {
+        guard let collectionView = collectionView,
+            let index = indexOfControl(id: controlId) else { return }
 
         collectionView.performBatchUpdates({
             var items = paceControls.value
@@ -118,6 +121,14 @@ public class PacesCollectionViewAdapter: NSObject {
     func availableControlId(_ controls: [ConversionControl]) -> Int {
         let maxId = controls.reduce(0) { max($0, $1.id) }
         return maxId + 1
+    }
+
+    func indexOfControl(id: Int) -> Int? {
+        let controls = paceControls.value
+        for (index, control) in controls.enumerated() {
+            if control.id == id { return index }
+        }
+        return nil
     }
 
 }
@@ -137,9 +148,6 @@ extension PacesCollectionViewAdapter: UICollectionViewDataSource {
             paceTypeCell.configureFor(control: controlModel)
             self.bindControl(paceTypeCell.paceTypeControlView.viewModel)
             paceTypeCell.paceTypeControlView.viewModel.inputs.control.accept(controlModel)
-            paceTypeCell.paceTypeControlView.viewModel.controlIndex = { [weak self] control in
-                return self?.paceControls.value.index(of: control)
-            }
             print("bind item: \(indexPath.item)")
         }
 

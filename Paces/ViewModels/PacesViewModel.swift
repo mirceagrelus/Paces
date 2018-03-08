@@ -138,12 +138,12 @@ public class PacesViewModel: PacesViewModelType {
             .debug("showInput")
 
         goToConfigurePace = configurePaceType
-            .map { (index, paceType) -> ConfigurePaceTypeViewModel in
-                 return ConfigurePaceTypeViewModel(paceType: paceType, index: index)
+            .map { (id, paceType) -> ConfigurePaceTypeViewModel in
+                 return ConfigurePaceTypeViewModel(paceType: paceType, controlId: id)
         }
 
         goToAddPaceType = addPaceType
-            .map { _ in ConfigurePaceTypeViewModel(paceType: nil, index: 0) }
+            .map { _ in ConfigurePaceTypeViewModel(paceType: nil, controlId: 0) }
 
         // store inputValue in Environment
         inputValue

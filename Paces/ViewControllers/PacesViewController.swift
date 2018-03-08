@@ -170,19 +170,19 @@ class PacesViewController: UIViewController {
         print("resources: \(RxSwift.Resources.total)")
 
         let adding = model.paceType == nil
-        let updateAction = Action<(Int, PaceType), Void> { [weak self] (index, paceType) in
+        let updateAction = Action<(Int, PaceType), Void> { [weak self] (id, paceType) in
             if adding {
                 self?.collectionViewAdapter.addPaceType(paceType)
             }
             else {
                 // editing a pace
-                self?.collectionViewAdapter.updatePaceType(paceType, at: index)
+                self?.collectionViewAdapter.updatePaceType(paceType, controlId: id)
             }
             return Observable.empty()
         }
 
-        let deleteAction = Action<Int, Void>(enabledIf: Observable.just(!adding)) { [weak self] (index:Int) -> Observable<Void> in
-            self?.collectionViewAdapter.deletePaceType(at: index)
+        let deleteAction = Action<Int, Void>(enabledIf: Observable.just(!adding)) { [weak self] (id:Int) -> Observable<Void> in
+            self?.collectionViewAdapter.deletePaceType(controlId: id)
             return .empty()
         }
 
