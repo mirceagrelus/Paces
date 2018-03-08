@@ -90,11 +90,12 @@ public class PacesCollectionViewAdapter: NSObject {
 
         collectionView.performBatchUpdates({
             var items = paceControls.value
-            let position = items.count
-            let item = ConversionControl(id: position, paceType: paceType)
+            let id = availableControlId(items)
+            let item = ConversionControl(id: id, paceType: paceType)
             items.append(item)
             paceControls.accept(items)
 
+            let position = collectionView.numberOfItems(inSection: controlsSection)
             collectionView.insertItems(at: [IndexPath(row: position, section: controlsSection)])
         })
     }
@@ -112,6 +113,11 @@ public class PacesCollectionViewAdapter: NSObject {
                 collectionView.deleteItems(at: [indexPath])
             }
         })
+    }
+
+    func availableControlId(_ controls: [ConversionControl]) -> Int {
+        let maxId = controls.reduce(0) { max($0, $1.id) }
+        return maxId + 1
     }
 
 }
