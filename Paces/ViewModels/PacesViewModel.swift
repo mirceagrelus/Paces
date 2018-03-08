@@ -102,7 +102,7 @@ public class PacesViewModel: PacesViewModelType {
             .bind(to: inputValue)
             .disposed(by: bag)
 
-        // selected control
+        // selection on tap
         tappedControl
             .withLatestFrom(selectedControl) { (tapped, selected) -> Int? in
                 if let currentlySelected = selected,
@@ -115,9 +115,19 @@ public class PacesViewModel: PacesViewModelType {
             .bind(to: selectedControl)
             .disposed(by: bag)
 
-        // selection state for controls
-        selectedControl
-            .withLatestFrom(paceControls) { (selected, controls) in
+        // update selected state if control gets deleted
+        paceControls
+            .withLatestFrom(selectedControl) { (controls, selected) in
+                controls.filter { $0.id == selected }
+            }
+            .filter { $0.count == 0 }
+            .map { _ -> Int? in nil }
+            .bind(to: selectedControl)
+            .disposed(by: bag)
+
+        // selection state of all controls
+        Observable
+            .combineLatest(selectedControl, paceControls) { (selected, controls) in
                 controls.map { ($0.id, $0.id == selected) }
             }
             .bind(to: _controlSelections)
