@@ -44,13 +44,15 @@ public class PacesCollectionViewAdapter: NSObject {
     // index of the section containing ConversionControls
     let controlsSection: Int = 0
 
+    let bag = DisposeBag()
+
     init(_ collectionView: UICollectionView,
          bindControl: @escaping (PaceTypeControlViewModelType) -> (),
          addPaceAction: CocoaAction? = nil ) {
         self.collectionView = collectionView
         self.bindControl = bindControl
         self.addPaceTypeAction = addPaceAction
-        paceControls = BehaviorRelay(value: AppEnvironment.current.envControls)
+        paceControls = BehaviorRelay(value: AppEnvironment.current.archivedControls)
         super.init()
         // configure the cell pan gesture
         let panGesture = UIPanGestureRecognizer(target: self, action: #selector(self.handleCellPan(_:)))
@@ -58,6 +60,11 @@ public class PacesCollectionViewAdapter: NSObject {
         self.collectionView?.addGestureRecognizer(panGesture)
         self.cellPanGesture = panGesture
         panGesture.isEnabled = false
+
+        paceControls
+            .skip(1)
+            .subscribe(onNext: { AppEnvironment.replaceCurrentEnvironment(archivedControls: $0) })
+            .disposed(by: bag)
     }
 
     // supplies data for the datasource

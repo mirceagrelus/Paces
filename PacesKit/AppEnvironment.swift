@@ -17,6 +17,7 @@ public struct AppEnvironment {
     internal static let key_isPremiumUser = "isPremiumUser"
     internal static let key_inputPaceValue = "inputPaceValue"
     internal static let key_inputPaceType = "inputPaceType"
+    internal static let key_archivedControls = "archivedControls"
     internal static let key_lastVersionWhatsNewShown = "lastVersionWhatsNewShown"
 
     // A global stack of environments.
@@ -44,6 +45,7 @@ public struct AppEnvironment {
                                                  isPremiumUser: Bool = current.isPremiumUser,
                                                  inputValue: String = current.inputValue,
                                                  inputPaceType: PaceType = current.inputPaceType,
+                                                 archivedControls: [ConversionControl] = current.archivedControls,
                                                  lastVersionWhatsNewShown: Double = current.lastVersionWhatsNewShown,
                                                  ubiquitousStore: KeyValueStoreType = current.ubiquitousStore,
                                                  userDefaults: KeyValueStoreType = current.userDefaults) {
@@ -53,6 +55,7 @@ public struct AppEnvironment {
                         isPremiumUser: isPremiumUser,
                         inputValue: inputValue,
                         inputPaceType: inputPaceType,
+                        archivedControls: archivedControls,
                         lastVersionWhatsNewShown: lastVersionWhatsNewShown,
                         ubiquitousStore: ubiquitousStore,
                         userDefaults: userDefaults)
@@ -82,6 +85,19 @@ public struct AppEnvironment {
             print(error.localizedDescription)
         }
 
+        var archivedControls: [ConversionControl]?
+        do {
+            if let jsonString = data[key_archivedControls] as? String,
+                let jsonData = jsonString.data(using: .utf8) {
+
+                let archivedPaceTypes = try JSONDecoder().decode(Array<PaceType>.self, from: jsonData)
+                archivedControls = archivedPaceTypes.enumerated().map { ConversionControl(id: $0, paceType: $1) }
+            }
+        }
+        catch {
+            print(error.localizedDescription)
+        }
+
         let lastVersionWhatsNewShown = data[key_lastVersionWhatsNewShown] as? Double
 
 
@@ -89,6 +105,7 @@ public struct AppEnvironment {
                            isPremiumUser: isPremiumUser ?? current.isPremiumUser,
                            inputValue: inputValue ?? current.inputValue,
                            inputPaceType: inputPaceType ?? current.inputPaceType,
+                           archivedControls: archivedControls ?? current.archivedControls,
                            lastVersionWhatsNewShown: lastVersionWhatsNewShown ?? current.lastVersionWhatsNewShown)
     }
 
@@ -109,6 +126,17 @@ public struct AppEnvironment {
             let jsonString = String(decoding: jsonData, as: UTF8.self)
 
             data[key_inputPaceType] = jsonString
+        }
+        catch {
+            print(error.localizedDescription)
+        }
+
+        do {
+            let encoder = JSONEncoder()
+            let archivedControlsData = try encoder.encode(env.archivedControls.map { $0.paceType })
+            let jsonString = String(decoding: archivedControlsData, as: UTF8.self)
+
+            data[key_archivedControls] = jsonString
         }
         catch {
             print(error.localizedDescription)

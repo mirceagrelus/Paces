@@ -22,6 +22,9 @@ public struct Environment {
     // the last pace type that was used for input data
     public let inputPaceType: PaceType
 
+    // the last configured controls
+    public let archivedControls: [ConversionControl]
+
     // last version number the What's new info was shown for
     public let lastVersionWhatsNewShown: Double
 
@@ -34,7 +37,8 @@ public struct Environment {
     // current version for the What's New info screen
     public let whatsNewVersion: Double = 1.0
 
-    public let envControls = [ConversionControl(id: 0, paceType: .pace(Pace(stringValue: "", unit: .minPerMile))),
+    // for testing during development
+    private let testControls = [ConversionControl(id: 0, paceType: .pace(Pace(stringValue: "", unit: .minPerMile))),
                        ConversionControl(id: 1, paceType: .pace(Pace(stringValue: "", unit: .minPerKm))),
                        ConversionControl(id: 2, paceType: .pace(Pace(stringValue: "", unit: .kmPerHour))),
                        ConversionControl(id: 3, paceType: .pace(Pace(stringValue: "", unit: .milePerHour))),
@@ -45,6 +49,7 @@ public struct Environment {
         isPremiumUser: Bool = false,
         inputValue: String = "8:00",
         inputPaceType: PaceType = .pace(Pace.minPerMile(seconds: 8*60)),
+        archivedControls: [ConversionControl] = [],
         lastVersionWhatsNewShown: Double = 0,
         ubiquitousStore: KeyValueStoreType = NSUbiquitousKeyValueStore.default,
         userDefaults: KeyValueStoreType = UserDefaults.standard){
@@ -53,6 +58,7 @@ public struct Environment {
         self.isPremiumUser = isPremiumUser
         self.inputValue = inputValue
         self.inputPaceType = inputPaceType
+        self.archivedControls = archivedControls
         self.lastVersionWhatsNewShown = lastVersionWhatsNewShown
         self.ubiquitousStore = ubiquitousStore
         self.userDefaults = userDefaults
