@@ -19,13 +19,16 @@ public protocol PacesViewModelInputs {
     // the paceType configured for the input
     var inputPaceType: BehaviorRelay<PaceType> { get }
 
+    // configured controls
+     var paceControls: PublishRelay<[ConversionControl]> { get }
+
     // viewDidLoad event
     var viewDidLoad: PublishSubject<()> { get }
 
-    // the control that was tapped
-    var tappedControl: PublishRelay<ConversionControl> { get }
+    // the id of the tapped control
+    var tappedControl: PublishRelay<Int> { get }
 
-    // pace type that needs to be configured
+    // PaceType with it's id that needs to be configured
     var configurePaceType: PublishRelay<(Int, PaceType)> { get }
 
     // add a new paceType
@@ -36,17 +39,14 @@ public protocol PacesViewModelOutputs {
     // the calculated pacing element from user input
     var paceType: Observable<PaceType> { get }
 
-    // configured controls
-    var paceControls: Observable<[ConversionControl]> { get }
-
     // show user input pane UI
     var showInput: Observable<Bool> { get }
 
     // data source of input for the picker view
     var inputDataSource: Observable<[[CustomStringConvertible]]> { get }
 
-    // selection event rebroadcasted to all controls
-    var controlSelection: Observable<ConversionControl> { get }
+    // selection state for controls (id, selected state)
+    var controlSelections: Observable<[(Int, Bool)]> { get }
 
     // show configure pace UI
     var goToConfigurePace: Observable<ConfigurePaceTypeViewModel> { get }
@@ -61,6 +61,8 @@ public protocol PacesViewModelType {
 
     var addPaceAction: CocoaAction { get }
     func bindControlModel() -> (PaceTypeControlViewModelType) -> ()
+
+    var bag: DisposeBag { get }
 }
 
 public class PacesViewModel: PacesViewModelType {
@@ -68,14 +70,6 @@ public class PacesViewModel: PacesViewModelType {
     init() {
         inputValue = BehaviorRelay(value: AppEnvironment.current.inputValue)
         inputPaceType = BehaviorRelay(value: AppEnvironment.current.inputPaceType)
-        //TODO: read paces config from AppEnvironment
-        let envControls = [ConversionControl(sortOrder: 0, paceType: .pace(Pace(stringValue: "", unit: .minPerMile))),
-                           ConversionControl(sortOrder: 1, paceType: .pace(Pace(stringValue: "", unit: .minPerKm))),
-                           ConversionControl(sortOrder: 2, paceType: .pace(Pace(stringValue: "", unit: .kmPerHour))),
-                           ConversionControl(sortOrder: 3, paceType: .pace(Pace(stringValue: "", unit: .milePerHour))),
-                           ConversionControl(sortOrder: 4, paceType: .race(Race(time: 0, raceDistance: RaceDistance(raceType: .halfMarathon, distanceUnit: .km)) ))
-        ]
-        _paceControls = BehaviorRelay(value: envControls)
 
         // share the latest computed pace
         paceType = _paceType.share(replay: 1, scope: .whileConnected)
@@ -108,22 +102,30 @@ public class PacesViewModel: PacesViewModelType {
             .bind(to: inputValue)
             .disposed(by: bag)
 
-        // redistribute the tap event to all controls, so they can handle selection
+        // selected control
         tappedControl
-            .bind(to: _controlSelection)
+            .withLatestFrom(selectedControl) { (tapped, selected) -> Int? in
+                if let currentlySelected = selected,
+                    tapped == currentlySelected {
+                    return nil
+                }
+                return tapped
+            }
+            .debug("selectedControl")
+            .bind(to: selectedControl)
             .disposed(by: bag)
 
-        showInput = tappedControl
-            .scan([]) { lastSlice, val -> [ConversionControl] in
-                let slice = (lastSlice + [val]).suffix(2)
-                return Array(slice)
+        // selection state for controls
+        selectedControl
+            .withLatestFrom(paceControls) { (selected, controls) in
+                controls.map { ($0.id, $0.id == selected) }
             }
-            .filter { $0.count == 2 }
-            .scan(true) { isShown, controls -> Bool in
-                let sameTapped = controls[0] == controls [1]
-                return isShown ? !sameTapped : true
-            }
-            .startWith(true)
+            .bind(to: _controlSelections)
+            .disposed(by: bag)
+
+        showInput = selectedControl
+            .map { $0 != nil }
+            .debug("showInput")
 
         goToConfigurePace = configurePaceType
             .map { (index, paceType) -> ConfigurePaceTypeViewModel in
@@ -132,16 +134,6 @@ public class PacesViewModel: PacesViewModelType {
 
         goToAddPaceType = addPaceType
             .map { _ in ConfigurePaceTypeViewModel(paceType: nil, index: 0) }
-
-//        addPaceType
-//            .withLatestFrom(showInput)
-//            .filter { $0 }
-//            .withLatestFrom(tappedControl)
-////            .bind(to: _controlSelection)
-//            .subscribe(onNext: { [weak self] in
-//                self?.tappedControl.accept($0)
-//            })
-//            .disposed(by: bag)
 
         // store inputValue in Environment
         inputValue
@@ -160,10 +152,11 @@ public class PacesViewModel: PacesViewModelType {
         }
 
         viewDidLoad
-            .withLatestFrom(initiallySelectedControl)
+            .withLatestFrom(initiallySelectedControl) { $1?.id }
             .take(1)
             .ignoreNil()
-            .bind(to: _controlSelection)
+            .delay(0.5, scheduler: MainScheduler.instance)
+            .bind(to: selectedControl)
             .disposed(by: bag)
 
     }
@@ -193,8 +186,15 @@ public class PacesViewModel: PacesViewModelType {
                 .bind(to: _self.inputs.tappedControl)
                 .disposed(by: controlModel.bag)
 
-            _self.outputs.controlSelection
-                .bind(to: controlModel.inputs.controlSelection)
+            Observable
+                .combineLatest(_self.outputs.controlSelections, controlModel.inputs.control) { (selection, control) in
+                    selection
+                        .filter { $0.0 == control.id }
+                        .first
+                }
+                .ignoreNil()
+                .map { $0.1 }
+                .bind(to: controlModel.inputs.isSelected)
                 .disposed(by: controlModel.bag)
 
             controlModel.outputs.configurePaceType
@@ -208,33 +208,31 @@ public class PacesViewModel: PacesViewModelType {
 
     public var inputValue: BehaviorRelay<String>
     public var inputPaceType: BehaviorRelay<PaceType>
+    public let paceControls: PublishRelay<[ConversionControl]> = PublishRelay()
     public var viewDidLoad: PublishSubject<()> = PublishSubject()
-    public var tappedControl: PublishRelay<ConversionControl> = PublishRelay()
+    public var tappedControl: PublishRelay<Int> = PublishRelay()
     public var configurePaceType: PublishRelay<(Int, PaceType)> = PublishRelay()
     public var addPaceType: PublishRelay<Void> = PublishRelay()
 
     fileprivate let _paceType: PublishRelay<PaceType> = PublishRelay()
     public var paceType: Observable<PaceType>
 
-    fileprivate let _paceControls: BehaviorRelay<[ConversionControl]>
-    public var paceControls: Observable<[ConversionControl]> {
-        return _paceControls.asObservable()
-    }
     public var showInput: Observable<Bool>
 
     fileprivate let _inputDataSource: BehaviorRelay<[[CustomStringConvertible]]> = BehaviorRelay(value: [])
     public var inputDataSource: Observable<[[CustomStringConvertible]]> {
         return _inputDataSource.asObservable()
     }
-    fileprivate let _controlSelection: PublishRelay<ConversionControl> = PublishRelay()
-    public var controlSelection: Observable<ConversionControl> {
-        return _controlSelection.asObservable()
+    fileprivate let _controlSelections: BehaviorRelay<[(Int, Bool)]> = BehaviorRelay(value: [])
+    public var controlSelections: Observable<[(Int, Bool)]> {
+        return _controlSelections.asObservable()
     }
-
     public var goToConfigurePace: Observable<ConfigurePaceTypeViewModel>
     public var goToAddPaceType: Observable<ConfigurePaceTypeViewModel>
 
-    private let bag = DisposeBag()
+    fileprivate let selectedControl: BehaviorRelay<Int?> = BehaviorRelay(value: nil)
+
+    public let bag = DisposeBag()
 }
 
 extension PacesViewModel: PacesViewModelInputs, PacesViewModelOutputs { }

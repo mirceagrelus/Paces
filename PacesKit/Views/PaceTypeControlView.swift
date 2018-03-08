@@ -20,22 +20,10 @@ public class PaceTypeControlView: UIView {
 
     public override init(frame: CGRect) {
         super.init(frame: .zero)
-        self.commonInit()
     }
 
     public required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
-        self.commonInit()
-    }
-
-    public func commonInit() {
-        let tapGesture = UITapGestureRecognizer()
-        self.addGestureRecognizer(tapGesture)
-
-        tapGesture.rx.event
-            .map { _ in () }
-            .bind(to: viewModel.inputs.tapped)
-            .disposed(by: bag)
     }
 
     public func configureFor(_ control: ConversionControl) {
@@ -43,8 +31,6 @@ public class PaceTypeControlView: UIView {
         case .pace(_): self.addPaceControlView()
         case .race(_): self.addDistanceControlView()
         }
-
-        self.viewModel.inputs.control.accept(control)
     }
 
     func addPaceControlView() {

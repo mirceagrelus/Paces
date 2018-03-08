@@ -15,7 +15,10 @@ import Action
 public class PacesCollectionViewAdapter: NSObject {
 
     // pace controls that act as the data source for the collection view
-    fileprivate var paceControls: BehaviorRelay<[ConversionControl]> = BehaviorRelay(value: [])
+    fileprivate var paceControls: BehaviorRelay<[ConversionControl]>
+    public var adapterControls: Observable<[ConversionControl]> {
+        return paceControls.asObservable()
+    }
 
     // weak reference to the collection being managed
     fileprivate weak var collectionView: UICollectionView?
@@ -47,6 +50,7 @@ public class PacesCollectionViewAdapter: NSObject {
         self.collectionView = collectionView
         self.bindControl = bindControl
         self.addPaceTypeAction = addPaceAction
+        paceControls = BehaviorRelay(value: AppEnvironment.current.envControls)
         super.init()
         // configure the cell pan gesture
         let panGesture = UIPanGestureRecognizer(target: self, action: #selector(self.handleCellPan(_:)))
@@ -87,7 +91,7 @@ public class PacesCollectionViewAdapter: NSObject {
         collectionView.performBatchUpdates({
             var items = paceControls.value
             let position = items.count
-            let item = ConversionControl(sortOrder: position, paceType: paceType)
+            let item = ConversionControl(id: position, paceType: paceType)
             items.append(item)
             paceControls.accept(items)
 
@@ -126,14 +130,9 @@ extension PacesCollectionViewAdapter: UICollectionViewDataSource {
         if let paceTypeCell = cell as? PaceTypeControlCollectionViewCell {
             paceTypeCell.configureFor(control: controlModel)
             self.bindControl(paceTypeCell.paceTypeControlView.viewModel)
+            paceTypeCell.paceTypeControlView.viewModel.inputs.control.accept(controlModel)
             paceTypeCell.paceTypeControlView.viewModel.controlIndex = { [weak self] control in
                 return self?.paceControls.value.index(of: control)
-            }
-            // select control if it's being reconfigured
-            if let reconfigureIndex = reconfigureIndexPath,
-                reconfigureIndex == indexPath {
-                reconfigureIndexPath = nil
-                paceTypeCell.paceTypeControlView.viewModel.inputs.tapped.accept(())
             }
             print("bind item: \(indexPath.item)")
         }

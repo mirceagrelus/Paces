@@ -34,6 +34,12 @@ public struct Environment {
     // current version for the What's New info screen
     public let whatsNewVersion: Double = 1.0
 
+    public let envControls = [ConversionControl(id: 0, paceType: .pace(Pace(stringValue: "", unit: .minPerMile))),
+                       ConversionControl(id: 1, paceType: .pace(Pace(stringValue: "", unit: .minPerKm))),
+                       ConversionControl(id: 2, paceType: .pace(Pace(stringValue: "", unit: .kmPerHour))),
+                       ConversionControl(id: 3, paceType: .pace(Pace(stringValue: "", unit: .milePerHour))),
+                       ConversionControl(id: 4, paceType: .race(Race(time: 0, raceDistance: RaceDistance(raceType: .halfMarathon, distanceUnit: .km)) ))]
+
     public init(
         theme: Theme = ThemeType.orangeRed.theme(),
         isPremiumUser: Bool = false,

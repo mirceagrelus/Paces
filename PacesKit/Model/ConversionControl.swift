@@ -9,27 +9,26 @@
 import Foundation
 
 public struct ConversionControl: Codable {
-    public var sortOrder: Int
+    public var id: Int
     public var paceType: PaceType
 
-    public init(sortOrder: Int, paceType: PaceType) {
-        self.sortOrder = sortOrder
+    public init(id: Int, paceType: PaceType) {
+        self.id = id
         self.paceType = paceType
-
     }
 
     public static func orderSort(_ lhs: ConversionControl, _ rhs: ConversionControl) -> Bool {
-        return (lhs.sortOrder) < (rhs.sortOrder)
+        return (lhs.id) < (rhs.id)
     }
 }
 
 extension ConversionControl: Equatable {
     public static func == (lhs: ConversionControl, rhs: ConversionControl) -> Bool {
-        return lhs.sortOrder == rhs.sortOrder && lhs.paceType == rhs.paceType
+        return lhs.id == rhs.id && lhs.paceType == rhs.paceType
     }
 }
 
-public enum PaceType: Codable {
+public enum PaceType {
     case pace(Pace)
     case race(Race)
 
@@ -91,6 +90,12 @@ public enum PaceType: Codable {
         }
     }
 
+    public static var defaultValue: PaceType {
+        return PaceType.pace(Pace.minPerMile(seconds: 0))
+    }
+}
+
+extension PaceType: Codable {
     public func encode(to encoder: Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
         switch self {
@@ -107,7 +112,7 @@ public enum PaceType: Codable {
             self = .race(race)
         } else {
             // something went wrong. Just default to a value instead of throwing
-            self = .pace(Pace.minPerMile(seconds: 0))
+            self = PaceType.defaultValue
         }
     }
 }

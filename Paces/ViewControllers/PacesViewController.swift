@@ -101,17 +101,9 @@ class PacesViewController: UIViewController {
             .bind(to: viewModel.inputs.inputValue)
             .disposed(by: bag)
 
-        // load preexisting controls
-        viewModel.outputs.paceControls
-            .take(1)
-            .subscribe(onNext: { [weak self] controls in
-                self?.collectionViewAdapter.loadControls(controls)
-                self?.collectionView.reloadData()
-            })
-            .disposed(by: bag)
-
         // show or hide user input pane
         viewModel.outputs.showInput
+            .skip(1)
             .observeOnMain()
             .subscribe(onNext: { [weak self] showInput in
                 self?.togglePaceInput(showInput)
@@ -224,9 +216,14 @@ class PacesViewController: UIViewController {
 
 extension PacesViewController {
     func createCollectionViewAdapter() -> PacesCollectionViewAdapter {
-        return PacesCollectionViewAdapter(collectionView,
-                                          bindControl: viewModel.bindControlModel(),
-                                          addPaceAction: viewModel.addPaceAction)
+        let pacesAdapter = PacesCollectionViewAdapter(collectionView,
+                                                      bindControl: viewModel.bindControlModel(),
+                                                      addPaceAction: viewModel.addPaceAction)
+        pacesAdapter.adapterControls
+            .bind(to: viewModel.inputs.paceControls)
+            .disposed(by: viewModel.bag)
+
+        return pacesAdapter
     }
 
     func tableLayout(width: CGFloat = 300) -> UICollectionViewFlowLayout {
@@ -277,6 +274,8 @@ extension PacesViewController {
             pickerView.heightAnchor.constraint(equalToConstant: pickerViewHeight)
             ])
         pickerBottomConstraint = pickerView.bottomAnchor.constraint(equalTo: gradientView.safeAreaLayoutGuide.bottomAnchor)
+        let rootSafeArea = UIApplication.shared.keyWindow?.safeAreaInsets.bottom
+        pickerBottomConstraint.constant = pickerViewHeight + bounceAdjustment + (rootSafeArea ?? 0)
         pickerBottomConstraint.isActive = true
 
         NSLayoutConstraint.activate([
