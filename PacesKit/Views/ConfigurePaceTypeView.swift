@@ -24,7 +24,7 @@ public class ConfigurePaceTypeView: UIView {
     @IBOutlet weak var dimView: DimView!
     @IBOutlet weak var scrollView: UIScrollView!
     @IBOutlet weak var scrollViewContentView: UIView!
-    @IBOutlet weak var contentView: UIView!
+    @IBOutlet weak var contentView: ThemeView!
     @IBOutlet weak var ibConstraint: NSLayoutConstraint!
     var contentShowConstraint: NSLayoutConstraint = NSLayoutConstraint()
     var contentHideConstraint: NSLayoutConstraint = NSLayoutConstraint()
@@ -41,7 +41,7 @@ public class ConfigurePaceTypeView: UIView {
     @IBOutlet weak var raceCustomDistance: CustomDistanceInput!
     @IBOutlet weak var raceDistanceKm: PaceTypeButton!
     @IBOutlet weak var raceDistanceMile: PaceTypeButton!
-    @IBOutlet weak var deleteButton: PaceTypeButton!
+    @IBOutlet weak var deleteButton: ThemeButton!
 
     let edgeInset: CGFloat = 20
     let shadowOpacity: Float = 0.5
@@ -198,10 +198,9 @@ public class ConfigurePaceTypeView: UIView {
         contentShowConstraint.isActive = false
         contentHideConstraint.isActive = true
 
-        let theme = AppEnvironment.current.theme
-
         scrollView.keyboardDismissMode = UIScrollViewKeyboardDismissMode.interactive
 
+        contentView.applyBackgroundColor = { AppEnvironment.current.theme.backgroundColor }
         contentView.layer.shadowColor = UIColor.black.cgColor
         contentView.layer.shadowOpacity = shadowOpacity
         contentView.layer.shadowOffset = CGSize.zero
@@ -209,7 +208,6 @@ public class ConfigurePaceTypeView: UIView {
         contentView.layer.borderColor = borderColor.cgColor
         contentView.layer.borderWidth = borderWidth
         contentView.layoutMargins = UIEdgeInsets(top: edgeInset, left: edgeInset, bottom: edgeInset, right: edgeInset)
-        contentView.backgroundColor = theme.backgroundColor
 
         paceMinKm.setTitle(PaceUnit.minPerKm.description, for: .normal)
         paceMinMi.setTitle(PaceUnit.minPerMile.description, for: .normal)
@@ -224,8 +222,9 @@ public class ConfigurePaceTypeView: UIView {
         raceDistanceKm.setTitle(DistanceUnit.km.description, for: .normal)
         raceDistanceMile.setTitle(DistanceUnit.mile.description, for: .normal)
 
-        deleteButton.applyBackgroundColor = { theme.destructiveActionActiveColor }
-        deleteButton.applyStyle()
+        deleteButton.contentEdgeInsets = raceMarathon.contentEdgeInsets
+        deleteButton.applyTintColor = { AppEnvironment.current.theme.destructiveActionTextColor }
+        deleteButton.applyBackgroundColor = { AppEnvironment.current.theme.destructiveActionActiveColor }
     }
 
     func setupGestures() {

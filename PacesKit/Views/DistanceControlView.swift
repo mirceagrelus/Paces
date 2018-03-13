@@ -16,7 +16,7 @@ public class DistanceControlView: ThemeView {
     @IBOutlet weak var raceTypeLabel: ConversionControlLabel!
     @IBOutlet weak var raceDistanceLabel: ConversionControlLabel!
     @IBOutlet weak var separatorLabel: ConversionControlLabel!
-    @IBOutlet weak var editButton: UIButton!
+    @IBOutlet weak var editButton: ThemeButton!
     
     public var viewModel: DistanceControlViewModelType = DistanceControlViewModel() { didSet { self.bindViewModel() }}
     public let bag = DisposeBag()
@@ -44,9 +44,12 @@ public class DistanceControlView: ThemeView {
         viewModel.inputs.isSelected
             .observeOn(MainScheduler.instance)
             .subscribe(onNext: { [weak self] isSelected in
-                let theme = AppEnvironment.current.theme
-                self?.applyBackgroundColor = isSelected ? { theme.controlCellBackgroundColorSelected } : { theme.controlCellBackgroundColor }
-                self?.editButton.tintColor = isSelected ?  theme.controlCellTextColorSelected : theme.controlCellTextColor
+                self?.applyBackgroundColor = isSelected ?
+                    { AppEnvironment.current.theme.controlCellBackgroundColorSelected } :
+                    { AppEnvironment.current.theme.controlCellBackgroundColor }
+                self?.editButton.applyTintColor = isSelected ?
+                    { AppEnvironment.current.theme.controlCellTextColorSelected } :
+                    { AppEnvironment.current.theme.controlCellTextColor }
                 self?.valueLabel.isSelected = isSelected
                 self?.raceTypeLabel.isSelected = isSelected
                 self?.raceDistanceLabel.isSelected = isSelected

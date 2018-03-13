@@ -7,8 +7,9 @@
 //
 
 import UIKit
-import RxSwift
 import PacesKit
+import RxSwift
+import RxCocoa
 
 protocol MainFlowControllerDelegate: class {
     func mainFlowControllerDidFinish(_ flowController: MainFlowController)
@@ -16,19 +17,25 @@ protocol MainFlowControllerDelegate: class {
 
 class MainFlowController: UIViewController {
 
+    let bag = DisposeBag()
     weak var flowDelegate: MainFlowControllerDelegate?
     let mainNavigationController: UINavigationController =  {
-        let theme = AppEnvironment.current.theme
         let navigationController = UINavigationController()
         navigationController.setNavigationBarHidden(true, animated: false)
-        navigationController.navigationBar.tintColor = theme.navBarItemsTintColor
         navigationController.navigationBar.isTranslucent = true
         return navigationController
     }()
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.view.backgroundColor = UIColor.green
+
+        applyStyle()
+        NotificationCenter.default.rx.notification(Notification.Name.ThemeDidChange)
+            .observeOnMain()
+            .subscribe(onNext: { [weak self] _ in
+                self?.applyStyle()
+            })
+        .disposed(by: bag)
     }
 
     override func viewDidAppear(_ animated: Bool) {
@@ -41,6 +48,11 @@ class MainFlowController: UIViewController {
 
         mainNavigationController.viewControllers = [pacesViewController]
         add(childController: mainNavigationController)
+    }
+
+    func applyStyle() {
+        mainNavigationController.navigationBar.tintColor = AppEnvironment.current.theme.navBarItemsTintColor
+        mainNavigationController.navigationBar.barStyle = AppEnvironment.current.theme.themeType.isDark ? .blackTranslucent : UIBarStyle.default
     }
 
 }

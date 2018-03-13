@@ -14,7 +14,7 @@ public class PaceControlView: ThemeView {
 
     @IBOutlet weak var valueLabel: ConversionControlLabel!
     @IBOutlet weak var unitLabel: ConversionControlLabel!
-    @IBOutlet weak var editButton: UIButton!
+    @IBOutlet weak var editButton: ThemeButton!
 
     public static let sourceFromString = "From"
     public static let sourceToString = "To"
@@ -37,13 +37,15 @@ public class PaceControlView: ThemeView {
             .bind(to: valueLabel.rx.text)
             .disposed(by: bag)
 
-        //viewModel.outputs.isSelected
         viewModel.inputs.isSelected
             .observeOn(MainScheduler.instance)
             .subscribe(onNext: { [weak self] isSelected in
-                let theme = AppEnvironment.current.theme
-                self?.applyBackgroundColor = isSelected ? { theme.controlCellBackgroundColorSelected } : { theme.controlCellBackgroundColor }
-                self?.editButton.tintColor = isSelected ?   theme.controlCellTextColorSelected  : theme.controlCellTextColor
+                self?.applyBackgroundColor = isSelected ?
+                    { AppEnvironment.current.theme.controlCellBackgroundColorSelected } :
+                    { AppEnvironment.current.theme.controlCellBackgroundColor }
+                self?.editButton.applyTintColor = isSelected ?
+                    { AppEnvironment.current.theme.controlCellTextColorSelected } :
+                    { AppEnvironment.current.theme.controlCellTextColor }
                 self?.valueLabel.isSelected = isSelected
                 self?.unitLabel.isSelected = isSelected
             })

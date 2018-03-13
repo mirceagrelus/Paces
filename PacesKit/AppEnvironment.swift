@@ -66,7 +66,7 @@ public struct AppEnvironment {
     public static func fromStorage(userDefaults: KeyValueStoreType) -> Environment {
         let data = userDefaults.dictionary(forKey: environmentStorageKey) ?? [:]
 
-        let themeId = data[key_themeType] as? Int ?? 0
+        let themeId = data[key_themeType] as? String ?? ""
         let theme = ThemeType(rawValue: themeId)?.theme()
 
         let isPremiumUser = data[key_isPremiumUser] as? Bool

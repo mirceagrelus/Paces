@@ -16,7 +16,7 @@ public class PaceTypeButton: UIButton {
     public var applyBackgroundColor: () -> UIColor
     public var applySelectedBackgroundColor: () -> UIColor
 
-    let edgeInset: CGFloat = 10
+    public let edgeInset: CGFloat = 10
 
 //    @IBInspectable var cornerRadius: CGFloat = 0 {
 //        didSet {

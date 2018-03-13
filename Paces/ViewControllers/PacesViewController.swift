@@ -23,7 +23,7 @@ class PacesViewController: UIViewController {
     let bag = DisposeBag()
 
     let pickerView = UIPickerView()
-    let paceInputView = PaceInputView()
+    let paceInputView = PaceInputView(color: AppEnvironment.current.theme.inputViewBackgroundColor)
     let paceContentView = UIView()
     let gradientView = ThemeGradientView(applyGradientColors: AppEnvironment.current.theme.backgroundColorGradient)
     lazy var collectionView: UICollectionView = { UICollectionView(frame: CGRect.zero, collectionViewLayout: self.tableLayout()) }()
@@ -32,7 +32,7 @@ class PacesViewController: UIViewController {
     var pickerBottomConstraint: NSLayoutConstraint = NSLayoutConstraint()
     var paceContentBottomAnchor: NSLayoutConstraint = NSLayoutConstraint()
 
-    let paceControlHeight: CGFloat = 80 //70
+    let paceControlHeight: CGFloat = 80
     let pickerViewHeight: CGFloat = 200
     let paceControlSpacing: CGFloat = 5
     let inputAnimationDuration = 0.3
@@ -291,20 +291,28 @@ extension PacesViewController {
     }
 
     func setupNavigationBar() {
-        self.navigationController?.setNavigationBarHidden(false, animated: false)
-        self.navigationItem.title = "Paces"
-        let item = UIBarButtonItem(image: UIImage(named: "shortcut-icon-bars"), style: .plain, target: nil, action: nil)
-        //let item = UIBarButtonItem(image: UIImage(named: "settings-icon"), style: .plain, target: nil, action: nil)
-        self.navigationItem.rightBarButtonItem = item
+        let settingsItem = UIBarButtonItem(image: UIImage(named: "shortcut-icon-bars"), style: .plain, target: nil, action: nil)
+        let themeItem = UIBarButtonItem(image: UIImage(named: "eye"), style: .plain, target: nil, action: nil)
+        navigationController?.setNavigationBarHidden(false, animated: false)
+        navigationItem.title = "Paces"
+        navigationItem.leftBarButtonItem = settingsItem
+        navigationItem.rightBarButtonItem = themeItem
 
-        item.rx.tap
+        themeItem.rx.tap
+            .map { _ in AppEnvironment.current.theme }
+            .subscribe(onNext: { theme in
+                let nextTheme = theme.themeType.toggle().theme()
+                AppEnvironment.replaceCurrentEnvironment(theme: nextTheme)
+                notifyThemeDidChange()
+            })
+            .disposed(by: bag)
+
+        settingsItem.rx.tap
             .subscribe(onNext: { [weak self] _ in
                 guard let _self = self else { return }
                 self?.delegate?.pacesViewControllerShowSettings(_self)
             })
             .disposed(by: bag)
-
-        self.toolbarItems = [item]
     }
 
     func setupCollectionView() {

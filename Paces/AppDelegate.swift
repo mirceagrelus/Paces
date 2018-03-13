@@ -54,23 +54,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         return viewModel.outputs.applicationDidFinishLaunchingReturnValue
     }
 
-    func test_themeDidChange() {
-        let _ = Observable<Int>.interval(5.0, scheduler: MainScheduler.instance)
-            .map { _ -> ThemeType in
-                switch AppEnvironment.current.theme.themeType {
-                case ThemeType.orangeRed: return ThemeType.purpleBlue
-                case ThemeType.purpleBlue: return ThemeType.orangeRed
-                }
-            }
-            .subscribe(onNext: { themeType in
-                print("theme: \(themeType)")
-                let theme = themeType.theme()
-                AppEnvironment.replaceCurrentEnvironment(theme: theme)
-                notifyThemeDidChange()
-            })
-
-    }
-
     func applicationWillResignActive(_ application: UIApplication) {
         // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.
         // Use this method to pause ongoing tasks, disable timers, and invalidate graphics rendering callbacks. Games should use this method to pause the game.

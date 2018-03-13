@@ -23,7 +23,7 @@
                         <stackView opaque="NO" contentMode="scaleToFill" alignment="lastBaseline" spacing="6" translatesAutoresizingMaskIntoConstraints="NO" id="eox-Va-S4r">
                             <rect key="frame" x="0.0" y="19" width="44" height="44"/>
                             <subviews>
-                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ith-jF-OZz">
+                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ith-jF-OZz" customClass="ThemeButton" customModule="PacesKit" customModuleProvider="target">
                                     <rect key="frame" x="0.0" y="0.0" width="44" height="44"/>
                                     <constraints>
                                         <constraint firstAttribute="height" constant="44" id="HXc-qv-5Ls"/>

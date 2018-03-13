@@ -79,7 +79,6 @@ public class PacesViewModel: PacesViewModelType {
             .withLatestFrom(inputPaceType) { value, inputPaceType -> PaceType in
                 return inputPaceType.withUpdatedValue(value)
             }
-            .debug("PaceType")
             .bind(to: _paceType)
             .disposed(by: bag)
 
@@ -91,13 +90,11 @@ public class PacesViewModel: PacesViewModelType {
                 case .race(let race): return race.inputSource
                 }
             }
-            .debug("_inputDataSource")
             .bind(to: _inputDataSource)
             .disposed(by: bag)
 
         // update value for new type of input
         inputPaceType
-            .debug("displayValue")
             .map { $0.displayValue }
             .bind(to: inputValue)
             .disposed(by: bag)
@@ -111,7 +108,6 @@ public class PacesViewModel: PacesViewModelType {
                 }
                 return tapped
             }
-            .debug("selectedControl")
             .bind(to: selectedControl)
             .disposed(by: bag)
 

@@ -8,15 +8,15 @@
 
 import UIKit
 
-public class PaceInputView: UIView {
+public class PaceInputView: ThemeView {
 
     let shadowOpacity: Float = 0.5
     let shadowRadius: CGFloat = 10
     let borderWidth: CGFloat = 1.0
     let borderColor: UIColor = UIColor.black.withAlphaComponent(0.5)
 
-    public override init(frame: CGRect) {
-        super.init(frame: .zero)
+    public override init(color: @autoclosure @escaping () -> UIColor?) {
+        super.init(color: color)
         setup()
     }
 
@@ -26,9 +26,6 @@ public class PaceInputView: UIView {
     }
 
     func setup() {
-        let theme = AppEnvironment.current.theme
-        self.backgroundColor = theme.inputViewBackgroundColor
-
         layer.shadowColor = UIColor.black.cgColor
         layer.shadowOpacity = shadowOpacity
         layer.shadowOffset = CGSize.zero

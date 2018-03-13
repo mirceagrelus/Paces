@@ -1,40 +1,38 @@
 //
-//  ThemeView.swift
+//  ThemeButton.swift
 //  PacesKit
 //
-//  Created by Mircea Grelus on 2018-02-21.
+//  Created by Mircea Grelus on 2018-03-11.
 //  Copyright © 2018 CodexBit Software. All rights reserved.
 //
 
 import UIKit
 
-/**
-    View that support theming for the background and border color
- */
-public class ThemeView: UIView {
+public class ThemeButton: UIButton {
 
-    var applyBackgroundColor: () -> UIColor? { didSet { applyStyle() } }
-    var applyBorderColor: (() -> UIColor?)? { didSet { applyStyle() } }
+    var applyTintColor: () -> UIColor { didSet { applyStyle() } }
+    var applyBackgroundColor: () -> UIColor { didSet { applyStyle() } }
 
-    public init(color: @autoclosure @escaping () -> UIColor?) {
-        applyBackgroundColor = color
+    public init(applyTintColor: @escaping @autoclosure () -> UIColor = AppEnvironment.current.theme.textColor,
+                applyBackgroundColor: @escaping @autoclosure () -> UIColor = UIColor.clear) {
+        self.applyTintColor = applyTintColor
+        self.applyBackgroundColor = applyBackgroundColor
         super.init(frame: .zero)
         applyStyle()
     }
 
     public required init?(coder aDecoder: NSCoder) {
-        applyBackgroundColor = { UIColor.black }
+        self.applyTintColor = { AppEnvironment.current.theme.textColor }
+        self.applyBackgroundColor = { UIColor.clear }
         super.init(coder: aDecoder)
-        applyBackgroundColor = { self.backgroundColor }
+        applyStyle()
+
     }
 
-    private func applyStyle() {
-        backgroundColor = self.applyBackgroundColor()
-        if let borderBlock = self.applyBorderColor {
-            self.layer.borderColor = borderBlock()?.cgColor
-        }
+    public func applyStyle() {
+        tintColor = applyTintColor()
+        setBackgroundColor(applyBackgroundColor(), for: .normal)
     }
-
 
     @objc func themeDidChangeNotification(notification: Notification) {
         DispatchQueue.main.async {
@@ -45,7 +43,7 @@ public class ThemeView: UIView {
 }
 
 // MARK: - overrides
-extension ThemeView {
+extension ThemeButton {
     public override func didMoveToWindow() {
         if self.window != nil {
             NotificationCenter.default.addObserver(self, selector: #selector(themeDidChangeNotification), name: NSNotification.Name.ThemeDidChange, object: nil)
