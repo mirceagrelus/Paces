@@ -131,7 +131,6 @@ public class PacesViewModel: PacesViewModelType {
 
         showInput = selectedControl
             .map { $0 != nil }
-            .debug("showInput")
 
         goToConfigurePace = configurePaceType
             .map { (id, paceType) -> ConfigurePaceTypeViewModel in

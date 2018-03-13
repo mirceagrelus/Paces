@@ -38,11 +38,6 @@ class PacesViewController: UIViewController {
     let inputAnimationDuration = 0.3
     let bounceAdjustment: CGFloat = 50
 
-    fileprivate let _viewWillDisappear = PublishSubject<Void>()
-    var viewWillDisappear: Observable<Void> {
-        return self._viewWillDisappear.asObserver()
-    }
-
     init() {
         super.init(nibName: nil, bundle: nil)
     }
@@ -51,29 +46,12 @@ class PacesViewController: UIViewController {
         super.init(coder: aDecoder)
     }
 
-    deinit {
-        print("PacesViewController_deinit: \(RxSwift.Resources.total)")
-    }
-
     override func viewDidLoad() {
         super.viewDidLoad()
         setup()
         bindViewModel()
 
         viewModel.inputs.viewDidLoad.onNext(())
-
-        //test_test()
-    }
-
-    override func viewWillAppear(_ animated: Bool) {
-        print("resources: \(RxSwift.Resources.total)")
-    }
-
-    override func viewWillDisappear(_ animated: Bool) {
-        super.viewWillDisappear(animated)
-
-        _viewWillDisappear.onNext(())
-        print("resources_viewWillDisappear: \(RxSwift.Resources.total)")
     }
 
     func bindViewModel() {
@@ -130,7 +108,6 @@ class PacesViewController: UIViewController {
     }
 
     func updatePickerValue(stringRepresentation paceValue: String) {
-        print("== \(paceValue)")
         let first: String
         let second: String
         var third: String? = nil
@@ -167,8 +144,6 @@ class PacesViewController: UIViewController {
     }
 
     func showConfigurePace(model: ConfigurePaceTypeViewModel) {
-        print("resources: \(RxSwift.Resources.total)")
-
         let adding = model.paceType == nil
         let updateAction = Action<(Int, PaceType), Void> { [weak self] (id, paceType) in
             if adding {
@@ -210,7 +185,6 @@ class PacesViewController: UIViewController {
 
         configurePaceTypeView.show()
     }
-
 
 }
 
@@ -323,9 +297,12 @@ extension PacesViewController {
         collectionView.dropDelegate = collectionViewAdapter
         collectionView.dragInteractionEnabled = true
         collectionView.alwaysBounceVertical = true
-        collectionView.register(PaceTypeControlCollectionViewCell.self, forCellWithReuseIdentifier: PaceTypeControlCollectionViewCell.identifier)
+        collectionView.register(PaceTypeControlCollectionViewCell.self,
+                                forCellWithReuseIdentifier: PaceTypeControlCollectionViewCell.identifier)
         let nib = UINib(nibName: String(describing: AddControlView.self), bundle: Bundle(for: AddControlView.self))
-        collectionView.register(nib, forSupplementaryViewOfKind: UICollectionElementKindSectionFooter, withReuseIdentifier: AddControlView.identifier)
+        collectionView.register(nib,
+                                forSupplementaryViewOfKind: UICollectionElementKindSectionFooter,
+                                withReuseIdentifier: AddControlView.identifier)
         collectionView.allowsSelection = false
     }
 
@@ -337,7 +314,7 @@ extension PacesViewController {
         print("resources: \(RxSwift.Resources.total)")
     }
 
-    func test_test() {
+    func test_printResources_doubleTap() {
         let tapGesture = UITapGestureRecognizer()
         tapGesture.numberOfTapsRequired = 2
         tapGesture.numberOfTouchesRequired = 2
@@ -346,12 +323,9 @@ extension PacesViewController {
         tapGesture.rx.event
             .debug("tapGesture")
             .subscribe { event in
-
                 print("resources: \(RxSwift.Resources.total)")
-
             }
             .disposed(by: bag)
-
     }
 
 }

@@ -10,8 +10,8 @@ import UIKit
 
 public class PaceInputView: ThemeView {
 
-    let shadowOpacity: Float = 0.5
-    let shadowRadius: CGFloat = 10
+    let shadowOpacity: Float = 0.2
+    let shadowRadius: CGFloat = 5
     let borderWidth: CGFloat = 1.0
     let borderColor: UIColor = UIColor.black.withAlphaComponent(0.5)
 
@@ -34,11 +34,11 @@ public class PaceInputView: ThemeView {
         let border = UIView()
         border.translatesAutoresizingMaskIntoConstraints = false
         border.backgroundColor = borderColor
-        self.addSubview(border)
+        addSubview(border)
         NSLayoutConstraint.activate([
-            border.topAnchor.constraint(equalTo: self.topAnchor, constant: -borderWidth),
-            border.leadingAnchor.constraint(equalTo: self.leadingAnchor),
-            border.trailingAnchor.constraint(equalTo: self.trailingAnchor),
+            border.topAnchor.constraint(equalTo: topAnchor, constant: -borderWidth),
+            border.leadingAnchor.constraint(equalTo: leadingAnchor),
+            border.trailingAnchor.constraint(equalTo: trailingAnchor),
             border.heightAnchor.constraint(equalToConstant: borderWidth) ])
     }
 

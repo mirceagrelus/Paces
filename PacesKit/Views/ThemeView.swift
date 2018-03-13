@@ -29,9 +29,9 @@ public class ThemeView: UIView {
     }
 
     private func applyStyle() {
-        backgroundColor = self.applyBackgroundColor()
-        if let borderBlock = self.applyBorderColor {
-            self.layer.borderColor = borderBlock()?.cgColor
+        backgroundColor = applyBackgroundColor()
+        if let borderBlock = applyBorderColor {
+            layer.borderColor = borderBlock()?.cgColor
         }
     }
 

@@ -13,8 +13,8 @@ import UIKit
  */
 public class ThemeGradientView: UIView {
 
-    public var applyGradientColors: () -> [UIColor] { didSet { self.applyStyle() } }
-    public var topToBottom: Bool = true { didSet { self.applyStyle() } }
+    public var applyGradientColors: () -> [UIColor] { didSet { applyStyle() } }
+    public var topToBottom: Bool = true { didSet { applyStyle() } }
 
     private var gradientLayer : CAGradientLayer = CAGradientLayer()
 
@@ -32,7 +32,7 @@ public class ThemeGradientView: UIView {
     }
 
     private func applyStyle() {
-        self.insertGradient(colorArray: self.applyGradientColors())
+        insertGradient(colorArray: applyGradientColors())
     }
 
     private func insertGradient(colorArray: [UIColor]) {
@@ -57,7 +57,7 @@ public class ThemeGradientView: UIView {
 
     public override func layoutSublayers(of layer: CALayer) {
         super.layoutSublayers(of: layer)
-        self.gradientLayer.frame = self.bounds
+        gradientLayer.frame = bounds
     }
 
     @objc func themeDidChangeNotification(notification: Notification) {

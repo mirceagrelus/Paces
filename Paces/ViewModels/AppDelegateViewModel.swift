@@ -41,7 +41,6 @@ public class AppDelegateViewModel: AppDelegateViewModelType {
             .share(replay: 1, scope: .whileConnected)
 
         appLaunched
-            .debug("applicationLaunchOptions")
             .map { _, options in options?[UIApplicationLaunchOptionsKey.shortcutItem] == nil }
             .bind(to: _applicationDidFinishLaunchingReturnValue)
             .disposed(by: bag)
@@ -52,7 +51,7 @@ public class AppDelegateViewModel: AppDelegateViewModelType {
             .take(1)
             .map { _ in }
             .filter { _ in AppEnvironment.current.whatsNewVersion > AppEnvironment.current.lastVersionWhatsNewShown }
-            .filter { _ in false } //disable
+            .filter { _ in false } //disable for now
 
     }
 

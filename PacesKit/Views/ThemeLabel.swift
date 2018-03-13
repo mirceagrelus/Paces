@@ -13,23 +13,23 @@ import UIKit
  */
 public class ThemeLabel: UILabel {
 
-    var applyTextColor: () -> UIColor { didSet { self.applyStyle() } }
+    var applyTextColor: () -> UIColor { didSet { applyStyle() } }
 
     public init(applyTextColor: @escaping @autoclosure () -> UIColor = AppEnvironment.current.theme.textColor) {
         self.applyTextColor = applyTextColor
         super.init(frame: .zero)
-        self.applyStyle()
+        applyStyle()
     }
 
     public required init?(coder aDecoder: NSCoder) {
         self.applyTextColor = { AppEnvironment.current.theme.textColor }
         super.init(coder: aDecoder)
-        self.applyStyle()
+        applyStyle()
 
     }
 
     private func applyStyle() {
-        self.textColor = self.applyTextColor()
+        textColor = applyTextColor()
     }
 
     @objc func themeDidChangeNotification(notification: Notification) {

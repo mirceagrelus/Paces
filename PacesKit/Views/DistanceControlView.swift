@@ -18,11 +18,11 @@ public class DistanceControlView: ThemeView {
     @IBOutlet weak var separatorLabel: ConversionControlLabel!
     @IBOutlet weak var editButton: ThemeButton!
     
-    public var viewModel: DistanceControlViewModelType = DistanceControlViewModel() { didSet { self.bindViewModel() }}
+    public var viewModel: DistanceControlViewModelType = DistanceControlViewModel() { didSet { bindViewModel() }}
     public let bag = DisposeBag()
 
     public override func awakeFromNib() {
-        self.bindViewModel()
+        bindViewModel()
     }
 
     func bindViewModel() {
@@ -58,7 +58,7 @@ public class DistanceControlView: ThemeView {
             .disposed(by: bag)
 
         let tapGesture = UITapGestureRecognizer()
-        self.addGestureRecognizer(tapGesture)
+        addGestureRecognizer(tapGesture)
 
         tapGesture.rx.event
             .map { _ in }

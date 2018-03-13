@@ -13,25 +13,25 @@ public class ConversionControlLabel: UILabel {
     var applyTextColor: () -> UIColor
     var applySelectedTextColor: () -> UIColor
 
-    var isSelected = false { didSet { self.applyStyle() } }
+    var isSelected = false { didSet { applyStyle() } }
 
     public init(applyTextColor: @escaping @autoclosure () -> UIColor = AppEnvironment.current.theme.controlCellTextColor,
                 applySelectedTextColor: @escaping @autoclosure () -> UIColor = AppEnvironment.current.theme.controlCellTextColorSelected) {
         self.applyTextColor = applyTextColor
         self.applySelectedTextColor = applySelectedTextColor
         super.init(frame: .zero)
-        self.applyStyle()
+        applyStyle()
     }
 
     public required init?(coder aDecoder: NSCoder) {
         self.applyTextColor = { AppEnvironment.current.theme.controlCellTextColor }
         self.applySelectedTextColor = { AppEnvironment.current.theme.controlCellTextColorSelected }
         super.init(coder: aDecoder)
-        self.applyStyle()
+        applyStyle()
     }
 
     func applyStyle() {
-        self.textColor = isSelected ? self.applySelectedTextColor() : self.applyTextColor()
+        textColor = isSelected ? applySelectedTextColor() : applyTextColor()
     }
 
     @objc func themeDidChangeNotification(notification: Notification) {

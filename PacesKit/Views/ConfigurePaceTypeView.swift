@@ -49,10 +49,6 @@ public class ConfigurePaceTypeView: UIView {
     let borderWidth: CGFloat = 1.0
     let borderColor: UIColor = UIColor.black.withAlphaComponent(0.5)
 
-    deinit {
-        print("ConfigurePaceTypeView - deinit")
-    }
-
     public override func awakeFromNib() {
         super.awakeFromNib()
         setup()
@@ -193,8 +189,8 @@ public class ConfigurePaceTypeView: UIView {
     func setupUI() {
         //disable Interface Builder constraint, and use these show/hide cosntraints.
         ibConstraint.isActive = false
-        contentShowConstraint = self.scrollView.centerYAnchor.constraint(equalTo: centerYAnchor)
-        contentHideConstraint = self.scrollView.topAnchor.constraint(equalTo: bottomAnchor)
+        contentShowConstraint = scrollView.centerYAnchor.constraint(equalTo: centerYAnchor)
+        contentHideConstraint = scrollView.topAnchor.constraint(equalTo: bottomAnchor)
         contentShowConstraint.isActive = false
         contentHideConstraint.isActive = true
 

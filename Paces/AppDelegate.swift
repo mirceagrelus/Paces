@@ -37,7 +37,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // sync iCloud
         viewModel.outputs.synchronizeUbiquitousStore
             .observeOnMain()
-            .debug("synchronizeUbiquitousStore")
             .subscribe(onNext: { _ in
                 _ = AppEnvironment.current.ubiquitousStore.synchronize()
             })

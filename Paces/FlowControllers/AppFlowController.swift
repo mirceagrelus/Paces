@@ -27,14 +27,10 @@ class AppFlowController: UIViewController {
 
     public func goToWhatsNew() {
         let controller = EmptyViewController()
-//        controller.flowDelegate = self
+        //controller.flowDelegate = self
 
         // present What's new over existing UI
         currentFlow?.present(controller, animated: true, completion: nil)
-
-        DispatchQueue.main.asyncAfter(deadline: .now() + 5) { //[weak self]
-            controller.dismiss(animated: true, completion: nil)
-        }
     }
 
     public func goToMainFlow() {

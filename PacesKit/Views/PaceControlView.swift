@@ -16,14 +16,11 @@ public class PaceControlView: ThemeView {
     @IBOutlet weak var unitLabel: ConversionControlLabel!
     @IBOutlet weak var editButton: ThemeButton!
 
-    public static let sourceFromString = "From"
-    public static let sourceToString = "To"
-    
-    public var viewModel: PaceControlViewModelType = PaceControlViewModel() { didSet { self.bindViewModel() }}
+    public var viewModel: PaceControlViewModelType = PaceControlViewModel() { didSet { bindViewModel() }}
     public let bag = DisposeBag()
 
     public override func awakeFromNib() {
-        self.bindViewModel()
+        bindViewModel()
     }
 
     func bindViewModel() {
@@ -52,7 +49,7 @@ public class PaceControlView: ThemeView {
             .disposed(by: bag)
 
         let tapGesture = UITapGestureRecognizer()
-        self.addGestureRecognizer(tapGesture)
+        addGestureRecognizer(tapGesture)
         tapGesture.rx.event
             .map { _ in () }
             .bind(to: viewModel.inputs.tapped)

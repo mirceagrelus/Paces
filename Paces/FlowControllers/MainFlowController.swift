@@ -38,10 +38,6 @@ class MainFlowController: UIViewController {
         .disposed(by: bag)
     }
 
-    override func viewDidAppear(_ animated: Bool) {
-        print("resources: \(RxSwift.Resources.total)")
-    }
-
     func start() {
         let pacesViewController = PacesViewController()
         pacesViewController.delegate = self

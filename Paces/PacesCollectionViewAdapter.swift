@@ -112,6 +112,8 @@ public class PacesCollectionViewAdapter: NSObject {
     func deletePaceType(controlId: Int) {
         guard let collectionView = collectionView,
             let index = indexOfControl(id: controlId) else { return }
+        
+        let cell = collectionView.cellForItem(at: IndexPath(row: index, section: controlsSection)) as? PaceTypeControlCollectionViewCell
 
         collectionView.performBatchUpdates({
             var items = paceControls.value
@@ -119,8 +121,10 @@ public class PacesCollectionViewAdapter: NSObject {
             if items.count > indexPath.item {
                 items.remove(at: indexPath.item)
                 paceControls.accept(items)
-
                 collectionView.deleteItems(at: [indexPath])
+
+                //release resources
+                cell?.prepareForReuse()
             }
         })
     }
@@ -155,7 +159,6 @@ extension PacesCollectionViewAdapter: UICollectionViewDataSource {
             paceTypeCell.configureFor(control: controlModel)
             self.bindControl(paceTypeCell.paceTypeControlView.viewModel)
             paceTypeCell.paceTypeControlView.viewModel.inputs.control.accept(controlModel)
-            print("bind item: \(indexPath.item)")
         }
 
         return cell
@@ -180,16 +183,7 @@ extension PacesCollectionViewAdapter: UICollectionViewDataSource {
 
 }
 
-extension PacesCollectionViewAdapter: UICollectionViewDelegate {
-//    public func collectionView(_ collectionView: UICollectionView, canMoveItemAt indexPath: IndexPath) -> Bool {
-//        return true
-//    }
-//
-//    public func collectionView(_ collectionView: UICollectionView, moveItemAt sourceIndexPath: IndexPath, to destinationIndexPath: IndexPath) {
-//        print("Starting Index: \(sourceIndexPath.item)")
-//        print("Ending Index: \(destinationIndexPath.item)")
-//    }
-}
+extension PacesCollectionViewAdapter: UICollectionViewDelegate { }
 
 extension PacesCollectionViewAdapter: UICollectionViewDragDelegate {
     public func collectionView(_ collectionView: UICollectionView, itemsForBeginning session: UIDragSession, at indexPath: IndexPath) -> [UIDragItem] {
@@ -269,7 +263,6 @@ extension PacesCollectionViewAdapter: UIGestureRecognizerDelegate {
 
         switch recognizer.state {
         case .began:
-            print("began")
             guard let collectionView = recognizer.view as? UICollectionView,
                 let indexpath = collectionView.indexPathForItem(at: point),
                 let cell = collectionView.cellForItem(at: indexpath) as? ConversionControlCollectionViewCell
@@ -294,7 +287,6 @@ extension PacesCollectionViewAdapter: UIGestureRecognizerDelegate {
 
             cell.controlContentTrailingConstraint.constant = deltaX
 
-//            print("changed: \(currentPoint)")
         case .cancelled: fallthrough
         case .failed:
             if let controlCell = activePannedCell as? ConversionControlCollectionViewCell {
@@ -302,7 +294,6 @@ extension PacesCollectionViewAdapter: UIGestureRecognizerDelegate {
             }
             activePannedCell = nil
         case .ended:
-            print("ended")
             if let controlCell = activePannedCell as? ConversionControlCollectionViewCell {
                 controlCell.controlContentTrailingConstraint.constant = 0
             }
