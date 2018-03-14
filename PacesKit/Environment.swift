@@ -37,19 +37,18 @@ public struct Environment {
     // current version for the What's New info screen
     public let whatsNewVersion: Double = 1.0
 
-    // for testing during development
-    private let testControls = [ConversionControl(id: 0, paceType: .pace(Pace(stringValue: "", unit: .minPerMile))),
-                       ConversionControl(id: 1, paceType: .pace(Pace(stringValue: "", unit: .minPerKm))),
-                       ConversionControl(id: 2, paceType: .pace(Pace(stringValue: "", unit: .kmPerHour))),
-                       ConversionControl(id: 3, paceType: .pace(Pace(stringValue: "", unit: .milePerHour))),
-                       ConversionControl(id: 4, paceType: .race(Race(time: 0, raceDistance: RaceDistance(raceType: .halfMarathon, distanceUnit: .km)) ))]
+    // default controls when nothing is configured
+    public static let defaultControls = [
+        ConversionControl(id: 0, paceType: .pace(Pace(value: 0, unit: .minPerMile))),
+        ConversionControl(id: 1, paceType: .pace(Pace(value: 0, unit: .minPerKm))),
+        ConversionControl(id: 2, paceType: .race(Race(time: 0, raceDistance: RaceDistance(raceType: .halfMarathon, distanceUnit: .km)) ))]
 
     public init(
         theme: Theme = ThemeType.orangeRed.theme(),
         isPremiumUser: Bool = false,
         inputValue: String = "8:00",
         inputPaceType: PaceType = .pace(Pace.minPerMile(seconds: 8*60)),
-        archivedControls: [ConversionControl] = [],
+        archivedControls: [ConversionControl] = Environment.defaultControls,
         lastVersionWhatsNewShown: Double = 0,
         ubiquitousStore: KeyValueStoreType = NSUbiquitousKeyValueStore.default,
         userDefaults: KeyValueStoreType = UserDefaults.standard){
