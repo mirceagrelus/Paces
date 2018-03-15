@@ -54,14 +54,19 @@ class MainFlowController: UIViewController {
 }
 
 extension MainFlowController: PacesViewControllerDelegate {
-    func pacesViewControllerShowSettings(_ pacesViewController: PacesViewController) {
-        let vc = PacesViewController()
-        vc.delegate = self
+    func pacesViewControllerShowAbout(_ pacesViewController: PacesViewController) {
+        guard let about = Storyboard.AboutViewController.instantiate() as? AboutViewController else { return }
+        about.delegate = self
 
-        self.mainNavigationController.pushViewController(vc, animated: true)
-
-
+        self.mainNavigationController.pushViewController(about, animated: true)
         print("resources: \(RxSwift.Resources.total)")
+    }
+
+}
+
+extension MainFlowController: AboutViewControllerDelegate {
+    func aboutViewControllerDidFinish(_ aboutController: AboutViewController) {
+        mainNavigationController.popViewController(animated: true)
     }
 
 

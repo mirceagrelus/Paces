@@ -166,6 +166,7 @@ public class ThemeSolidBase: ThemeLightBase {
     public override init(_ themeType: ThemeType) {
         super.init(themeType)
 
+        textColor = UIColor.white
         backgroundColor = #colorLiteral(red: 0.9019607843, green: 0.1843137255, blue: 0.2705882353, alpha: 1)
         backgroundColorGradient = [backgroundColor, backgroundColor]
 

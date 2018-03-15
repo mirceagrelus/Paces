@@ -13,8 +13,8 @@ import UIKit
  */
 public class ThemeView: UIView {
 
-    var applyBackgroundColor: () -> UIColor? { didSet { applyStyle() } }
-    var applyBorderColor: (() -> UIColor?)? { didSet { applyStyle() } }
+    public var applyBackgroundColor: () -> UIColor? { didSet { applyStyle() } }
+    public var applyBorderColor: (() -> UIColor?)? { didSet { applyStyle() } }
 
     public init(color: @autoclosure @escaping () -> UIColor?) {
         applyBackgroundColor = color

@@ -37,6 +37,8 @@
 		087EFAD82039D19D005B7385 /* ConversionControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 087EFAD72039D19D005B7385 /* ConversionControl.swift */; };
 		087EFAE9203B10B3005B7385 /* PacesCollectionViewAdapter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 087EFAE7203B0666005B7385 /* PacesCollectionViewAdapter.swift */; };
 		08AEC0BB2055A4EB00027FE5 /* ThemeButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08AEC0BA2055A4EB00027FE5 /* ThemeButton.swift */; };
+		08BE592320592D3800C03899 /* AboutViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08BE592220592D3800C03899 /* AboutViewController.swift */; };
+		08BE593520593F2C00C03899 /* Storyboard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08BE593420593F2C00C03899 /* Storyboard.swift */; };
 		08C694FD203F248D005A96CA /* PaceInputView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08C694FC203F248D005A96CA /* PaceInputView.swift */; };
 		08C694FF20404B25005A96CA /* Race.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08C694FE20404B25005A96CA /* Race.swift */; };
 		08C6950120406177005A96CA /* DistanceControlViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08C6950020406177005A96CA /* DistanceControlViewModel.swift */; };
@@ -66,6 +68,10 @@
 		08E64B99202F224B00A59F41 /* Navigation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08E64B98202F224A00A59F41 /* Navigation.swift */; };
 		08E64B9C202F266900A59F41 /* PacesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08E64B9B202F266900A59F41 /* PacesViewController.swift */; };
 		08E64B9E202F297600A59F41 /* PacesViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08E64B9D202F297600A59F41 /* PacesViewModel.swift */; };
+		08EDEBA4205A9E16002941CA /* AppConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08EDEBA3205A9E16002941CA /* AppConfig.swift */; };
+		08EDEBA6205AA2D3002941CA /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 08EDEBA5205AA2D3002941CA /* MessageUI.framework */; };
+		08EDEBA8205AAE3B002941CA /* MFMailComposeViewController+Rx.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08EDEBA7205AAE3B002941CA /* MFMailComposeViewController+Rx.swift */; };
+		08EDEBAA205ABB3B002941CA /* SafariServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 08EDEBA9205ABB3A002941CA /* SafariServices.framework */; };
 		08F81B73203097B6008C346A /* PaceControlViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08F81B72203097B6008C346A /* PaceControlViewModelTests.swift */; };
 		0C47E90A62D3CBA410713ED0 /* Pods_Paces.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BC09D143B537961A85321211 /* Pods_Paces.framework */; };
 		4685430A1B886E3DEC73BED3 /* Pods_PacesKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 81C9957795BB657245FD2BD0 /* Pods_PacesKit.framework */; };
@@ -148,6 +154,8 @@
 		087EFAD72039D19D005B7385 /* ConversionControl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConversionControl.swift; sourceTree = "<group>"; };
 		087EFAE7203B0666005B7385 /* PacesCollectionViewAdapter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PacesCollectionViewAdapter.swift; sourceTree = "<group>"; };
 		08AEC0BA2055A4EB00027FE5 /* ThemeButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThemeButton.swift; sourceTree = "<group>"; };
+		08BE592220592D3800C03899 /* AboutViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AboutViewController.swift; sourceTree = "<group>"; };
+		08BE593420593F2C00C03899 /* Storyboard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Storyboard.swift; sourceTree = "<group>"; };
 		08C694FC203F248D005A96CA /* PaceInputView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaceInputView.swift; sourceTree = "<group>"; };
 		08C694FE20404B25005A96CA /* Race.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Race.swift; sourceTree = "<group>"; };
 		08C6950020406177005A96CA /* DistanceControlViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DistanceControlViewModel.swift; sourceTree = "<group>"; };
@@ -182,6 +190,10 @@
 		08E64B98202F224A00A59F41 /* Navigation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Navigation.swift; sourceTree = "<group>"; };
 		08E64B9B202F266900A59F41 /* PacesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PacesViewController.swift; sourceTree = "<group>"; };
 		08E64B9D202F297600A59F41 /* PacesViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PacesViewModel.swift; sourceTree = "<group>"; };
+		08EDEBA3205A9E16002941CA /* AppConfig.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppConfig.swift; sourceTree = "<group>"; };
+		08EDEBA5205AA2D3002941CA /* MessageUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MessageUI.framework; path = System/Library/Frameworks/MessageUI.framework; sourceTree = SDKROOT; };
+		08EDEBA7205AAE3B002941CA /* MFMailComposeViewController+Rx.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MFMailComposeViewController+Rx.swift"; sourceTree = "<group>"; };
+		08EDEBA9205ABB3A002941CA /* SafariServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SafariServices.framework; path = System/Library/Frameworks/SafariServices.framework; sourceTree = SDKROOT; };
 		08F81B72203097B6008C346A /* PaceControlViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaceControlViewModelTests.swift; sourceTree = "<group>"; };
 		119460154047C98E38AE5449 /* Pods-PacesKitTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PacesKitTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-PacesKitTests/Pods-PacesKitTests.release.xcconfig"; sourceTree = "<group>"; };
 		220AFA9DE64D32EF2E2BD0A2 /* Pods-PacesKitTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PacesKitTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-PacesKitTests/Pods-PacesKitTests.debug.xcconfig"; sourceTree = "<group>"; };
@@ -219,6 +231,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				08EDEBAA205ABB3B002941CA /* SafariServices.framework in Frameworks */,
+				08EDEBA6205AA2D3002941CA /* MessageUI.framework in Frameworks */,
 				4685430A1B886E3DEC73BED3 /* Pods_PacesKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -241,6 +255,7 @@
 				0805B25920389DED00916CD4 /* Observable+Operators.swift */,
 				0805B25720388BE800916CD4 /* UITableView+Extensions.swift */,
 				084DFEC1204E87C900AFE0B2 /* HelperFunctions.swift */,
+				08EDEBA7205AAE3B002941CA /* MFMailComposeViewController+Rx.swift */,
 			);
 			path = "Rx Extensions";
 			sourceTree = "<group>";
@@ -355,6 +370,8 @@
 				08E64B88202DD9CC00A59F41 /* KeyValueStoreType.swift */,
 				08E64B98202F224A00A59F41 /* Navigation.swift */,
 				08CAB6C7202F4CB300C7FF41 /* Extensions.swift */,
+				08BE593420593F2C00C03899 /* Storyboard.swift */,
+				08EDEBA3205A9E16002941CA /* AppConfig.swift */,
 				0805B25B2039614D00916CD4 /* Rx Extensions */,
 				08CAB6D0202F92C200C7FF41 /* Model */,
 				08CAB6B6202F377100C7FF41 /* Views */,
@@ -399,6 +416,7 @@
 			children = (
 				08738C352046F7DE009B9652 /* EmptyViewController.swift */,
 				08E64B9B202F266900A59F41 /* PacesViewController.swift */,
+				08BE592220592D3800C03899 /* AboutViewController.swift */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -421,6 +439,8 @@
 		5168F72B2E16D1B32402862F /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				08EDEBA9205ABB3A002941CA /* SafariServices.framework */,
+				08EDEBA5205AA2D3002941CA /* MessageUI.framework */,
 				BC09D143B537961A85321211 /* Pods_Paces.framework */,
 				BF5A82F7DBACF9FD253E12E0 /* Pods_PacesTests.framework */,
 				81C9957795BB657245FD2BD0 /* Pods_PacesKit.framework */,
@@ -801,6 +821,7 @@
 				087EFAE9203B10B3005B7385 /* PacesCollectionViewAdapter.swift in Sources */,
 				08E64B29202DD3B900A59F41 /* AppDelegate.swift in Sources */,
 				08E64B9E202F297600A59F41 /* PacesViewModel.swift in Sources */,
+				08BE592320592D3800C03899 /* AboutViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -824,6 +845,7 @@
 				083C323E203ED37D005AD1F5 /* AddControlView.swift in Sources */,
 				08C6950120406177005A96CA /* DistanceControlViewModel.swift in Sources */,
 				08CAB6CD202F929900C7FF41 /* PaceControlViewModel.swift in Sources */,
+				08EDEBA8205AAE3B002941CA /* MFMailComposeViewController+Rx.swift in Sources */,
 				08E64B89202DD9CC00A59F41 /* KeyValueStoreType.swift in Sources */,
 				083C322D203DC5D3005AD1F5 /* ThemeGradientView.swift in Sources */,
 				0805B25820388BE800916CD4 /* UITableView+Extensions.swift in Sources */,
@@ -831,6 +853,7 @@
 				08083CFE20458C2B007E5A43 /* PaceTypeControlView.swift in Sources */,
 				08CAB6CF202F92BC00C7FF41 /* Pace.swift in Sources */,
 				08CAB6C8202F4CB300C7FF41 /* Extensions.swift in Sources */,
+				08BE593520593F2C00C03899 /* Storyboard.swift in Sources */,
 				083C3225203D689C005AD1F5 /* ThemeLabel.swift in Sources */,
 				0805B25A20389DED00916CD4 /* Observable+Operators.swift in Sources */,
 				083C3229203D88F9005AD1F5 /* ThemeView.swift in Sources */,
@@ -846,6 +869,7 @@
 				08083CF720445EFE007E5A43 /* PaceTypeButton.swift in Sources */,
 				08083D0020458EDE007E5A43 /* PaceTypeControlCollectionViewCell.swift in Sources */,
 				08083CF320445884007E5A43 /* ConfigurePaceTypeView.swift in Sources */,
+				08EDEBA4205A9E16002941CA /* AppConfig.swift in Sources */,
 				0877626020498B8A00FFDFC1 /* DimView.swift in Sources */,
 				08C694FF20404B25005A96CA /* Race.swift in Sources */,
 				08C694FD203F248D005A96CA /* PaceInputView.swift in Sources */,

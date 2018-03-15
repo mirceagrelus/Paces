@@ -37,6 +37,9 @@ public struct Environment {
     // current version for the What's New info screen
     public let whatsNewVersion: Double = 1.0
 
+    // config info for the app
+    public let appConfig: AppConfig = AppConfig()
+
     // default controls when nothing is configured
     public static let defaultControls = [
         ConversionControl(id: 0, paceType: .pace(Pace(value: 0, unit: .minPerMile))),

@@ -13,7 +13,7 @@ import RxCocoa
 import Action
 
 protocol PacesViewControllerDelegate: class {
-    func pacesViewControllerShowSettings(_ pacesViewController: PacesViewController)
+    func pacesViewControllerShowAbout(_ pacesViewController: PacesViewController)
 }
 
 class PacesViewController: UIViewController {
@@ -265,11 +265,11 @@ extension PacesViewController {
     }
 
     func setupNavigationBar() {
-        let settingsItem = UIBarButtonItem(image: UIImage(named: "shortcut-icon-bars"), style: .plain, target: nil, action: nil)
+        let aboutItem = UIBarButtonItem(image: UIImage(named: "iconBars"), style: .plain, target: nil, action: nil)
         let themeItem = UIBarButtonItem(image: UIImage(named: "eye"), style: .plain, target: nil, action: nil)
         navigationController?.setNavigationBarHidden(false, animated: false)
         navigationItem.title = "Paces"
-        navigationItem.leftBarButtonItem = settingsItem
+        navigationItem.leftBarButtonItem = aboutItem
         navigationItem.rightBarButtonItem = themeItem
 
         themeItem.rx.tap
@@ -281,10 +281,10 @@ extension PacesViewController {
             })
             .disposed(by: bag)
 
-        settingsItem.rx.tap
+        aboutItem.rx.tap
             .subscribe(onNext: { [weak self] _ in
                 guard let _self = self else { return }
-                self?.delegate?.pacesViewControllerShowSettings(_self)
+                self?.delegate?.pacesViewControllerShowAbout(_self)
             })
             .disposed(by: bag)
     }
