@@ -59,7 +59,6 @@ extension MainFlowController: PacesViewControllerDelegate {
         about.delegate = self
 
         self.mainNavigationController.pushViewController(about, animated: true)
-        print("resources: \(RxSwift.Resources.total)")
     }
 
 }

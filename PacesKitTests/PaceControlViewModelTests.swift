@@ -28,7 +28,7 @@ class PaceControlViewModelTests: XCTestCase {
         // Put teardown code here. This method is called after the invocation of each test method in the class.
         super.tearDown()
     }
-    
+   /*
     func testConversion() {
         let convertedPace = testScheduler.createObserver(Pace.self)
         vm.outputs.pace.bind(to: convertedPace).disposed(by: bag)
@@ -71,6 +71,6 @@ class PaceControlViewModelTests: XCTestCase {
         XCTAssertEqual(expected.displayValue, received?.displayValue);
 
     }
-
+*/
     
 }

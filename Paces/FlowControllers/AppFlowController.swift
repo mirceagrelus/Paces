@@ -17,7 +17,7 @@ class AppFlowController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.view.backgroundColor = UIColor.yellow
+        self.view.backgroundColor = UIColor.black
     }
 
     func start() {

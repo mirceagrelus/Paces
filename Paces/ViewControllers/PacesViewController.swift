@@ -311,7 +311,7 @@ extension PacesViewController {
 
 extension PacesViewController {
     func test_printResources() {
-        print("resources: \(RxSwift.Resources.total)")
+        //print("resources: \(RxSwift.Resources.total)")
     }
 
     func test_printResources_doubleTap() {
@@ -323,7 +323,7 @@ extension PacesViewController {
         tapGesture.rx.event
             .debug("tapGesture")
             .subscribe { event in
-                print("resources: \(RxSwift.Resources.total)")
+                //print("resources: \(RxSwift.Resources.total)")
             }
             .disposed(by: bag)
     }
