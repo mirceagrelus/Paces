@@ -39,12 +39,13 @@ extension Reactive where Base: MFMailComposeViewController {
         return RxMFMailComposeViewControllerDelegateProxy.proxy(for: base)
     }
 
-    public func setMailComposeDelegate(_ delegate: MFMailComposeViewControllerDelegate) -> Disposable {
-        return RxMFMailComposeViewControllerDelegateProxy.installForwardDelegate(
-            delegate,
-            retainDelegate: false,
-            onProxyForObject: self.base
-        )
+    public var didFinish: Observable<MFMailComposeResult> {
+        return mailComposeDelegate
+            .methodInvoked(#selector(MFMailComposeViewControllerDelegate.mailComposeController(_:didFinishWith:error:)))
+            .map { parameters in
+                return MFMailComposeResult(rawValue: parameters[1] as! Int) ?? MFMailComposeResult.failed
+        }
     }
+
 }
 

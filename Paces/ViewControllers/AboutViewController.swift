@@ -105,8 +105,7 @@ class AboutViewController: UIViewController {
 
             self.present(composer, animated: true, completion: nil)
 
-            composer.rx.mailComposeDelegate
-                .methodInvoked(#selector(MFMailComposeViewControllerDelegate.mailComposeController(_:didFinishWith:error:)))
+            composer.rx.didFinish
                 .subscribe(onNext: { _ in
                     self.dismiss(animated: true, completion: nil)
                 })
