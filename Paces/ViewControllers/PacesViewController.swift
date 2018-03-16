@@ -135,9 +135,10 @@ class PacesViewController: UIViewController {
     func togglePaceInput(_ showInput: Bool) {
         inputSourceAnimator.addAnimations { [weak self] in
             guard let strongSelf = self else { return }
-            let const = showInput ? 0 : strongSelf.paceInputView.bounds.size.height + strongSelf.bounceAdjustment
-            self?.pickerBottomConstraint.constant = const
-            self?.paceContentBottomAnchor.constant = showInput ? -strongSelf.pickerView.bounds.size.height : 0
+            let pickerBottom = showInput ? 0 : strongSelf.paceInputView.bounds.size.height + strongSelf.bounceAdjustment
+            let paceContentBottom = showInput ? -(strongSelf.pickerView.bounds.size.height + strongSelf.view.safeAreaInsets.bottom) : 0
+            self?.pickerBottomConstraint.constant = pickerBottom
+            self?.paceContentBottomAnchor.constant = paceContentBottom
             self?.view.layoutIfNeeded()
         }
         inputSourceAnimator.startAnimation()
@@ -257,7 +258,7 @@ extension PacesViewController {
             paceContentView.trailingAnchor.constraint(equalTo: gradientView.safeAreaLayoutGuide.trailingAnchor),
             paceContentView.topAnchor.constraint(equalTo: gradientView.safeAreaLayoutGuide.topAnchor)
             ])
-        paceContentBottomAnchor = paceContentView.bottomAnchor.constraint(equalTo: gradientView.safeAreaLayoutGuide.bottomAnchor)
+        paceContentBottomAnchor = paceContentView.bottomAnchor.constraint(equalTo: gradientView.bottomAnchor)
         paceContentBottomAnchor.isActive = true
 
         AutoLayoutUtils.constrainView(collectionView, equalToView: paceContentView)
