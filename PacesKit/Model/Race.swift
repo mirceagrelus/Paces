@@ -22,7 +22,7 @@ public struct Race: Codable {
     }
 
     public var displayValue: String {
-        let (hours, minutes, seconds) = self.secondsToHoursMinutesSeconds(seconds: Int(time))
+        let (hours, minutes, seconds) = self.secondsToHoursMinutesSeconds(seconds: Int(round(time)))
         let minutesString = minutes < 10 ? "0\(minutes)" : "\(minutes)"
         let secondsString = seconds < 10 ? "0\(seconds)" : "\(seconds)"
 
