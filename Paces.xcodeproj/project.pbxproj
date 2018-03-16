@@ -18,6 +18,7 @@
 		08083CFC20456F32007E5A43 /* PaceTypeControlViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08083CFB20456F32007E5A43 /* PaceTypeControlViewModel.swift */; };
 		08083CFE20458C2B007E5A43 /* PaceTypeControlView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08083CFD20458C2B007E5A43 /* PaceTypeControlView.swift */; };
 		08083D0020458EDE007E5A43 /* PaceTypeControlCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08083CFF20458EDC007E5A43 /* PaceTypeControlCollectionViewCell.swift */; };
+		0826F012205C057600915056 /* PaceType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0826F011205C057600915056 /* PaceType.swift */; };
 		083C321B203C6EE4005AD1F5 /* DistanceControlView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 083C321A203C6EE4005AD1F5 /* DistanceControlView.swift */; };
 		083C321F203C7A94005AD1F5 /* ConversionControlCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 083C321E203C7A94005AD1F5 /* ConversionControlCollectionViewCell.swift */; };
 		083C3223203D5501005AD1F5 /* Theme.swift in Sources */ = {isa = PBXBuildFile; fileRef = 083C3222203D5501005AD1F5 /* Theme.swift */; };
@@ -135,6 +136,7 @@
 		08083CFB20456F32007E5A43 /* PaceTypeControlViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaceTypeControlViewModel.swift; sourceTree = "<group>"; };
 		08083CFD20458C2B007E5A43 /* PaceTypeControlView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaceTypeControlView.swift; sourceTree = "<group>"; };
 		08083CFF20458EDC007E5A43 /* PaceTypeControlCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PaceTypeControlCollectionViewCell.swift; sourceTree = "<group>"; };
+		0826F011205C057600915056 /* PaceType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaceType.swift; sourceTree = "<group>"; };
 		083C321A203C6EE4005AD1F5 /* DistanceControlView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DistanceControlView.swift; sourceTree = "<group>"; };
 		083C321E203C7A94005AD1F5 /* ConversionControlCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConversionControlCollectionViewCell.swift; sourceTree = "<group>"; };
 		083C3222203D5501005AD1F5 /* Theme.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Theme.swift; sourceTree = "<group>"; };
@@ -301,9 +303,10 @@
 		08CAB6D0202F92C200C7FF41 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				087EFAD72039D19D005B7385 /* ConversionControl.swift */,
+				0826F011205C057600915056 /* PaceType.swift */,
 				08CAB6CE202F92BC00C7FF41 /* Pace.swift */,
 				08C694FE20404B25005A96CA /* Race.swift */,
-				087EFAD72039D19D005B7385 /* ConversionControl.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -845,6 +848,7 @@
 				083C323E203ED37D005AD1F5 /* AddControlView.swift in Sources */,
 				08C6950120406177005A96CA /* DistanceControlViewModel.swift in Sources */,
 				08CAB6CD202F929900C7FF41 /* PaceControlViewModel.swift in Sources */,
+				0826F012205C057600915056 /* PaceType.swift in Sources */,
 				08EDEBA8205AAE3B002941CA /* MFMailComposeViewController+Rx.swift in Sources */,
 				08E64B89202DD9CC00A59F41 /* KeyValueStoreType.swift in Sources */,
 				083C322D203DC5D3005AD1F5 /* ThemeGradientView.swift in Sources */,
