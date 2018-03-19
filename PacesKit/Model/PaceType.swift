@@ -36,7 +36,6 @@ public enum PaceType {
         switch paceType {
         case .pace(let pace): return .pace(self.converted(to: pace.unit))
         case .race(let race): return .race(self.converted(to: race.raceDistance))
-
         }
     }
 
