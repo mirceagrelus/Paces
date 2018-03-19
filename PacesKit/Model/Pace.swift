@@ -96,18 +96,6 @@ public struct Pace: Codable {
 
         return Race(time: totalSeconds, raceDistance: raceDistance)
     }
-
-//    public func converted(from race: Race) -> Pace {
-//        let raceDistance = race.raceDistance.coefficient
-//        let seconds = race.time
-//
-//        let value = raceDistance / seconds
-//        let raceSpeed = Measurement(value: value, unit: UnitSpeed.metersPerSecond)
-//        let targetSpeed = raceSpeed.converted(to: self.unit.toUnitSpeed())
-//
-//        return Pace(value: targetSpeed.value, unit: self.unit)
-//    }
-
 }
 
 extension Pace: Equatable {
@@ -150,7 +138,6 @@ public enum PaceUnit: String, Codable {
 
     public static let paceInputs: [[CustomStringConvertible]] = [Array(0...59), [":"], Array(0...59).map { String(format: "%02d", arguments:[$0]) }]
     public static let speedInputs: [[CustomStringConvertible]] = [Array(0...100), ["."],  Array(0...9)]
-//    public static let speedInputs: [[CustomStringConvertible]] = [Array(0...100), Array(0...9).map { ".\($0)" } ]
 
     public var distanceUnit: DistanceUnit {
         switch self {
@@ -158,17 +145,6 @@ public enum PaceUnit: String, Codable {
         case .kmPerHour: return .km
         case .minPerMile: return .mile
         case .milePerHour: return .mile
-        }
-    }
-
-    public static func fromDescription(_ description: String) -> PaceUnit? {
-        switch description {
-        case PaceUnit.minPerKm.description:    return .minPerKm
-        case PaceUnit.minPerMile.description:  return .minPerMile
-        case PaceUnit.kmPerHour.description:   return .kmPerHour
-        case PaceUnit.milePerHour.description: return .milePerHour
-        default:
-            return nil
         }
     }
 
@@ -183,17 +159,9 @@ public enum PaceUnit: String, Codable {
 }
 
 public extension UnitSpeed {
-    class var secondsPerMeter: UnitSpeed {
-        return UnitSpeed(symbol: "sec/m", converter: UnitConverterPace(coefficient: 1))
-    }
-
-    class var minutesPerKilometer: UnitSpeed {
-        return UnitSpeed(symbol: "min/km", converter: UnitConverterPace(coefficient: 60.0 / 1000.0))
-    }
-
-    class var minutesPerMile: UnitSpeed {
-        return UnitSpeed(symbol: "min/mi", converter: UnitConverterPace(coefficient: 60.0 / 1609.34))
-    }
+    static var secondsPerMeter = UnitSpeed(symbol: "sec/m", converter: UnitConverterPace(coefficient: 1))
+    static var minutesPerKilometer = UnitSpeed(symbol: "min/km", converter: UnitConverterPace(coefficient: 60.0 / 1000.0))
+    static var minutesPerMile = UnitSpeed(symbol: "min/mi", converter: UnitConverterPace(coefficient: 60.0 / 1609.34))
 }
 
 public class UnitConverterPace: UnitConverter {
