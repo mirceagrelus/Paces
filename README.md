@@ -14,3 +14,6 @@ Easy pace, speed, and race time conversions for runners and cyclists. Built with
 * How long will it take you to ride an 80 km course if you average 28 km/h? 
 
 #
+<div align="center">
+  <img src="http://codexbit.com/apps/paces/images/AppPreview.gif" alt="preview" width="320"/>
+</div>
