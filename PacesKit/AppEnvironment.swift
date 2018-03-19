@@ -5,7 +5,7 @@
 //  Created by Mircea Grelus on 2018-02-09.
 //  2018 CodexBit Software
 //
-// Uses the AppEnvironment model of handling dependencies used in the Kickstarter-iOS app
+// Uses the AppEnvironment style of handling dependencies used in the Kickstarter-iOS app
 // https://github.com/kickstarter/ios-oss/blob/master/Library/AppEnvironment.swift
 
 import Foundation
@@ -120,7 +120,7 @@ public struct AppEnvironment {
                            lastVersionWhatsNewShown: lastVersionWhatsNewShown ?? current.lastVersionWhatsNewShown)
     }
 
-    // Saves some key data for the current environment
+    // Saves some key data for the environment
     internal static func saveEnvironment(environment env: Environment,
                                          userDefaults: KeyValueStoreType) {
 
@@ -144,8 +144,8 @@ public struct AppEnvironment {
 
         do {
             let encoder = JSONEncoder()
-            let archivedControlsData = try encoder.encode(env.archivedControls.map { $0.paceType })
-            let jsonString = String(decoding: archivedControlsData, as: UTF8.self)
+            let archivedPaceTypes = try encoder.encode(env.archivedControls.map { $0.paceType })
+            let jsonString = String(decoding: archivedPaceTypes, as: UTF8.self)
 
             data[key_archivedControls] = jsonString
         }
