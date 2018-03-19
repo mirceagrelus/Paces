@@ -34,6 +34,17 @@ public struct AppEnvironment {
         stack.append(env)
     }
 
+    // Pop an environment off the stack.
+    @discardableResult
+    public static func popEnvironment() -> Environment? {
+        let last = stack.count > 1 ? stack.popLast() : nil
+        if last != nil {
+            saveEnvironment(environment: current,
+                            userDefaults: current.userDefaults)
+        }
+        return last
+    }
+
     // Replace the current environment with a new environment.
     public static func replaceCurrentEnvironment(_ env: Environment) {
         pushEnvironment(env)
