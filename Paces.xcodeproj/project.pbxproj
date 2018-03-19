@@ -57,7 +57,6 @@
 		08E64B33202DD3B900A59F41 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 08E64B31202DD3B900A59F41 /* LaunchScreen.storyboard */; };
 		08E64B3E202DD3B900A59F41 /* PacesTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08E64B3D202DD3B900A59F41 /* PacesTests.swift */; };
 		08E64B71202DD82F00A59F41 /* PacesKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 08E64B68202DD82E00A59F41 /* PacesKit.framework */; };
-		08E64B78202DD82F00A59F41 /* PacesKitTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08E64B77202DD82F00A59F41 /* PacesKitTests.swift */; };
 		08E64B7A202DD82F00A59F41 /* PacesKit.h in Headers */ = {isa = PBXBuildFile; fileRef = 08E64B6A202DD82F00A59F41 /* PacesKit.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		08E64B7D202DD82F00A59F41 /* PacesKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 08E64B68202DD82E00A59F41 /* PacesKit.framework */; };
 		08E64B7E202DD82F00A59F41 /* PacesKit.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 08E64B68202DD82E00A59F41 /* PacesKit.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
@@ -75,7 +74,6 @@
 		08EDEBA6205AA2D3002941CA /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 08EDEBA5205AA2D3002941CA /* MessageUI.framework */; };
 		08EDEBA8205AAE3B002941CA /* MFMailComposeViewController+Rx.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08EDEBA7205AAE3B002941CA /* MFMailComposeViewController+Rx.swift */; };
 		08EDEBAA205ABB3B002941CA /* SafariServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 08EDEBA9205ABB3A002941CA /* SafariServices.framework */; };
-		08F81B73203097B6008C346A /* PaceControlViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08F81B72203097B6008C346A /* PaceControlViewModelTests.swift */; };
 		0C47E90A62D3CBA410713ED0 /* Pods_Paces.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BC09D143B537961A85321211 /* Pods_Paces.framework */; };
 		4685430A1B886E3DEC73BED3 /* Pods_PacesKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 81C9957795BB657245FD2BD0 /* Pods_PacesKit.framework */; };
 		57507DD765C42307B9037744 /* Pods_PacesKitTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F5006EC2BBC20C0E2E2C3D4C /* Pods_PacesKitTests.framework */; };
@@ -184,7 +182,6 @@
 		08E64B6A202DD82F00A59F41 /* PacesKit.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PacesKit.h; sourceTree = "<group>"; };
 		08E64B6B202DD82F00A59F41 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		08E64B70202DD82F00A59F41 /* PacesKitTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = PacesKitTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		08E64B77202DD82F00A59F41 /* PacesKitTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PacesKitTests.swift; sourceTree = "<group>"; };
 		08E64B79202DD82F00A59F41 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		08E64B86202DD86E00A59F41 /* Environment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Environment.swift; sourceTree = "<group>"; };
 		08E64B88202DD9CC00A59F41 /* KeyValueStoreType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyValueStoreType.swift; sourceTree = "<group>"; };
@@ -200,7 +197,6 @@
 		08EDEBA5205AA2D3002941CA /* MessageUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MessageUI.framework; path = System/Library/Frameworks/MessageUI.framework; sourceTree = SDKROOT; };
 		08EDEBA7205AAE3B002941CA /* MFMailComposeViewController+Rx.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MFMailComposeViewController+Rx.swift"; sourceTree = "<group>"; };
 		08EDEBA9205ABB3A002941CA /* SafariServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SafariServices.framework; path = System/Library/Frameworks/SafariServices.framework; sourceTree = SDKROOT; };
-		08F81B72203097B6008C346A /* PaceControlViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaceControlViewModelTests.swift; sourceTree = "<group>"; };
 		119460154047C98E38AE5449 /* Pods-PacesKitTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PacesKitTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-PacesKitTests/Pods-PacesKitTests.release.xcconfig"; sourceTree = "<group>"; };
 		220AFA9DE64D32EF2E2BD0A2 /* Pods-PacesKitTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PacesKitTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-PacesKitTests/Pods-PacesKitTests.debug.xcconfig"; sourceTree = "<group>"; };
 		8094585C65415FB1C24B599C /* Pods-PacesTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PacesTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-PacesTests/Pods-PacesTests.release.xcconfig"; sourceTree = "<group>"; };
@@ -391,11 +387,9 @@
 		08E64B76202DD82F00A59F41 /* PacesKitTests */ = {
 			isa = PBXGroup;
 			children = (
-				08E64B77202DD82F00A59F41 /* PacesKitTests.swift */,
 				08E64B79202DD82F00A59F41 /* Info.plist */,
 				08E64B8C202DEDC500A59F41 /* AppEnvironmentTests.swift */,
 				08CAB6D32030668300C7FF41 /* PaceTests.swift */,
-				08F81B72203097B6008C346A /* PaceControlViewModelTests.swift */,
 				0826F013205D072100915056 /* RaceTests.swift */,
 				0849E2F8205D38DA00CBD1A2 /* PaceTypeTests.swift */,
 			);
@@ -891,12 +885,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				08E64B78202DD82F00A59F41 /* PacesKitTests.swift in Sources */,
 				0849E2F9205D38DA00CBD1A2 /* PaceTypeTests.swift in Sources */,
 				0826F014205D072100915056 /* RaceTests.swift in Sources */,
 				08E64B8D202DEDC500A59F41 /* AppEnvironmentTests.swift in Sources */,
 				08CAB6D42030668300C7FF41 /* PaceTests.swift in Sources */,
-				08F81B73203097B6008C346A /* PaceControlViewModelTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -34,7 +34,6 @@ class PaceTests: XCTestCase {
     }
 
     func testDisplayValue() {
-        //let pace1 = Pace(value: 5 * 60 + 30, unit: .minPerKm)
         let pace1 = Pace.minPerKm(seconds: 5 * 60 + 30)
         let pace2 = Pace.minPerKm(seconds: 3 * 60 + 5)
         let pace3 = Pace.minPerMile(seconds: 10 * 60 + 0)
