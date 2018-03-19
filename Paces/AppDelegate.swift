@@ -25,6 +25,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             AppEnvironment.fromStorage(userDefaults: UserDefaults.standard)
         )
 
+        // exit early when running Tests
+        if let _ = NSClassFromString("XCTest") { return true }
+
         // A view controller should manage either sequence or UI, but not both.
         // FlowControllers manage sequences, regular controllers manage UI.
         // AppFlow is the root coordinator of sequences.
