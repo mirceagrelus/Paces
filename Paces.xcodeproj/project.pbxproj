@@ -19,6 +19,7 @@
 		08083CFE20458C2B007E5A43 /* PaceTypeControlView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08083CFD20458C2B007E5A43 /* PaceTypeControlView.swift */; };
 		08083D0020458EDE007E5A43 /* PaceTypeControlCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08083CFF20458EDC007E5A43 /* PaceTypeControlCollectionViewCell.swift */; };
 		0826F012205C057600915056 /* PaceType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0826F011205C057600915056 /* PaceType.swift */; };
+		0826F014205D072100915056 /* RaceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0826F013205D072100915056 /* RaceTests.swift */; };
 		083C321B203C6EE4005AD1F5 /* DistanceControlView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 083C321A203C6EE4005AD1F5 /* DistanceControlView.swift */; };
 		083C321F203C7A94005AD1F5 /* ConversionControlCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 083C321E203C7A94005AD1F5 /* ConversionControlCollectionViewCell.swift */; };
 		083C3223203D5501005AD1F5 /* Theme.swift in Sources */ = {isa = PBXBuildFile; fileRef = 083C3222203D5501005AD1F5 /* Theme.swift */; };
@@ -137,6 +138,7 @@
 		08083CFD20458C2B007E5A43 /* PaceTypeControlView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaceTypeControlView.swift; sourceTree = "<group>"; };
 		08083CFF20458EDC007E5A43 /* PaceTypeControlCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PaceTypeControlCollectionViewCell.swift; sourceTree = "<group>"; };
 		0826F011205C057600915056 /* PaceType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaceType.swift; sourceTree = "<group>"; };
+		0826F013205D072100915056 /* RaceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RaceTests.swift; sourceTree = "<group>"; };
 		083C321A203C6EE4005AD1F5 /* DistanceControlView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DistanceControlView.swift; sourceTree = "<group>"; };
 		083C321E203C7A94005AD1F5 /* ConversionControlCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConversionControlCollectionViewCell.swift; sourceTree = "<group>"; };
 		083C3222203D5501005AD1F5 /* Theme.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Theme.swift; sourceTree = "<group>"; };
@@ -392,6 +394,7 @@
 				08E64B8C202DEDC500A59F41 /* AppEnvironmentTests.swift */,
 				08CAB6D32030668300C7FF41 /* PaceTests.swift */,
 				08F81B72203097B6008C346A /* PaceControlViewModelTests.swift */,
+				0826F013205D072100915056 /* RaceTests.swift */,
 			);
 			path = PacesKitTests;
 			sourceTree = "<group>";
@@ -886,6 +889,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				08E64B78202DD82F00A59F41 /* PacesKitTests.swift in Sources */,
+				0826F014205D072100915056 /* RaceTests.swift in Sources */,
 				08E64B8D202DEDC500A59F41 /* AppEnvironmentTests.swift in Sources */,
 				08CAB6D42030668300C7FF41 /* PaceTests.swift in Sources */,
 				08F81B73203097B6008C346A /* PaceControlViewModelTests.swift in Sources */,

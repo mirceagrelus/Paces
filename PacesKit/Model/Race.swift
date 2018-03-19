@@ -22,7 +22,7 @@ public struct Race: Codable {
     }
 
     public var displayValue: String {
-        let (hours, minutes, seconds) = self.secondsToHoursMinutesSeconds(seconds: Int(round(time)))
+        let (hours, minutes, seconds) = secondsToHoursMinutesSeconds(seconds: Int(round(time)))
         let minutesString = minutes < 10 ? "0\(minutes)" : "\(minutes)"
         let secondsString = seconds < 10 ? "0\(seconds)" : "\(seconds)"
 
@@ -58,10 +58,6 @@ public struct Race: Codable {
         self.time = totalSeconds
     }
 
-//    public static func from(pace: Pace, distance: RaceDistance) -> Race {
-//        return Race(time: 0, raceDistance: distance)
-//    }
-
     // TODO: take out of here
     func secondsToHoursMinutesSeconds (seconds : Int) -> (Int, Int, Int) {
         return (seconds / 3600, (seconds % 3600) / 60, (seconds % 3600) % 60)
@@ -92,20 +88,11 @@ public struct Race: Codable {
 
         return Race(time: newRaceSeconds, raceDistance: newRaceDistance)
     }
-
-//    public func converted(from pace: Pace) -> Race {
-//
-//        let paceMeasurement = Measurement(value: pace.value, unit: pace.unit.toUnitSpeed())
-//        let metersPerSecond = paceMeasurement.converted(to: UnitSpeed.metersPerSecond)
-//
-//        let raceDistanceMeters = self.raceDistance.coefficient
-//        let seconds = raceDistanceMeters / metersPerSecond.value
-//
-//        return Race(time: seconds, raceDistance: self.raceDistance)
-//    }
 }
 
 extension Race: Equatable {
+    // technically races configured with different distance units could be considered equal,
+    // but we consider equality as in a user's configuration of the race
     public static func == (lhs: Race, rhs: Race) -> Bool {
         return lhs.raceDistance == rhs.raceDistance && lhs.time == rhs.time
     }
