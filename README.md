@@ -16,5 +16,10 @@ Easy pace, speed, and race time conversions for runners and cyclists. Built with
 #
 <div align="center">
   <img src="http://codexbit.com/apps/paces/images/AppPreview_1.gif" alt="loading animated demo" width="320"/>
-  <img src="http://codexbit.com/apps/paces/images/AppPreviewSecond_1.gif" alt="loading animated demo" width="320"/>
+</div>
+
+#
+
+<div align="center">
+<img src="http://codexbit.com/apps/paces/images/AppPreviewSecond_1.gif" alt="loading animated demo" width="300"/>
 </div>
