@@ -51,6 +51,8 @@
 		08CAB6CD202F929900C7FF41 /* PaceControlViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08CAB6CC202F929900C7FF41 /* PaceControlViewModel.swift */; };
 		08CAB6CF202F92BC00C7FF41 /* Pace.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08CAB6CE202F92BC00C7FF41 /* Pace.swift */; };
 		08CAB6D42030668300C7FF41 /* PaceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08CAB6D32030668300C7FF41 /* PaceTests.swift */; };
+		08DD4D8A20651DAB00A4EFF8 /* PacesUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08DD4D8920651DAB00A4EFF8 /* PacesUITests.swift */; };
+		08DD4D9220651E0D00A4EFF8 /* SnapshotHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08DD4D9120651E0D00A4EFF8 /* SnapshotHelper.swift */; };
 		08E64B29202DD3B900A59F41 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08E64B28202DD3B900A59F41 /* AppDelegate.swift */; };
 		08E64B2E202DD3B900A59F41 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 08E64B2C202DD3B900A59F41 /* Main.storyboard */; };
 		08E64B30202DD3B900A59F41 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 08E64B2F202DD3B900A59F41 /* Assets.xcassets */; };
@@ -81,6 +83,13 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
+		08DD4D8C20651DAB00A4EFF8 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 08E64B1D202DD3B900A59F41 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 08E64B24202DD3B900A59F41;
+			remoteInfo = Paces;
+		};
 		08E64B3A202DD3B900A59F41 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 08E64B1D202DD3B900A59F41 /* Project object */;
@@ -169,6 +178,10 @@
 		08CAB6CC202F929900C7FF41 /* PaceControlViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaceControlViewModel.swift; sourceTree = "<group>"; };
 		08CAB6CE202F92BC00C7FF41 /* Pace.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Pace.swift; sourceTree = "<group>"; };
 		08CAB6D32030668300C7FF41 /* PaceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaceTests.swift; sourceTree = "<group>"; };
+		08DD4D8720651DAB00A4EFF8 /* PacesUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = PacesUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		08DD4D8920651DAB00A4EFF8 /* PacesUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PacesUITests.swift; sourceTree = "<group>"; };
+		08DD4D8B20651DAB00A4EFF8 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		08DD4D9120651E0D00A4EFF8 /* SnapshotHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SnapshotHelper.swift; path = fastlane/SnapshotHelper.swift; sourceTree = SOURCE_ROOT; };
 		08E64B25202DD3B900A59F41 /* Paces.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Paces.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		08E64B28202DD3B900A59F41 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		08E64B2D202DD3B900A59F41 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -212,6 +225,13 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		08DD4D8420651DAB00A4EFF8 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		08E64B22202DD3B900A59F41 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -311,6 +331,16 @@
 			path = Model;
 			sourceTree = "<group>";
 		};
+		08DD4D8820651DAB00A4EFF8 /* PacesUITests */ = {
+			isa = PBXGroup;
+			children = (
+				08DD4D9120651E0D00A4EFF8 /* SnapshotHelper.swift */,
+				08DD4D8920651DAB00A4EFF8 /* PacesUITests.swift */,
+				08DD4D8B20651DAB00A4EFF8 /* Info.plist */,
+			);
+			path = PacesUITests;
+			sourceTree = "<group>";
+		};
 		08E64B1C202DD3B900A59F41 = {
 			isa = PBXGroup;
 			children = (
@@ -318,6 +348,7 @@
 				08E64B3C202DD3B900A59F41 /* PacesTests */,
 				08E64B69202DD82F00A59F41 /* PacesKit */,
 				08E64B76202DD82F00A59F41 /* PacesKitTests */,
+				08DD4D8820651DAB00A4EFF8 /* PacesUITests */,
 				08E64B26202DD3B900A59F41 /* Products */,
 				4E0CE232E29C91E0D81AC67D /* Pods */,
 				5168F72B2E16D1B32402862F /* Frameworks */,
@@ -331,6 +362,7 @@
 				08E64B39202DD3B900A59F41 /* PacesTests.xctest */,
 				08E64B68202DD82E00A59F41 /* PacesKit.framework */,
 				08E64B70202DD82F00A59F41 /* PacesKitTests.xctest */,
+				08DD4D8720651DAB00A4EFF8 /* PacesUITests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -467,6 +499,24 @@
 /* End PBXHeadersBuildPhase section */
 
 /* Begin PBXNativeTarget section */
+		08DD4D8620651DAB00A4EFF8 /* PacesUITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 08DD4D9020651DAC00A4EFF8 /* Build configuration list for PBXNativeTarget "PacesUITests" */;
+			buildPhases = (
+				08DD4D8320651DAB00A4EFF8 /* Sources */,
+				08DD4D8420651DAB00A4EFF8 /* Frameworks */,
+				08DD4D8520651DAB00A4EFF8 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				08DD4D8D20651DAB00A4EFF8 /* PBXTargetDependency */,
+			);
+			name = PacesUITests;
+			productName = PacesUITests;
+			productReference = 08DD4D8720651DAB00A4EFF8 /* PacesUITests.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
 		08E64B24202DD3B900A59F41 /* Paces */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 08E64B42202DD3BA00A59F41 /* Build configuration list for PBXNativeTarget "Paces" */;
@@ -562,6 +612,11 @@
 				LastUpgradeCheck = 0920;
 				ORGANIZATIONNAME = "CodexBit Software";
 				TargetAttributes = {
+					08DD4D8620651DAB00A4EFF8 = {
+						CreatedOnToolsVersion = 9.2;
+						ProvisioningStyle = Automatic;
+						TestTargetID = 08E64B24202DD3B900A59F41;
+					};
 					08E64B24202DD3B900A59F41 = {
 						CreatedOnToolsVersion = 9.2;
 						ProvisioningStyle = Automatic;
@@ -600,11 +655,19 @@
 				08E64B38202DD3B900A59F41 /* PacesTests */,
 				08E64B67202DD82E00A59F41 /* PacesKit */,
 				08E64B6F202DD82F00A59F41 /* PacesKitTests */,
+				08DD4D8620651DAB00A4EFF8 /* PacesUITests */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
+		08DD4D8520651DAB00A4EFF8 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		08E64B23202DD3B900A59F41 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -812,6 +875,15 @@
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		08DD4D8320651DAB00A4EFF8 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				08DD4D8A20651DAB00A4EFF8 /* PacesUITests.swift in Sources */,
+				08DD4D9220651E0D00A4EFF8 /* SnapshotHelper.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		08E64B21202DD3B900A59F41 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -895,6 +967,11 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
+		08DD4D8D20651DAB00A4EFF8 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 08E64B24202DD3B900A59F41 /* Paces */;
+			targetProxy = 08DD4D8C20651DAB00A4EFF8 /* PBXContainerItemProxy */;
+		};
 		08E64B3B202DD3B900A59F41 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = 08E64B24202DD3B900A59F41 /* Paces */;
@@ -937,6 +1014,38 @@
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
+		08DD4D8E20651DAB00A4EFF8 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 5LNPS62N3V;
+				INFOPLIST_FILE = PacesUITests/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.2;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.codexbit.PacesUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 4.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = Paces;
+			};
+			name = Debug;
+		};
+		08DD4D8F20651DAB00A4EFF8 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 5LNPS62N3V;
+				INFOPLIST_FILE = PacesUITests/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.2;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.codexbit.PacesUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 4.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = Paces;
+			};
+			name = Release;
+		};
 		08E64B40202DD3BA00A59F41 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -1206,6 +1315,15 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		08DD4D9020651DAC00A4EFF8 /* Build configuration list for PBXNativeTarget "PacesUITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				08DD4D8E20651DAB00A4EFF8 /* Debug */,
+				08DD4D8F20651DAB00A4EFF8 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		08E64B20202DD3B900A59F41 /* Build configuration list for PBXProject "Paces" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
