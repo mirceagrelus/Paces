@@ -16,4 +16,12 @@ platform :ios do
   lane :screenshots do
     capture_screenshots(workspace: "Paces.xcworkspace", scheme: "PacesUITests")
   end
+
+  lane :tests do
+    run_tests(workspace: "Paces.xcworkspace",
+              devices: ["iPhone 6s"],
+              scheme: "PacesKitTests")
+  end
+
+
 end
