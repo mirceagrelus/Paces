@@ -33,6 +33,9 @@ extension TestScheduler {
      - returns: Recorded event in time.
      */
     public func next<T>(_ time: TestTime, _ element: T) -> Recorded<Event<T>> {
+        #if DEBUG
+            DeprecationWarner.warnIfNeeded(.globalTestFunctionNext)
+        #endif
         return Recorded.next(time, element)
     }
 
@@ -44,6 +47,9 @@ extension TestScheduler {
      - returns: Recorded event in time.
      */
     public func completed<T>(_ time: TestTime, _ type: T.Type = T.self) -> Recorded<Event<T>> {
+        #if DEBUG
+            DeprecationWarner.warnIfNeeded(.globalTestFunctionCompleted)
+        #endif
         return Recorded.completed(time, type)
     }
 
@@ -53,6 +59,9 @@ extension TestScheduler {
      - parameter time: Recorded virtual time the `.completed` event occurs.
      */
     public func error<T>(_ time: TestTime, _ error: Swift.Error, _ type: T.Type = T.self) -> Recorded<Event<T>> {
+        #if DEBUG
+            DeprecationWarner.warnIfNeeded(.globalTestFunctionError)
+        #endif
         return Recorded.error(time, error, type)
     }
 //}

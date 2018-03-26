@@ -2,12 +2,12 @@ PODS:
   - Action (3.5.0):
     - RxCocoa (~> 4.0)
     - RxSwift (~> 4.0)
-  - RxBlocking (4.1.1):
+  - RxBlocking (4.1.2):
     - RxSwift (~> 4.0)
-  - RxCocoa (4.1.1):
+  - RxCocoa (4.1.2):
     - RxSwift (~> 4.0)
-  - RxSwift (4.1.1)
-  - RxTest (4.1.1):
+  - RxSwift (4.1.2)
+  - RxTest (4.1.2):
     - RxSwift (~> 4.0)
 
 DEPENDENCIES:
@@ -19,11 +19,11 @@ DEPENDENCIES:
 
 SPEC CHECKSUMS:
   Action: d60087ebce41b969d1afdad01e2fa1372a82f26e
-  RxBlocking: 22e7d7b86a1c0c42164a30d64f56f97128b4ffab
-  RxCocoa: fd0862fd2df95fa55562ad28ffd2522c25eb4a85
-  RxSwift: c6e3b1c7b325c7d121cd4327e9d98b7ed746b570
-  RxTest: f934010a5b07ecd627cb70b38eb4baf0414591d2
+  RxBlocking: f6054985901412fc8c02daa84e92d4ba68c61389
+  RxCocoa: d88ba0f1f6abf040011a9eb4b539324fc426843a
+  RxSwift: e49536837d9901277638493ea537394d4b55f570
+  RxTest: e634f15fd2c2cd0e0120132ef7a4f7be69ad0393
 
-PODFILE CHECKSUM: f082eb7d8b7d6b1d70990a75ba9b3ebd3a95caff
+PODFILE CHECKSUM: c4ad6ef0d2ec9e3a25f873fb929a88cd51d46b67
 
-COCOAPODS: 1.2.0
+COCOAPODS: 1.4.0

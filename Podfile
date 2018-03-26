@@ -22,6 +22,10 @@ target 'Paces' do
         pod 'RxBlocking', '~> 4.0'
         pod 'RxTest', '~> 4.0'
     end
+
+    target 'PacesUITests' do
+        inherit! :search_paths
+    end
 end
 
 target 'PacesKit' do
