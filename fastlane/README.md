@@ -26,6 +26,11 @@ fastlane ios tests
 fastlane ios screenshots
 ```
 
+### ios beta
+```
+fastlane ios beta
+```
+
 
 ----
 
