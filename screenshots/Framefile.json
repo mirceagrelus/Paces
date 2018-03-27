@@ -1,0 +1,22 @@
+{
+  "device_frame_version": "latest",
+  "default": {
+    "title": {
+      "color": "#000000"
+    },
+    "background": "./background.jpg",
+    "padding": 20,
+    "show_complete_frame": true,
+    "stack_title" : false,
+    "title_below_image": false
+  },
+
+  "data": [
+    {
+      "filter": "Brainstorming",
+      "keyword": {
+        "color": "#d21559"
+      }
+    }
+  ]
+}

@@ -25,6 +25,7 @@
                             <subviews>
                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ith-jF-OZz" customClass="ThemeButton" customModule="PacesKit" customModuleProvider="target">
                                     <rect key="frame" x="0.0" y="0.0" width="44" height="44"/>
+                                    <accessibility key="accessibilityConfiguration" label="Edit"/>
                                     <constraints>
                                         <constraint firstAttribute="height" constant="44" id="HXc-qv-5Ls"/>
                                         <constraint firstAttribute="width" constant="44" id="hfH-7q-JKd"/>
