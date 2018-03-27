@@ -52,7 +52,7 @@
 		08CAB6CF202F92BC00C7FF41 /* Pace.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08CAB6CE202F92BC00C7FF41 /* Pace.swift */; };
 		08CAB6D42030668300C7FF41 /* PaceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08CAB6D32030668300C7FF41 /* PaceTests.swift */; };
 		08D0E5A62068E9790077E1C4 /* PacesKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 08E64B68202DD82E00A59F41 /* PacesKit.framework */; };
-		08DD4D8A20651DAB00A4EFF8 /* PacesUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08DD4D8920651DAB00A4EFF8 /* PacesUITests.swift */; };
+		08DD4D8A20651DAB00A4EFF8 /* AppStoreSnapshotsUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08DD4D8920651DAB00A4EFF8 /* AppStoreSnapshotsUITests.swift */; };
 		08DD4D9220651E0D00A4EFF8 /* SnapshotHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08DD4D9120651E0D00A4EFF8 /* SnapshotHelper.swift */; };
 		08E64B29202DD3B900A59F41 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08E64B28202DD3B900A59F41 /* AppDelegate.swift */; };
 		08E64B2E202DD3B900A59F41 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 08E64B2C202DD3B900A59F41 /* Main.storyboard */; };
@@ -180,7 +180,7 @@
 		08CAB6CE202F92BC00C7FF41 /* Pace.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Pace.swift; sourceTree = "<group>"; };
 		08CAB6D32030668300C7FF41 /* PaceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaceTests.swift; sourceTree = "<group>"; };
 		08DD4D8720651DAB00A4EFF8 /* PacesUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = PacesUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		08DD4D8920651DAB00A4EFF8 /* PacesUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PacesUITests.swift; sourceTree = "<group>"; };
+		08DD4D8920651DAB00A4EFF8 /* AppStoreSnapshotsUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppStoreSnapshotsUITests.swift; sourceTree = "<group>"; };
 		08DD4D8B20651DAB00A4EFF8 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		08DD4D9120651E0D00A4EFF8 /* SnapshotHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SnapshotHelper.swift; path = fastlane/SnapshotHelper.swift; sourceTree = SOURCE_ROOT; };
 		08E64B25202DD3B900A59F41 /* Paces.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Paces.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -340,7 +340,7 @@
 			isa = PBXGroup;
 			children = (
 				08DD4D9120651E0D00A4EFF8 /* SnapshotHelper.swift */,
-				08DD4D8920651DAB00A4EFF8 /* PacesUITests.swift */,
+				08DD4D8920651DAB00A4EFF8 /* AppStoreSnapshotsUITests.swift */,
 				08DD4D8B20651DAB00A4EFF8 /* Info.plist */,
 			);
 			path = PacesUITests;
@@ -975,7 +975,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				08DD4D8A20651DAB00A4EFF8 /* PacesUITests.swift in Sources */,
+				08DD4D8A20651DAB00A4EFF8 /* AppStoreSnapshotsUITests.swift in Sources */,
 				08DD4D9220651E0D00A4EFF8 /* SnapshotHelper.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

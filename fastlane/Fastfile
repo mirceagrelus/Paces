@@ -12,15 +12,15 @@
 default_platform(:ios)
 
 platform :ios do
-  desc "Generate new localized screenshots"
-  lane :screenshots do
-    capture_screenshots(workspace: "Paces.xcworkspace", scheme: "PacesUITests")
-  end
-
   lane :tests do
     run_tests(workspace: "Paces.xcworkspace",
               devices: ["iPhone 6s"],
               scheme: "PacesKitTests")
+  end
+
+  lane :screenshots do
+    capture_screenshots(workspace: "Paces.xcworkspace", scheme: "PacesUITests")
+    # upload_to_app_store
   end
 
 

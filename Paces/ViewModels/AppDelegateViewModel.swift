@@ -53,6 +53,17 @@ public class AppDelegateViewModel: AppDelegateViewModelType {
             .filter { _ in AppEnvironment.current.whatsNewVersion > AppEnvironment.current.lastVersionWhatsNewShown }
             .filter { _ in false } //disable for now
 
+        // if running UITests for taking AppStore Snaphots, switch to red theme
+        appLaunched
+            .filter { _ in ProcessInfo.processInfo.arguments.contains("AppStoreSnapshot") }
+            .delay(1, scheduler: MainScheduler.instance)
+            .take(1)
+            .subscribe(onNext: { _ in
+                AppEnvironment.replaceCurrentEnvironment(Environment(theme: ThemeType.orangeRed.theme()))
+                notifyThemeDidChange()
+            })
+            .disposed(by: bag)
+
     }
 
     public var inputs: AppDelegateViewModelInputs { return self }
