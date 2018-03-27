@@ -29,7 +29,7 @@ public struct AppEnvironment {
     }
 
     // Push a new environment onto the stack.
-    internal static func pushEnvironment(_ env: Environment) {
+    public static func pushEnvironment(_ env: Environment) {
         saveEnvironment(environment: env, userDefaults: env.userDefaults)
         stack.append(env)
     }
