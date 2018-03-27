@@ -34,3 +34,7 @@
 stop_after_first_error true
 number_of_retries 0
 concurrent_simulators false
+
+# to add device frames around screenshots frameit:
+# https://docs.fastlane.tools/actions/frameit/
+# fastlane frameit

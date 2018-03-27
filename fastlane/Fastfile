@@ -20,6 +20,7 @@ platform :ios do
 
   lane :screenshots do
     capture_screenshots(workspace: "Paces.xcworkspace", scheme: "PacesUITests")
+    frame_screenshots(path: "./screenshots")
     # upload_to_app_store
   end
 
