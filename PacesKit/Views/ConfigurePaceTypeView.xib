@@ -105,10 +105,12 @@
                                                             <subviews>
                                                                 <button opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="YV6-rf-oef" customClass="PaceTypeButton" customModule="PacesKit" customModuleProvider="target">
                                                                     <rect key="frame" x="0.0" y="0.0" width="34" height="34"/>
+                                                                    <accessibility key="accessibilityConfiguration" identifier="km"/>
                                                                     <state key="normal" title="km"/>
                                                                 </button>
                                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="MEd-tA-aBM" customClass="PaceTypeButton" customModule="PacesKit" customModuleProvider="target">
                                                                     <rect key="frame" x="0.0" y="39" width="34" height="34"/>
+                                                                    <accessibility key="accessibilityConfiguration" identifier="mi"/>
                                                                     <state key="normal" title="mile"/>
                                                                 </button>
                                                             </subviews>
