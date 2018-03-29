@@ -66,8 +66,7 @@ class AppStoreSnapshotsUITests: XCTestCase {
         app.scrollViews.otherElements.buttons["mph"].tap()
         app.collectionViews.buttons["+"].tap()
         app.scrollViews.otherElements.buttons["Custom distance"].tap()
-        app.keys["6"].tap()
-        app.keys["0"].tap()
+        app.scrollViews.otherElements.textFields["textInput"].typeText("60")
         app.scrollViews.otherElements.buttons["mi"].tap()
         app.toolbars.buttons["Done"].tap()
         // select second control
