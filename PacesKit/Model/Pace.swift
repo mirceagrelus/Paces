@@ -127,6 +127,15 @@ public enum PaceUnit: String, Codable {
         }
     }
 
+    public var accessibilityLabel: String {
+        switch self {
+        case .minPerKm:    return "minutes per kilometer"
+        case .minPerMile:  return "minutes per mile"
+        case .kmPerHour:   return "kilometers per hour"
+        case .milePerHour: return "miles per hour"
+        }
+    }
+
     public var inputSource: [[CustomStringConvertible]] {
         switch self {
         case .minPerKm:    return PaceUnit.paceInputs

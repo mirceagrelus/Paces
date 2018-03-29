@@ -17,6 +17,7 @@ public class DistanceControlView: ThemeView {
     @IBOutlet weak var raceDistanceLabel: ConversionControlLabel!
     @IBOutlet weak var separatorLabel: ConversionControlLabel!
     @IBOutlet weak var editButton: ThemeButton!
+    @IBOutlet weak var raceAccessibilityView: UIView!
     
     public var viewModel: DistanceControlViewModelType = DistanceControlViewModel() { didSet { bindViewModel() }}
     public let bag = DisposeBag()
@@ -56,6 +57,18 @@ public class DistanceControlView: ThemeView {
                 self?.separatorLabel.isSelected = isSelected
             })
             .disposed(by: bag)
+
+        Observable
+            .combineLatest(viewModel.inputs.race,
+                           viewModel.inputs.isSelected)
+            .subscribe(onNext: { [weak self] (race, isSelected) in
+                guard let _self = self else { return }
+                let selected = isSelected ? "selected, " : ""
+                _self.raceAccessibilityView.accessibilityLabel = "\(selected)\(race.displayValue), \(race.raceDistance.accessibilityLabel)"
+                _self.editButton.accessibilityLabel = "Edit race \(race.raceDistance.accessibilityLabel)"
+            })
+            .disposed(by: bag)
+
 
         let tapGesture = UITapGestureRecognizer()
         addGestureRecognizer(tapGesture)

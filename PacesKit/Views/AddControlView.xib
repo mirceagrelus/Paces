@@ -19,6 +19,7 @@
             <subviews>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="K4K-6p-HwY" customClass="PaceTypeButton" customModule="PacesKit" customModuleProvider="target">
                     <rect key="frame" x="148" y="12" width="30" height="52"/>
+                    <accessibility key="accessibilityConfiguration" identifier="+" label="Add"/>
                     <fontDescription key="fontDescription" type="system" pointSize="33"/>
                     <state key="normal" title="+"/>
                 </button>

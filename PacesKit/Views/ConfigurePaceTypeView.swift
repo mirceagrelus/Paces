@@ -29,6 +29,7 @@ public class ConfigurePaceTypeView: UIView {
     var contentShowConstraint: NSLayoutConstraint = NSLayoutConstraint()
     var contentHideConstraint: NSLayoutConstraint = NSLayoutConstraint()
 
+    @IBOutlet weak var paceLabel: ConversionControlLabel!
     @IBOutlet weak var deleteStackView: UIStackView!
     @IBOutlet weak var paceMinKm: PaceTypeButton!
     @IBOutlet weak var paceMinMi: PaceTypeButton!
@@ -66,6 +67,9 @@ public class ConfigurePaceTypeView: UIView {
             self.contentShowConstraint.isActive = true
 
             self.layoutIfNeeded()
+        }
+        animator.addCompletion { _ in
+            UIAccessibilityPostNotification(UIAccessibilityScreenChangedNotification, self.paceLabel)
         }
         animator.startAnimation()
     }
@@ -182,6 +186,7 @@ public class ConfigurePaceTypeView: UIView {
 
     func setup() {
         setupUI()
+        setupAccessibility()
         setupGestures()
         observeKeyboard()
     }
@@ -221,6 +226,20 @@ public class ConfigurePaceTypeView: UIView {
         deleteButton.contentEdgeInsets = raceMarathon.contentEdgeInsets
         deleteButton.applyTintColor = { AppEnvironment.current.theme.destructiveActionTextColor }
         deleteButton.applyBackgroundColor = { AppEnvironment.current.theme.destructiveActionActiveColor }
+    }
+
+    func setupAccessibility() {
+        accessibilityViewIsModal = true
+        dimView.isAccessibilityElement = true
+        dimView.accessibilityLabel = "Dimmed view. Tap to dismiss edit screen"
+
+        paceMinKm.accessibilityLabel = PaceUnit.minPerKm.accessibilityLabel
+        paceMinMi.accessibilityLabel = PaceUnit.minPerMile.accessibilityLabel
+        paceKph.accessibilityLabel = PaceUnit.kmPerHour.accessibilityLabel
+        paceMph.accessibilityLabel = PaceUnit.milePerHour.accessibilityLabel
+
+        raceDistanceKm.accessibilityLabel = "\(DistanceUnit.km.accessibilityLabel), distance unit"
+        raceDistanceMile.accessibilityLabel = "\(DistanceUnit.mile.accessibilityLabel), distance unit"
     }
 
     func setupGestures() {

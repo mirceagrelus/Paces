@@ -17,6 +17,13 @@
             <rect key="frame" x="0.0" y="0.0" width="378" height="82"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <subviews>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Gck-xX-eCW">
+                    <rect key="frame" x="0.0" y="0.0" width="334" height="82"/>
+                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <accessibility key="accessibilityConfiguration">
+                        <bool key="isElement" value="YES"/>
+                    </accessibility>
+                </view>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="w0h-Wz-qsO">
                     <rect key="frame" x="334" y="0.0" width="44" height="82"/>
                     <subviews>
@@ -25,7 +32,7 @@
                             <subviews>
                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ith-jF-OZz" customClass="ThemeButton" customModule="PacesKit" customModuleProvider="target">
                                     <rect key="frame" x="0.0" y="0.0" width="44" height="44"/>
-                                    <accessibility key="accessibilityConfiguration" label="Edit"/>
+                                    <accessibility key="accessibilityConfiguration" identifier="Edit" label="Edit"/>
                                     <constraints>
                                         <constraint firstAttribute="height" constant="44" id="HXc-qv-5Ls"/>
                                         <constraint firstAttribute="width" constant="44" id="hfH-7q-JKd"/>
@@ -44,25 +51,39 @@
                 </view>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mzD-Pu-bnp" customClass="ConversionControlLabel" customModule="PacesKit" customModuleProvider="target">
                     <rect key="frame" x="150.5" y="21.5" width="78" height="39.5"/>
+                    <accessibility key="accessibilityConfiguration">
+                        <bool key="isElement" value="NO"/>
+                    </accessibility>
                     <fontDescription key="fontDescription" type="system" pointSize="33"/>
                     <nil key="textColor"/>
                     <nil key="highlightedColor"/>
                 </label>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jhp-5u-Y7C" customClass="ConversionControlLabel" customModule="PacesKit" customModuleProvider="target">
                     <rect key="frame" x="168" y="58.5" width="42" height="20.5"/>
+                    <accessibility key="accessibilityConfiguration">
+                        <bool key="isElement" value="NO"/>
+                    </accessibility>
                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                     <nil key="textColor"/>
                     <nil key="highlightedColor"/>
                 </label>
             </subviews>
             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+            <accessibility key="accessibilityConfiguration">
+                <accessibilityTraits key="traits" summaryElement="YES"/>
+                <bool key="isElement" value="NO"/>
+            </accessibility>
             <constraints>
                 <constraint firstItem="w0h-Wz-qsO" firstAttribute="trailing" secondItem="360-Xm-lWY" secondAttribute="trailing" id="4bY-OW-M7w"/>
+                <constraint firstItem="Gck-xX-eCW" firstAttribute="bottom" secondItem="360-Xm-lWY" secondAttribute="bottom" id="5Hh-kW-wqQ"/>
                 <constraint firstItem="jhp-5u-Y7C" firstAttribute="bottom" secondItem="360-Xm-lWY" secondAttribute="bottom" constant="-3" id="6rV-i7-fw9"/>
                 <constraint firstItem="w0h-Wz-qsO" firstAttribute="centerY" secondItem="360-Xm-lWY" secondAttribute="centerY" id="CAW-Co-qki"/>
+                <constraint firstItem="Gck-xX-eCW" firstAttribute="top" secondItem="360-Xm-lWY" secondAttribute="top" id="IyI-A4-HjL"/>
+                <constraint firstItem="Gck-xX-eCW" firstAttribute="left" secondItem="360-Xm-lWY" secondAttribute="left" id="SxO-Zk-ehK"/>
                 <constraint firstItem="mzD-Pu-bnp" firstAttribute="centerX" secondItem="360-Xm-lWY" secondAttribute="centerXWithinMargins" id="a3q-dp-a0b"/>
                 <constraint firstItem="w0h-Wz-qsO" firstAttribute="height" secondItem="360-Xm-lWY" secondAttribute="height" id="ajN-0V-jk9"/>
                 <constraint firstItem="mzD-Pu-bnp" firstAttribute="centerY" secondItem="360-Xm-lWY" secondAttribute="centerYWithinMargins" id="i7f-ep-QYD"/>
+                <constraint firstItem="Gck-xX-eCW" firstAttribute="trailing" secondItem="w0h-Wz-qsO" secondAttribute="leading" id="pDH-fm-b3O"/>
                 <constraint firstAttribute="trailingMargin" secondItem="jhp-5u-Y7C" secondAttribute="trailing" id="rXY-dD-JTN"/>
                 <constraint firstItem="jhp-5u-Y7C" firstAttribute="centerX" secondItem="360-Xm-lWY" secondAttribute="centerXWithinMargins" id="riq-Of-Kce"/>
             </constraints>
@@ -75,6 +96,7 @@
             </variation>
             <connections>
                 <outlet property="editButton" destination="Ith-jF-OZz" id="FCT-Qa-c6b"/>
+                <outlet property="paceAccessibilityView" destination="Gck-xX-eCW" id="OM1-n1-MFN"/>
                 <outlet property="unitLabel" destination="jhp-5u-Y7C" id="Cr3-e4-qXT"/>
                 <outlet property="valueLabel" destination="mzD-Pu-bnp" id="pmg-3X-6ks"/>
             </connections>

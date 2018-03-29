@@ -127,6 +127,16 @@ public struct RaceDistance: Codable {
         return self.raceType.name
     }
 
+    public var accessibilityLabel: String {
+        switch raceType {
+        case .km5: return "5k"
+        case .km10: return "10k"
+        case .halfMarathon: return "Half Marathon"
+        case .marathon: return "Marathon"
+        case .custom(let val): return "Custom, \(val) \(distanceUnit.accessibilityLabel)"
+        }
+    }
+
 }
 
 extension RaceDistance: Equatable {
@@ -218,6 +228,13 @@ public enum DistanceUnit: String, Codable {
         switch self {
         case .km: return 1000.0
         case .mile: return 1609.34
+        }
+    }
+
+    public var accessibilityLabel: String {
+        switch self {
+        case .km: return "kilometers"
+        case .mile: return "miles"
         }
     }
 }

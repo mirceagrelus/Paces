@@ -83,6 +83,7 @@ public class CustomDistanceInput: UIView {
         keyboardToolbar.items = [flexBarButton, keyboardDoneButton]
 
         textInput.translatesAutoresizingMaskIntoConstraints = false
+        textInput.accessibilityIdentifier = "textInput"
         textInput.borderStyle = UITextBorderStyle.none
         textInput.font = UIFont.systemFont(ofSize: labelFontSize)
         textInput.keyboardType = UIKeyboardType.decimalPad

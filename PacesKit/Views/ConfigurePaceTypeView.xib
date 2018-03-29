@@ -35,6 +35,7 @@
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Pace" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="D0s-wY-6Eo" customClass="ConversionControlLabel" customModule="PacesKit" customModuleProvider="target">
                                                     <rect key="frame" x="0.0" y="0.0" width="240" height="23"/>
+                                                    <accessibility key="accessibilityConfiguration" label="Choose a pace"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="19"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
@@ -44,24 +45,29 @@
                                                     <subviews>
                                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="XM6-1j-sao" customClass="PaceTypeButton" customModule="PacesKit" customModuleProvider="target">
                                                             <rect key="frame" x="0.0" y="0.0" width="60" height="34"/>
+                                                            <accessibility key="accessibilityConfiguration" identifier="min/km"/>
                                                             <state key="normal" title="min/km"/>
                                                         </button>
                                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0bc-W4-QS5" customClass="PaceTypeButton" customModule="PacesKit" customModuleProvider="target">
                                                             <rect key="frame" x="79" y="0.0" width="55" height="34"/>
+                                                            <accessibility key="accessibilityConfiguration" identifier="min/mi"/>
                                                             <state key="normal" title="min/mi"/>
                                                         </button>
                                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bJZ-p7-hqu" customClass="PaceTypeButton" customModule="PacesKit" customModuleProvider="target">
                                                             <rect key="frame" x="153" y="0.0" width="31" height="34"/>
+                                                            <accessibility key="accessibilityConfiguration" identifier="kph"/>
                                                             <state key="normal" title="kph"/>
                                                         </button>
                                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="kLh-xx-dls" customClass="PaceTypeButton" customModule="PacesKit" customModuleProvider="target">
                                                             <rect key="frame" x="203" y="0.0" width="37" height="34"/>
+                                                            <accessibility key="accessibilityConfiguration" identifier="mph"/>
                                                             <state key="normal" title="mph"/>
                                                         </button>
                                                     </subviews>
                                                 </stackView>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Race" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="MYx-yf-2sf" customClass="ConversionControlLabel" customModule="PacesKit" customModuleProvider="target">
                                                     <rect key="frame" x="0.0" y="77" width="240" height="23"/>
+                                                    <accessibility key="accessibilityConfiguration" label="Choose a race"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="19"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
@@ -183,6 +189,7 @@
                 <outlet property="dimView" destination="aN0-5X-ygm" id="Bad-vY-ak3"/>
                 <outlet property="ibConstraint" destination="myW-Ws-bJG" id="JR0-jL-XaQ"/>
                 <outlet property="paceKph" destination="bJZ-p7-hqu" id="iX8-m3-I8B"/>
+                <outlet property="paceLabel" destination="D0s-wY-6Eo" id="qUc-Lr-B8W"/>
                 <outlet property="paceMinKm" destination="XM6-1j-sao" id="eic-ZG-6JA"/>
                 <outlet property="paceMinMi" destination="0bc-W4-QS5" id="SnM-II-ela"/>
                 <outlet property="paceMph" destination="kLh-xx-dls" id="OB3-lb-Nru"/>

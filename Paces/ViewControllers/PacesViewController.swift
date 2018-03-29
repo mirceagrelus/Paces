@@ -268,6 +268,7 @@ extension PacesViewController {
     func setupNavigationBar() {
         let aboutItem = UIBarButtonItem(image: UIImage(named: "iconBars"), style: .plain, target: nil, action: nil)
         let themeItem = UIBarButtonItem(image: UIImage(named: "eye"), style: .plain, target: nil, action: nil)
+        aboutItem.accessibilityLabel = "App settings"
         themeItem.accessibilityLabel = "Toggle theme"
         navigationController?.setNavigationBarHidden(false, animated: false)
         navigationItem.title = "Paces"

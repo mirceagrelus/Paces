@@ -15,6 +15,7 @@ public class PaceControlView: ThemeView {
     @IBOutlet weak var valueLabel: ConversionControlLabel!
     @IBOutlet weak var unitLabel: ConversionControlLabel!
     @IBOutlet weak var editButton: ThemeButton!
+    @IBOutlet weak var paceAccessibilityView: UIView!
 
     public var viewModel: PaceControlViewModelType = PaceControlViewModel() { didSet { bindViewModel() }}
     public let bag = DisposeBag()
@@ -45,6 +46,17 @@ public class PaceControlView: ThemeView {
                     { AppEnvironment.current.theme.controlCellTextColor }
                 self?.valueLabel.isSelected = isSelected
                 self?.unitLabel.isSelected = isSelected
+            })
+            .disposed(by: bag)
+
+        Observable
+            .combineLatest(viewModel.inputs.pace,
+                           viewModel.inputs.isSelected)
+            .subscribe(onNext: { [weak self] (pace, isSelected) in
+                guard let _self = self else { return }
+                let selected = isSelected ? "selected, " : ""
+                _self.paceAccessibilityView.accessibilityLabel = "\(selected)\(pace.displayValue), \(pace.unit.accessibilityLabel)"
+                _self.editButton.accessibilityLabel = "Edit pace \(pace.unit.accessibilityLabel)"
             })
             .disposed(by: bag)
 
